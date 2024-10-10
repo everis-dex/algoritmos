@@ -1,1 +1,7 @@
-<router-outlet />
+@if (currentView === 'home') {
+<app-home (_changeView)="changeView($event)"></app-home>
+} @else if (currentView === 'systems-searcher') {
+<app-systems-searcher></app-systems-searcher>
+} @else if (currentView === 'system-detail') {
+<app-system-detail></app-system-detail>
+}

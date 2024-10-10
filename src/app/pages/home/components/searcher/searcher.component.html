@@ -1,1 +1,41 @@
-<p>searcher works!</p>
+<div class="searcher-container">
+  <input type="text" placeholder="Cerca per paraula, categoria..." (input)="handleInput($event)"
+    (keydown)="handleSearch($event)">
+  <button (click)="handleCategorySelect()" class="searcher-container__filter-button">{{ categorySelected ?
+    categorySelected : 'Filtra per categoria' }}<img src="assets/icons/select_divisor.svg" alt="Select divisor"><img
+      src="assets/icons/select.svg" alt="Select arrows">
+  </button>
+  <button (click)="handleSearch($event)" class="searcher-container__search-button"><img
+      src="assets/icons/Buscador_Boton.svg" alt="Searcher button"></button>
+</div>
+@if (isFilterClicked) {
+<div class="filter-container">
+  @if (isCurrentSearches) {
+  <section id="current-searches">
+    <header>
+      <span>Cerques recents</span>
+      <button (click)="resetSearch()">Restaurar recents</button>
+    </header>
+    @for (currentSearch of currentSearches; track currentSearch; let i = $index) {
+    <div>
+      <div>
+        <img src="assets/icons/Restart.svg" alt="Restart">
+        <span>{{ currentSearch }}</span>
+      </div>
+      <button (click)="deleteSearch(i)"><img src="assets/icons/Delete.svg" alt="Delete"></button>
+    </div>
+    }
+  </section>
+  }
+  <section id="popular-categories">
+    <span>Categories populars</span>
+    <div>
+      @for (category of categories; track category) {
+      <app-category-chip [categoryName]="category.name"
+        (_selectCategory)="selectCategory(category.name)"></app-category-chip>
+      }
+    </div>
+  </section>
+  <app-systems-searcher-link></app-systems-searcher-link>
+</div>
+}

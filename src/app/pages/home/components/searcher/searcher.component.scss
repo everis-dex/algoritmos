@@ -1,0 +1,125 @@
+@import "../../../../../assets/scss/styles.scss";
+
+input {
+  width: 448px;
+  line-height: 24px;
+}
+
+button {
+  cursor: pointer;
+
+  &:not(.searcher-container__search-button) {
+    display: flex;
+    line-height: 24px;
+  }
+}
+
+input,
+button {
+  border: none;
+  background-color: transparent;
+}
+
+span {
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.searcher-container {
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  border-radius: 2px;
+
+  input,
+  &__filter-button {
+    padding: 12px 0 12px 12px;
+  }
+
+  &__filter-button {
+    background-color: $fondos-Subcabecera;
+    width: 400px;
+    height: 100%;
+    align-items: center;
+    position: relative;
+
+    img {
+      position: absolute;
+    }
+    img:first-of-type {
+      margin: auto 8px;
+      right: 40px;
+    }
+    img:last-of-type {
+      margin: auto 10px;
+      right: 8px;
+    }
+  }
+
+  &__search-button {
+    height: 48px;
+  }
+}
+
+.filter-container {
+  background-color: $fondos-Subcabecera;
+  box-shadow: 0px 4px 35px 4px rgba(0, 0, 0, 0.1);
+  max-height: 332px;
+  padding: 30px 30px 24px;
+}
+
+.searcher-container,
+.filter-container {
+  width: 896px;
+  border: 1px solid $grey-7;
+  box-sizing: border-box;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  &#popular-categories {
+    gap: 12px;
+
+    div {
+      display: flex;
+      gap: 10px;
+    }
+  }
+  &#current-searches {
+    gap: 8px;
+
+    & > * {
+      display: flex;
+    }
+
+    header {
+      justify-content: space-between;
+      align-items: center;
+      height: 24px;
+
+      button {
+        justify-content: end;
+        color: $red-Red;
+        font-weight: 600;
+        width: fit-content;
+      }
+    }
+
+    & > div {
+      padding: 8px 0;
+
+      div {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+
+      button {
+        margin-left: auto;
+      }
+    }
+  }
+}

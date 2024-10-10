@@ -1,12 +1,94 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CategoryService } from '../../../../services/category.service';
+import { Category } from '../../../../interfaces/categories';
+import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
+import { CategoryChipComponent } from '../../../../shared/category-chip/category-chip.component';
+import { SessionStorageService } from '../../../../services/session-storage.service';
 
 @Component({
   selector: 'app-searcher',
   standalone: true,
-  imports: [],
+  imports: [SystemsSearcherLinkComponent, CategoryChipComponent],
   templateUrl: './searcher.component.html',
-  styleUrl: './searcher.component.scss'
+  styleUrl: './searcher.component.scss',
 })
-export class SearcherComponent {
+export class SearcherComponent implements OnInit {
+  public categories: Category[] = [];
+  public categorySelected = '';
+  public isFilterClicked = false;
+  public isCurrentSearches = false;
+  public currentSearches: string[] = [];
 
+  @Output()
+  private _changeView = new EventEmitter<string>();
+
+  constructor(
+    private readonly _categoryService: CategoryService,
+    private readonly _sessionStorageService: SessionStorageService
+  ) {}
+
+  ngOnInit(): void {
+    this._categoryService
+      .getCategories()
+      .subscribe((categories) => (this.categories = categories));
+  }
+
+  public handleCategorySelect(): void {
+    this.isFilterClicked = !this.isFilterClicked;
+  }
+
+  public selectCategory(category: string): void {
+    this.categorySelected = category;
+    this.isFilterClicked = false;
+  }
+
+  public handleInput(event: Event): void {
+    const value = (event.target as HTMLInputElement).value;
+    this._sessionStorageService.setItem('lastSearch', value);
+  }
+
+  public handleSearch(event: KeyboardEvent | MouseEvent): void {
+    if (
+      (event instanceof KeyboardEvent && event.key === 'Enter') ||
+      event instanceof MouseEvent
+    ) {
+      const item = this._sessionStorageService.getItem('lastSearch');
+      if (
+        item &&
+        !this.currentSearches.some((currentSearch) => currentSearch === item)
+      ) {
+        if (this.currentSearches.length === 3) this.currentSearches.shift();
+        this.currentSearches.push(item);
+        this._sessionStorageService.setItem(
+          'currentSearches',
+          JSON.stringify(this.currentSearches)
+        );
+        this.isCurrentSearches = true;
+      }
+      this._changeView.emit('systems-searcher');
+    }
+  }
+
+  public resetSearch(): void {
+    this._sessionStorageService.clear();
+    this.currentSearches = [];
+    this.isCurrentSearches = false;
+  }
+
+  public deleteSearch(index: number): void {
+    const currentSearches = JSON.parse(
+      this._sessionStorageService.getItem('currentSearches')
+    );
+    const updatedCurrentSearches = currentSearches.filter(
+      (currentSearch: string) => currentSearch !== this.currentSearches[index]
+    );
+    this._sessionStorageService.setItem(
+      'currentSearches',
+      JSON.stringify(updatedCurrentSearches)
+    );
+    this.currentSearches = updatedCurrentSearches;
+    if (this.currentSearches.length === 0) {
+      this.isCurrentSearches = false;
+    }
+  }
 }

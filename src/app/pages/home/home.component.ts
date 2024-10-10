@@ -1,12 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { SearcherComponent } from './components/searcher/searcher.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [SearcherComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
+  @Output()
+  private _changeView = new EventEmitter<string>();
 
+  public changeView(view: string): void {
+    this._changeView.emit(view);
+  }
 }

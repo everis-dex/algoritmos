@@ -1,0 +1,12 @@
+@import "../../../assets/scss/styles.scss";
+
+button {
+  padding: 8px 12px;
+  border: 1px solid $red-Red;
+  border-radius: 16px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  cursor: pointer;
+}
