@@ -15,12 +15,12 @@ import { SessionStorageService } from '../../../../services/session-storage.serv
 export class SearcherComponent implements OnInit {
   public categories: Category[] = [];
   public categorySelected = '';
-  public isFilterClicked = false;
+  public isFilterVisible = false;
   public isCurrentSearches = false;
   public currentSearches: string[] = [];
 
   @Output()
-  private _changeView = new EventEmitter<string>();
+  private readonly _changeView = new EventEmitter<string>();
 
   constructor(
     private readonly _categoryService: CategoryService,
@@ -34,17 +34,18 @@ export class SearcherComponent implements OnInit {
   }
 
   public handleCategorySelect(): void {
-    this.isFilterClicked = !this.isFilterClicked;
+    this.isFilterVisible = !this.isFilterVisible;
   }
 
   public selectCategory(category: string): void {
     this.categorySelected = category;
-    this.isFilterClicked = false;
+    this.isFilterVisible = false;
   }
 
   public handleInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this._sessionStorageService.setItem('lastSearch', value);
+    this.isFilterVisible = !!(value.trim().length > 0);
   }
 
   public handleSearch(event: KeyboardEvent | MouseEvent): void {
@@ -65,7 +66,7 @@ export class SearcherComponent implements OnInit {
         );
         this.isCurrentSearches = true;
       }
-      this._changeView.emit('systems-searcher');
+      this.redirectToSystemsSearcherView();
     }
   }
 
@@ -87,8 +88,12 @@ export class SearcherComponent implements OnInit {
       JSON.stringify(updatedCurrentSearches)
     );
     this.currentSearches = updatedCurrentSearches;
-    if (this.currentSearches.length === 0) {
-      this.isCurrentSearches = false;
-    }
+    if (this.currentSearches.length === 0) this.isCurrentSearches = false;
+  }
+
+  public redirectToSystemsSearcherView(currentSearch?: string): void {
+    if (currentSearch)
+      this._sessionStorageService.setItem('lastSearch', currentSearch);
+    this._changeView.emit('systems-searcher');
   }
 }

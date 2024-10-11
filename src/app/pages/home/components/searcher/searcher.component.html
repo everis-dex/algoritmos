@@ -1,6 +1,6 @@
-<div class="searcher-container">
+<div class="searcher-container" role="search">
   <input type="text" placeholder="Cerca per paraula, categoria..." (input)="handleInput($event)"
-    (keydown)="handleSearch($event)">
+    (keydown)="handleSearch($event)" tabindex="0">
   <button (click)="handleCategorySelect()" class="searcher-container__filter-button">{{ categorySelected ?
     categorySelected : 'Filtra per categoria' }}<img src="assets/icons/select_divisor.svg" alt="Select divisor"><img
       src="assets/icons/select.svg" alt="Select arrows">
@@ -8,27 +8,29 @@
   <button (click)="handleSearch($event)" class="searcher-container__search-button"><img
       src="assets/icons/Buscador_Boton.svg" alt="Searcher button"></button>
 </div>
-@if (isFilterClicked) {
+@if (isFilterVisible) {
 <div class="filter-container">
   @if (isCurrentSearches) {
-  <section id="current-searches">
-    <header>
-      <span>Cerques recents</span>
-      <button (click)="resetSearch()">Restaurar recents</button>
+  <section class="filter-container__section" id="current-searches">
+    <header class="filter-container__section__header">
+      <h4>Cerques recents</h4>
+      <button class="filter-container__section__header--button-display" (click)="resetSearch()">Restaurar
+        recents</button>
+      <button class="filter-container__section__header--button-display" (click)="resetSearch()">Restaurar</button>
     </header>
     @for (currentSearch of currentSearches; track currentSearch; let i = $index) {
-    <div>
+    <div class="filter-container__section__current-search-container">
       <div>
         <img src="assets/icons/Restart.svg" alt="Restart">
-        <span>{{ currentSearch }}</span>
+        <a (click)="redirectToSystemsSearcherView(currentSearch)" tabindex="0">{{ currentSearch }}</a>
       </div>
       <button (click)="deleteSearch(i)"><img src="assets/icons/Delete.svg" alt="Delete"></button>
     </div>
     }
   </section>
   }
-  <section id="popular-categories">
-    <span>Categories populars</span>
+  <section class="filter-container__section" id="popular-categories">
+    <h4>Categories populars</h4>
     <div>
       @for (category of categories; track category) {
       <app-category-chip [categoryName]="category.name"
@@ -36,6 +38,6 @@
       }
     </div>
   </section>
-  <app-systems-searcher-link></app-systems-searcher-link>
+  <app-systems-searcher-link (_changeView)="redirectToSystemsSearcherView()"></app-systems-searcher-link>
 </div>
 }

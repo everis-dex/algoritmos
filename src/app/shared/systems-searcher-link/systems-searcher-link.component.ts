@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-systems-searcher-link',
@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './systems-searcher-link.component.html',
   styleUrl: './systems-searcher-link.component.scss',
 })
-export class SystemsSearcherLinkComponent {}
+export class SystemsSearcherLinkComponent {
+  @Output()
+  private readonly _changeView = new EventEmitter<string>();
+
+  public redirectToSystemsSearcherView(): void {
+    this._changeView.emit('systems-searcher');
+  }
+}
