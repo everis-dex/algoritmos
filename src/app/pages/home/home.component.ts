@@ -10,7 +10,7 @@ import { SearcherComponent } from './components/searcher/searcher.component';
 })
 export class HomeComponent {
   @Output()
-  private _changeView = new EventEmitter<string>();
+  private readonly _changeView = new EventEmitter<string>();
 
   public changeView(view: string): void {
     this._changeView.emit(view);

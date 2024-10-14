@@ -4,11 +4,12 @@ import { Category } from '../../../../interfaces/categories';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
 import { CategoryChipComponent } from '../../../../shared/category-chip/category-chip.component';
 import { SessionStorageService } from '../../../../services/session-storage.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-searcher',
   standalone: true,
-  imports: [SystemsSearcherLinkComponent, CategoryChipComponent],
+  imports: [SystemsSearcherLinkComponent, CategoryChipComponent, CommonModule],
   templateUrl: './searcher.component.html',
   styleUrl: './searcher.component.scss',
 })
@@ -18,6 +19,7 @@ export class SearcherComponent implements OnInit {
   public isFilterVisible = false;
   public isCurrentSearches = false;
   public currentSearches: string[] = [];
+  public hasValue = false;
 
   @Output()
   private readonly _changeView = new EventEmitter<string>();
@@ -33,7 +35,8 @@ export class SearcherComponent implements OnInit {
       .subscribe((categories) => (this.categories = categories));
   }
 
-  public handleCategorySelect(): void {
+  public handleCategorySelect(event: MouseEvent): void {
+    event.preventDefault();
     this.isFilterVisible = !this.isFilterVisible;
   }
 
@@ -45,7 +48,8 @@ export class SearcherComponent implements OnInit {
   public handleInput(event: Event): void {
     const value = (event.target as HTMLInputElement).value;
     this._sessionStorageService.setItem('lastSearch', value);
-    this.isFilterVisible = !!(value.trim().length > 0);
+    this.hasValue = value.trim().length > 0;
+    this.isFilterVisible = this.hasValue;
   }
 
   public handleSearch(event: KeyboardEvent | MouseEvent): void {
@@ -53,6 +57,8 @@ export class SearcherComponent implements OnInit {
       (event instanceof KeyboardEvent && event.key === 'Enter') ||
       event instanceof MouseEvent
     ) {
+      event.preventDefault();
+
       const item = this._sessionStorageService.getItem('lastSearch');
       if (
         item &&
@@ -66,6 +72,7 @@ export class SearcherComponent implements OnInit {
         );
         this.isCurrentSearches = true;
       }
+
       this.redirectToSystemsSearcherView();
     }
   }

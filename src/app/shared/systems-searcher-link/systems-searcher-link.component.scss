@@ -3,15 +3,18 @@
 div {
   width: 100%;
   display: grid;
-}
 
-a {
-  color: $red-Red;
-  line-height: 24px;
-  text-decoration: none;
-  font-weight: 600;
-  display: flex;
-  gap: 4px;
-  justify-self: end;
-  align-items: center;
+  button {
+    color: $red-bright;
+    line-height: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    gap: 0.25rem;
+    justify-self: end;
+    align-items: center;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

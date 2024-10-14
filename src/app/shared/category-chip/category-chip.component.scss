@@ -1,13 +1,18 @@
 @import "../../../assets/scss/styles.scss";
 
 button {
-  padding: 8px 12px;
-  border: 1px solid $red-Red;
-  border-radius: 16px;
-  height: 28px;
+  padding: 0.5rem 0.75rem;
+  border: 0.0625rem solid $red-bright;
+  border-radius: 1rem;
+  height: 1.75rem;
   display: flex;
   align-items: center;
   background-color: transparent;
-  color: $grey-10;
+  color: $gray-dark;
   cursor: pointer;
+
+  &:hover {
+    background-color: rgba(192, 0, 0, 0.1);
+    text-shadow: 0 0 0.009375rem $gray-dark, 0 0 0.009375rem $gray-dark;
+  }
 }

@@ -1,35 +1,48 @@
-<div class="searcher-container" role="search">
-  <input type="text" placeholder="Cerca per paraula, categoria..." (input)="handleInput($event)"
-    (keydown)="handleSearch($event)" tabindex="0">
-  <button (click)="handleCategorySelect()" class="searcher-container__filter-button">{{ categorySelected ?
-    categorySelected : 'Filtra per categoria' }}<img src="assets/icons/select_divisor.svg" alt="Select divisor"><img
-      src="assets/icons/select.svg" alt="Select arrows">
+<form class="searcher-form" aria-label="Cercador">
+  <label for="search-input"
+    [ngClass]="{'searcher-form__label--visible': !isFilterVisible || (isFilterVisible && !hasValue), 'searcher-form__label--hidden': hasValue}">Cerca
+    per paraula, categoria...</label>
+  <input id="search-input" type="text" (input)="handleInput($event)" (keydown)="handleSearch($event)">
+  <button (click)="handleCategorySelect($event)" class="searcher-form__category-button">{{ categorySelected ?
+    categorySelected : 'Filtra per categoria' }}
+    <img src="assets/icons/select_divisor.svg" alt="Divisor del selector">
+    <img src="assets/icons/select.svg" alt="Fletxes del selector">
   </button>
-  <button (click)="handleSearch($event)" class="searcher-container__search-button"><img
-      src="assets/icons/Buscador_Boton.svg" alt="Searcher button"></button>
-</div>
+  <button (click)="handleSearch($event)" class="searcher-form__search-button" type="submit">
+    <img src="assets/icons/Buscador_Boton.svg" alt="Botó del cercador">
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0 0H46C47.1046 0 48 0.895431 48 2V46C48 47.1046 47.1046 48 46 48H0V0Z" fill="#900000" />
+      <path fill-rule="evenodd" clip-rule="evenodd"
+        d="M35.8046 34.3787L28.9227 27.4968C30.2557 25.8502 31.0583 23.7579 31.0583 21.4791C31.0583 16.1974 26.7608 11.8999 21.4791 11.8999C16.1975 11.8999 11.9 16.1974 11.9 21.479C11.9 26.7607 16.1975 31.0582 21.4792 31.0582C23.758 31.0582 25.8503 30.2556 27.4969 28.9226L34.3788 35.8044C34.5754 36.0011 34.8335 36.0999 35.0917 36.0999C35.3499 36.0999 35.608 36.0011 35.8046 35.8044C36.1988 35.4102 36.1988 34.7729 35.8046 34.3787ZM21.4792 29.0415C17.3087 29.0415 13.9167 25.6495 13.9167 21.479C13.9167 17.3086 17.3087 13.9165 21.4792 13.9165C25.6497 13.9165 29.0417 17.3086 29.0417 21.479C29.0417 25.6495 25.6496 29.0415 21.4792 29.0415Z"
+        fill="white" />
+      <path d="M0.5 0.5H46C46.8284 0.5 47.5 1.17157 47.5 2V46C47.5 46.8284 46.8284 47.5 46 47.5H0.5V0.5Z"
+        stroke="#600000" />
+    </svg>
+  </button>
+</form>
 @if (isFilterVisible) {
-<div class="filter-container">
+<section class="searcher-container" aria-label="Filtre">
   @if (isCurrentSearches) {
-  <section class="filter-container__section" id="current-searches">
-    <header class="filter-container__section__header">
+  <section class="searcher-container__section" id="current-searches">
+    <div class="searcher-container__section__header">
       <h4>Cerques recents</h4>
-      <button class="filter-container__section__header--button-display" (click)="resetSearch()">Restaurar
+      <button class="searcher-container__section__header--button-display" (click)="resetSearch()">Restaurar
         recents</button>
-      <button class="filter-container__section__header--button-display" (click)="resetSearch()">Restaurar</button>
-    </header>
+      <button class="searcher-container__section__header--button-display" (click)="resetSearch()">Restaurar</button>
+    </div>
     @for (currentSearch of currentSearches; track currentSearch; let i = $index) {
-    <div class="filter-container__section__current-search-container">
-      <div>
-        <img src="assets/icons/Restart.svg" alt="Restart">
-        <a (click)="redirectToSystemsSearcherView(currentSearch)" tabindex="0">{{ currentSearch }}</a>
-      </div>
-      <button (click)="deleteSearch(i)"><img src="assets/icons/Delete.svg" alt="Delete"></button>
+    <div class="searcher-container__section__current-search-container">
+      <button (click)="redirectToSystemsSearcherView(currentSearch)">
+        <img src="assets/icons/Restart.svg" alt="Restaurar">{{ currentSearch }}
+      </button>
+      <button (click)="deleteSearch(i)">
+        <img src="assets/icons/Delete.svg" alt="Borrar">
+      </button>
     </div>
     }
   </section>
   }
-  <section class="filter-container__section" id="popular-categories">
+  <section class="searcher-container__section" id="popular-categories">
     <h4>Categories populars</h4>
     <div>
       @for (category of categories; track category) {
@@ -39,5 +52,5 @@
     </div>
   </section>
   <app-systems-searcher-link (_changeView)="redirectToSystemsSearcherView()"></app-systems-searcher-link>
-</div>
+</section>
 }

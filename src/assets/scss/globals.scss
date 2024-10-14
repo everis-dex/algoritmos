@@ -4,10 +4,6 @@
   font-family: "Open Sans", sans-serif;
 }
 
-html {
-  font-size: 100%;
-}
-
 input,
 select {
   outline: none;
@@ -16,4 +12,15 @@ select {
 button,
 a {
   cursor: pointer;
+}
+
+input,
+button {
+  border: none;
+  background-color: initial;
+}
+
+input:focus {
+  border: 0.0625rem solid $vivid-cerulean;
+  border-radius: 0.125rem;
 }
