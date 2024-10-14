@@ -57,8 +57,7 @@ h4 {
     }
 
     &:focus {
-      border: 0.0625rem solid $vivid-cerulean;
-      outline: none;
+      outline: 0.0625rem solid $vivid-cerulean;
     }
   }
 
