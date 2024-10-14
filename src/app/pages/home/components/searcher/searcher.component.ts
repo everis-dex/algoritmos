@@ -46,9 +46,9 @@ export class SearcherComponent implements OnInit {
   }
 
   public handleInput(event: Event): void {
-    const value = (event.target as HTMLInputElement).value;
+    const value = (event.target as HTMLInputElement)?.value;
     this._sessionStorageService.setItem('lastSearch', value);
-    this.hasValue = value.trim().length > 0;
+    this.hasValue = value?.trim().length > 0;
     this.isFilterVisible = this.hasValue;
   }
 
@@ -87,7 +87,7 @@ export class SearcherComponent implements OnInit {
     const currentSearches = JSON.parse(
       this._sessionStorageService.getItem('currentSearches')
     );
-    const updatedCurrentSearches = currentSearches.filter(
+    const updatedCurrentSearches = currentSearches?.filter(
       (currentSearch: string) => currentSearch !== this.currentSearches[index]
     );
     this._sessionStorageService.setItem(
@@ -95,7 +95,7 @@ export class SearcherComponent implements OnInit {
       JSON.stringify(updatedCurrentSearches)
     );
     this.currentSearches = updatedCurrentSearches;
-    if (this.currentSearches.length === 0) this.isCurrentSearches = false;
+    if (this.currentSearches?.length === 0) this.isCurrentSearches = false;
   }
 
   public redirectToSystemsSearcherView(currentSearch?: string): void {

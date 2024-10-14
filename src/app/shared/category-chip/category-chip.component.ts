@@ -12,7 +12,7 @@ export class CategoryChipComponent {
   public categoryName!: string;
 
   @Output()
-  private _selectCategory = new EventEmitter<void>();
+  private readonly _selectCategory = new EventEmitter<void>();
 
   public selectCategory(): void {
     this._selectCategory.emit();

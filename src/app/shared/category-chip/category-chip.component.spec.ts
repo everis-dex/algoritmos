@@ -19,4 +19,12 @@ describe('CategoryChipComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should emit selectCategory event', () => {
+    const changeViewSpy = spyOn((component as any)._selectCategory, 'emit');
+
+    component.selectCategory();
+
+    expect(changeViewSpy).toHaveBeenCalled();
+  });
 });

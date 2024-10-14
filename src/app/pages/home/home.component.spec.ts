@@ -8,9 +8,8 @@ describe('HomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeComponent]
-    })
-    .compileComponents();
+      imports: [HomeComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
@@ -19,5 +18,14 @@ describe('HomeComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit changeView event when the current view is systems-searcher', () => {
+    const changeViewSpy = spyOn((component as any)._changeView, 'emit');
+    const currentView = 'systems-searcher';
+
+    component.changeView(currentView);
+
+    expect(changeViewSpy).toHaveBeenCalledWith(currentView);
   });
 });
