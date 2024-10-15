@@ -84,18 +84,20 @@ export class SearcherComponent implements OnInit {
   }
 
   public deleteSearch(index: number): void {
-    const currentSearches = JSON.parse(
-      this._sessionStorageService.getItem('currentSearches')
-    );
-    const updatedCurrentSearches = currentSearches?.filter(
-      (currentSearch: string) => currentSearch !== this.currentSearches[index]
-    );
-    this._sessionStorageService.setItem(
-      'currentSearches',
-      JSON.stringify(updatedCurrentSearches)
-    );
-    this.currentSearches = updatedCurrentSearches;
-    if (this.currentSearches?.length === 0) this.isCurrentSearches = false;
+    const currentSearchesSaved =
+      this._sessionStorageService.getItem('currentSearches') ?? null;
+    if (typeof currentSearchesSaved === 'string') {
+      const currentSearches = JSON.parse(currentSearchesSaved);
+      const updatedCurrentSearches = currentSearches?.filter(
+        (currentSearch: string) => currentSearch !== this.currentSearches[index]
+      );
+      this._sessionStorageService.setItem(
+        'currentSearches',
+        JSON.stringify(updatedCurrentSearches)
+      );
+      this.currentSearches = updatedCurrentSearches;
+      if (this.currentSearches?.length === 0) this.isCurrentSearches = false;
+    }
   }
 
   public redirectToSystemsSearcherView(currentSearch?: string): void {

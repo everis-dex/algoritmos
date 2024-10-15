@@ -4,13 +4,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class SessionStorageService {
-  constructor() {}
-
   public setItem(key: string, value: any): void {
     sessionStorage.setItem(key, JSON.stringify(value));
   }
 
-  public getItem(key: string): any {
+  public getItem(key: string): string | null {
     const item = sessionStorage.getItem(key);
     return item ? JSON.parse(item) : null;
   }

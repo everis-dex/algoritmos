@@ -9,8 +9,6 @@ import { Category } from '../interfaces/categories';
 export class CategoryService {
   public categoryList: Category[] = [];
 
-  constructor() {}
-
   public getCategories(): Observable<Category[]> {
     mockCategories.forEach((category) => {
       this.categoryList.push(category);

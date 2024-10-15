@@ -19,10 +19,21 @@ button {
   border: none;
   background-color: initial;
 }
+
 input:focus {
   border: 0.0625rem solid $vivid-cerulean;
   border-radius: 0.125rem;
 }
-button:focus {
-  outline: auto;
+
+button {
+  @media (min-width: $mobile) and (max-width: $desktop) {
+    font-size: 0.875rem;
+  }
+  @media (min-width: $desktop) {
+    font-size: 1rem;
+  }
+
+  &:focus {
+    outline: auto;
+  }
 }
