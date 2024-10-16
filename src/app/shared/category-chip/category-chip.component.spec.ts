@@ -21,7 +21,10 @@ describe('CategoryChipComponent', () => {
   });
 
   it('should emit selectCategory event', () => {
-    const changeViewSpy = spyOn((component as any)._selectCategory, 'emit');
+    const changeViewSpy = spyOn(
+      Object.getOwnPropertyDescriptor(component, '_selectCategory')!.value,
+      'emit'
+    );
 
     component.selectCategory();
 

@@ -21,7 +21,10 @@ describe('HomeComponent', () => {
   });
 
   it('should emit changeView event when the current view is systems-searcher', () => {
-    const changeViewSpy = spyOn((component as any)._changeView, 'emit');
+    const changeViewSpy = spyOn(
+      Object.getOwnPropertyDescriptor(component, '_changeView')!.value,
+      'emit'
+    );
     const currentView = 'systems-searcher';
 
     component.changeView(currentView);

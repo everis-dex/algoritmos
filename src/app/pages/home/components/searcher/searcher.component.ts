@@ -81,7 +81,7 @@ export class SearcherComponent implements OnInit {
     ) {
       event.preventDefault();
 
-      const item = this._sessionStorageService.getItem('lastSearch');
+      const item = this._sessionStorageService.getItem<string>('lastSearch');
       if (
         item &&
         !this.currentSearches.some((currentSearch) => currentSearch === item)
@@ -106,11 +106,11 @@ export class SearcherComponent implements OnInit {
   }
 
   public deleteSearch(index: number): void {
-    const currentSearchesSaved =
-      this._sessionStorageService.getItem('currentSearches') ?? null;
-    if (typeof currentSearchesSaved === 'string') {
-      const currentSearches = JSON.parse(currentSearchesSaved);
-      const updatedCurrentSearches = currentSearches?.filter(
+    const currentSearchesSaved = this._sessionStorageService.getItem<
+      string[] | null
+    >('currentSearches');
+    if (currentSearchesSaved !== null) {
+      const updatedCurrentSearches = currentSearchesSaved.filter(
         (currentSearch: string) => currentSearch !== this.currentSearches[index]
       );
       this._sessionStorageService.setItem(

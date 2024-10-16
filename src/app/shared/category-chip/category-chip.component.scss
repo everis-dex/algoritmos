@@ -8,11 +8,11 @@ button {
   display: flex;
   align-items: center;
   background-color: transparent;
-  color: $gray-dark;
+  color: $grey-dark;
   cursor: pointer;
 
   &:hover {
     background-color: rgba(192, 0, 0, 0.1);
-    text-shadow: 0 0 0.009375rem $gray-dark, 0 0 0.009375rem $gray-dark;
+    text-shadow: 0 0 0.009375rem $grey-dark, 0 0 0.009375rem $grey-dark;
   }
 }

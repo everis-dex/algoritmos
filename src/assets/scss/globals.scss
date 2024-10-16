@@ -22,6 +22,7 @@ button {
 
 input {
   line-height: 1.5rem;
+  color: $grey-medium;
 
   &:focus {
     border: 0.0625rem solid $vivid-cerulean;
@@ -55,7 +56,7 @@ form button[type="submit"]:focus {
 
 h4 {
   font-weight: 600;
-  color: $gray-dark;
+  color: $grey-dark;
 
   @media (min-width: $mobile) and (max-width: $desktop) {
     line-height: 1.3125rem;

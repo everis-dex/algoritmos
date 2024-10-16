@@ -9,7 +9,7 @@
     &--visible {
       position: absolute;
       z-index: -1;
-      color: $gray-medium;
+      color: $grey-medium;
     }
     &--hidden {
       width: 0;
@@ -25,6 +25,7 @@
 
   &__category-button {
     padding: 0.75rem 0 0.75rem 0.75rem;
+    color: $grey-dark;
     background-color: $white-smoke;
     align-items: center;
     position: relative;
@@ -99,7 +100,7 @@
 
       button {
         &:first-of-type {
-          color: $dark-blue-gray;
+          color: $dark-blue-grey;
           width: 100%;
           gap: 0.5rem;
           align-items: center;
@@ -123,11 +124,11 @@
 
 .searcher-form,
 .searcher-container {
-  border: 0.0625rem solid $gray-very-light;
+  border: 0.0625rem solid $grey-very-light;
   box-sizing: border-box;
 }
 
-@media (min-width: $mobile) and (max-width: $desktop) {
+@media (max-width: $desktop) {
   .searcher-form {
     height: 2.5rem;
     position: relative;

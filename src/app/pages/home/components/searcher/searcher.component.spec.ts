@@ -37,13 +37,24 @@ describe('SearcherComponent', () => {
     expect(component.ngOnInit).toBeTruthy();
   });
 
-  it('should handle category select correctly', () => {
+  it('should hide the filter when clicking outside the category button and searcher container', () => {
+    const categoryButton = document.createElement('button');
+    categoryButton.classList.add('searcher-form__category-button');
+    document.body.appendChild(categoryButton);
+    const searcherContainer = document.createElement('section');
+    searcherContainer.classList.add('searcher-container');
+    document.body.appendChild(searcherContainer);
+
     const event = new MouseEvent('click');
-    const eventSpy = spyOn(event, 'preventDefault');
+    document.dispatchEvent(event);
+    component.onClickOutside(event);
 
-    component.handleCategorySelect(event);
+    expect(component.isFilterVisible).toBeFalse();
+  });
 
-    expect(eventSpy).toHaveBeenCalled();
+  it('should handle category select correctly', () => {
+    component.handleCategorySelect();
+
     expect(component.isFilterVisible).toBeTrue();
   });
 
@@ -56,7 +67,7 @@ describe('SearcherComponent', () => {
   });
 
   it('should handle search input correctly', () => {
-    let event = new Event('input');
+    const event = new Event('input');
     const inputElement = document.createElement('input');
     inputElement.value = 'testValue';
 
@@ -131,9 +142,7 @@ describe('SearcherComponent', () => {
 
   it('should delete the search at the given index', () => {
     component.currentSearches = ['search1', 'search2', 'search3'];
-    sessionStorageService.getItem.and.returnValue(
-      JSON.stringify(component.currentSearches)
-    );
+    sessionStorageService.getItem.and.returnValue(component.currentSearches);
 
     component.deleteSearch(1);
 
@@ -141,13 +150,8 @@ describe('SearcherComponent', () => {
   });
 
   it('should set isCurrentSearches to false when all searches are deleted', () => {
-    sessionStorageService.getItem.and.returnValue(
-      JSON.stringify(component.currentSearches)
-    );
-
-    component.currentSearches = JSON.parse(
-      sessionStorageService.getItem('testValue')
-    );
+    component.currentSearches = ['search1'];
+    sessionStorageService.getItem.and.returnValue(component.currentSearches);
 
     component.deleteSearch(0);
 
@@ -156,7 +160,10 @@ describe('SearcherComponent', () => {
   });
 
   it('should emit changeView event with currentSearch', () => {
-    const changeViewSpy = spyOn((component as any)._changeView, 'emit');
+    const changeViewSpy = spyOn(
+      Object.getOwnPropertyDescriptor(component, '_changeView')!.value,
+      'emit'
+    );
     const currentSearch = 'test';
 
     sessionStorageService.setItem('lastSearch', currentSearch);
