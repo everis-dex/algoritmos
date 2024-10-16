@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CategoryService } from '../../../../services/category.service';
 import { Category } from '../../../../interfaces/categories';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
@@ -24,6 +30,23 @@ export class SearcherComponent implements OnInit {
   @Output()
   private readonly _changeView = new EventEmitter<string>();
 
+  @HostListener('document:click', ['$event'])
+  public onClickOutside(event: MouseEvent): void {
+    const categoryButton = document.querySelector(
+      '.searcher-form__category-button'
+    ) as HTMLElement;
+    const searcherContainer = document.querySelector(
+      '.searcher-container'
+    ) as HTMLElement;
+
+    if (
+      !categoryButton.contains(event.target as Node) &&
+      !searcherContainer?.contains(event.target as Node)
+    ) {
+      this.isFilterVisible = false;
+    }
+  }
+
   constructor(
     private readonly _categoryService: CategoryService,
     private readonly _sessionStorageService: SessionStorageService
@@ -35,8 +58,7 @@ export class SearcherComponent implements OnInit {
       .subscribe((categories) => (this.categories = categories));
   }
 
-  public handleCategorySelect(event: MouseEvent): void {
-    event.preventDefault();
+  public handleCategorySelect(): void {
     this.isFilterVisible = !this.isFilterVisible;
   }
 
