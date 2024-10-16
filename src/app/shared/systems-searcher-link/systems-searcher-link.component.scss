@@ -1,0 +1,14 @@
+@import "../../../assets/scss/styles.scss";
+
+div {
+  width: 100%;
+  display: grid;
+
+  button {
+    color: $red-bright;
+    font-weight: 600;
+    gap: 0.25rem;
+    justify-self: end;
+    align-items: center;
+  }
+}

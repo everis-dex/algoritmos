@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { SystemsSearcherLinkComponent } from './systems-searcher-link.component';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+describe('SystemsSearcherLinkComponent', () => {
+  let component: SystemsSearcherLinkComponent;
+  let fixture: ComponentFixture<SystemsSearcherLinkComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeComponent],
+      imports: [SystemsSearcherLinkComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(SystemsSearcherLinkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -25,10 +25,9 @@ describe('HomeComponent', () => {
       Object.getOwnPropertyDescriptor(component, '_changeView')!.value,
       'emit'
     );
-    const currentView = 'systems-searcher';
 
-    component.changeView(currentView);
+    component.redirectToSystemsSearcherView();
 
-    expect(changeViewSpy).toHaveBeenCalledWith(currentView);
+    expect(changeViewSpy).toHaveBeenCalled();
   });
 });

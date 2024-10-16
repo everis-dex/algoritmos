@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+input,
+select {
+  outline: none;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+input,
+button {
+  border: none;
+  background-color: initial;
+}
+
+input {
+  line-height: 1.5rem;
+  color: $grey-medium;
+
+  &:focus {
+    border: 0.0625rem solid $vivid-cerulean;
+    border-radius: 0.125rem;
+  }
+}
+
+button:not([type="submit"]) {
+  display: flex;
+
+  @media (min-width: $mobile) and (max-width: $desktop) {
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+  }
+  @media (min-width: $desktop) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  &:not([type="button"]):hover {
+    text-decoration: underline;
+  }
+}
+button:not(form button):focus {
+  outline: auto;
+}
+
+form button[type="submit"]:focus {
+  outline: auto;
+}
+
+h4 {
+  font-weight: 600;
+  color: $grey-dark;
+
+  @media (min-width: $mobile) and (max-width: $desktop) {
+    line-height: 1.3125rem;
+  }
+  @media (min-width: $desktop) {
+    line-height: 1.5rem;
+  }
+}
