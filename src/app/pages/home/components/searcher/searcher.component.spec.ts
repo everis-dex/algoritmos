@@ -32,11 +32,6 @@ describe('SearcherComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should ngOnInit', () => {
-    component.ngOnInit();
-    expect(component.ngOnInit).toBeTruthy();
-  });
-
   it('should hide the filter when clicking outside the category button and searcher container', () => {
     const categoryButton = document.createElement('button');
     categoryButton.classList.add('searcher-form__category-button');
@@ -160,10 +155,7 @@ describe('SearcherComponent', () => {
   });
 
   it('should emit changeView event with currentSearch', () => {
-    const changeViewSpy = spyOn(
-      Object.getOwnPropertyDescriptor(component, '_changeView')!.value,
-      'emit'
-    );
+    const changeViewSpy = spyOn(component['_changeView'], 'emit');
     const currentSearch = 'test';
 
     sessionStorageService.setItem('lastSearch', currentSearch);
