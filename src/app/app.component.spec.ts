@@ -28,4 +28,10 @@ describe('AppComponent', () => {
 
     expect(component.currentView).toBe(currentView);
   });
+
+  it('should set currentView to home', () => {
+    component.changeView();
+
+    expect(component.currentView).toBe('home');
+  });
 });
