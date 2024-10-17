@@ -23,7 +23,7 @@
 </form>
 @if (isFilterVisible) {
 <section class="searcher-container" aria-label="Filtre">
-  @if (isCurrentSearches) {
+  @if (currentSearches.length > 0) {
   <section class="searcher-container__section" id="current-searches">
     <div class="searcher-container__section__header">
       <h4>Cerques recents</h4>
