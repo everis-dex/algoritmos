@@ -1,9 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-banner',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './banner.component.html',
   styleUrl: './banner.component.scss',
 })
@@ -16,7 +17,7 @@ export class BannerComponent {
   @Output()
   private readonly _changeView = new EventEmitter<void>();
 
-  private _window!: Window;
+  private readonly _window!: Window;
 
   public redirectToIniciPage(): void {
     this._window.location.href =

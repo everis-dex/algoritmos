@@ -12,11 +12,13 @@
     }
     }
   </ul>
-  @if (currentView === 'home') {
-  <h1 class="desktop-display">Registre d'IA</h1>
-  <img class="desktop-display" src="assets/images/Imagen.svg" alt="Imatge de la capçalera">
-  <img class="mobile-display" src="assets/images/Titulo+foto.svg" alt="Imatge de la capçalera">
-  } @else if (currentView === 'systems-searcher') {
+  <div
+    [ngClass]="{'banner-container__home-header': currentView === 'home', 'banner-container__other-view-header': currentView !== 'home'}">
+    <h1>Registre d'IA</h1>
+    <img src="assets/images/Titulo+foto.svg" alt="Imatge de la capçalera">
+    <img src="assets/images/Imagen.svg" alt="Imatge de la capçalera">
+  </div>
+  @if (currentView === 'systems-searcher') {
   <h1>Cerca un dels nostres sistemes</h1>
   } @else if (currentView === 'system-detail') {
   <h1>{{ algorithmicSystemName }}</h1>
