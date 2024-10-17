@@ -1,12 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  OnInit,
-  Output,
-} from '@angular/core';
-import { CategoryService } from '../../../../services/category.service';
-import { Category } from '../../../../interfaces/categories';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
 import { CategoryChipComponent } from '../../../../shared/category-chip/category-chip.component';
 import { SessionStorageService } from '../../../../services/session-storage.service';
@@ -19,8 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './searcher.component.html',
   styleUrl: './searcher.component.scss',
 })
-export class SearcherComponent implements OnInit {
-  public categories: Category[] = [];
+export class SearcherComponent {
   public categorySelected = '';
   public isFilterVisible = false;
   public isCurrentSearches = false;
@@ -47,23 +38,14 @@ export class SearcherComponent implements OnInit {
     }
   }
 
-  constructor(
-    private readonly _categoryService: CategoryService,
-    private readonly _sessionStorageService: SessionStorageService
-  ) {}
-
-  ngOnInit(): void {
-    this._categoryService
-      .getCategories()
-      .subscribe((categories) => (this.categories = categories));
-  }
+  constructor(private readonly _sessionStorageService: SessionStorageService) {}
 
   public handleCategorySelect(): void {
     this.isFilterVisible = !this.isFilterVisible;
   }
 
-  public selectCategory(category: string): void {
-    this.categorySelected = category;
+  public selectCategory(categorySelected: string): void {
+    this.categorySelected = categorySelected;
     this.isFilterVisible = false;
   }
 
@@ -90,7 +72,7 @@ export class SearcherComponent implements OnInit {
         this.currentSearches.push(item);
         this._sessionStorageService.setItem(
           'currentSearches',
-          JSON.stringify(this.currentSearches)
+          this.currentSearches
         );
         this.isCurrentSearches = true;
       }
@@ -115,7 +97,7 @@ export class SearcherComponent implements OnInit {
       );
       this._sessionStorageService.setItem(
         'currentSearches',
-        JSON.stringify(updatedCurrentSearches)
+        updatedCurrentSearches
       );
       this.currentSearches = updatedCurrentSearches;
       if (this.currentSearches?.length === 0) this.isCurrentSearches = false;

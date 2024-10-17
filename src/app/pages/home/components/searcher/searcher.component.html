@@ -45,12 +45,7 @@
   }
   <section class="searcher-container__section" id="popular-categories">
     <h4>Categories populars</h4>
-    <div>
-      @for (category of categories; track category) {
-      <app-category-chip [categoryName]="category.name"
-        (_selectCategory)="selectCategory(category.name)"></app-category-chip>
-      }
-    </div>
+    <app-category-chip (_selectCategory)="selectCategory($event)"></app-category-chip>
   </section>
   <app-systems-searcher-link (_changeView)="redirectToSystemsSearcherView()"></app-systems-searcher-link>
 </section>

@@ -79,6 +79,7 @@
     margin-bottom: 1.25rem;
 
     &__header {
+      display: flex;
       justify-content: space-between;
       align-items: center;
       height: 1.5rem;
@@ -96,6 +97,7 @@
 
     &__current-search-container {
       padding: 0.5rem 0;
+      display: flex;
       align-items: center;
 
       button {
@@ -109,15 +111,6 @@
           margin-left: auto;
         }
       }
-    }
-
-    &#current-searches > * {
-      display: flex;
-    }
-    &#popular-categories div {
-      display: flex;
-      gap: 0.625rem;
-      flex-wrap: wrap;
     }
   }
 }
@@ -200,7 +193,6 @@
     }
   }
 }
-
 @media (min-width: $desktop) {
   .searcher-form {
     height: 3rem;
