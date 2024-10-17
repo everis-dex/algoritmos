@@ -33,15 +33,6 @@ input {
 button:not([type="submit"]) {
   display: flex;
 
-  @media (max-width: $desktop) {
-    font-size: 0.875rem;
-    line-height: 1.3125rem;
-  }
-  @media (min-width: $desktop) {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
   &:not([type="button"]):hover {
     text-decoration: underline;
   }

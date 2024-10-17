@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { SearcherComponent } from './components/searcher/searcher.component';
+import { AlgorithmicSystemCardComponent } from '../../shared/algorithmic-system-card/algorithmic-system-card/algorithmic-system-card.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SearcherComponent],
+  imports: [SearcherComponent, AlgorithmicSystemCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
