@@ -1,3 +1,4 @@
+<app-banner [currentView]="currentView" (_changeView)="changeView()"></app-banner>
 @if (currentView === 'home') {
 <app-home (_changeView)="changeView($event)"></app-home>
 } @else if (currentView === 'systems-searcher') {
