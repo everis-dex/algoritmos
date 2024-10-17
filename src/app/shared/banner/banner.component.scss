@@ -37,12 +37,25 @@
       }
     }
   }
+
+  &__home-header {
+    display: block;
+
+    img {
+      width: 100vw;
+    }
+  }
+
+  &__other-view-header {
+    display: none;
+  }
 }
 
 @media (max-width: $desktop) {
   .banner-container {
     ul,
-    img.desktop-display {
+    &__home-header h1,
+    &__home-header img:last-of-type {
       display: none;
     }
 
@@ -58,10 +71,10 @@
     }
 
     h1 {
-      padding: 0 7.5rem;
+      padding: 0 7.5rem 1.5rem;
     }
 
-    img.mobile-display {
+    &__home-header img:first-of-type {
       display: none;
     }
   }
