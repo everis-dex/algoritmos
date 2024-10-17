@@ -14,8 +14,7 @@ import { CommonModule } from '@angular/common';
 export class SearcherComponent {
   public categorySelected = '';
   public isFilterVisible = false;
-  public isCurrentSearches = false;
-  public currentSearches: string[] = [];
+  public currentSearches: string[];
   public hasValue = false;
 
   @Output()
@@ -38,7 +37,10 @@ export class SearcherComponent {
     }
   }
 
-  constructor(private readonly _sessionStorageService: SessionStorageService) {}
+  constructor(private readonly _sessionStorageService: SessionStorageService) {
+    this.currentSearches =
+      this._sessionStorageService.getItem('currentSearches') || [];
+  }
 
   public handleCategorySelect(): void {
     this.isFilterVisible = !this.isFilterVisible;
@@ -68,13 +70,12 @@ export class SearcherComponent {
         item &&
         !this.currentSearches.some((currentSearch) => currentSearch === item)
       ) {
-        if (this.currentSearches.length === 3) this.currentSearches.shift();
+        if (this.currentSearches.length === 5) this.currentSearches.shift();
         this.currentSearches.push(item);
         this._sessionStorageService.setItem(
           'currentSearches',
           this.currentSearches
         );
-        this.isCurrentSearches = true;
       }
 
       this.redirectToSystemsSearcherView();
@@ -84,24 +85,16 @@ export class SearcherComponent {
   public resetSearch(): void {
     this._sessionStorageService.clear();
     this.currentSearches = [];
-    this.isCurrentSearches = false;
   }
 
   public deleteSearch(index: number): void {
-    const currentSearchesSaved = this._sessionStorageService.getItem<
-      string[] | null
-    >('currentSearches');
-    if (currentSearchesSaved !== null) {
-      const updatedCurrentSearches = currentSearchesSaved.filter(
-        (currentSearch: string) => currentSearch !== this.currentSearches[index]
-      );
-      this._sessionStorageService.setItem(
-        'currentSearches',
-        updatedCurrentSearches
-      );
-      this.currentSearches = updatedCurrentSearches;
-      if (this.currentSearches?.length === 0) this.isCurrentSearches = false;
-    }
+    this.currentSearches = this.currentSearches.filter(
+      (currentSearch: string) => currentSearch !== this.currentSearches[index]
+    );
+    this._sessionStorageService.setItem(
+      'currentSearches',
+      this.currentSearches
+    );
   }
 
   public redirectToSystemsSearcherView(currentSearch?: string): void {
