@@ -17,7 +17,7 @@ export class BannerComponent {
   @Output()
   private readonly _changeView = new EventEmitter<void>();
 
-  private readonly _window!: Window;
+  private _window!: Window;
 
   public redirectToIniciPage(): void {
     this._window.location.href =
