@@ -20,12 +20,24 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit changeView event when the current view is systems-searcher', () => {
-    const changeViewSpy = spyOn(component['_changeView'], 'emit');
-    const currentView = 'systems-searcher';
+  it('should emit changeView event when the current view is system-detail', () => {
+    const changeViewSpy = spyOn(component, 'changeView');
+    const currentView = 'system-detail';
 
-    component.changeView(currentView);
+    component.redirectToAlgorithmicSystemDetail();
 
     expect(changeViewSpy).toHaveBeenCalledWith(currentView);
+  });
+
+  it('should emit setHedder event when the algorithmic system id is called', () => {
+    const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
+
+    component.redirectToAlgorithmicSystemDetail(
+      component.algorithmicSystems[0].id
+    );
+
+    expect(setHeaderSpy).toHaveBeenCalledWith(
+      component.algorithmicSystems[0].title
+    );
   });
 });

@@ -21,17 +21,23 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should set currentView to systems-searcher', () => {
-    const currentView = 'systems-searcher';
+  it('should set currentView to the given view', () => {
+    const view = 'systems-searcher';
+    component.changeView(view);
 
-    component.changeView(currentView);
-
-    expect(component.currentView).toBe(currentView);
+    expect(component.currentView).toBe(view);
   });
 
-  it('should set currentView to home', () => {
+  it('should set currentView to the default view', () => {
     component.changeView();
 
     expect(component.currentView).toBe('home');
+  });
+
+  it('should set algorithmicSystemName to the given name', () => {
+    const name = 'Anonimitzador de documents';
+    component.setHeader(name);
+
+    expect(component.algorithmicSystemName).toBe(name);
   });
 });

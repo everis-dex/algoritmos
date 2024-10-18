@@ -1,13 +1,8 @@
-<div class="algorithmic-system-card-container">
-  <span class="algorithmic-system-card-container__state"><img src="assets/icons/Oval_Green.svg"
-      alt="Estat del sistema algorítmic">En producció</span>
-  <button type="button" class="algorithmic-system-card-container__button">Anonimitzador
-    de Documents</button>
+<button class="algorithmic-system-card-container" (click)="redirectToAlgorithmicSystemDetail(id)">
+  <span class="algorithmic-system-card-container__state"><img src="assets/icons/Oval_{{ stateColor }}.svg"
+      alt="Estat del sistema algorítmic">{{ state }}</span>
+  <button type="button" class="algorithmic-system-card-container__button">{{ title }}</button>
   <div class="algorithmic-system-card-container__separator"></div>
-  <p class="algorithmic-system-card-container__description">El servei digital "Anonimitzador de documents” permet
-    anonimitzar (ocultar o reemplaçar caràcters) la informació
-    dels documents que faci referència a dades personals per tal d'impedir que pugui identificar-se a una persona o que
-    puguin utilitzar-se les seves dades de manera fraudulenta. Amb l'anonimització es trenca el fil conductor entre les
-    dades i la persona física, de forma que no és possible reidentificar-la ni revertir la connexió que les uneix.</p>
-  <div class="algorithmic-system-card-container__category-chip">Informació o comunicació</div>
-</div>
+  <p class="algorithmic-system-card-container__description">{{ description }}</p>
+  <div class="algorithmic-system-card-container__category-chip">{{ categoryChip }}</div>
+</button>

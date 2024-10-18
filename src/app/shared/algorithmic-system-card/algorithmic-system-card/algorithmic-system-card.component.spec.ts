@@ -8,9 +8,8 @@ describe('AlgorithmicSystemCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AlgorithmicSystemCardComponent]
-    })
-    .compileComponents();
+      imports: [AlgorithmicSystemCardComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AlgorithmicSystemCardComponent);
     component = fixture.componentInstance;
@@ -19,5 +18,16 @@ describe('AlgorithmicSystemCardComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit changeView and setHeader events', () => {
+    const changeViewSpy = spyOn(component['_changeView'], 'emit');
+    const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
+
+    const algorithmicSystemId = 1;
+    component.redirectToAlgorithmicSystemDetail(algorithmicSystemId);
+
+    expect(changeViewSpy).toHaveBeenCalled();
+    expect(setHeaderSpy).toHaveBeenCalledWith(algorithmicSystemId);
   });
 });

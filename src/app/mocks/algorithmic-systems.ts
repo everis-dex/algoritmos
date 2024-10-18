@@ -2,6 +2,7 @@ import { AlgorithmicSystemCard } from '../interfaces/algorithmicSystems';
 
 export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   {
+    id: 1,
     state: 'En producció',
     title:
       'Algoritme Intel·ligent per la gestió de les prioritats en el sector públic',
@@ -10,13 +11,15 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
     categoryChip: 'Administració pública',
   },
   {
-    state: 'En construcció',
+    id: 2,
+    state: 'Desmantellat',
     title: 'Algoritme per la identificació de patrons en dades de trànsit',
     description:
       'El projecte desenvolupa un algoritme per la identificació de patrons en dades de trànsit',
     categoryChip: 'Economia',
   },
   {
+    id: 3,
     state: 'En desenvolupament',
     title:
       'Algoritme de consolidació i càlcul de la productivitat en la indústria automòvil',
@@ -25,6 +28,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
     categoryChip: 'Tecnologia, recerca i innovació',
   },
   {
+    id: 4,
     state: 'En desenvolupament',
     title:
       "Algoritme per la gestió de les reserves d'energia en un entorn residencial",

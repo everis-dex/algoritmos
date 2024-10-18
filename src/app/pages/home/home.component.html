@@ -1,2 +1,5 @@
 <app-searcher (_changeView)="changeView($event)"></app-searcher>
-<app-algorithmic-system-card></app-algorithmic-system-card>
+<app-algorithmic-system-card [stateColor]="getStateColor()" [state]="algorithmicSystems[0].state"
+  [title]="algorithmicSystems[0].title" [description]="algorithmicSystems[0].description"
+  [categoryChip]="algorithmicSystems[0].categoryChip" (_changeView)="redirectToAlgorithmicSystemDetail()"
+  (_setHeader)="redirectToAlgorithmicSystemDetail(algorithmicSystems[0].id)"></app-algorithmic-system-card>
