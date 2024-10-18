@@ -18,8 +18,13 @@ import { BannerComponent } from './shared/banner/banner.component';
 })
 export class AppComponent {
   public currentView = 'home';
+  public algorithmicSystemName = '';
 
   public changeView(view?: string) {
-    this.currentView = view || 'home';
+    this.currentView = view ?? 'home';
+  }
+
+  public setHeader(name: string) {
+    this.algorithmicSystemName = name;
   }
 }

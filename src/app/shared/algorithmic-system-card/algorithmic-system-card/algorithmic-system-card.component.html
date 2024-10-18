@@ -1,0 +1,8 @@
+<button class="algorithmic-system-card-container" (click)="redirectToAlgorithmicSystemDetail(id)">
+  <span class="algorithmic-system-card-container__state"><img src="assets/icons/Oval_{{ stateColor }}.svg"
+      alt="Estat del sistema algorítmic">{{ state }}</span>
+  <button type="button" class="algorithmic-system-card-container__button">{{ title }}</button>
+  <div class="algorithmic-system-card-container__separator"></div>
+  <p class="algorithmic-system-card-container__description">{{ description }}</p>
+  <div class="algorithmic-system-card-container__category-chip">{{ categoryChip }}</div>
+</button>
