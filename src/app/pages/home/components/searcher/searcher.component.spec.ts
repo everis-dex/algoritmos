@@ -78,7 +78,6 @@ describe('SearcherComponent', () => {
     component.resetSearch();
 
     expect(component.currentSearches.length).toBe(0);
-    expect(component.isCurrentSearches).toBe(false);
   });
 
   it('should handle KeyboardEvent correctly', () => {
@@ -92,7 +91,6 @@ describe('SearcherComponent', () => {
 
     expect(eventSpy).toHaveBeenCalled();
     expect(component.currentSearches).toContain('testValue');
-    expect(component.isCurrentSearches).toBeTrue();
     expect(redirectionSpy).toHaveBeenCalled();
   });
 
@@ -107,13 +105,18 @@ describe('SearcherComponent', () => {
 
     expect(eventSpy).toHaveBeenCalled();
     expect(component.currentSearches).toContain('testValue');
-    expect(component.isCurrentSearches).toBeTrue();
     expect(redirectionSpy).toHaveBeenCalled();
   });
 
-  it('should handle searches correctly when currentSearches has 3 items', () => {
-    component.currentSearches = ['search1', 'search2', 'search3'];
-    sessionStorageService.getItem.and.returnValue('testSearch');
+  it('should handle searches correctly when currentSearches has 5 items', () => {
+    component.currentSearches = [
+      'search1',
+      'search2',
+      'search3',
+      'search4',
+      'search5',
+    ];
+    sessionStorageService.getItem.and.returnValue('search6');
 
     const event = new KeyboardEvent('keydown', { key: 'Enter' });
 
@@ -122,7 +125,9 @@ describe('SearcherComponent', () => {
     expect(component.currentSearches).toEqual([
       'search2',
       'search3',
-      'testSearch',
+      'search4',
+      'search5',
+      'search6',
     ]);
   });
 
@@ -151,7 +156,6 @@ describe('SearcherComponent', () => {
     component.deleteSearch(0);
 
     expect(component.currentSearches).toEqual([]);
-    expect(component.isCurrentSearches).toBeFalse();
   });
 
   it('should emit changeView event with currentSearch', () => {
