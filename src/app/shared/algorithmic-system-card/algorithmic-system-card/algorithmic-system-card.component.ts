@@ -26,7 +26,12 @@ export class AlgorithmicSystemCardComponent {
   @Output()
   private readonly _setHeader = new EventEmitter<number>();
 
-  public redirectToAlgorithmicSystemDetail(algorithmicSystemId: number): void {
+  public redirectToAlgorithmicSystemDetail(
+    event: MouseEvent,
+    algorithmicSystemId: number
+  ): void {
+    event.preventDefault();
+
     this._changeView.emit();
     this._setHeader.emit(algorithmicSystemId);
   }
