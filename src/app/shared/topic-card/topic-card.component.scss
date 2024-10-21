@@ -7,6 +7,8 @@
   width: 35.4rem;
   height: 19.3rem;
   align-items: center;
+  text-decoration: none;
+
   &__content {
     display: flex;
     flex-direction: column;
@@ -20,9 +22,9 @@
       line-height: 1.3rem;
     }
 
-    &__link {
-      text-decoration: none;
-    }
+    // &__link {
+    //   text-decoration: none;
+    // }
   }
 
   h3 {
