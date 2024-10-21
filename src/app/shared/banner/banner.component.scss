@@ -50,17 +50,19 @@
   }
 }
 
-@media (max-width: $desktop) {
+@media (min-width: $mobile) and (max-width: $desktop) {
   .banner-container {
     ul,
     &__home-header h1:first-of-type,
-    &__home-header img:last-of-type {
+    &__home-header img {
       display: none;
     }
 
     &__home-header {
       position: relative;
-      max-width: 100%;
+      background-image: url("../../../assets/images/Titulo+foto.svg");
+      background-size: cover;
+      height: 18rem;
 
       h1:last-of-type {
         position: absolute;
@@ -87,9 +89,15 @@
     }
 
     &__home-header {
-      h1:last-of-type,
-      img:first-of-type {
+      background: none;
+      height: 100%;
+      
+      h1:last-of-type {
         display: none;
+      }
+
+      img {
+        display: block;
       }
     }
   }
