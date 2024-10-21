@@ -27,9 +27,7 @@
   <section class="searcher-container__section" id="current-searches">
     <div class="searcher-container__section__header">
       <h4>Cerques recents</h4>
-      <button class="searcher-container__section__header--button-display" (click)="resetSearch()">Restaurar
-        recents</button>
-      <button class="searcher-container__section__header--button-display" (click)="resetSearch()">Restaurar</button>
+      <button class="searcher-container__section__header__button" (click)="resetSearch()">Restaurar</button>
     </div>
     @for (currentSearch of currentSearches; track currentSearch; let i = $index) {
     <div class="searcher-container__section__current-search-container">

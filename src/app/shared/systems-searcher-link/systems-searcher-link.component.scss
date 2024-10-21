@@ -10,14 +10,5 @@ div {
     gap: 0.25rem;
     justify-self: end;
     align-items: center;
-
-    @media (max-width: $desktop) {
-      font-size: 0.875rem;
-      line-height: 1.3125rem;
-    }
-    @media (min-width: $desktop) {
-      font-size: 1rem;
-      line-height: 1.5rem;
-    }
   }
 }

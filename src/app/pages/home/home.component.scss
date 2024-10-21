@@ -1,0 +1,12 @@
+@import "../../../assets/scss/styles.scss";
+
+::ng-deep button:not(form button) {
+  @media (max-width: $desktop) {
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+  }
+  @media (min-width: $desktop) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+}
