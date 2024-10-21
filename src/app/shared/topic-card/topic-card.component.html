@@ -1,0 +1,14 @@
+<div [style.backgroundImage]="'url(' + image + ')'" class="topic-card" [attr.aria-label]="'Imatge de fons de
+: ' + title">
+    <a
+      [attr.href]="url"
+      [attr.aria-describedby]="'topic-title'"
+      class="topic-card__content__link" tabindex="0">
+    <div class="topic-card__content">
+      <h3 id="topic-title">{{ title }}</h3>
+      <p class="topic-card__content__body">
+        {{ body }}
+      </p>
+    </div>
+  </a>
+</div>
