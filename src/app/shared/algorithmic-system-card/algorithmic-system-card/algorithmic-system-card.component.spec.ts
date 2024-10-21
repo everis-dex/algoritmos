@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlgorithmicSystemCardComponent } from './algorithmic-system-card.component';
+import { mockAlgorithmicSystems } from '../../../mocks/algorithmic-systems';
 
 describe('AlgorithmicSystemCardComponent', () => {
   let component: AlgorithmicSystemCardComponent;
@@ -23,10 +24,13 @@ describe('AlgorithmicSystemCardComponent', () => {
   it('should emit changeView and setHeader events', () => {
     const changeViewSpy = spyOn(component['_changeView'], 'emit');
     const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
+    const event = new MouseEvent('click');
+    const eventSpy = spyOn(event, 'preventDefault');
+    const algorithmicSystemId = mockAlgorithmicSystems[0].id;
 
-    const algorithmicSystemId = 1;
-    component.redirectToAlgorithmicSystemDetail(algorithmicSystemId);
+    component.redirectToAlgorithmicSystemDetail(event, algorithmicSystemId);
 
+    expect(eventSpy).toHaveBeenCalled();
     expect(changeViewSpy).toHaveBeenCalled();
     expect(setHeaderSpy).toHaveBeenCalledWith(algorithmicSystemId);
   });
