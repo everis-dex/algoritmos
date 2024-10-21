@@ -30,7 +30,7 @@ a {
     color: $red-bright;
     font-weight: 600;
 
-    @media (max-width: $desktop) {
+    @media (min-width: $mobile) and (max-width: $desktop) {
       font-size: 1rem;
       line-height: 1.5rem;
     }
@@ -50,7 +50,7 @@ a {
     -webkit-box-orient: vertical;
     overflow: hidden;
 
-    @media (max-width: $desktop) {
+    @media (min-width: $mobile) and (max-width: $desktop) {
       -webkit-line-clamp: 3;
     }
     @media (min-width: $desktop) {
@@ -70,7 +70,7 @@ a {
 
   &__state,
   &__description {
-    @media (max-width: $desktop) {
+    @media (min-width: $mobile) and (max-width: $desktop) {
       font-size: 0.875rem;
       line-height: 1.3125rem;
     }
