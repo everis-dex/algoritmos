@@ -7,19 +7,17 @@
   gap: 1.5rem;
 
   ul {
-    align-items: center;
+    align-items: baseline;
     gap: 0.5rem;
     padding: 1.75rem 7.5rem 0;
 
     li,
-    button {
+    a {
       color: $grey-dark;
       line-height: 1rem;
     }
 
-    button {
-      text-decoration: underline;
-
+    a {
       &::after {
         content: "";
         width: 1rem;
@@ -27,7 +25,8 @@
         margin-left: 0.5rem;
         background-image: url("../../../assets/icons/Chevron_Small_Up.svg");
         background-repeat: no-repeat;
-        align-self: center;
+        display: inline-block;
+        vertical-align: bottom;
       }
       &:hover {
         font-family: "Open Sans Bold", sans-serif;
@@ -54,9 +53,22 @@
 @media (max-width: $desktop) {
   .banner-container {
     ul,
-    &__home-header h1,
+    &__home-header h1:first-of-type,
     &__home-header img:last-of-type {
       display: none;
+    }
+
+    &__home-header {
+      position: relative;
+      max-width: 100%;
+
+      h1:last-of-type {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba($white-smoke, 0.9);
+      }
     }
 
     h1 {
@@ -74,8 +86,11 @@
       padding: 0 7.5rem 1.5rem;
     }
 
-    &__home-header img:first-of-type {
-      display: none;
+    &__home-header {
+      h1:last-of-type,
+      img:first-of-type {
+        display: none;
+      }
     }
   }
 }
