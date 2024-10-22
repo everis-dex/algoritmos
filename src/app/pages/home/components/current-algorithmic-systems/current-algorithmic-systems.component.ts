@@ -54,15 +54,11 @@ export class CurrentAlgorithmicSystemsComponent implements OnInit, OnDestroy {
     return stateColorConfig[this.algorithmicSystems[0].state];
   }
 
-  public redirectToAlgorithmicSystemDetail(algorithmicSystemId?: number): void {
-    this.changeView('system-detail');
-
-    if (algorithmicSystemId) {
-      const algorithmicSystemName = this.algorithmicSystems.find(
-        (algorithmicSystem) => algorithmicSystem.id === algorithmicSystemId
-      )?.title;
-      this._setHeader.emit(algorithmicSystemName);
-    }
+  public setHeader(algorithmicSystemId: number): void {
+    const algorithmicSystemName = this.algorithmicSystems.find(
+      (algorithmicSystem) => algorithmicSystem.id === algorithmicSystemId
+    )?.title;
+    this._setHeader.emit(algorithmicSystemName);
   }
 
   public changeView(view: string): void {
