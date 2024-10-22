@@ -20,24 +20,21 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit changeView event when the current view is system-detail', () => {
-    const changeViewSpy = spyOn(component, 'changeView');
-    const currentView = 'system-detail';
+  it('should emit changeView event to the given view', () => {
+    const changeViewSpy = spyOn(component['_changeView'], 'emit');
 
-    component.redirectToAlgorithmicSystemDetail();
+    const view = 'system-detail';
+    component.changeView(view);
 
-    expect(changeViewSpy).toHaveBeenCalledWith(currentView);
+    expect(changeViewSpy).toHaveBeenCalledWith(view);
   });
 
-  it('should emit setHedder event when the algorithmic system id is called', () => {
+  it('should emit setHeader event to the given algorithmic system name', () => {
     const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
 
-    component.redirectToAlgorithmicSystemDetail(
-      component.algorithmicSystems[0].id
-    );
+    const algorithmicSystemName = 'Anonimitzador de documents';
+    component.setHeader(algorithmicSystemName);
 
-    expect(setHeaderSpy).toHaveBeenCalledWith(
-      component.algorithmicSystems[0].title
-    );
+    expect(setHeaderSpy).toHaveBeenCalledWith(algorithmicSystemName);
   });
 });
