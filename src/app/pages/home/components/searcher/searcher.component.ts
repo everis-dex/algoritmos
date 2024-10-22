@@ -23,10 +23,10 @@ export class SearcherComponent {
   @HostListener('document:click', ['$event'])
   public onClickOutside(event: MouseEvent): void {
     const categoryButton = document.querySelector(
-      '.searcher-form__category-button'
+      '.searcher-container__form__category-button'
     ) as HTMLElement;
     const searcherContainer = document.querySelector(
-      '.searcher-container'
+      '.searcher-container__filter'
     ) as HTMLElement;
 
     if (

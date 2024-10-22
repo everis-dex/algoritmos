@@ -1,9 +1,11 @@
 @import "../../../../../assets/scss/styles.scss";
 
-.searcher-form {
+.searcher-container__form {
   display: inline-flex;
   align-items: center;
   border-radius: 0.125rem;
+  width: 100%;
+  position: relative;
 
   &__label {
     &--visible {
@@ -21,9 +23,11 @@
   input {
     width: 100%;
     height: 100%;
+    border-right: 0;
   }
 
   &__category-button {
+    width: 100%;
     padding: 0.75rem 0 0.75rem 0.75rem;
     color: $grey-dark;
     background-color: $white-smoke;
@@ -71,20 +75,20 @@
   }
 }
 
-.searcher-container {
+.searcher-container__filter {
   background-color: $white-smoke;
-  width: fit-content;
+  width: 100%;
 
   &__section {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1.25rem;
 
     &__header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       height: 1.5rem;
+      margin-bottom: 0.5rem;
 
       &__button {
         color: $red-bright;
@@ -114,84 +118,88 @@
         }
       }
     }
+
+    &#popular-categories {
+      margin: 1.25rem auto 1rem;
+    }
   }
 }
 
-.searcher-form,
-.searcher-container {
+.searcher-container__form input,
+.searcher-container__filter {
   border: 0.0625rem solid $grey-very-light;
   box-sizing: border-box;
 }
 
 @media (min-width: $mobile) and (max-width: $desktop) {
-  .searcher-form {
-    height: 2.5rem;
+  .searcher-container {
     position: relative;
 
-    input {
-      padding-left: 0.625rem;
-    }
-
-    &__label--visible {
-      left: 0.625rem;
-    }
-
-    &__category-button {
-      width: 100%;
+    &__form {
       height: 2.5rem;
+      position: relative;
+
+      input {
+        padding-left: 0.625rem;
+      }
+
+      &__label--visible {
+        left: 0.625rem;
+      }
+
+      &__category-button {
+        height: 2.5rem;
+        position: absolute;
+        top: 2.5rem;
+        margin: 0.625rem auto;
+
+        img {
+          &:first-of-type {
+            right: 2.25rem;
+          }
+          &:last-of-type {
+            right: 0.25rem;
+          }
+        }
+      }
+
+      &__search-button {
+        img,
+        svg {
+          width: 2.5rem;
+        }
+      }
+    }
+
+    &__filter {
+      padding: 1.5rem 1rem;
+      box-shadow: 0 0.25rem 2.1875rem 0 rgba(0, 0, 0, 0.1);
       position: absolute;
       top: 2.5rem;
-      margin: 0.625rem auto;
 
-      img {
-        &:first-of-type {
-          right: 2.25rem;
+      &__section {
+        h4,
+        p {
+          font-size: 0.875rem;
         }
-        &:last-of-type {
-          right: 0.25rem;
+
+        &#current-searches {
+          gap: 0.375rem;
         }
-      }
-    }
-
-    &__search-button img,
-    &__search-button svg {
-      width: 2.5rem;
-      height: 2.5rem;
-    }
-  }
-
-  .searcher-form,
-  .searcher-container {
-    width: 92%;
-  }
-
-  .searcher-container {
-    padding: 1.5rem 1rem;
-    max-height: 22.5rem;
-    box-shadow: 0 0.25rem 2.1875rem 0 rgba(0, 0, 0, 0.1);
-    position: absolute;
-
-    &__section {
-      h4,
-      p {
-        font-size: 0.875rem;
-      }
-
-      &#current-searches {
-        gap: 0.375rem;
-      }
-      &#popular-categories {
-        gap: 0.625rem;
+        &#popular-categories {
+          gap: 0.625rem;
+        }
       }
     }
   }
 }
 @media (min-width: $desktop) {
-  .searcher-form {
+  .searcher-container__form {
     height: 3rem;
 
     input {
       padding-left: 0.75rem;
+      max-width: 28rem;
     }
 
     &__label--visible {
@@ -199,8 +207,10 @@
     }
 
     &__category-button {
-      min-width: 25rem;
-      height: 100%;
+      max-width: 25rem;
+      height: auto;
+      position: relative;
+      top: 0;
 
       img {
         &:first-of-type {
@@ -211,16 +221,22 @@
         }
       }
     }
+
+    &__search-button {
+      img,
+      svg {
+        width: auto;
+      }
+    }
   }
 
-  .searcher-form,
-  .searcher-container {
-    min-width: 56rem;
-  }
-
-  .searcher-container {
-    padding: 1.875rem 1.875rem 1.5rem;
+  .searcher-container__filter {
+    width: 100%;
+    max-width: 56rem;
+    margin: 0;
+    padding: 1.875rem 1.875rem 1rem;
     box-shadow: 0 0.25rem 2.1875rem 0.25rem rgba(0, 0, 0, 0.1);
+    position: static;
 
     &__section {
       &__header__button::after {
@@ -228,9 +244,6 @@
         white-space: pre;
       }
 
-      &#current-searches {
-        gap: 0.5rem;
-      }
       &#popular-categories {
         gap: 0.75rem;
       }

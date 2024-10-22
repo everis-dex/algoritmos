@@ -39,6 +39,17 @@
 
   &__home-header {
     display: block;
+    position: relative;
+
+    h2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba($white-smoke, 0.9);
+      font-size: 1.75rem;
+      line-height: 2.375rem;
+    }
 
     img {
       width: 100vw;
@@ -53,27 +64,24 @@
 @media (min-width: $mobile) and (max-width: $desktop) {
   .banner-container {
     ul,
-    &__home-header h1:first-of-type,
+    &__home-header h1,
     &__home-header img {
       display: none;
     }
 
     &__home-header {
-      position: relative;
       background-image: url("../../../assets/images/Titulo+foto.svg");
       background-size: cover;
       height: 18rem;
 
-      h1:last-of-type {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background-color: rgba($white-smoke, 0.9);
+      h2 {
+        padding: 1.5rem;
       }
     }
 
     h1 {
+      font-size: 1.75rem;
+      line-height: 2.625rem;
       padding: 1.5rem;
     }
   }
@@ -84,21 +92,23 @@
       display: flex;
     }
 
-    h1 {
-      padding: 0 7.5rem 1.5rem;
-    }
-
     &__home-header {
       background: none;
       height: 100%;
-      
-      h1:last-of-type {
-        display: none;
+
+      h2 {
+        padding: 1.5rem 7.5rem;
       }
 
       img {
         display: block;
       }
+    }
+
+    h1 {
+      font-size: 2.1875rem;
+      line-height: 3rem;
+      padding: 0 7.5rem 1.5rem;
     }
   }
 }

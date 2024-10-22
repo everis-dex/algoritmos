@@ -34,10 +34,10 @@ describe('SearcherComponent', () => {
 
   it('should hide the filter when clicking outside the category button and searcher container', () => {
     const categoryButton = document.createElement('button');
-    categoryButton.classList.add('searcher-form__category-button');
+    categoryButton.classList.add('searcher-container__category-button');
     document.body.appendChild(categoryButton);
     const searcherContainer = document.createElement('section');
-    searcherContainer.classList.add('searcher-container');
+    searcherContainer.classList.add('searcher-container__filter');
     document.body.appendChild(searcherContainer);
 
     const event = new MouseEvent('click');
