@@ -26,12 +26,12 @@ export class CurrentAlgorithmicSystemsComponent implements OnInit, OnDestroy {
 
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
 
-  private _algorithmicSystemSuscription!: Subscription;
+  private _algorithmicSystemsSuscription!: Subscription;
 
   constructor(private readonly _algorithmicSystemService: CardService) {}
 
   ngOnInit(): void {
-    this._algorithmicSystemSuscription = this._algorithmicSystemService
+    this._algorithmicSystemsSuscription = this._algorithmicSystemService
       .getAlgorithmicSystems()
       .subscribe((response) => {
         this.algorithmicSystems = response;
@@ -39,8 +39,8 @@ export class CurrentAlgorithmicSystemsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._algorithmicSystemSuscription)
-      this._algorithmicSystemSuscription.unsubscribe();
+    if (this._algorithmicSystemsSuscription)
+      this._algorithmicSystemsSuscription.unsubscribe();
   }
 
   public getStateColor(): string {
