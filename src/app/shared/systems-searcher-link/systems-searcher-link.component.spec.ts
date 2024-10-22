@@ -20,7 +20,7 @@ describe('SystemsSearcherLinkComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit changeView event when the current view is systems-searcher', () => {
+  it('should emit changeView event', () => {
     const changeViewSpy = spyOn(component['_changeView'], 'emit');
 
     component.redirectToSystemsSearcherView();
