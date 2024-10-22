@@ -1,5 +1,11 @@
 @import "../../../../../assets/scss/styles.scss";
 
+.searcher-container__form input,
+.searcher-container__filter {
+  border: 0.0625rem solid $grey-very-light;
+  box-sizing: border-box;
+}
+
 .searcher-container__form {
   display: inline-flex;
   align-items: center;
@@ -123,12 +129,6 @@
       margin: 1.25rem auto 1rem;
     }
   }
-}
-
-.searcher-container__form input,
-.searcher-container__filter {
-  border: 0.0625rem solid $grey-very-light;
-  box-sizing: border-box;
 }
 
 @media (min-width: $mobile) and (max-width: $desktop) {

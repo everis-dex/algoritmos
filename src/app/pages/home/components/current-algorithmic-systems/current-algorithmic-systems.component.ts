@@ -6,9 +6,9 @@ import {
   Output,
 } from '@angular/core';
 import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card/algorithmic-system-card.component';
-import { AlgorithmicSystemCard } from '../../../../interfaces/algorithmicSystems';
+import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import { Subscription } from 'rxjs';
-import { AlgorithmicSystemService } from '../../../../services/algorithmic-system.service';
+import { CardService } from '../../../../services/card.service';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
 
 @Component({
@@ -26,14 +26,12 @@ export class CurrentAlgorithmicSystemsComponent implements OnInit, OnDestroy {
 
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
 
-  private _algorithmicSystemsSuscription!: Subscription;
+  private _algorithmicSystemSuscription!: Subscription;
 
-  constructor(
-    private readonly _algorithmicSystemService: AlgorithmicSystemService
-  ) {}
+  constructor(private readonly _algorithmicSystemService: CardService) {}
 
   ngOnInit(): void {
-    this._algorithmicSystemsSuscription = this._algorithmicSystemService
+    this._algorithmicSystemSuscription = this._algorithmicSystemService
       .getAlgorithmicSystems()
       .subscribe((response) => {
         this.algorithmicSystems = response;
@@ -41,8 +39,8 @@ export class CurrentAlgorithmicSystemsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._algorithmicSystemsSuscription)
-      this._algorithmicSystemsSuscription.unsubscribe();
+    if (this._algorithmicSystemSuscription)
+      this._algorithmicSystemSuscription.unsubscribe();
   }
 
   public getStateColor(): string {

@@ -1,0 +1,28 @@
+@import "../../../../../assets/scss/styles.scss";
+
+.topic-cards-container {
+  position: absolute;
+  left: 0;
+  background-color: $white-smoke;
+  padding-bottom: 2rem;
+  gap: 1.5rem;
+}
+
+@media (min-width: $mobile) and (max-width: $desktop) {
+  .topic-cards-container {
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+@media (min-width: $desktop) {
+  .topic-cards-container {
+    padding-top: 2rem;
+    padding-left: 7.5rem;
+    padding-right: 7.5rem;
+
+    div {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+}

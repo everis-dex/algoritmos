@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AlgorithmicSystemCard, TopicCard } from '../interfaces/algorithmicSystems';
+import { AlgorithmicSystemCard, TopicCard } from '../interfaces/cards';
 import { Observable, of } from 'rxjs';
-import { mockAlgorithmicSystems, mockTopics } from '../mocks/algorithmic-systems';
+import { mockAlgorithmicSystems, mockTopics } from '../mocks/cards';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AlgorithmicSystemService {
+export class CardService {
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
   public topicCards: TopicCard[] = [];
 
