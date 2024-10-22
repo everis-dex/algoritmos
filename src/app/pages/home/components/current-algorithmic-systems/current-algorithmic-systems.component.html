@@ -1,1 +1,13 @@
-<p>current-algorithmic-systems works!</p>
+<section class="current-algorithmic-systems-section-container">
+  <app-systems-searcher-link class="current-algorithmic-systems-section-container__link"></app-systems-searcher-link>
+  <h1>Sistemes Algorísmics recents</h1>
+  <div>
+    @for (algorithmicSystem of algorithmicSystems; track $index) {
+    <app-algorithmic-system-card [stateColor]="getStateColor()" [state]="algorithmicSystem.state"
+      [title]="algorithmicSystem.title" [description]="algorithmicSystem.description"
+      [categoryChip]="algorithmicSystem.categoryChip" (_changeView)="redirectToAlgorithmicSystemDetail()"
+      (_setHeader)="redirectToAlgorithmicSystemDetail(algorithmicSystem.id)"></app-algorithmic-system-card>
+    }
+  </div>
+  <app-systems-searcher-link class="current-algorithmic-systems-section-container__link"></app-systems-searcher-link>
+</section>

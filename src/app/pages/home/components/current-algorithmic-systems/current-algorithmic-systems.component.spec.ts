@@ -8,9 +8,8 @@ describe('CurrentAlgorithmicSystemsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CurrentAlgorithmicSystemsComponent]
-    })
-    .compileComponents();
+      imports: [CurrentAlgorithmicSystemsComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CurrentAlgorithmicSystemsComponent);
     component = fixture.componentInstance;
@@ -19,5 +18,26 @@ describe('CurrentAlgorithmicSystemsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit changeView event to the given view', () => {
+    const changeViewSpy = spyOn(component, 'changeView');
+    const view = 'system-detail';
+
+    component.redirectToAlgorithmicSystemDetail();
+
+    expect(changeViewSpy).toHaveBeenCalledWith(view);
+  });
+
+  it('should emit setHeader event to the given algorithmic system id', () => {
+    const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
+
+    component.redirectToAlgorithmicSystemDetail(
+      component.algorithmicSystems[0].id
+    );
+
+    expect(setHeaderSpy).toHaveBeenCalledWith(
+      component.algorithmicSystems[0].title
+    );
   });
 });

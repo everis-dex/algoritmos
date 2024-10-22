@@ -45,26 +45,19 @@ form button[type="submit"]:focus {
   outline: auto;
 }
 
-h1 {
-  font-weight: 400;
+h1,
+h2,
+h4 {
   color: $grey-dark;
+}
 
-  @media (min-width: $mobile) and (max-width: $desktop) {
-    line-height: 2.625rem;
-    font-size: 1.75rem;
-
-    &.desktop-display {
-      display: none;
-    }
-  }
-  @media (min-width: $desktop) {
-    line-height: 3rem;
-  }
+h1,
+h2 {
+  font-weight: 400;
 }
 
 h4 {
   font-weight: 600;
-  color: $grey-dark;
 
   @media (min-width: $mobile) and (max-width: $desktop) {
     line-height: 1.3125rem;
