@@ -10,6 +10,16 @@ a {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  box-shadow: 0;
+  transition: all .4s ease;
+
+  &:hover {
+    transform: translate3D(0,-1px,0) scale(1.03);
+    -webkit-box-shadow: 0px 5px 3px 0px $grey-very-light;
+    -moz-box-shadow: 0px 5px 3px 0px $grey-very-light;
+    box-shadow: 0px 5px 3px 0px $grey-very-light;
+    transition: all .4s ease; /* zoom in */
+  }
 
   &:hover h2 {
     text-decoration: underline;
