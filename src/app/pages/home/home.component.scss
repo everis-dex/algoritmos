@@ -9,7 +9,7 @@
       padding-bottom: 1rem;
     }
 
-    & > div {
+    & > div:not(form + div) {
       display: grid;
       gap: 1.5rem;
     }
@@ -28,11 +28,11 @@
         padding-top: 1rem;
       }
 
-      & > div {
+      & > div:not(form + div) {
         grid-template-columns: 1fr;
       }
 
-      &:not(.topic-cards-container) {
+      &:not(div > section) {
         padding-left: 1rem;
         padding-right: 1rem;
       }
@@ -50,7 +50,7 @@
         line-height: 2.5rem;
       }
 
-      &:not(.topic-cards-container) {
+      &:not(div > section) {
         padding-left: 7.5rem;
         padding-right: 7.5rem;
       }

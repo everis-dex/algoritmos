@@ -9,15 +9,11 @@
 @media (min-width: $mobile) and (max-width: $desktop) {
   .topic-cards-container {
     padding-top: 1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
   }
 }
 @media (min-width: $desktop) {
   .topic-cards-container {
     padding-top: 2rem;
-    padding-left: 7.5rem;
-    padding-right: 7.5rem;
 
     div {
       grid-template-columns: repeat(2, 1fr);
