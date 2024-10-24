@@ -39,7 +39,6 @@
       color: $grey-dark;
       background-color: $white-smoke;
       align-items: center;
-      position: relative;
       font-size: 1rem;
       line-height: 1.5rem;
 
@@ -59,7 +58,7 @@
       }
 
       &:focus {
-        outline: 0.0625rem solid $vivid-cerulean;
+        box-shadow: inset 0 0 0 0.0625rem $vivid-cerulean;
       }
     }
 
@@ -84,6 +83,7 @@
 
   &__filter {
     position: absolute;
+    z-index: 1;
     background-color: $white-smoke;
 
     &__section {
@@ -199,59 +199,61 @@
   }
 }
 @media (min-width: $desktop) {
-  .searcher-container__form {
-    height: 3rem;
+  .searcher-container {
+    &__form {
+      height: 3rem;
 
-    input {
-      padding-left: 0.75rem;
-      min-width: 28rem;
-      max-width: 46.5rem;
-    }
+      input {
+        padding-left: 0.75rem;
+        min-width: 28rem;
+        max-width: 46.5rem;
+      }
 
-    &__label--visible {
-      left: 0.75rem;
-    }
+      &__label--visible {
+        left: 0.75rem;
+      }
 
-    &__category-button {
-      max-width: 25rem;
-      height: auto;
-      position: relative;
-      top: 0;
+      &__category-button {
+        max-width: 25rem;
+        height: auto;
+        position: relative;
+        top: 0;
 
-      img {
-        &:first-of-type {
-          right: 2.5rem;
+        img {
+          &:first-of-type {
+            right: 2.5rem;
+          }
+          &:last-of-type {
+            right: 0.5rem;
+          }
         }
-        &:last-of-type {
-          right: 0.5rem;
+      }
+
+      &__search-button {
+        img,
+        svg {
+          width: auto;
         }
       }
     }
 
-    &__search-button {
-      img,
-      svg {
-        width: auto;
-      }
-    }
-  }
+    &__filter {
+      max-width: 56rem;
+      padding: 1.875rem 1.875rem 1rem;
+      box-shadow: 0 0.25rem 2.1875rem 0.25rem rgba(0, 0, 0, 0.1);
+      top: 3rem;
+      left: 7.5rem;
+      right: 7.5rem;
 
-  .searcher-container__filter {
-    max-width: 56rem;
-    padding: 1.875rem 1.875rem 1rem;
-    box-shadow: 0 0.25rem 2.1875rem 0.25rem rgba(0, 0, 0, 0.1);
-    top: 3rem;
-    left: 7.5rem;
-    right: 7.5rem;
+      &__section {
+        &__header__button::after {
+          content: " recents";
+          white-space: pre;
+        }
 
-    &__section {
-      &__header__button::after {
-        content: " recents";
-        white-space: pre;
-      }
-
-      &#popular-categories {
-        gap: 0.75rem;
+        &#popular-categories {
+          gap: 0.75rem;
+        }
       }
     }
   }
