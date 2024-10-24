@@ -1,14 +1,14 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { SearcherComponent } from './components/searcher/searcher.component';
 import { AlgorithmicSystemCard } from '../../interfaces/cards';
 import { CurrentAlgorithmicSystemsComponent } from './components/current-algorithmic-systems/current-algorithmic-systems.component';
 import { TopicCardsComponent } from './components/topic-cards/topic-cards.component';
+import { SearchBarComponent } from '../../shared/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
-    SearcherComponent,
+    SearchBarComponent,
     CurrentAlgorithmicSystemsComponent,
     TopicCardsComponent,
   ],

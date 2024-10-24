@@ -1,15 +1,18 @@
 <section class="searcher-container">
   <form class="searcher-container__form" aria-label="Cercador">
     <label for="search-input"
-      [ngClass]="{'searcher-container__form__label--visible': !isFilterVisible || (isFilterVisible && !hasValue), 'searcher-container__form__label--hidden': hasValue}">Cerca
+      [ngClass]="{'searcher-container__form__label--visible': !hasValue, 'searcher-container__form__label--hidden': hasValue}">Cerca
       per paraula, categoria...</label>
-    <input id="search-input" type="text" (input)="handleInput($event)" (keydown)="handleSearch($event)">
+    <input [style.width]="!hasFilterSelector && '100%'" id="search-input" type="text" (input)="handleInput($event)"
+      (keydown)="handleSearch($event)">
+    @if (hasFilterSelector) {
     <button type="button" (click)="handleCategorySelect()" class="searcher-container__form__category-button">{{
       categorySelected ?
       categorySelected : 'Filtra per categoria' }}
       <img src="assets/icons/select_divisor.svg" alt="Divisor del selector">
       <img src="assets/icons/select.svg" alt="Fletxes del selector">
     </button>
+    }
     <button (click)="handleSearch($event)" class="searcher-container__form__search-button" type="submit">
       <img src="assets/icons/Buscador_Boton.svg" alt="Botó del cercador">
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +25,7 @@
       </svg>
     </button>
   </form>
-  @if (isFilterVisible) {
+  @if (hasFilterSelector && isFilterVisible) {
   <div class="searcher-container__filter" aria-label="Filtre">
     @if (currentSearches.length > 0) {
     <section class="searcher-container__filter__section" id="current-searches">

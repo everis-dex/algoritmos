@@ -1,6 +1,4 @@
-<main class="home-container">
-  <app-searcher (_changeView)="changeView($event)"></app-searcher>
-  <app-current-algorithmic-systems (_changeView)="changeView($event)"
-    (_setHeader)="setHeader($event)"></app-current-algorithmic-systems>
-  <app-topic-cards></app-topic-cards>
-</main>
+<app-search-bar [hasFilterSelector]="true" (_changeView)="changeView($event)"></app-search-bar>
+<app-current-algorithmic-systems (_changeView)="changeView($event)"
+  (_setHeader)="setHeader($event)"></app-current-algorithmic-systems>
+<app-topic-cards></app-topic-cards>

@@ -1,39 +1,50 @@
-import { Component, EventEmitter, HostListener, Output } from '@angular/core';
-import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
-import { CategoryChipComponent } from '../../../../shared/category-chip/category-chip.component';
-import { SessionStorageService } from '../../../../services/session-storage.service';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
+import { SessionStorageService } from '../../services/session-storage.service';
 import { CommonModule } from '@angular/common';
+import { CategoryChipComponent } from '../category-chip/category-chip.component';
+import { SystemsSearcherLinkComponent } from '../systems-searcher-link/systems-searcher-link.component';
 
 @Component({
-  selector: 'app-searcher',
+  selector: 'app-search-bar',
   standalone: true,
-  imports: [SystemsSearcherLinkComponent, CategoryChipComponent, CommonModule],
-  templateUrl: './searcher.component.html',
-  styleUrl: './searcher.component.scss',
+  imports: [CategoryChipComponent, SystemsSearcherLinkComponent, CommonModule],
+  templateUrl: './search-bar.component.html',
+  styleUrl: './search-bar.component.scss',
 })
-export class SearcherComponent {
+export class SearchBarComponent {
   public categorySelected = '';
   public isFilterVisible = false;
   public currentSearches: string[];
   public hasValue = false;
+
+  @Input()
+  public hasFilterSelector!: boolean;
 
   @Output()
   private readonly _changeView = new EventEmitter<string>();
 
   @HostListener('document:click', ['$event'])
   public onClickOutside(event: MouseEvent): void {
-    const categoryButton = document.querySelector(
-      '.searcher-container__form__category-button'
-    ) as HTMLElement;
-    const searcherContainer = document.querySelector(
-      '.searcher-container__filter'
-    ) as HTMLElement;
+    if (this.hasFilterSelector) {
+      const categoryButton = document.querySelector(
+        '.searcher-container__form__category-button'
+      ) as HTMLElement;
+      const searcherContainer = document.querySelector(
+        '.searcher-container__filter'
+      ) as HTMLElement;
 
-    if (
-      !categoryButton.contains(event.target as Node) &&
-      !searcherContainer?.contains(event.target as Node)
-    ) {
-      this.isFilterVisible = false;
+      if (
+        !categoryButton?.contains(event.target as Node) &&
+        !searcherContainer?.contains(event.target as Node)
+      ) {
+        this.isFilterVisible = false;
+      }
     }
   }
 
@@ -78,7 +89,7 @@ export class SearcherComponent {
         );
       }
 
-      this.redirectToSystemsSearcherView();
+      if (this.hasFilterSelector) this.redirectToSystemsSearcherView();
     }
   }
 
