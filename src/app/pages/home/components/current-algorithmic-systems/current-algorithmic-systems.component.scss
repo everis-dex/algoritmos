@@ -21,12 +21,18 @@
       padding-top: 0;
     }
 
-    div {
-      grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
-    }
-
     &__link:first-child {
       display: none;
     }
+  }
+}
+@media (min-width: $desktop) and (max-width: $large-desktop) {
+  .current-algorithmic-systems-section-container div {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: $large-desktop) {
+  .current-algorithmic-systems-section-container div {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
