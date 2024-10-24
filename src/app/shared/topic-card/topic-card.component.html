@@ -1,14 +1,9 @@
-<a
-  [style.backgroundImage]="'url(' + image + ')'"
-  [attr.href]="url"
-  [attr.aria-describedby]="'topic-title'"
-  class="topic-card">
-  <div class="topic-card__content" [attr.aria-label]="'Imatge de fons de
-  : ' + title">
-      <h3 id="topic-title">{{ title }}</h3>
-      <p class="topic-card__content__body">
-        {{ body }}
-      </p>
+<a [attr.href]="url" [attr.title]="title" class="topic-card-link">
+  <div class="topic-card-link--before" [style.backgroundImage]="'url(' + image + ')'"></div>
+  <div class="topic-card-link__content">
+    <h3 class="topic-card-link__content__title">{{ title }}</h3>
+    <p class="topic-card-link__content__description">
+      {{ description }}
+    </p>
   </div>
 </a>
-

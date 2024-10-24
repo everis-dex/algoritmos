@@ -1,4 +1,5 @@
-<app-banner [currentView]="currentView" [algorithmicSystemName]="algorithmicSystemName" (_changeView)="changeView()"></app-banner>
+<app-banner [currentView]="currentView" [algorithmicSystemName]="algorithmicSystemName"
+  (_changeView)="changeView()"></app-banner>
 @if (currentView === 'home') {
 <app-home (_changeView)="changeView($event)" (_setHeader)="setHeader($event)"></app-home>
 } @else if (currentView === 'systems-searcher') {
@@ -6,5 +7,3 @@
 } @else if (currentView === 'system-detail') {
 <app-system-detail></app-system-detail>
 }
-
-<app-topic-card></app-topic-card>

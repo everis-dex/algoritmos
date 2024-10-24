@@ -1,0 +1,9 @@
+<section class="topic-cards-container">
+  <h1>Et pot interessar</h1>
+  <div>
+    @for (topic of topics; track $index) {
+    <app-topic-card [image]="topic.image" [title]="topic.title" [description]="topic.description"
+      [url]="topic.url"></app-topic-card>
+    }
+  </div>
+</section>

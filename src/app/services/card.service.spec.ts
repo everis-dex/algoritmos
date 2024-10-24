@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AlgorithmicSystemService } from './algorithmic-system.service';
-import { mockAlgorithmicSystems, mockTopics } from '../mocks/algorithmic-systems';
+import { CardService } from './card.service';
+import { mockAlgorithmicSystems, mockTopics } from '../mocks/cards';
 
-describe('AlgorithmicSystemService', () => {
-  let service: AlgorithmicSystemService;
+describe('CardService', () => {
+  let service: CardService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(AlgorithmicSystemService);
+    service = TestBed.inject(CardService);
   });
 
   it('should be created', () => {
