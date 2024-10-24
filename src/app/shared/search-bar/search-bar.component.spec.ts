@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SearcherComponent } from './searcher.component';
-import { SessionStorageService } from '../../../../services/session-storage.service';
+import { SearchBarComponent } from './search-bar.component';
+import { SessionStorageService } from '../../services/session-storage.service';
 
-describe('SearcherComponent', () => {
-  let component: SearcherComponent;
-  let fixture: ComponentFixture<SearcherComponent>;
+describe('SearchBarComponent', () => {
+  let component: SearchBarComponent;
+  let fixture: ComponentFixture<SearchBarComponent>;
 
   let sessionStorageService: jasmine.SpyObj<SessionStorageService>;
 
@@ -17,15 +17,17 @@ describe('SearcherComponent', () => {
     ]);
 
     await TestBed.configureTestingModule({
-      imports: [SearcherComponent],
+      imports: [SearchBarComponent],
       providers: [
         { provide: SessionStorageService, useValue: sessionStorageService },
       ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SearcherComponent);
+    fixture = TestBed.createComponent(SearchBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    component.hasFilterSelector = true;
   });
 
   it('should create', () => {

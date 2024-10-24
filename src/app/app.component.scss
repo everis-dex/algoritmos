@@ -1,0 +1,66 @@
+@import "../assets/scss/styles.scss";
+
+::ng-deep {
+  section {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      padding-bottom: 1rem;
+    }
+
+    & > div:not(form + div) {
+      display: grid;
+      gap: 1.5rem;
+    }
+  }
+
+  @media (min-width: $mobile) and (max-width: $desktop) {
+    button:not(form button) {
+      font-size: 0.875rem;
+      line-height: 1.3125rem;
+    }
+
+    section {
+      h1 {
+        font-size: 1.375rem;
+        line-height: 1.875rem;
+        padding-top: 1rem;
+      }
+
+      & > div:not(form + div) {
+        grid-template-columns: 1fr;
+      }
+
+      &:not(div > section) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+  }
+  @media (min-width: $desktop) {
+    button:not(form button) {
+      font-size: 1rem;
+      line-height: 1.5rem;
+    }
+
+    section {
+      h1 {
+        font-size: 1.875rem;
+        line-height: 2.5rem;
+      }
+
+      &:not(div > section) {
+        padding-left: 7.5rem;
+        padding-right: 7.5rem;
+      }
+    }
+  }
+}
+
+.app-container > * {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-top: 2rem;
+}
