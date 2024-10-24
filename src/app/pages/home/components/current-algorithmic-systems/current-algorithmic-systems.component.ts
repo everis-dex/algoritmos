@@ -35,7 +35,7 @@ export class CurrentAlgorithmicSystemsComponent
 
   constructor(
     private readonly _algorithmicSystemService: CardService,
-    private _el: ElementRef
+    private readonly _el: ElementRef
   ) {}
 
   ngAfterViewInit(): void {
@@ -54,14 +54,14 @@ export class CurrentAlgorithmicSystemsComponent
 
     const elements = this._el.nativeElement.querySelectorAll(selector);
     elements.forEach((element: HTMLElement) => {
-      (element as HTMLElement).style.height = '';
+      element.style.height = '';
     });
     elements.forEach((element: HTMLElement) => {
-      const height = (element as HTMLElement).offsetHeight;
+      const height = element.offsetHeight;
       if (height > highestHeight) highestHeight = height;
     });
     elements.forEach((element: HTMLElement) => {
-      (element as HTMLElement).style.height = `${highestHeight / 16}rem`;
+      element.style.height = `${highestHeight / 16}rem`;
     });
   }
 
