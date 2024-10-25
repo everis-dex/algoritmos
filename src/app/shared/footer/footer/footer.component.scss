@@ -5,16 +5,12 @@ img {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-}
 
-@media (min-width: $mobile) and (max-width: $desktop) {
-  img {
+  @media (min-width: $mobile) and (max-width: $desktop) {
     content: url("../../../../assets/images/Group_108.svg");
     padding: 1.5rem 2.125rem 2.125rem;
   }
-}
-@media (min-width: $desktop) {
-  img {
+  @media (min-width: $desktop) {
     content: url("../../../../assets/images/franja_5_logos_2.svg");
     padding: 2.5rem 8.75rem 3.125rem;
   }
