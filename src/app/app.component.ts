@@ -4,6 +4,7 @@ import { SystemsSearcherComponent } from './pages/systems-searcher/systems-searc
 import { SystemDetailComponent } from './pages/system-detail/system-detail.component';
 import { BannerComponent } from './shared/banner/banner.component';
 import { TopicCardComponent } from './shared/topic-card/topic-card.component';
+import { FooterComponent } from './shared/footer/footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,8 @@ import { TopicCardComponent } from './shared/topic-card/topic-card.component';
     SystemsSearcherComponent,
     SystemDetailComponent,
     BannerComponent,
-    TopicCardComponent
+    TopicCardComponent,
+    FooterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
