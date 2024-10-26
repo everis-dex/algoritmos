@@ -1,26 +1,7 @@
 <section class="searcher-filter-container">
   <div>
-    <h1>Filtres</h1>
+    <h3>Filtres</h3>
     <button>Restaurar filtres</button>
   </div>
-  <button (click)="toggle('category-list')">Categoria<img src="assets/icons/Icon_angle-down.svg" alt=""
-      [ngClass]="{'searcher-filter-container--rotation': toggleStates['category-list'].rotation}"></button>
-  @if (toggleStates['category-list'].display) {
-  <div>Llistat de categories</div>
-  }
-  <button (click)="toggle('tag-list')">Etiquetes<img src="assets/icons/Icon_angle-down.svg" alt=""
-      [ngClass]="{'searcher-filter-container--rotation': toggleStates['tag-list'].rotation}"></button>
-  @if (toggleStates['tag-list'].display) {
-  <div>Llistat d'etiquetes</div>
-  }
-  <button (click)="toggle('state-list')">Estats<img src="assets/icons/Icon_angle-down.svg" alt=""
-      [ngClass]="{'searcher-filter-container--rotation': toggleStates['state-list'].rotation}"></button>
-  @if (toggleStates['state-list'].display) {
-  <div>Llistat d'estats</div>
-  }
-  <button (click)="toggle('algorithm-type-list')">Tipus d'algorismes<img src="assets/icons/Icon_angle-down.svg" alt=""
-      [ngClass]="{'searcher-filter-container--rotation': toggleStates['algorithm-type-list'].rotation}"></button>
-  @if (toggleStates['algorithm-type-list'].display) {
-  <div>Llistat de tipus d'algorismes</div>
-  }
+  <app-accordion [accordionList]="filters"></app-accordion>
 </section>

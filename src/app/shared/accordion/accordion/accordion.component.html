@@ -1,0 +1,14 @@
+@for (accordionItem of accordionList; track accordionItem.name) {
+<button type="button" (click)="toggle(accordionItem.id)" class="accordion-container">{{ accordionItem.name }}<img
+    src="assets/icons/Icon_angle-down.svg" alt=""
+    [ngClass]="{'accordion-container--rotation': toggleStates[accordionItem.id].rotation}"></button>
+@if (toggleStates[accordionItem.id].display) {
+@if (accordionItem.chips) {
+<app-chips [chips]="accordionItem.chips"></app-chips>
+} @else {
+<select>
+  <option>Estat 1</option>
+</select>
+}
+}
+}

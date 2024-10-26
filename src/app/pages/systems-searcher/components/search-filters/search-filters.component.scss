@@ -1,5 +1,29 @@
+@import "../../../../../assets/scss/styles.scss";
+
 .searcher-filter-container {
-  &--rotation {
-    transform: rotate(180deg);
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.25rem;
+
+    h3 {
+      letter-spacing: 0.015rem;
+      color: $grey-black;
+      font-weight: 400;
+
+      @media (min-width: $mobile) and (max-width: $desktop) {
+        font-size: 1.25rem;
+      }
+      @media (min-width: $desktop) {
+        font-size: 1.5rem;
+      }
+    }
+
+    button {
+      color: $red-bright;
+      font-weight: 600;
+      line-height: 2rem;
+    }
   }
 }

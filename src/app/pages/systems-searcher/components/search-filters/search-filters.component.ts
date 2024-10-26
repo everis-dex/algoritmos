@@ -1,26 +1,31 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { AccordionComponent } from '../../../../shared/accordion/accordion/accordion.component';
 
 @Component({
   selector: 'app-search-filters',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AccordionComponent],
   templateUrl: './search-filters.component.html',
   styleUrl: './search-filters.component.scss',
 })
 export class SearchFiltersComponent {
-  public toggleStates: Record<string, { display: boolean; rotation: boolean }> =
+  public filters = [
     {
-      'category-list': { display: false, rotation: false },
-      'tag-list': { display: false, rotation: false },
-      'state-list': { display: false, rotation: false },
-      'algorithm-type-list': { display: false, rotation: false },
-    };
-
-  public toggle(id: string): void {
-    this.toggleStates[id] = {
-      display: !this.toggleStates[id].display,
-      rotation: !this.toggleStates[id].rotation,
-    };
-  }
+      id: 'category-list',
+      name: 'Categoria',
+      chips: ['Categoria 1', 'Categoria 2', 'Categoria 3'],
+    },
+    { id: 'tag-list', name: 'Etiquetes' },
+    {
+      id: 'state-list',
+      name: 'Estats',
+      chips: ['Estat 1', 'Estat 2', 'Estat 3'],
+    },
+    {
+      id: 'algorithm-type-list',
+      name: "Tipus d'algorisme",
+      chips: ['Algorisme 1', 'Algorisme 2', 'Algorisme 3'],
+    },
+  ];
 }

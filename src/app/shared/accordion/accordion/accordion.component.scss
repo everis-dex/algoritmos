@@ -1,0 +1,11 @@
+@import "../../../../assets/scss/styles.scss";
+
+.accordion-container {
+  display: flex;
+  align-items: center;
+  color: $grey-black;
+
+  &--rotation {
+    transform: rotate(180deg);
+  }
+}
