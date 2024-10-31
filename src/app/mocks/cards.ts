@@ -36,6 +36,79 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
       "El projecte desenvolupa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
     categoryChip: 'Economia',
   },
+  {
+    id: 5,
+    state: 'En producció',
+    title:
+      "Probabilitat d'ocupació",
+    description:
+      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    categoryChip: 'Tecnologia, recerca i innovació',
+  },
+  {
+    id: 6,
+    state: 'En producció',
+    title:
+      'Estimacions electorals del CEO',
+    description:
+      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    categoryChip: 'Tecnologia, recerca i innovació'
+  },
+  {
+    id: 7,
+    state: 'En producció',
+    title:
+      'Preinscripció escolar',
+    description:
+      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    categoryChip: 'Tecnologia, recerca i innovació'
+  },
+  {
+    id: 8,
+    state: 'En producció',
+    title:
+      'Previsió d’afluència de visitants',
+    description:
+      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    categoryChip: 'Tecnologia, recerca i innovació'
+  },
+  {
+    id: 9,
+    state: 'En producció',
+    title:
+      'Carnets professionals',
+    description:
+      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    categoryChip: 'Tecnologia, recerca i innovació'
+  },
+  {
+    id: 10,
+    state: 'En producció',
+    title:
+      'Algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    description:
+      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    categoryChip: 'Tecnologia, recerca i innovació'
+  },
+  {
+    id: 11,
+    state: 'En producció',
+    title:
+      'Algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    description:
+      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    categoryChip: 'Tecnologia'
+  },
+  {
+    id: 12,
+    state: 'En producció',
+    title:
+      'Algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    description:
+      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    categoryChip: 'Tecnologia, recerca i innovació'
+  }
+
 ];
 
 export const mockTopics: TopicCard[] = [

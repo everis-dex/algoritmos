@@ -1,0 +1,49 @@
+@import "../../../../../assets/scss/styles.scss";
+
+.search-results {
+
+    h2 {
+        font-weight: 600;
+    }
+   
+    &__li {
+        padding-left: 10px;
+        &::marker {
+            content: "•"!important;
+
+            color: black;
+        }
+
+    }
+
+    &__bold {
+        font-weight: 600;
+    }
+
+    &
+    &__container {
+        gap: 1.25rem;
+    }
+
+    &__results-found {
+        display: flex;
+        margin-bottom: 1.25rem;
+        justify-content: end;
+    }
+
+    &__empty-container {
+        gap: 1.25rem;
+
+    }
+
+
+}
+
+@media (max-width: $desktop) {
+    .search-results {
+        &__results-found {
+            justify-content: flex-start;
+        }
+    }
+  }
+  

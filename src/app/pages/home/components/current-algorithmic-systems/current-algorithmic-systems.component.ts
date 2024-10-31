@@ -69,7 +69,7 @@ export class CurrentAlgorithmicSystemsComponent
     this._algorithmicSystemsSuscription = this._algorithmicSystemService
       .getAlgorithmicSystems()
       .subscribe((response) => {
-        this.algorithmicSystems = response;
+        this.algorithmicSystems = response.slice(0, 4);
       });
   }
 
