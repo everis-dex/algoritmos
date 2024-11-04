@@ -1,14 +1,34 @@
 @for (accordionItem of accordionList; track accordionItem.name) {
 <button type="button" (click)="toggle(accordionItem.id)" class="accordion-container">{{ accordionItem.name }}<img
-    src="assets/icons/Icon_angle-down.svg" alt=""
+    src="assets/icons/Icon_angle-down.svg" alt="Fletxa d'expansió del contingut desplegable"
     [ngClass]="{'accordion-container--rotation': toggleStates[accordionItem.id].rotation}"></button>
 @if (toggleStates[accordionItem.id].display) {
 @if (accordionItem.chips) {
-<app-chips [chips]="accordionItem.chips"></app-chips>
+<app-chips [chips]="accordionItem.chips" [customStyles]="{ 'padding': '1.25rem 0',
+    'font-size': '0.875rem', 'background-color': '#EFBFBF' }" (_selectChip)="handleChip($event)"></app-chips>
 } @else {
-<select>
-  <option>Estat 1</option>
-</select>
+@if (hasTagsSelected && hasFiltersApplied) {
+<app-chips [chips]="tagsSelected" [customStyles]="{ 'padding': '1.25rem 0',
+    'font-size': '0.875rem', 'background-color': '#EFBFBF' }" (_selectChip)="handleChip($event)"></app-chips>
+}
+<div class="accordion-container__form-select">
+  <button type="button" (click)="handleTagSelect()">Selecciona<img src="assets/icons/Icon_angle-down.svg"
+      alt="Fletxa d'expansió del contingut desplegable"
+      [ngClass]="{'accordion-container--rotation': isRotation}"></button>
+  @if (isRotation) {
+  <form aria-label="Cercador d'etiquetes">
+    <label for="tag-input"
+      [ngClass]="{'accordion-container__form-select__label--visible': !hasValue, 'accordion-container__form-select__label--hidden': hasValue}">Cerca</label>
+    <input id="tag-input" type="text" (input)="handleInput($event)">
+    <button type="submit"><img src="assets/icons/Buscador_Boton_Buscador.svg" alt="Botó del cercador"></button>
+  </form>
+  <ul>
+    @for (tag of tags; track tag) {
+    <li><button type="button" (click)="handleChip($event, tag)">{{ tag }}</button></li>
+    }
+  </ul>
+  }
+</div>
 }
 }
 }

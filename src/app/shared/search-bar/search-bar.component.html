@@ -14,7 +14,7 @@
     </button>
     }
     <button (click)="handleSearch($event)" class="searcher-container__form__search-button" type="submit">
-      <img src="assets/icons/Buscador_Boton.svg" alt="Botó del cercador">
+      <img src="assets/icons/Buscador_Boton_Home.svg" alt="Botó del cercador">
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 0H46C47.1046 0 48 0.895431 48 2V46C48 47.1046 47.1046 48 46 48H0V0Z" fill="#900000" />
         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -26,7 +26,7 @@
     </button>
   </form>
   @if (hasFilterSelector && isFilterVisible) {
-  <div class="searcher-container__filter" aria-label="Filtre">
+  <div class="searcher-container__filter">
     @if (currentSearches.length > 0) {
     <section class="searcher-container__filter__section" id="current-searches">
       <div class="searcher-container__filter__section__header">

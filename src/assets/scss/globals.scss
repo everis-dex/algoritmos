@@ -3,11 +3,6 @@
   font-family: "Open Sans", sans-serif;
 }
 
-input,
-select {
-  outline: none;
-}
-
 button,
 a {
   cursor: pointer;
@@ -18,11 +13,16 @@ button {
   border: none;
   background-color: initial;
   padding: 0;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 input {
   line-height: 1.5rem;
-  color: $grey-medium;
+  border: 0.0625rem solid $grey-very-light;
+  box-sizing: border-box;
 
   &:focus {
     border: 0.0625rem solid $vivid-cerulean;
@@ -33,16 +33,10 @@ input {
 button:not([type="submit"]) {
   display: flex;
 
-  &:not([type="button"]):hover {
+  &:not([type="button"]):hover,
+  &:not([type="button"]):focus {
     text-decoration: underline;
   }
-}
-button:not(form button):focus {
-  outline: auto;
-}
-
-form button[type="submit"]:focus {
-  outline: auto;
 }
 
 h1,

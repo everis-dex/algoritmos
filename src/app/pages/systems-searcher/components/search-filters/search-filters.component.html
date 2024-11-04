@@ -1,7 +1,8 @@
-<section class="searcher-filter-container">
+<aside class="searcher-filter-container" aria-labelledby="Filtres">
   <div>
-    <h3>Filtres</h3>
-    <button>Restaurar filtres</button>
+    <h3 id="Filtres">Filtres</h3>
+    <button (click)="resetFilters()">Restaurar filtres</button>
   </div>
-  <app-accordion [accordionList]="filters"></app-accordion>
-</section>
+  <app-accordion [accordionList]="filters" [hasFiltersApplied]="hasFiltersApplied" [hasTagsSelected]="hasTagsSelected"
+    [tagsSelected]="tagsSelected" (_applyFilters)="applyFilters($event)"></app-accordion>
+</aside>

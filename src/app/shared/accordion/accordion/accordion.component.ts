@@ -1,7 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Accordion } from '../../../interfaces/accordion';
 import { ChipsComponent } from '../../chips/chips.component';
+import { TAGS } from '../../../constants/search-filters.const';
 
 @Component({
   selector: 'app-accordion',
@@ -13,9 +14,21 @@ import { ChipsComponent } from '../../chips/chips.component';
 export class AccordionComponent implements OnInit {
   @Input()
   public accordionList!: Accordion[];
+  @Input()
+  public hasFiltersApplied!: boolean;
+  @Input()
+  public hasTagsSelected!: boolean;
+  @Input()
+  public tagsSelected!: string[];
+
+  @Output()
+  private readonly _applyFilters = new EventEmitter<string>();
 
   public toggleStates: Record<string, { display: boolean; rotation: boolean }> =
     {};
+  public isRotation = false;
+  public tags = TAGS;
+  public hasValue = false;
 
   ngOnInit(): void {
     this.accordionList?.forEach((accordion) => {
@@ -28,5 +41,19 @@ export class AccordionComponent implements OnInit {
       display: !this.toggleStates[id].display,
       rotation: !this.toggleStates[id].rotation,
     };
+  }
+
+  public handleTagSelect(): void {
+    this.isRotation = !this.isRotation;
+  }
+
+  public handleChip(event: string | MouseEvent, tag?: string): void {
+    this._applyFilters.emit(tag);
+    if (event instanceof MouseEvent) event.preventDefault();
+  }
+
+  public handleInput(event: Event): void {
+    const value = (event.target as HTMLInputElement)?.value;
+    this.hasValue = value?.trim().length > 0;
   }
 }

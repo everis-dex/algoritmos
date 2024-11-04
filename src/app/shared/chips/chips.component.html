@@ -1,5 +1,8 @@
-<div>
+<div [ngStyle]="{'padding': customStyles?.['padding']}">
   @for (chip of chips; track $index) {
-  <button type="button" (click)="handleChipClick(chip)">{{ chip }}</button>
+  <button type="button" (click)="selectChip(chip)" [title]="chip"
+    [ngStyle]="{'font-size': customStyles?.['font-size'], 'background-color': customStyles?.['background-color'] || 'transparent'}">{{
+    chip }}<img src="assets/icons/Cross_icon.svg" alt="Desfer xip seleccionat">
+  </button>
   }
 </div>
