@@ -21,11 +21,20 @@ describe('ChipsComponent', () => {
   });
 
   it('should emit selectChip event', () => {
-    const changeViewSpy = spyOn(component['_selectChip'], 'emit');
+    const selectChipSpy = spyOn(component['_selectChip'], 'emit');
 
-    const chipSelected = 'TestChip';
-    component.handleChipClick(chipSelected);
+    const chipSelected = 'Chip 1';
+    component.selectChip(chipSelected);
 
-    expect(changeViewSpy).toHaveBeenCalled();
+    expect(selectChipSpy).toHaveBeenCalled();
+  });
+
+  it('should emit deselectChip event', () => {
+    const deselectChipSpy = spyOn(component['_deselectChip'], 'emit');
+
+    const chipSelected = 'Chip 1';
+    component.deselectChip(chipSelected);
+
+    expect(deselectChipSpy).toHaveBeenCalled();
   });
 });

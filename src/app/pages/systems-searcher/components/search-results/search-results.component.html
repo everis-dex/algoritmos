@@ -1,1 +1,28 @@
-<p>search-results works!</p>
+<div class="search-results">
+    @if (searchResults.length > 0) {
+    <p class="search-results__results-found">
+        S'han trobat
+        <span class="search-results__bold">{{searchResults.length}}</span>
+        resultats
+    </p>
+    @for (result of searchResults; track result) {
+    <app-algorithmic-system-card [stateColor]="getStateColor(result.state)" [state]="result.state"
+        [title]="result.title" [description]="result.description" [categoryChip]="result.categoryChip"
+        (_changeView)="changeView('system-detail')"
+        (_setHeader)="getAlgorithmID(result.id)"></app-algorithmic-system-card>
+    }
+    } @else {
+    <div class="search-results__no-results">
+        <h2 class="search-results__bold">
+            No s'han trobat resultats amb la vostra condició de cerca.
+        </h2>
+        <p class="search-results__bold">Suggeriments:</p>
+        <ul class="search-results__no-results__suggestion-list">
+            <li>Comprobeu que els termes de la cerca són correctes.</li>
+            <li>Probeu la cerca amb diferents paraules clau.</li>
+            <li>Probeu amb paraules clau generals.</li>
+            <li>Comprobeu els criteris i l'àmbit de cerca.</li>
+        </ul>
+    </div>
+    }
+</div>

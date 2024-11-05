@@ -4,14 +4,17 @@
     [ngClass]="{'accordion-container--rotation': toggleStates[accordionItem.id].rotation}"></button>
 @if (toggleStates[accordionItem.id].display) {
 @if (accordionItem.chips) {
-<app-chips [chips]="accordionItem.chips" [customStyles]="{ 'padding': '1.25rem 0',
-    'font-size': '0.875rem', 'background-color': '#EFBFBF' }" (_selectChip)="handleChip($event)"></app-chips>
+<app-chips [chips]="accordionItem.chips" [optionsSelected]="chipsSelected" [customStyles]="{ 'padding': '1.25rem 0',
+    'font-size': '0.875rem', 'background-color': '#EFBFBF' }" (_selectChip)="selectChip($event)"
+  (_deselectChip)="deselectChip($event)"></app-chips>
 } @else {
-@if (hasTagsSelected && hasFiltersApplied) {
+@if (tagsSelected) {
 <app-chips [chips]="tagsSelected" [customStyles]="{ 'padding': '1.25rem 0',
-    'font-size': '0.875rem', 'background-color': '#EFBFBF' }" (_selectChip)="handleChip($event)"></app-chips>
+      'font-size': '0.875rem', 'background-color': '#EFBFBF' }" [optionsSelected]="tagsSelected"
+  (_selectChip)="selectChip($event)" (_deselectChip)="deselectChip($event)"></app-chips>
 }
-<div class="accordion-container__form-select">
+<div class="accordion-container__form-select"
+  [ngClass]="{'accordion-container__form-select--padding-top': tagsSelected.length === 0}">
   <button type="button" (click)="handleTagSelect()">Selecciona<img src="assets/icons/Icon_angle-down.svg"
       alt="Fletxa d'expansió del contingut desplegable"
       [ngClass]="{'accordion-container--rotation': isRotation}"></button>
@@ -22,11 +25,13 @@
     <input id="tag-input" type="text" (input)="handleInput($event)">
     <button type="submit"><img src="assets/icons/Buscador_Boton_Buscador.svg" alt="Botó del cercador"></button>
   </form>
+  @if (filteredTags.length > 0) {
   <ul>
-    @for (tag of tags; track tag) {
-    <li><button type="button" (click)="handleChip($event, tag)">{{ tag }}</button></li>
+    @for (tag of filteredTags; track tag) {
+    <li><button type="button" (click)="selectChip($event, tag)">{{ tag }}</button></li>
     }
   </ul>
+  }
   }
 </div>
 }

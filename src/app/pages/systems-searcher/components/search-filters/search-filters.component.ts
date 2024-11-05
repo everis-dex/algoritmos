@@ -33,26 +33,48 @@ export class SearchFiltersComponent {
       chips: ALGORITHMS,
     },
   ];
-  public hasFiltersApplied = false;
-  public hasTagsSelected = false;
+  public chipsSelected: string[] = [];
   public tagsSelected: string[] = [];
 
   public resetFilters(): void {
+    this.chipsSelected = [];
     this.tagsSelected = [];
-    this.hasFiltersApplied = false;
   }
 
-  public applyFilters(tag: string): void {
-    this.hasFiltersApplied = true;
-
-    if (tag) {
-      this.hasTagsSelected = true;
+  public applyFilters({
+    event,
+    tag,
+  }: {
+    event: string | MouseEvent;
+    tag?: string | undefined;
+  }): void {
+    if (event instanceof MouseEvent && tag) {
       if (
         this.tagsSelected.length > 0 &&
         this.tagsSelected.some((tagSelected) => tagSelected === tag)
       )
         return;
       this.tagsSelected.push(tag);
+    } else if (typeof event === 'string') {
+      this.chipsSelected.push(event);
+    }
+  }
+
+  public removeFilters({
+    event,
+    isChipSelected,
+    isTagSelected,
+  }: {
+    event: string;
+    isChipSelected?: boolean;
+    isTagSelected?: boolean;
+  }): void {
+    if (isChipSelected) {
+      const index = this.chipsSelected.indexOf(event);
+      if (index > -1) this.chipsSelected.splice(index, 1);
+    } else if (isTagSelected) {
+      const index = this.tagsSelected.indexOf(event);
+      if (index > -1) this.tagsSelected.splice(index, 1);
     }
   }
 }

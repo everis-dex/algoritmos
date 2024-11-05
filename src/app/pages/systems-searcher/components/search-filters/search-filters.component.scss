@@ -27,18 +27,3 @@
     }
   }
 }
-
-@media (min-width: $mobile) and (max-width: $desktop) {
-  .searcher-filter-container {
-    width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    box-sizing: border-box;
-  }
-}
-@media (min-width: $desktop) {
-  .searcher-filter-container {
-    width: 23.75rem;
-    padding-left: 7.5rem;
-  }
-}

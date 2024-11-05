@@ -13,13 +13,19 @@ export class ChipsComponent {
   public chips!: string[];
   @Input()
   public customStyles?: Record<string, string>;
-
-  public selectedChips: string[] = [];
+  @Input()
+  public optionsSelected!: string[];
 
   @Output()
   private readonly _selectChip = new EventEmitter<string>();
+  @Output()
+  private readonly _deselectChip = new EventEmitter<string>();
 
   public selectChip(chip: string): void {
     this._selectChip.emit(chip);
+  }
+
+  public deselectChip(chip: string): void {
+    this._deselectChip.emit(chip);
   }
 }

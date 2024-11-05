@@ -61,6 +61,6 @@ h4 {
   }
 }
 
-li::marker {
+li:not(ul.search-results__no-results__suggestion-list li)::marker {
   content: "";
 }

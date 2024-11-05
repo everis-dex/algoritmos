@@ -1,8 +1,24 @@
-<div [ngStyle]="{'padding': customStyles?.['padding']}">
+@if (chips && chips.length > 0) {
+<div class="chips-container" [ngStyle]="{'padding': customStyles?.['padding']}">
+  @if (optionsSelected) {
   @for (chip of chips; track $index) {
-  <button type="button" (click)="selectChip(chip)" [title]="chip"
-    [ngStyle]="{'font-size': customStyles?.['font-size'], 'background-color': customStyles?.['background-color'] || 'transparent'}">{{
-    chip }}<img src="assets/icons/Cross_icon.svg" alt="Desfer xip seleccionat">
+  @if (optionsSelected.includes(chip)) {
+  <div [ngStyle]="{'font-size': customStyles?.['font-size'], 'background-color': customStyles?.['background-color']}">
+    <span>{{ chip }}</span>
+    <button (click)="deselectChip(chip)">
+      <img src="assets/icons/Cross_icon.svg" alt="Deseleccionar chip">
+    </button>
+  </div>
+  }
+  }
+  @for (chip of chips; track $index) {
+  @if (!optionsSelected.includes(chip)) {
+  <button class="chips-container__chip" type="button" (click)="selectChip(chip)" [title]="chip"
+    [ngStyle]="{'font-size': customStyles?.['font-size'], 'background-color': 'transparent'}">
+    <span>{{ chip }}</span>
   </button>
   }
+  }
+  }
 </div>
+}

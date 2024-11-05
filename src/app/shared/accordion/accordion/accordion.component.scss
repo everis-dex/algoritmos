@@ -16,7 +16,11 @@
   &__form-select {
     display: flex;
     flex-direction: column;
-    padding: 1.25rem 0;
+    padding-bottom: 1.25rem;
+
+    &--padding-top {
+      padding-top: 1.25rem;
+    }
 
     @media (min-width: $mobile) and (max-width: $desktop) {
       width: 100%;

@@ -7,20 +7,11 @@ import { mockAlgorithmicSystems, mockTopics } from '../mocks/cards';
   providedIn: 'root',
 })
 export class CardService {
-  public algorithmicSystems: AlgorithmicSystemCard[] = [];
-  public topicCards: TopicCard[] = [];
-
   public getAlgorithmicSystems(): Observable<AlgorithmicSystemCard[]> {
-    mockAlgorithmicSystems.forEach((algorithmicSystem) => {
-      this.algorithmicSystems.push(algorithmicSystem);
-    });
-    return of(this.algorithmicSystems);
+    return of(mockAlgorithmicSystems);
   }
 
   public getTopics(): Observable<TopicCard[]> {
-    mockTopics.forEach((topicCard) => {
-      this.topicCards.push(topicCard);
-    });
-    return of(this.topicCards);
+    return of(mockTopics);
   }
 }
