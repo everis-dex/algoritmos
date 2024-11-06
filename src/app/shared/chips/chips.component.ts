@@ -10,7 +10,7 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
 })
 export class ChipsComponent {
   @Input()
-  public chips!: string[];
+  public chips?: string[];
   @Input()
   public customStyles?: Record<string, string>;
   @Input()

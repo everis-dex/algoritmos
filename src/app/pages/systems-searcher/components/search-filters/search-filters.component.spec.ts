@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SearchFiltersComponent } from './search-filters.component';
 
 describe('SearchFiltersComponent', () => {
@@ -14,6 +13,12 @@ describe('SearchFiltersComponent', () => {
     fixture = TestBed.createComponent(SearchFiltersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+
+    component.filterList = [
+      { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },
+      { filter: 'Filter 2', optionsSelected: ['Option 3'] },
+      { filter: 'Filter 3', optionsSelected: [] },
+    ];
   });
 
   it('should create', () => {
@@ -23,54 +28,42 @@ describe('SearchFiltersComponent', () => {
   it('should reset filters', () => {
     component.resetFilters();
 
-    expect(component.chipsSelected.length).toBe(0);
-    expect(component.tagsSelected.length).toBe(0);
+    expect(component.filterList).toEqual([
+      { filter: 'Categoria', optionsSelected: [] },
+      { filter: 'Etiquetes', optionsSelected: [] },
+      { filter: 'Estats', optionsSelected: [] },
+      { filter: "Tipus d'algorisme", optionsSelected: [] },
+    ]);
   });
 
-  it('should apply filters when MouseEvent is triggered and tags array is empty', () => {
-    component.tagsSelected = [];
-
+  it('should add a new option if it does not already exist in optionsSelected (with MouseEvent and tag)', () => {
     const event = new MouseEvent('click');
-    const tag = 'Tag 1';
+    const tag = 'Option 4';
     component.applyFilters({ event, tag });
-
-    expect(component.tagsSelected).toEqual([tag]);
   });
 
-  it('should not apply filters when the same tag is selected', () => {
-    component.tagsSelected = ['Tag 1'];
-
-    const event = new MouseEvent('click');
-    const tag = 'Tag 1';
-    component.applyFilters({ event, tag });
-
-    expect(component.tagsSelected).toEqual([tag]);
-  });
-
-  it('should apply filters when event contains a string', () => {
-    component.chipsSelected = [];
-
-    const event = 'Chip 1';
+  it('should apply filters when event is a string without tag', () => {
+    const event = 'Option 4';
     component.applyFilters({ event });
-
-    expect(component.chipsSelected).toEqual([event]);
   });
 
-  it('should remove filters when a chip is selected', () => {
-    component.chipsSelected = ['Chip 1', 'Chip 2', 'Chip 3'];
+  it('should remove the event from optionsSelected', () => {
+    component.removeFilters('Option 1');
 
-    const event = 'Chip 1';
-    component.removeFilters({ event, isChipSelected: true });
-
-    expect(component.chipsSelected).toEqual(['Chip 2', 'Chip 3']);
+    expect(component.filterList).toEqual([
+      { filter: 'Filter 1', optionsSelected: ['Option 2'] },
+      { filter: 'Filter 2', optionsSelected: ['Option 3'] },
+      { filter: 'Filter 3', optionsSelected: [] },
+    ]);
   });
 
-  it('should remove filters when a tag is selected', () => {
-    component.tagsSelected = ['Tag 1', 'Tag 2', 'Tag 3'];
+  it('should not modify filterList if the event is not found', () => {
+    component.removeFilters('Option 4');
 
-    const event = 'Tag 1';
-    component.removeFilters({ event, isTagSelected: true });
-
-    expect(component.tagsSelected).toEqual(['Tag 2', 'Tag 3']);
+    expect(component.filterList).toEqual([
+      { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },
+      { filter: 'Filter 2', optionsSelected: ['Option 3'] },
+      { filter: 'Filter 3', optionsSelected: [] },
+    ]);
   });
 });

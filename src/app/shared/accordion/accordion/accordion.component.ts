@@ -15,26 +15,23 @@ export class AccordionComponent implements OnInit {
   @Input()
   public accordionList!: Accordion[];
   @Input()
-  public tagsSelected!: string[];
+  public filterList!: { filter: string; optionsSelected: string[] }[];
   @Input()
-  public chipsSelected!: string[];
+  public resetTags!: boolean;
 
   @Output()
   private readonly _applyFilters = new EventEmitter<{
     event: string | MouseEvent;
-    tag?: string | undefined;
+    tag?: string;
   }>();
   @Output()
-  private readonly _removeFilters = new EventEmitter<{
-    event: string;
-    isChipSelected?: boolean;
-    isTagSelected?: boolean;
-  }>();
+  private readonly _removeFilters = new EventEmitter<string>();
 
   public toggleStates: Record<string, { display: boolean; rotation: boolean }> =
     {};
   public isRotation = false;
   public tags = TAGS;
+  public hasTagsSelected = false;
   public hasValue = false;
   public filteredTags: string[] = [...this.tags];
 
@@ -42,6 +39,10 @@ export class AccordionComponent implements OnInit {
     this.accordionList?.forEach((accordion) => {
       this.toggleStates[accordion.id] = { display: false, rotation: false };
     });
+  }
+
+  public getOptionsSelected(index: number): string[] {
+    return this.filterList?.[index - 1]?.optionsSelected;
   }
 
   public filterTags(inputValue: string): void {
@@ -59,7 +60,7 @@ export class AccordionComponent implements OnInit {
       });
   }
 
-  public toggle(id: string): void {
+  public toggle(id: number): void {
     this.toggleStates[id] = {
       display: !this.toggleStates[id].display,
       rotation: !this.toggleStates[id].rotation,
@@ -77,21 +78,21 @@ export class AccordionComponent implements OnInit {
   }
 
   public selectChip(event: string | MouseEvent, tag?: string): void {
-    if (event instanceof MouseEvent) event.preventDefault();
-    this._applyFilters.emit({ event, tag });
+    if (event instanceof MouseEvent && tag) {
+      event.preventDefault();
+      if (!this.tags.includes(tag)) return;
+      this.hasTagsSelected = true;
+      this._applyFilters.emit({ event, tag });
+    } else {
+      this._applyFilters.emit({ event });
+    }
   }
 
-  public deselectChip(event: string): void {
-    if (this.chipsSelected.includes(event)) {
-      this._removeFilters.emit({
-        event,
-        isChipSelected: true,
-      });
-    } else if (this.tagsSelected.includes(event)) {
-      this._removeFilters.emit({
-        event,
-        isTagSelected: true,
-      });
+  public deselectChip(event: string, index?: number): void {
+    this._removeFilters.emit(event);
+    if (index) {
+      if (this.filterList[index - 1].optionsSelected.length === 0)
+        this.hasTagsSelected = false;
     }
   }
 }

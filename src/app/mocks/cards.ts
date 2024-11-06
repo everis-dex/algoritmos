@@ -8,7 +8,10 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
       'Algoritme Intel·ligent per la gestió de les prioritats en el sector públic',
     description:
       'El projecte implementa un algoritme intel·ligent per la gestió de les prioritats en el sector públic',
-    categoryChip: 'Administració pública',
+    categoryChips: [
+      'Administració pública',
+      'Administració pública, govern i relacions institucionals',
+    ],
   },
   {
     id: 2,
@@ -16,7 +19,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
     title: 'Algoritme per la identificació de patrons en dades de trànsit',
     description:
       'El projecte desenvolupa un algoritme per la identificació de patrons en dades de trànsit',
-    categoryChip: 'Economia',
+    categoryChips: ['Economia'],
   },
   {
     id: 3,
@@ -25,7 +28,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
       'Algoritme de consolidació i càlcul de la productivitat en la indústria automòvil',
     description:
       'El projecte implementa un algoritme de consolidació i càlcul de la productivitat en la indústria automòvil',
-    categoryChip: 'Tecnologia, recerca i innovació',
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 4,
@@ -34,7 +37,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
       "Algoritme per la gestió de les reserves d'energia en un entorn residencial",
     description:
       "El projecte desenvolupa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
-    categoryChip: 'Economia',
+    categoryChips: ['Economia'],
   },
   {
     id: 5,
@@ -42,7 +45,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
     title: "Probabilitat d'ocupació",
     description:
       "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
-    categoryChip: 'Tecnologia, recerca i innovació',
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 6,
@@ -50,7 +53,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
     title: 'Estimacions electorals del CEO',
     description:
       "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
-    categoryChip: 'Tecnologia, recerca i innovació',
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 7,
@@ -58,7 +61,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
     title: 'Preinscripció escolar',
     description:
       "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
-    categoryChip: 'Tecnologia, recerca i innovació',
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 8,
@@ -66,7 +69,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
     title: 'Previsió d’afluència de visitants',
     description:
       "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
-    categoryChip: 'Tecnologia, recerca i innovació',
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 9,
@@ -74,7 +77,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
     title: 'Carnets professionals',
     description:
       "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
-    categoryChip: 'Tecnologia, recerca i innovació',
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 10,
@@ -83,7 +86,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
       "Algoritme per la gestió de les reserves d'energia en un entorn residencial",
     description:
       "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
-    categoryChip: 'Tecnologia, recerca i innovació',
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 11,
@@ -92,7 +95,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
       "Algoritme per la gestió de les reserves d'energia en un entorn residencial",
     description:
       "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
-    categoryChip: 'Tecnologia',
+    categoryChips: ['Tecnologia'],
   },
   {
     id: 12,
@@ -101,7 +104,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
       "Algoritme per la gestió de les reserves d'energia en un entorn residencial",
     description:
       "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
-    categoryChip: 'Tecnologia, recerca i innovació',
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
 ];
 

@@ -5,6 +5,10 @@
     <h2 class="algorithmic-system-card-container__title">{{ title }}</h2>
     <div class="algorithmic-system-card-container__separator"></div>
     <p class="algorithmic-system-card-container__description">{{ description }}</p>
-    <div class="algorithmic-system-card-container__category-chip">{{ categoryChip }}</div>
+    <div class="algorithmic-system-card-container__category-chip-container">
+      @for (categoryChip of categoryChips; track categoryChip) {
+      <div class="algorithmic-system-card-container__category-chip">{{ categoryChip }}</div>
+      }
+    </div>
   </div>
 </a>

@@ -17,28 +17,35 @@ import {
 export class SearchFiltersComponent {
   public filters = [
     {
-      id: 'category-list',
+      id: 1,
       name: 'Categoria',
       chips: CATEGORIES,
     },
-    { id: 'tag-list', name: 'Etiquetes' },
+    { id: 2, name: 'Etiquetes' },
     {
-      id: 'state-list',
+      id: 3,
       name: 'Estats',
       chips: STATES,
     },
     {
-      id: 'algorithm-type-list',
+      id: 4,
       name: "Tipus d'algorisme",
       chips: ALGORITHMS,
     },
   ];
-  public chipsSelected: string[] = [];
-  public tagsSelected: string[] = [];
+  public filterList: { filter: string; optionsSelected: string[] }[] =
+    this.filters.map((filter) => ({
+      filter: filter.name,
+      optionsSelected: [],
+    }));
+  public resetTags = false;
 
   public resetFilters(): void {
-    this.chipsSelected = [];
-    this.tagsSelected = [];
+    this.filterList = this.filters.map((filter) => ({
+      filter: filter.name,
+      optionsSelected: [],
+    }));
+    this.resetTags = true;
   }
 
   public applyFilters({
@@ -46,35 +53,48 @@ export class SearchFiltersComponent {
     tag,
   }: {
     event: string | MouseEvent;
-    tag?: string | undefined;
+    tag?: string;
   }): void {
+    let filterName: string | undefined;
+    let selectedValue = '';
+
     if (event instanceof MouseEvent && tag) {
-      if (
-        this.tagsSelected.length > 0 &&
-        this.tagsSelected.some((tagSelected) => tagSelected === tag)
-      )
-        return;
-      this.tagsSelected.push(tag);
+      filterName = this.filters.find((accordion) => !accordion.chips)?.name;
+      selectedValue = tag;
     } else if (typeof event === 'string') {
-      this.chipsSelected.push(event);
+      filterName = this.filters.find((accordion) =>
+        accordion.chips?.includes(event)
+      )?.name;
+      selectedValue = event;
     }
+    if (!filterName) return;
+
+    const filterIndex = this.filters.findIndex(
+      (accordion) => accordion.name === filterName
+    );
+
+    if (filterIndex !== -1) {
+      const filter = this.filterList[filterIndex];
+      if (!filter?.optionsSelected.includes(selectedValue)) {
+        filter?.optionsSelected.push(selectedValue);
+      }
+    } else {
+      this.filterList.push({
+        filter: filterName,
+        optionsSelected: [selectedValue],
+      });
+    }
+    this.resetTags = false;
   }
 
-  public removeFilters({
-    event,
-    isChipSelected,
-    isTagSelected,
-  }: {
-    event: string;
-    isChipSelected?: boolean;
-    isTagSelected?: boolean;
-  }): void {
-    if (isChipSelected) {
-      const index = this.chipsSelected.indexOf(event);
-      if (index > -1) this.chipsSelected.splice(index, 1);
-    } else if (isTagSelected) {
-      const index = this.tagsSelected.indexOf(event);
-      if (index > -1) this.tagsSelected.splice(index, 1);
+  public removeFilters(event: string): void {
+    const filterIndex = this.filterList.findIndex((filterItem) =>
+      filterItem?.optionsSelected.includes(event)
+    );
+    if (filterIndex !== -1) {
+      this.filterList[filterIndex].optionsSelected = this.filterList[
+        filterIndex
+      ].optionsSelected.filter((option) => option !== event);
     }
   }
 }

@@ -47,12 +47,18 @@ export class CurrentAlgorithmicSystemsComponent
   ngAfterViewInit(): void {
     this.setMaxHeightForElements('h2');
     this.setMaxHeightForElements('p');
+    this.setMaxHeightForElements(
+      '.algorithmic-system-card-container__category-chip-container'
+    );
   }
 
   @HostListener('window:resize')
   onResize(): void {
     this.setMaxHeightForElements('h2');
     this.setMaxHeightForElements('p');
+    this.setMaxHeightForElements(
+      '.algorithmic-system-card-container__category-chip-container'
+    );
   }
 
   public setMaxHeightForElements(selector: string): void {

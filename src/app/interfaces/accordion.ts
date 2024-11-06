@@ -1,5 +1,5 @@
 export interface Accordion {
-  id: string;
+  id: number;
   name: string;
   chips?: string[];
 }

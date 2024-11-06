@@ -1,5 +1,5 @@
 export const CATEGORIES = [
-  'Administració pública, govern y relacions institucionals',
+  'Administració pública, govern i relacions institucionals',
   'Agricultura, ramaderia, pesca i alimentació',
   'Salut',
   'Comerç, consum i turisme',

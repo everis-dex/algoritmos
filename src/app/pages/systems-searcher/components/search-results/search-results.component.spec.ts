@@ -38,7 +38,7 @@ describe('SearchResultsComponent', () => {
         title: 'Test Algorithm',
         state: 'active',
         description: 'Test Description',
-        categoryChip: 'Test Category',
+        categoryChips: ['Test Category'],
       },
     ];
     component.searchResults = mockResults;
@@ -60,7 +60,7 @@ describe('SearchResultsComponent', () => {
         title: 'Test Algorithm',
         state: 'active',
         description: 'Test Description',
-        categoryChip: 'Test Category',
+        categoryChips: ['Test Category'],
       },
     ];
     component.searchResults = mockResults;

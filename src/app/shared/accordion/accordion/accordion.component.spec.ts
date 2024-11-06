@@ -23,6 +23,23 @@ describe('AccordionComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should ngOnInit', () => {
+    component.ngOnInit();
+    expect(component.ngOnInit).toBeTruthy();
+  });
+
+  it('should get options selected correctly', () => {
+    component.filterList = [
+      { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },
+      { filter: 'Filter 2', optionsSelected: ['Option 3'] },
+      { filter: 'Filter 3', optionsSelected: [] },
+    ];
+
+    const index = 1;
+    const optionsSelected = component.getOptionsSelected(index);
+    expect(optionsSelected).toEqual(['Option 1', 'Option 2']);
+  });
+
   it('should filter and sort tags with input value matching the start of tags', () => {
     const inputValue = 'se';
     component.filterTags(inputValue);
@@ -41,7 +58,7 @@ describe('AccordionComponent', () => {
   });
 
   it('should toggle accordion display', () => {
-    const accordionId = '1';
+    const accordionId = 1;
     component.toggleStates[accordionId] = { display: false, rotation: false };
     component.toggle(accordionId);
 
@@ -79,10 +96,19 @@ describe('AccordionComponent', () => {
     const applyFiltersSpy = spyOn(component['_applyFilters'], 'emit');
     const tag = 'Tag 1';
 
+    component.tags = [tag];
     component.selectChip(event, tag);
 
     expect(eventSpy).toHaveBeenCalled();
     expect(applyFiltersSpy).toHaveBeenCalledWith({ event, tag });
+  });
+
+  it('should not emit or prevent default if tag is not in tags list', () => {
+    const event = new MouseEvent('click');
+    const tag = 'Tag 3';
+
+    component.tags = ['Tag 1', 'Tag 2'];
+    component.selectChip(event, tag);
   });
 
   it('should emit applyFilters event directly when input is a string', () => {
@@ -91,33 +117,23 @@ describe('AccordionComponent', () => {
     const event = 'Chip 1';
     component.selectChip(event);
 
-    expect(applyFiltersSpy).toHaveBeenCalledWith({ event, tag: undefined });
+    expect(applyFiltersSpy).toHaveBeenCalledWith({ event });
   });
 
-  it('should emit removeFilters event with isChipSelected when event is in chipsSelected', () => {
-    component.chipsSelected = ['Chip 1'];
+  it('should emit removeFilters event when a chip is deselected', () => {
+    component.filterList = [
+      { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },
+      { filter: 'Filter 2', optionsSelected: ['Option 3'] },
+      { filter: 'Filter 3', optionsSelected: [] },
+    ];
+
     const removeFiltersSpy = spyOn(component['_removeFilters'], 'emit');
 
-    const event = component.chipsSelected[0];
-    component.deselectChip(event);
+    const event = 'Chip 1';
+    const index = 3;
+    component.deselectChip(event, index);
 
-    expect(removeFiltersSpy).toHaveBeenCalledWith({
-      event,
-      isChipSelected: true,
-    });
-  });
-
-  it('should emit removeFilters event with isTagSelected when event is in tagsSelected', () => {
-    component.chipsSelected = [];
-    component.tagsSelected = ['Tag 1'];
-    const removeFiltersSpy = spyOn(component['_removeFilters'], 'emit');
-
-    const event = component.tagsSelected[0];
-    component.deselectChip(event);
-
-    expect(removeFiltersSpy).toHaveBeenCalledWith({
-      event,
-      isTagSelected: true,
-    });
+    expect(removeFiltersSpy).toHaveBeenCalledWith(event);
+    expect(component.hasTagsSelected).toBeFalse();
   });
 });
