@@ -29,7 +29,7 @@ export class AccordionComponent implements OnInit {
 
   public toggleStates: Record<string, { display: boolean; rotation: boolean }> =
     {};
-  public isRotation = false;
+  public isSelectorRotated = false;
   public tags = TAGS;
   public hasTagsSelected = false;
   public hasValue = false;
@@ -68,7 +68,7 @@ export class AccordionComponent implements OnInit {
   }
 
   public handleTagSelect(): void {
-    this.isRotation = !this.isRotation;
+    this.isSelectorRotated = !this.isSelectorRotated;
   }
 
   public handleInput(event: Event): void {

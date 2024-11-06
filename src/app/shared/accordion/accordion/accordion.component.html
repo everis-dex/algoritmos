@@ -1,7 +1,7 @@
 @for (accordionItem of accordionList; track accordionItem.name) {
 <button type="button" (click)="toggle(accordionItem.id)" class="accordion-container">{{ accordionItem.name }}<img
     src="assets/icons/Icon_angle-down.svg" alt="Fletxa d'expansió del contingut desplegable"
-    [ngClass]="{'accordion-container--rotation': toggleStates[accordionItem.id].rotation}"></button>
+    [ngClass]="{'accordion-container--rotate-left': toggleStates[accordionItem.id].rotation, 'accordion-container--rotate-right': !toggleStates[accordionItem.id].rotation}"></button>
 @if (toggleStates[accordionItem.id].display) {
 @if (accordionItem.chips) {
 <app-chips [chips]="accordionItem.chips" [optionsSelected]="getOptionsSelected(accordionItem.id)" [customStyles]="{ 'padding': '1.25rem 0',
@@ -18,8 +18,8 @@
   [ngClass]="{'accordion-container__form-select--padding-top': !hasTagsSelected || resetTags}">
   <button type="button" (click)="handleTagSelect()">Selecciona<img src="assets/icons/Icon_angle-down.svg"
       alt="Fletxa d'expansió del contingut desplegable"
-      [ngClass]="{'accordion-container--rotation': isRotation}"></button>
-  @if (isRotation) {
+      [ngClass]="{'accordion-container--rotate-left': isSelectorRotated, 'accordion-container--rotate-right': !isSelectorRotated}"></button>
+  @if (isSelectorRotated) {
   <form aria-label="Cercador d'etiquetes">
     <label for="tag-input"
       [ngClass]="{'accordion-container__form-select__label--visible': !hasValue, 'accordion-container__form-select__label--hidden': hasValue}">Cerca</label>

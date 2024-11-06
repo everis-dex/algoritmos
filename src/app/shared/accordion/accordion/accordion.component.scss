@@ -9,8 +9,14 @@
   padding: 1rem;
   border-bottom: 0.0625rem solid $grey-very-light;
 
-  &--rotation {
-    transform: rotate(180deg);
+  &--rotate-left {
+    transform: rotate(-180deg);
+    transition: transform 0.5s ease;
+  }
+
+  &--rotate-right {
+    transform: rotate(0deg);
+    transition: transform 0.5s ease;
   }
 
   &__form-select {

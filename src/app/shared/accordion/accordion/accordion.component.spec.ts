@@ -69,11 +69,11 @@ describe('AccordionComponent', () => {
   });
 
   it('should disable rotation on tag select', () => {
-    component.isRotation = true;
+    component.isSelectorRotated  = true;
 
     component.handleTagSelect();
 
-    expect(component.isRotation).toBeFalse();
+    expect(component.isSelectorRotated  ).toBeFalse();
   });
 
   it('should handle search input correctly', () => {
