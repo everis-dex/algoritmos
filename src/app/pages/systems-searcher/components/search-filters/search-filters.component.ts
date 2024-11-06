@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AccordionComponent } from '../../../../shared/accordion/accordion/accordion.component';
 import {
   ALGORITHMS,
@@ -15,6 +15,9 @@ import {
   styleUrl: './search-filters.component.scss',
 })
 export class SearchFiltersComponent {
+  @Output()
+  private readonly _filtersApplied = new EventEmitter<{ filter: string; optionsSelected: string[]; }[]>();
+
   public filters = [
     {
       id: 1,
@@ -57,7 +60,6 @@ export class SearchFiltersComponent {
   }): void {
     let filterName: string | undefined;
     let selectedValue = '';
-
     if (event instanceof MouseEvent && tag) {
       filterName = this.filters.find((accordion) => !accordion.chips)?.name;
       selectedValue = tag;
@@ -72,7 +74,6 @@ export class SearchFiltersComponent {
     const filterIndex = this.filters.findIndex(
       (accordion) => accordion.name === filterName
     );
-
     if (filterIndex !== -1) {
       const filter = this.filterList[filterIndex];
       if (!filter?.optionsSelected.includes(selectedValue)) {
@@ -84,7 +85,9 @@ export class SearchFiltersComponent {
         optionsSelected: [selectedValue],
       });
     }
+    
     this.resetTags = false;
+    this._filtersApplied.emit(this.filterList);
   }
 
   public removeFilters(event: string): void {

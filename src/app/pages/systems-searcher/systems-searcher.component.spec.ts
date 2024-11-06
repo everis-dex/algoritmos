@@ -49,4 +49,15 @@ describe('SystemsSearcherComponent', () => {
       expect(emitSpy).toHaveBeenCalledWith('');
     });
   });
+
+  it('should update filter list correctly', () => {
+    const updatedFilterList = [
+      { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },
+      { filter: 'Filter 2', optionsSelected: ['Option 3'] },
+      { filter: 'Filter 3', optionsSelected: [] },
+    ];
+    component.filtersApplied(updatedFilterList);
+
+    expect(component.filterList).toEqual(updatedFilterList);
+  });
 });

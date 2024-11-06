@@ -1,6 +1,6 @@
 <app-search-bar [hasFilterSelector]="false"></app-search-bar>
 <section>
-  <app-search-filters class="filters"></app-search-filters>
+  <app-search-filters class="filters" (_filtersApplied)="filtersApplied($event)"></app-search-filters>
   <app-search-results class="results" [searchResults]="searchResults" (_changeView)="changeView($event)"
     (_setHeader)="setHeader($event)"></app-search-results>
 </section>

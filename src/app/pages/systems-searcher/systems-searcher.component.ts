@@ -25,8 +25,10 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   @Output()
   private readonly _changeView = new EventEmitter<string>();
 
-  private _algorithmicSystemsSuscription!: Subscription;
   public searchResults: AlgorithmicSystemCard[] = [];
+  public filterList: { filter: string; optionsSelected: string[] }[] = [];
+
+  private _algorithmicSystemsSuscription!: Subscription;
 
   constructor(private readonly _algorithmicSystemService: CardService) {}
 
@@ -43,11 +45,17 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
       this._algorithmicSystemsSuscription.unsubscribe();
   }
 
-  changeView(view: string): void {
+  public filtersApplied(
+    updatedFilterList: { filter: string; optionsSelected: string[] }[]
+  ): void {
+    this.filterList = updatedFilterList;
+  }
+
+  public changeView(view: string): void {
     this._changeView.emit(view);
   }
 
-  setHeader(name: string): void {
+  public setHeader(name: string): void {
     this._setHeader.emit(name);
   }
 }
