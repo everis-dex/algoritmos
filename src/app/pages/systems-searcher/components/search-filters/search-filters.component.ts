@@ -16,7 +16,7 @@ import {
 })
 export class SearchFiltersComponent {
   @Output()
-  private readonly _filtersApplied = new EventEmitter<{ filter: string; optionsSelected: string[]; }[]>();
+  private readonly _filtersApplied = new EventEmitter<{ filter: string; optionsSelected: string[] }[]>();
 
   public filters = [
     {
@@ -58,36 +58,25 @@ export class SearchFiltersComponent {
     event: string | MouseEvent;
     tag?: string;
   }): void {
-    let filterName: string | undefined;
-    let selectedValue = '';
     if (event instanceof MouseEvent && tag) {
-      filterName = this.filters.find((accordion) => !accordion.chips)?.name;
-      selectedValue = tag;
+      const filterIndex = this.filters.findIndex((filter) => !filter.chips);
+      this._addNewOptionSelected(tag, filterIndex);
     } else if (typeof event === 'string') {
-      filterName = this.filters.find((accordion) =>
-        accordion.chips?.includes(event)
-      )?.name;
-      selectedValue = event;
+      const filterIndex = this.filters.findIndex((filter) =>
+        filter.chips?.includes(event)
+      );
+      this._addNewOptionSelected(event, filterIndex);
     }
-    if (!filterName) return;
 
-    const filterIndex = this.filters.findIndex(
-      (accordion) => accordion.name === filterName
-    );
-    if (filterIndex !== -1) {
-      const filter = this.filterList[filterIndex];
-      if (!filter?.optionsSelected.includes(selectedValue)) {
-        filter?.optionsSelected.push(selectedValue);
-      }
-    } else {
-      this.filterList.push({
-        filter: filterName,
-        optionsSelected: [selectedValue],
-      });
-    }
-    
     this.resetTags = false;
     this._filtersApplied.emit(this.filterList);
+  }
+
+  private _addNewOptionSelected(option: string, index: number): void {
+    const filter = this.filterList[index];
+    if (!filter?.optionsSelected.includes(option)) {
+      filter?.optionsSelected.push(option);
+    }
   }
 
   public removeFilters(event: string): void {

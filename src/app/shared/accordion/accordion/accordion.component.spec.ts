@@ -41,10 +41,14 @@ describe('AccordionComponent', () => {
   });
 
   it('should filter and sort tags with input value matching the start of tags', () => {
+    component.tags = [...component.tags, 'Seguretat de la informació'];
     const inputValue = 'se';
     component.filterTags(inputValue);
 
-    expect(component.filteredTags).toEqual(['Seguretat informàtica']);
+    expect(component.filteredTags).toEqual([
+      'Seguretat informàtica',
+      'Seguretat de la informació',
+    ]);
   });
 
   it('should filter tags with input value matching inside tags', () => {
@@ -69,11 +73,11 @@ describe('AccordionComponent', () => {
   });
 
   it('should disable rotation on tag select', () => {
-    component.isSelectorRotated  = true;
+    component.isSelectorRotated = true;
 
     component.handleTagSelect();
 
-    expect(component.isSelectorRotated  ).toBeFalse();
+    expect(component.isSelectorRotated).toBeFalse();
   });
 
   it('should handle search input correctly', () => {
