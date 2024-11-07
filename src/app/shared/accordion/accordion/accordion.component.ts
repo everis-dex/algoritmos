@@ -84,7 +84,9 @@ export class AccordionComponent implements OnInit {
     this.isSelectorRotated = !this.isSelectorRotated;
   }
 
-  public handleInput(event: Event): void {
+  public handleInput(event: Event | KeyboardEvent): void {
+    if (event instanceof KeyboardEvent && event.key === 'Enter')
+      event.preventDefault();
     const value = (event.target as HTMLInputElement)?.value;
     this.hasInputValue = value?.trim().length > 0;
     this.filterTags(value);

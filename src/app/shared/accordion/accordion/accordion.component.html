@@ -20,18 +20,19 @@
       alt="Fletxa d'expansió del contingut desplegable"
       [ngClass]="{'accordion-container--rotate-left': isSelectorRotated, 'accordion-container--rotate-right': !isSelectorRotated}"></button>
   @if (isSelectorRotated) {
-  <form aria-label="Cercador d'etiquetes" (submit)="handleInput($event)">
+  <form aria-label="Cercador d'etiquetes">
     <label for="tag-input"
       [ngClass]="{'accordion-container__form-select__label--visible': !hasInputValue, 'accordion-container__form-select__label--hidden': hasInputValue}">Cerca</label>
-    <input id="tag-input" type="text" (input)="handleInput($event)">
+    <input id="tag-input" type="text" (input)="handleInput($event)" (keydown)="handleInput($event)">
+    <button type="submit" tabindex="-1" style="display: none;"></button>
     <img src="assets/icons/Buscador_Boton.svg" alt="Botó del cercador">
   </form>
   @if (filteredTags.length > 0) {
-  <ul>
+  <div>
     @for (tag of filteredTags; track tag) {
     <button type="button" (click)="selectChip($event, tag)">{{ tag }}</button>
     }
-  </ul>
+  </div>
   }
   }
 </div>
