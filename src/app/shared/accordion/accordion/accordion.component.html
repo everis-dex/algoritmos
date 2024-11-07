@@ -20,11 +20,11 @@
       alt="Fletxa d'expansió del contingut desplegable"
       [ngClass]="{'accordion-container--rotate-left': isSelectorRotated, 'accordion-container--rotate-right': !isSelectorRotated}"></button>
   @if (isSelectorRotated) {
-  <form aria-label="Cercador d'etiquetes">
+  <form aria-label="Cercador d'etiquetes" (submit)="handleInput($event)">
     <label for="tag-input"
       [ngClass]="{'accordion-container__form-select__label--visible': !hasInputValue, 'accordion-container__form-select__label--hidden': hasInputValue}">Cerca</label>
     <input id="tag-input" type="text" (input)="handleInput($event)">
-    <button type="submit"><img src="assets/icons/Buscador_Boton_Buscador.svg" alt="Botó del cercador"></button>
+    <img src="assets/icons/Buscador_Boton_Buscador.svg" alt="Botó del cercador">
   </form>
   @if (filteredTags.length > 0) {
   <ul>
