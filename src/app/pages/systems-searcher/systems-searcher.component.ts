@@ -33,6 +33,7 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   constructor(private readonly _algorithmicSystemService: CardService) {}
 
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this._algorithmicSystemsSuscription = this._algorithmicSystemService
       .getAlgorithmicSystems()
       .subscribe((response) => {

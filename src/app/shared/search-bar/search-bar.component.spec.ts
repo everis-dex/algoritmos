@@ -82,7 +82,7 @@ describe('SearchBarComponent', () => {
 
     component.handleInput(event);
 
-    expect(component.hasValue).toBeTrue();
+    expect(component.hasInputValue).toBeTrue();
     expect(component.isFilterVisible).toBeTrue();
   });
 

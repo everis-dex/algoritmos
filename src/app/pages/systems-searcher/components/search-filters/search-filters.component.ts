@@ -5,6 +5,7 @@ import {
   ALGORITHMS,
   CATEGORIES,
   STATES,
+  TAGS_ID,
 } from '../../../../constants/search-filters.const';
 
 @Component({
@@ -16,7 +17,9 @@ import {
 })
 export class SearchFiltersComponent {
   @Output()
-  private readonly _filtersApplied = new EventEmitter<{ filter: string; optionsSelected: string[] }[]>();
+  private readonly _filtersApplied = new EventEmitter<
+    { filter: string; optionsSelected: string[] }[]
+  >();
 
   public filters = [
     {
@@ -41,14 +44,18 @@ export class SearchFiltersComponent {
       filter: filter.name,
       optionsSelected: [],
     }));
-  public resetTags = false;
+  public resetTagsSelected = false;
 
-  public resetFilters(): void {
+  public resetFilters(id?: number): void {
+    if (id) {
+      this.filterList[id].optionsSelected = [];
+      return;
+    }
     this.filterList = this.filters.map((filter) => ({
       filter: filter.name,
       optionsSelected: [],
     }));
-    this.resetTags = true;
+    this.resetTagsSelected = true;
   }
 
   public applyFilters({
@@ -68,11 +75,12 @@ export class SearchFiltersComponent {
       this._addNewOptionSelected(event, filterIndex);
     }
 
-    this.resetTags = false;
+    this.resetTagsSelected = false;
     this._filtersApplied.emit(this.filterList);
   }
 
   private _addNewOptionSelected(option: string, index: number): void {
+    if (index >= TAGS_ID) this.resetFilters(index);
     const filter = this.filterList[index];
     if (!filter?.optionsSelected.includes(option)) {
       filter?.optionsSelected.push(option);

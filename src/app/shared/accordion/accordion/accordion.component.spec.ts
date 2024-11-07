@@ -40,6 +40,13 @@ describe('AccordionComponent', () => {
     expect(optionsSelected).toEqual(['Option 1', 'Option 2']);
   });
 
+  it('should reset tags if input value is not provided', () => {
+    component.filterTags();
+
+    expect(component.hasInputValue).toBeFalse();
+    expect(component.filteredTags).toEqual(TAGS);
+  });
+
   it('should filter and sort tags with input value matching the start of tags', () => {
     component.tags = [...component.tags, 'Seguretat de la informació'];
     const inputValue = 'se';
@@ -61,7 +68,7 @@ describe('AccordionComponent', () => {
     ]);
   });
 
-  it('should toggle accordion display', () => {
+  it('should toggle the accordion to display it and rotate the icon', () => {
     const accordionId = 1;
     component.toggleStates[accordionId] = { display: false, rotation: false };
     component.toggle(accordionId);
@@ -70,6 +77,16 @@ describe('AccordionComponent', () => {
       display: true,
       rotation: true,
     });
+  });
+
+  it('should call filterTags when the accordion with input value is toggled', () => {
+    const filterTagsSpy = spyOn(component, 'filterTags');
+    component.hasInputValue = true;
+
+    const accordionId = 2;
+    component.toggle(accordionId);
+
+    expect(filterTagsSpy).toHaveBeenCalled();
   });
 
   it('should disable rotation on tag select', () => {
@@ -90,7 +107,7 @@ describe('AccordionComponent', () => {
 
     component.handleInput(event);
 
-    expect(component.hasValue).toBeTrue();
+    expect(component.hasInputValue).toBeTrue();
     expect(filterTagsSpy).toHaveBeenCalledWith('testValue');
   });
 

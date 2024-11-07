@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Accordion } from '../../../interfaces/accordion';
 import { ChipsComponent } from '../../chips/chips.component';
-import { TAGS } from '../../../constants/search-filters.const';
+import { TAGS, TAGS_ID } from '../../../constants/search-filters.const';
 
 @Component({
   selector: 'app-accordion',
@@ -17,7 +17,7 @@ export class AccordionComponent implements OnInit {
   @Input()
   public filterList!: { filter: string; optionsSelected: string[] }[];
   @Input()
-  public resetTags!: boolean;
+  public resetTagsSelected!: boolean;
 
   @Output()
   private readonly _applyFilters = new EventEmitter<{
@@ -32,7 +32,7 @@ export class AccordionComponent implements OnInit {
   public isSelectorRotated = false;
   public tags = TAGS;
   public hasTagsSelected = false;
-  public hasValue = false;
+  public hasInputValue = false;
   public filteredTags: string[] = [...this.tags];
 
   ngOnInit(): void {
@@ -45,10 +45,21 @@ export class AccordionComponent implements OnInit {
     return this.filterList?.[index - 1]?.optionsSelected;
   }
 
-  public filterTags(inputValue: string): void {
+  public filterTags(inputValue?: string): void {
+    if (!inputValue) {
+      this.hasInputValue = false;
+      this.filteredTags = this.tags;
+      return;
+    }
     const lowerInputValue = inputValue.toLowerCase();
     this.filteredTags = this.tags
-      .filter((tag) => tag.toLowerCase().includes(lowerInputValue))
+      .filter((tag) =>
+        tag
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .includes(lowerInputValue)
+      )
       .sort((a, b) => {
         const startsWithA = a.toLowerCase().startsWith(lowerInputValue)
           ? -1
@@ -61,9 +72,10 @@ export class AccordionComponent implements OnInit {
   }
 
   public toggle(id: number): void {
+    if (id === TAGS_ID && this.hasInputValue) this.filterTags();
     this.toggleStates[id] = {
-      display: !this.toggleStates[id].display,
-      rotation: !this.toggleStates[id].rotation,
+      display: !this.toggleStates[id]?.display,
+      rotation: !this.toggleStates[id]?.rotation,
     };
   }
 
@@ -73,7 +85,7 @@ export class AccordionComponent implements OnInit {
 
   public handleInput(event: Event): void {
     const value = (event.target as HTMLInputElement)?.value;
-    this.hasValue = value?.trim().length > 0;
+    this.hasInputValue = value?.trim().length > 0;
     this.filterTags(value);
   }
 

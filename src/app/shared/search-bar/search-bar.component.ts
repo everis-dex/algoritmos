@@ -26,7 +26,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   public categorySelected = '';
   public isFilterVisible = false;
   public currentSearches: string[];
-  public hasValue = false;
+  public hasInputValue = false;
 
   @Input()
   public hasFilterSelector!: boolean;
@@ -97,8 +97,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   public handleInput(event: Event): void {
     const value = (event.target as HTMLInputElement)?.value;
     this._sessionStorageService.setItem('lastSearch', value);
-    this.hasValue = value?.trim().length > 0;
-    this.isFilterVisible = this.hasValue;
+    this.hasInputValue = value?.trim().length > 0;
+    this.isFilterVisible = this.hasInputValue;
   }
 
   public handleSearch(event: KeyboardEvent | MouseEvent): void {

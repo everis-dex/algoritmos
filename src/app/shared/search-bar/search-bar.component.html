@@ -1,7 +1,7 @@
 <section class="searcher-container">
   <form class="searcher-container__form" aria-label="Cercador">
     <label for="search-input"
-      [ngClass]="{'searcher-container__form__label--visible': !hasValue, 'searcher-container__form__label--hidden': hasValue}">Cerca
+      [ngClass]="{'searcher-container__form__label--visible': !hasInputValue, 'searcher-container__form__label--hidden': hasInputValue}">Cerca
       per paraula, categoria...</label>
     <input [style.width]="!hasFilterSelector && '100%'" id="search-input" type="text" (input)="handleInput($event)"
       (keydown)="handleSearch($event)">
