@@ -27,15 +27,17 @@ input {
   }
 }
 
-button:not([type="submit"]) {
-  display: flex;
-
+button {
   &:focus {
-    outline: none;
+    outline: auto;
   }
-  &:not([type="button"]):hover,
-  &:not([type="button"]):focus {
-    text-decoration: underline;
+  &:not([type="submit"]) {
+    display: flex;
+
+    &:not([type="button"]):hover,
+    &:not([type="button"]):focus {
+      text-decoration: underline;
+    }
   }
 }
 
