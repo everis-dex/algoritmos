@@ -116,17 +116,9 @@
     &__search-button {
       height: inherit;
 
-      svg {
-        display: none;
-      }
-
-      &:hover {
-        img {
-          display: none;
-        }
-
-        svg {
-          display: block;
+      svg:hover {
+        path:first-child {
+          fill: $red;
         }
       }
     }
@@ -164,11 +156,9 @@
         }
       }
 
-      &__search-button {
-        img,
-        svg {
-          width: 2.5rem;
-        }
+      &__search-button svg {
+        width: 2.5rem;
+        height: 2.5rem;
       }
     }
 
@@ -226,11 +216,9 @@
         }
       }
 
-      &__search-button {
-        img,
-        svg {
-          width: auto;
-        }
+      &__search-button svg {
+        width: auto;
+        height: auto;
       }
     }
 

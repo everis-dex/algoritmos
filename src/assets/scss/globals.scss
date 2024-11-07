@@ -13,10 +13,6 @@ button {
   border: none;
   background-color: initial;
   padding: 0;
-
-  &:focus {
-    outline: none;
-  }
 }
 
 input {
@@ -27,12 +23,16 @@ input {
   &:focus {
     border: 0.0625rem solid $vivid-cerulean;
     border-radius: 0.125rem;
+    outline: none;
   }
 }
 
 button:not([type="submit"]) {
   display: flex;
 
+  &:focus {
+    outline: none;
+  }
   &:not([type="button"]):hover,
   &:not([type="button"]):focus {
     text-decoration: underline;
