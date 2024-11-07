@@ -29,7 +29,7 @@
   @if (filteredTags.length > 0) {
   <ul>
     @for (tag of filteredTags; track tag) {
-    <li><button type="button" (click)="selectChip($event, tag)">{{ tag }}</button></li>
+    <button type="button" (click)="selectChip($event, tag)">{{ tag }}</button>
     }
   </ul>
   }

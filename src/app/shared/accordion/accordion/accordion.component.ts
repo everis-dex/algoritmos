@@ -80,6 +80,7 @@ export class AccordionComponent implements OnInit {
   }
 
   public handleTagSelect(): void {
+    if (this.hasInputValue) this.filterTags();
     this.isSelectorRotated = !this.isSelectorRotated;
   }
 
