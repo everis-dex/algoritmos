@@ -1,2 +1,4 @@
 <app-search-bar [hasFilterSelector]="false"></app-search-bar>
-<app-search-results [searchResults]="searchResults" (_changeView)="changeView($event)" (_setHeader)="setHeader($event)"></app-search-results>
+<app-search-results [searchResults]="searchResults" [totalSearchResultsLength]="totalSearchResultsLength" (_changeView)="changeView($event)"
+  (_setHeader)="setHeader($event)"></app-search-results>
+<app-search-pagination [totalPages]="totalPages" (_changePage)="changePage($event)"></app-search-pagination>

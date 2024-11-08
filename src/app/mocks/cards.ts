@@ -107,6 +107,15 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
     description:
       'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
     categoryChip: 'Tecnologia, recerca i innovació'
+  },
+  {
+    id: 13,
+    state: 'En producció',
+    title:
+      'Algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    description:
+      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    categoryChip: 'Tecnologia, recerca i innovació'
   }
 
 ];

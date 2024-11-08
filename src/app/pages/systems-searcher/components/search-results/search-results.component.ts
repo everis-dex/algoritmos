@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import {getAlgorithmNameByID, getStateColor} from '../../../../shared/utilities';
 import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card/algorithmic-system-card.component';
@@ -10,10 +10,12 @@ import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-s
   templateUrl: './search-results.component.html',
   styleUrl: './search-results.component.scss'
 })
-export class SearchResultsComponent {
+export class SearchResultsComponent implements OnInit {
 
 @Input()
 public searchResults: AlgorithmicSystemCard[] = [];
+@Input()
+public totalSearchResultsLength!: number;
 
 @Output()
 private readonly _changeView = new EventEmitter<string>();
@@ -23,6 +25,10 @@ private readonly _setHeader = new EventEmitter<string>();
 
 getStateColor = getStateColor;
 getAlgorithmNameByID = getAlgorithmNameByID;
+
+ngOnInit(): void {
+  this.totalSearchResultsLength = this.searchResults.length;
+}
 
 changeView(view: string): void {
   this._changeView.emit(view);
