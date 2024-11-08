@@ -8,7 +8,10 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
       'Algoritme Intel·ligent per la gestió de les prioritats en el sector públic',
     description:
       'El projecte implementa un algoritme intel·ligent per la gestió de les prioritats en el sector públic',
-    categoryChip: 'Administració pública',
+    categoryChips: [
+      'Administració pública',
+      'Administració pública, govern i relacions institucionals',
+    ],
   },
   {
     id: 2,
@@ -16,7 +19,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
     title: 'Algoritme per la identificació de patrons en dades de trànsit',
     description:
       'El projecte desenvolupa un algoritme per la identificació de patrons en dades de trànsit',
-    categoryChip: 'Economia',
+    categoryChips: ['Economia'],
   },
   {
     id: 3,
@@ -25,7 +28,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
       'Algoritme de consolidació i càlcul de la productivitat en la indústria automòvil',
     description:
       'El projecte implementa un algoritme de consolidació i càlcul de la productivitat en la indústria automòvil',
-    categoryChip: 'Tecnologia, recerca i innovació',
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 4,
@@ -34,97 +37,90 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
       "Algoritme per la gestió de les reserves d'energia en un entorn residencial",
     description:
       "El projecte desenvolupa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
-    categoryChip: 'Economia',
+    categoryChips: ['Economia'],
   },
   {
     id: 5,
     state: 'En producció',
-    title:
-      "Probabilitat d'ocupació",
+    title: "Probabilitat d'ocupació",
     description:
-      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
-    categoryChip: 'Tecnologia, recerca i innovació',
+      "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 6,
     state: 'En producció',
-    title:
-      'Estimacions electorals del CEO',
+    title: 'Estimacions electorals del CEO',
     description:
-      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
-    categoryChip: 'Tecnologia, recerca i innovació'
+      "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 7,
     state: 'En producció',
-    title:
-      'Preinscripció escolar',
+    title: 'Preinscripció escolar',
     description:
-      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
-    categoryChip: 'Tecnologia, recerca i innovació'
+      "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 8,
     state: 'En producció',
-    title:
-      'Previsió d’afluència de visitants',
+    title: 'Previsió d’afluència de visitants',
     description:
-      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
-    categoryChip: 'Tecnologia, recerca i innovació'
+      "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 9,
     state: 'En producció',
-    title:
-      'Carnets professionals',
+    title: 'Carnets professionals',
     description:
-      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
-    categoryChip: 'Tecnologia, recerca i innovació'
+      "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 10,
     state: 'En producció',
     title:
-      'Algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+      "Algoritme per la gestió de les reserves d'energia en un entorn residencial",
     description:
-      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
-    categoryChip: 'Tecnologia, recerca i innovació'
+      "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 11,
     state: 'En producció',
     title:
-      'Algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+      "Algoritme per la gestió de les reserves d'energia en un entorn residencial",
     description:
-      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
-    categoryChip: 'Tecnologia'
+      "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
+    categoryChips: ['Tecnologia'],
   },
   {
     id: 12,
     state: 'En producció',
     title:
-      'Algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+      "Algoritme per la gestió de les reserves d'energia en un entorn residencial",
     description:
-      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
-    categoryChip: 'Tecnologia, recerca i innovació'
+      "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
+    categoryChips: ['Tecnologia, recerca i innovació'],
   },
   {
     id: 13,
     state: 'En producció',
-    title:
-      'Algoritme per la gestió de les reserves d\'energia en un entorn residencial',
+    title: 'Previsió d’afluència de visitants',
     description:
-      'El projecte implementa un algoritme per la gestió de les reserves d\'energia en un entorn residencial',
-    categoryChip: 'Tecnologia, recerca i innovació'
-  }
-
+      "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
+    categoryChips: ['Tecnologia, recerca i innovació'],
+  },
 ];
 
 export const mockTopics: TopicCard[] = [
   {
     id: 1,
     image:
-      'https://s3-alpha-sig.figma.com/img/455f/fcb5/c303634f4ac01395fcb6374a56d0e742?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=iXCBVxauQ4OlXMoQ5~GjEaO3hI64oP3ZSb9hgye90vHXSgWIAAxIgcOBgH7Fsa-RQt~f1A0CX2ChBwEo4bRIzi8E1v31d0h1nGqokKu5ZF6qUQz-8XExBXLxfdw7k4irHA7FoZog6Bf4DhTY2Y-GggDYMD7G~yThhNThDJl2RXc0RDdweKY68Ilrn7gEQmEwcBoJ9Z4fgPCwZtg9vQTUNNjfUdAvHoZo99mM3yoBOXzB5p8eurL0TaBFj4q1kQdJV-iMOhm70vArW7KRBXobHjUobWfSyz52P37TjyTELdfNUtwK9xkc5decKYW8nSWQ0rt8~FFutujeZXMhktnw4g__',
+      'https://s3-alpha-sig.figma.com/img/455f/fcb5/c303634f4ac01395fcb6374a56d0e742?Expires=1731888000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=RAwEtHts1TnIjTQSsDWPQwkJg76CJg69lz5rM~TDoKLCZVFFsdfm9Sf5BoOF3kygpgLSuwwx1aETtRTVqynE5IYFv9dTT0uCWyjRXzVsQHVl6kR~Zbi~QoeWSfDYRVvx1kOlpAMenJLDz3EWVjTA2-LlF6ax~B3rndc-hA8O-waKNm75j9J9r8jeJtNHJLJG95dVAnmCxjZmsHZvFnUepQS5HF1W8fb6GGUgKpR-A2dxvmC6HcFUUQOuwrK5QSfF2OFmIrIXoVQx0lTqoqVT0Vs74xhCpGegNe0wNmUTUyRar819PsFB09gJvBv2YvKRRJIRO4Rs92iIDMfbYWVPwg__',
     title: "Sobre el registre de sistemes d'IA",
     description:
       "El registre de sistemes d'IA està integrat per la informació dels sistemes d'ús d'intel·ligència artificial i altres algorismes emprats en els serveis públics de l'Administració de la Generalitat.",
@@ -133,7 +129,7 @@ export const mockTopics: TopicCard[] = [
   {
     id: 2,
     image:
-      'https://s3-alpha-sig.figma.com/img/66f1/ebee/92bbd6c6311f77d2c3481e6014504b03?Expires=1730678400&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=pjo-Tkn8HpiW6b-vrzapLRb8ir8PaOPKVlinJBAxnAWQU1oh13QyeXvwP6tyvMUemuvItiIL8IiBNH1fkGpC-Amc5gSwpBbtNNFK6Ds3hSnrMW77mwaISg7RSD6M~JOSgMW-42gBG1LriDodDfQd~8fnCFls-iS2S1yvvlEuQODgHf5DTOs124CaIXRg5F3-7BFK9lpHsqUTDY86UkFfNWpQt2nhFghBv5RsFR4ywcLYea2U0l-2yCeW7-HK-WRa0Bdh9NRTy8Z2k1V6rB6UHfocOi6mkb8M1Ic-sn4aohoQs38XitAkfBLjK8-tXFUiHO9Xdot-RrRYkkzWf65kmg__',
+      'https://s3-alpha-sig.figma.com/img/66f1/ebee/92bbd6c6311f77d2c3481e6014504b03?Expires=1731888000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=QQCbR6pv5EJBDKAl8ptc-y8RZ1nth85zKDb-HyQFas4GV0WTuUnsF6QzB0E4hKljWcn8ldUldZJiDDxnz8eUypUbY~yNCN8R27PfwWm8tXVHALppBDzoZOtbPDnJlVSeFhPKR0zQBoM5fSkOVTOXJ3k2W-ZidgsrxgWit3r7lsgCATrzPSmYG07VrGYIQInUEVpJAttIuDZMnNNhtBr-qkapgp8NRAXhl0v5h3RI7g8VkHR~2KV5MNimicu4uiMIaG4AKl6BGktJi5KH5T-dkY~9ObZQanceLn3BOyTlwUc8oLx8Gg4xVtGm4NmqfYfqI17yWdvh6BFNkPeUCliVBQ__',
     title: "Què és un sistema d'IA?",
     description:
       'La intel·ligència artificial és una disciplina de la informàtica, dedicada al desenvolupament d’algorismes, que permet que les màquines prenguin decisions intel·ligents',

@@ -1,6 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
-import {getAlgorithmNameByID, getStateColor} from '../../../../shared/utilities';
+import {
+  getAlgorithmNameByID,
+  getStateColor,
+} from '../../../../shared/utilities';
 import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card/algorithmic-system-card.component';
 
 @Component({
@@ -8,34 +11,27 @@ import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-s
   standalone: true,
   imports: [AlgorithmicSystemCardComponent],
   templateUrl: './search-results.component.html',
-  styleUrl: './search-results.component.scss'
+  styleUrl: './search-results.component.scss',
 })
-export class SearchResultsComponent implements OnInit {
+export class SearchResultsComponent {
+  @Input()
+  public searchResults: AlgorithmicSystemCard[] = [];
+  @Input()
+  public totalSearchResultsLength!: number;
 
-@Input()
-public searchResults: AlgorithmicSystemCard[] = [];
-@Input()
-public totalSearchResultsLength!: number;
+  @Output()
+  private readonly _changeView = new EventEmitter<string>();
+  @Output()
+  private readonly _setHeader = new EventEmitter<string>();
 
-@Output()
-private readonly _changeView = new EventEmitter<string>();
+  public getStateColor = getStateColor;
+  public getAlgorithmNameByID = getAlgorithmNameByID;
 
-@Output()
-private readonly _setHeader = new EventEmitter<string>();
+  public changeView(view: string): void {
+    this._changeView.emit(view);
+  }
 
-getStateColor = getStateColor;
-getAlgorithmNameByID = getAlgorithmNameByID;
-
-ngOnInit(): void {
-  this.totalSearchResultsLength = this.searchResults.length;
-}
-
-changeView(view: string): void {
-  this._changeView.emit(view);
-}
-
-getAlgorithmID(id: number): void {
-  this._setHeader.emit(this.getAlgorithmNameByID(id, this.searchResults));
-}
-
+  public getAlgorithmID(id: number): void {
+    this._setHeader.emit(this.getAlgorithmNameByID(id, this.searchResults));
+  }
 }

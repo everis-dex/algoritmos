@@ -1,4 +1,8 @@
 <app-search-bar [hasFilterSelector]="false"></app-search-bar>
-<app-search-results [searchResults]="searchResults" [totalSearchResultsLength]="totalSearchResultsLength" (_changeView)="changeView($event)"
-  (_setHeader)="setHeader($event)"></app-search-results>
-<app-search-pagination [totalPages]="totalPages" (_changePage)="changePage($event)"></app-search-pagination>
+<section>
+  <app-search-filters class="filters" (_filtersApplied)="filtersApplied($event)"></app-search-filters>
+  <app-search-results class="results" [searchResults]="searchResults"
+    [totalSearchResultsLength]="totalSearchResultsLength" (_changeView)="changeView($event)"
+    (_setHeader)="setHeader($event)"></app-search-results>
+  <app-search-pagination [totalPages]="totalPages" (_changePage)="changePage($event)"></app-search-pagination>
+</section>

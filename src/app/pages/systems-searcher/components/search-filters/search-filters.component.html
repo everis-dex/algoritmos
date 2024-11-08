@@ -1,1 +1,8 @@
-<p>search-filters works!</p>
+<aside class="searcher-filter-container" aria-labelledby="Filtres">
+  <div>
+    <h3 id="Filtres">Filtres</h3>
+    <button (click)="resetFilters()">Restaurar filtres</button>
+  </div>
+  <app-accordion [accordionList]="filters" [filterList]="filterList" [resetTagsSelected]="resetTagsSelected"
+    (_applyFilters)="applyFilters($event)" (_removeFilters)="removeFilters($event)"></app-accordion>
+</aside>

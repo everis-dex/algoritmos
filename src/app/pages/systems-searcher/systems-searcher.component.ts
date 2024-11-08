@@ -6,6 +6,7 @@ import {
   Output,
 } from '@angular/core';
 import { SearchBarComponent } from '../../shared/search-bar/search-bar.component';
+import { SearchFiltersComponent } from './components/search-filters/search-filters.component';
 import { Subscription } from 'rxjs';
 import { CardService } from '../../services/card.service';
 import { AlgorithmicSystemCard } from '../../interfaces/cards';
@@ -17,6 +18,7 @@ import { SearchPaginationComponent } from './components/search-pagination/search
   standalone: true,
   imports: [
     SearchBarComponent,
+    SearchFiltersComponent,
     SearchResultsComponent,
     SearchPaginationComponent,
   ],
@@ -29,19 +31,17 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   @Output()
   private readonly _changeView = new EventEmitter<string>();
 
-  private _algorithmicSystemsSuscription!: Subscription;
   public searchResults: AlgorithmicSystemCard[] = [];
+  public filterList: { filter: string; optionsSelected: string[] }[] = [];
   public totalSearchResultsLength = 0;
   public totalPages = 0;
 
+  private _algorithmicSystemsSuscription!: Subscription;
+
   constructor(private readonly _algorithmicSystemService: CardService) {}
 
-  ngOnDestroy(): void {
-    if (this._algorithmicSystemsSuscription)
-      this._algorithmicSystemsSuscription.unsubscribe();
-  }
-
   ngOnInit(): void {
+    window.scrollTo(0, 0);
     this._algorithmicSystemsSuscription = this._algorithmicSystemService
       .getAlgorithmicSystems()
       .subscribe((response) => {
@@ -49,6 +49,11 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
         this.totalSearchResultsLength = this.searchResults.length;
         this.totalPages = Math.ceil(this.searchResults.length / 6);
       });
+  }
+
+  ngOnDestroy(): void {
+    if (this._algorithmicSystemsSuscription)
+      this._algorithmicSystemsSuscription.unsubscribe();
   }
 
   public changePage(page: number): void {
@@ -63,11 +68,17 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
       });
   }
 
-  changeView(view: string): void {
+  public filtersApplied(
+    updatedFilterList: { filter: string; optionsSelected: string[] }[]
+  ): void {
+    this.filterList = updatedFilterList;
+  }
+
+  public changeView(view: string): void {
     this._changeView.emit(view);
   }
 
-  setHeader(name: string): void {
+  public setHeader(name: string): void {
     this._setHeader.emit(name);
   }
 }

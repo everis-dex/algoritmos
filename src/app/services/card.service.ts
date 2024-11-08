@@ -7,7 +7,6 @@ import { mockAlgorithmicSystems, mockTopics } from '../mocks/cards';
   providedIn: 'root',
 })
 export class CardService {
-
   public getAlgorithmicSystems(): Observable<AlgorithmicSystemCard[]> {
     return of(mockAlgorithmicSystems);
   }

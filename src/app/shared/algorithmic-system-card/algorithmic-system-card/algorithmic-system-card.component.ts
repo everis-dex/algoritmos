@@ -19,7 +19,7 @@ export class AlgorithmicSystemCardComponent {
   @Input()
   public description!: string;
   @Input()
-  public categoryChip!: string;
+  public categoryChips!: string[];
 
   @Output()
   private readonly _changeView = new EventEmitter<void>();
