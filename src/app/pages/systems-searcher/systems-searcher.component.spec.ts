@@ -8,9 +8,8 @@ describe('SystemsSearcherComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SystemsSearcherComponent]
-    })
-    .compileComponents();
+      imports: [SystemsSearcherComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SystemsSearcherComponent);
     component = fixture.componentInstance;
@@ -25,9 +24,9 @@ describe('SystemsSearcherComponent', () => {
     it('should emit the view string when changeView is called', () => {
       const emitSpy = spyOn(component['_changeView'], 'emit');
       const testView = 'test-view';
-      
+
       component.changeView(testView);
-      
+
       expect(emitSpy).toHaveBeenCalledWith(testView);
     });
   });
@@ -36,18 +35,29 @@ describe('SystemsSearcherComponent', () => {
     it('should emit the header name when setHeader is called', () => {
       const emitSpy = spyOn(component['_setHeader'], 'emit');
       const testHeader = 'test-header';
-      
+
       component.setHeader(testHeader);
-      
+
       expect(emitSpy).toHaveBeenCalledWith(testHeader);
     });
 
     it('should emit empty string when setHeader is called with empty string', () => {
       const emitSpy = spyOn(component['_setHeader'], 'emit');
-      
+
       component.setHeader('');
-      
+
       expect(emitSpy).toHaveBeenCalledWith('');
     });
+  });
+
+  it('should update filter list correctly', () => {
+    const updatedFilterList = [
+      { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },
+      { filter: 'Filter 2', optionsSelected: ['Option 3'] },
+      { filter: 'Filter 3', optionsSelected: [] },
+    ];
+    component.filtersApplied(updatedFilterList);
+
+    expect(component.filterList).toEqual(updatedFilterList);
   });
 });

@@ -3,31 +3,68 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  OnDestroy,
+  OnInit,
   Output,
 } from '@angular/core';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { CommonModule } from '@angular/common';
-import { CategoryChipComponent } from '../category-chip/category-chip.component';
+import { ChipsComponent } from '../chips/chips.component';
 import { SystemsSearcherLinkComponent } from '../systems-searcher-link/systems-searcher-link.component';
+import { Subscription } from 'rxjs';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-search-bar',
   standalone: true,
-  imports: [CategoryChipComponent, SystemsSearcherLinkComponent, CommonModule],
+  imports: [ChipsComponent, SystemsSearcherLinkComponent, CommonModule],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit, OnDestroy {
+  public popularCategories: string[] = [];
   public categorySelected = '';
   public isFilterVisible = false;
   public currentSearches: string[];
-  public hasValue = false;
+  public hasInputValue = false;
 
   @Input()
   public hasFilterSelector!: boolean;
 
   @Output()
   private readonly _changeView = new EventEmitter<string>();
+
+  private _categoriesSuscription!: Subscription;
+
+  constructor(
+    private readonly _categoryService: CategoryService,
+    private readonly _sessionStorageService: SessionStorageService
+  ) {
+    this.currentSearches =
+      this._sessionStorageService.getItem('currentSearches') || [];
+  }
+
+  ngOnInit(): void {
+    const popularCategories =
+      this._sessionStorageService.getItem<string[]>('popularCategories');
+    if (popularCategories !== null) {
+      this.popularCategories = popularCategories;
+    } else {
+      this._categoriesSuscription = this._categoryService
+        .getCategories()
+        .subscribe((categories) => {
+          this.popularCategories = categories;
+          this._sessionStorageService.setItem(
+            'popularCategories',
+            this.popularCategories
+          );
+        });
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this._categoriesSuscription) this._categoriesSuscription.unsubscribe();
+  }
 
   @HostListener('document:click', ['$event'])
   public onClickOutside(event: MouseEvent): void {
@@ -48,11 +85,6 @@ export class SearchBarComponent {
     }
   }
 
-  constructor(private readonly _sessionStorageService: SessionStorageService) {
-    this.currentSearches =
-      this._sessionStorageService.getItem('currentSearches') || [];
-  }
-
   public handleCategorySelect(): void {
     this.isFilterVisible = !this.isFilterVisible;
   }
@@ -65,8 +97,8 @@ export class SearchBarComponent {
   public handleInput(event: Event): void {
     const value = (event.target as HTMLInputElement)?.value;
     this._sessionStorageService.setItem('lastSearch', value);
-    this.hasValue = value?.trim().length > 0;
-    this.isFilterVisible = this.hasValue;
+    this.hasInputValue = value?.trim().length > 0;
+    this.isFilterVisible = this.hasInputValue;
   }
 
   public handleSearch(event: KeyboardEvent | MouseEvent): void {

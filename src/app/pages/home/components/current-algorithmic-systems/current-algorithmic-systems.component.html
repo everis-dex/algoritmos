@@ -4,9 +4,9 @@
   <h1>Sistemes Algorísmics recents</h1>
   <div>
     @for (algorithmicSystem of algorithmicSystems; track $index) {
-    <app-algorithmic-system-card [stateColor]="getStateColor()" [state]="algorithmicSystem.state"
+    <app-algorithmic-system-card [stateColor]="getStateColor(algorithmicSystem.state)" [state]="algorithmicSystem.state"
       [title]="algorithmicSystem.title" [description]="algorithmicSystem.description"
-      [categoryChip]="algorithmicSystem.categoryChip" (_changeView)="changeView('system-detail')"
+      [categoryChips]="algorithmicSystem.categoryChips" (_changeView)="changeView('system-detail')"
       (_setHeader)="setHeader(algorithmicSystem.id)"></app-algorithmic-system-card>
     }
   </div>

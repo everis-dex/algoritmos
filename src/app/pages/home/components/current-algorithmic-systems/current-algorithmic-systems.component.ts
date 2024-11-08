@@ -13,6 +13,10 @@ import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import { Subscription } from 'rxjs';
 import { CardService } from '../../../../services/card.service';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
+import {
+  getAlgorithmNameByID,
+  getStateColor,
+} from '../../../../shared/utilities';
 
 @Component({
   selector: 'app-current-algorithmic-systems',
@@ -30,6 +34,8 @@ export class CurrentAlgorithmicSystemsComponent
   private readonly _setHeader = new EventEmitter<string>();
 
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
+  public getStateColor = getStateColor;
+  public getAlgorithmNameByID = getAlgorithmNameByID;
 
   private _algorithmicSystemsSuscription!: Subscription;
 
@@ -41,15 +47,21 @@ export class CurrentAlgorithmicSystemsComponent
   ngAfterViewInit(): void {
     this.setMaxHeightForElements('h2');
     this.setMaxHeightForElements('p');
+    this.setMaxHeightForElements(
+      '.algorithmic-system-card-container__category-chip-container'
+    );
   }
 
   @HostListener('window:resize')
   onResize(): void {
     this.setMaxHeightForElements('h2');
     this.setMaxHeightForElements('p');
+    this.setMaxHeightForElements(
+      '.algorithmic-system-card-container__category-chip-container'
+    );
   }
 
-  setMaxHeightForElements(selector: string): void {
+  public setMaxHeightForElements(selector: string): void {
     let highestHeight = 0;
 
     const elements = this._el.nativeElement.querySelectorAll(selector);
@@ -78,20 +90,10 @@ export class CurrentAlgorithmicSystemsComponent
       this._algorithmicSystemsSuscription.unsubscribe();
   }
 
-  public getStateColor(): string {
-    const stateColorConfig: Record<string, string> = {
-      'En producció': 'Green',
-      'En desenvolupament': 'Yellow',
-      Desmantellat: 'Red',
-    };
-    return stateColorConfig[this.algorithmicSystems[0].state];
-  }
-
   public setHeader(algorithmicSystemId: number): void {
-    const algorithmicSystemName = this.algorithmicSystems.find(
-      (algorithmicSystem) => algorithmicSystem.id === algorithmicSystemId
-    )?.title;
-    this._setHeader.emit(algorithmicSystemName);
+    this._setHeader.emit(
+      this.getAlgorithmNameByID(algorithmicSystemId, this.algorithmicSystems)
+    );
   }
 
   public changeView(view: string): void {
