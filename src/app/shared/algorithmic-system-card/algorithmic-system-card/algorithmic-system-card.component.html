@@ -6,7 +6,7 @@
     <div class="algorithmic-system-card-container__separator"></div>
     <p class="algorithmic-system-card-container__description">{{ description }}</p>
     <div class="algorithmic-system-card-container__category-chip-container">
-      @for (categoryChip of categoryChips; track categoryChip) {
+      @for (categoryChip of categoryChips; track $index) {
       <div class="algorithmic-system-card-container__category-chip">{{ categoryChip }}</div>
       }
     </div>

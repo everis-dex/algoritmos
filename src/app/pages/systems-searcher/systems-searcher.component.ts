@@ -58,6 +58,7 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
 
   public changePage(page: number): void {
     this._getSearchResults(page);
+    window.scrollTo(0, 0);
   }
 
   private _getSearchResults(page: number): void {
