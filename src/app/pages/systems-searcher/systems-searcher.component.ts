@@ -30,6 +30,8 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   @Output()
   private readonly _setHeader = new EventEmitter<string>();
   @Output()
+  private readonly _setDetails = new EventEmitter<AlgorithmicSystemCard>();
+  @Output()
   private readonly _changeView = new EventEmitter<string>();
 
   public searchResults: AlgorithmicSystemCard[] = [];
@@ -85,7 +87,11 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
     this._changeView.emit(view);
   }
 
-  public setHeader(name: string): void {
-    this._setHeader.emit(name);
+  public setDetails(details: AlgorithmicSystemCard): void {
+    this._setDetails.emit(details);
+  }
+
+  public setHeader(header: string): void {
+    this._setHeader.emit(header);
   }
 }

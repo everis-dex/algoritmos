@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import {
-  getAlgorithmNameByID,
+  getAlgorithmicSystemNameById,
   getStateColor,
 } from '../../../../shared/utilities';
 import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card/algorithmic-system-card.component';
@@ -23,17 +23,24 @@ export class SearchResultsComponent {
   @Output()
   private readonly _changeView = new EventEmitter<string>();
   @Output()
+  private readonly _setDetails = new EventEmitter<AlgorithmicSystemCard>();
+  @Output()
   private readonly _setHeader = new EventEmitter<string>();
 
   public getStateColor = getStateColor;
-  public getAlgorithmNameByID = getAlgorithmNameByID;
+  public getAlgorithmicSystemNameById = getAlgorithmicSystemNameById;
   public maxSearchResultsPerPage = MAX_SEARCH_RESULTS_PER_PAGE;
 
-  public changeView(view: string): void {
-    this._changeView.emit(view);
+  public setView(details: AlgorithmicSystemCard): void {
+    this._changeView.emit('system-detail');
+    this._setDetails.emit(details);
   }
 
-  public getAlgorithmID(id: number): void {
-    this._setHeader.emit(this.getAlgorithmNameByID(id, this.searchResults));
+  public getAlgorithmicSystemId(id: number): void {
+    const algorithmicSystemName = this.getAlgorithmicSystemNameById(
+      id,
+      this.searchResults
+    );
+    if (algorithmicSystemName) this._setHeader.emit(algorithmicSystemName);
   }
 }

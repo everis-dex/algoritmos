@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SystemsSearcherComponent } from './systems-searcher.component';
+import { mockAlgorithmicSystems } from '../../mocks/cards';
 
 describe('SystemsSearcherComponent', () => {
   let component: SystemsSearcherComponent;
@@ -21,52 +22,59 @@ describe('SystemsSearcherComponent', () => {
   });
 
   describe('changeView', () => {
-    it('should emit the view string when changeView is called', () => {
-      const emitSpy = spyOn(component['_changeView'], 'emit');
-      const testView = 'test-view';
+    it('should emit changeView event to the given view', () => {
+      const changeViewSpy = spyOn(component['_changeView'], 'emit');
 
+      const testView = 'test-view';
       component.changeView(testView);
 
-      expect(emitSpy).toHaveBeenCalledWith(testView);
+      expect(changeViewSpy).toHaveBeenCalledWith(testView);
     });
   });
 
   describe('setHeader', () => {
-    it('should emit the header name when setHeader is called', () => {
-      const emitSpy = spyOn(component['_setHeader'], 'emit');
-      const testHeader = 'test-header';
+    it('should emit setHeader event to the given header', () => {
+      const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
 
+      const testHeader = 'test-header';
       component.setHeader(testHeader);
 
-      expect(emitSpy).toHaveBeenCalledWith(testHeader);
-    });
-
-    it('should emit empty string when setHeader is called with empty string', () => {
-      const emitSpy = spyOn(component['_setHeader'], 'emit');
-
-      component.setHeader('');
-
-      expect(emitSpy).toHaveBeenCalledWith('');
+      expect(setHeaderSpy).toHaveBeenCalledWith(testHeader);
     });
   });
 
-  it('should change the page and scroll the window to the top', () => {
-    const windowSpy = spyOn(window, 'scrollTo');
+  describe('setDetails', () => {
+    it('should emit setDetails event to the given details', () => {
+      const setDetailsSpy = spyOn(component['_setDetails'], 'emit');
 
-    const page = 2;
-    component.changePage(page);
+      const details = mockAlgorithmicSystems[0];
+      component.setDetails(details);
 
-    expect(windowSpy).toHaveBeenCalled();
+      expect(setDetailsSpy).toHaveBeenCalledWith(details);
+    });
   });
 
-  it('should update filter list correctly', () => {
-    const updatedFilterList = [
-      { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },
-      { filter: 'Filter 2', optionsSelected: ['Option 3'] },
-      { filter: 'Filter 3', optionsSelected: [] },
-    ];
-    component.filtersApplied(updatedFilterList);
+  describe('changePage', () => {
+    it('should change the page and scroll the window to the top', () => {
+      const windowSpy = spyOn(window, 'scrollTo');
 
-    expect(component.filterList).toEqual(updatedFilterList);
+      const page = 2;
+      component.changePage(page);
+
+      expect(windowSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('filtersApplied', () => {
+    it('should update filter list correctly', () => {
+      const updatedFilterList = [
+        { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },
+        { filter: 'Filter 2', optionsSelected: ['Option 3'] },
+        { filter: 'Filter 3', optionsSelected: [] },
+      ];
+      component.filtersApplied(updatedFilterList);
+
+      expect(component.filterList).toEqual(updatedFilterList);
+    });
   });
 });

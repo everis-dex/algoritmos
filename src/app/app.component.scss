@@ -9,7 +9,7 @@
       padding-bottom: 1rem;
     }
 
-    & > div:not(form + div) {
+    .algorithmic-system-cards-container {
       display: grid;
       gap: 1.5rem;
     }

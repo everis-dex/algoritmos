@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { mockAlgorithmicSystems } from './mocks/cards';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -21,23 +22,36 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should set currentView to the given view', () => {
-    const view = 'systems-searcher';
-    component.changeView(view);
+  describe('changeView', () => {
+    it('should set currentView to the given view', () => {
+      const view = 'systems-searcher';
+      component.changeView(view);
 
-    expect(component.currentView).toBe(view);
+      expect(component.currentView).toBe(view);
+    });
+
+    it('should set currentView to the default view', () => {
+      component.changeView();
+
+      expect(component.currentView).toBe('home');
+    });
   });
 
-  it('should set currentView to the default view', () => {
-    component.changeView();
+  describe('setDetails', () => {
+    it('should set algorithmicSystemDetails to the given details', () => {
+      const details = mockAlgorithmicSystems[0];
+      component.setDetails(details);
 
-    expect(component.currentView).toBe('home');
+      expect(component.algorithmicSystemDetails).toEqual(details);
+    });
   });
 
-  it('should set algorithmicSystemName to the given name', () => {
-    const name = 'Anonimitzador de documents';
-    component.setHeader(name);
+  describe('setHeader', () => {
+    it('should set algorithmicSystemName to the given name', () => {
+      const name = 'Anonimitzador de documents';
+      component.setHeader(name);
 
-    expect(component.algorithmicSystemName).toBe(name);
+      expect(component.algorithmicSystemName).toBe(name);
+    });
   });
 });

@@ -5,13 +5,13 @@ import { AlgorithmicSystemCard } from '../interfaces/cards';
  *
  * @export
  * @param {string} state
- * @return {*}  {string}
+ * @return {*} {string}
  */
 export function getStateColor(state: string): string {
   const stateColorConfig: Record<string, string> = {
     'En producció': 'Green',
     'En desenvolupament': 'Yellow',
-    'Desmantellat': 'Red',
+    Desmantellat: 'Red',
   };
   return stateColorConfig[state];
 }
@@ -20,17 +20,16 @@ export function getStateColor(state: string): string {
  * Returns the name of the algorithm associated with the given ID.
  *
  * @export
- * @param {number} algorithmId
+ * @param {number} algorithmicSystemId
  * @param {AlgorithmicSystemCard[]} algorithmicSystems
- * @return {*}  {string}
+ * @return {*} {string}
  */
-export function getAlgorithmNameByID(
-  algorithmId: number,
+export function getAlgorithmicSystemNameById(
+  algorithmicSystemId: number,
   algorithmicSystems: AlgorithmicSystemCard[]
-): string {
-  const algorithmicSystemName =
-    algorithmicSystems.find(
-      (algorithmicSystem) => algorithmicSystem.id === algorithmId
-    )?.title ?? '';
+): string | undefined {
+  const algorithmicSystemName = algorithmicSystems.find(
+    (algorithmicSystem) => algorithmicSystem.id === algorithmicSystemId
+  )?.title;
   return algorithmicSystemName;
 }

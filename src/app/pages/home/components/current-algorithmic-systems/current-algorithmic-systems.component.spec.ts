@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CurrentAlgorithmicSystemsComponent } from './current-algorithmic-systems.component';
+import { mockAlgorithmicSystems } from '../../../../mocks/cards';
 
 describe('CurrentAlgorithmicSystemsComponent', () => {
   let component: CurrentAlgorithmicSystemsComponent;
@@ -20,30 +21,38 @@ describe('CurrentAlgorithmicSystemsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should apply the highest element height after window resize', () => {
-    const setMaxHeightSpy = spyOn(component, 'setMaxHeightForElements');
+  describe('onResize', () => {
+    it('should apply the highest element height after window resize', () => {
+      const setMaxHeightSpy = spyOn(component, 'setMaxHeightForElements');
 
-    component.onResize();
+      component.onResize();
 
-    expect(setMaxHeightSpy).toHaveBeenCalled();
+      expect(setMaxHeightSpy).toHaveBeenCalled();
+    });
   });
 
-  it('should emit changeView event to the given view', () => {
-    const changeViewSpy = spyOn(component['_changeView'], 'emit');
+  describe('setView', () => {
+    it('should emit changeView event to the given view', () => {
+      const changeViewSpy = spyOn(component['_changeView'], 'emit');
+      const setDetailsSpy = spyOn(component['_setDetails'], 'emit');
 
-    const view = 'system-detail';
-    component.changeView(view);
+      const details = mockAlgorithmicSystems[0];
+      component.setView(details);
 
-    expect(changeViewSpy).toHaveBeenCalledWith(view);
+      expect(changeViewSpy).toHaveBeenCalledWith('system-detail');
+      expect(setDetailsSpy).toHaveBeenCalledWith(details);
+    });
   });
 
-  it('should emit setHeader event to the given algorithmic system id', () => {
-    const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
+  describe('setHeader', () => {
+    it('should emit setHeader event to the given algorithmic system id', () => {
+      const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
 
-    component.setHeader(component.algorithmicSystems[0].id);
+      component.setHeader(component.algorithmicSystems[0].id);
 
-    expect(setHeaderSpy).toHaveBeenCalledWith(
-      component.algorithmicSystems[0].title
-    );
+      expect(setHeaderSpy).toHaveBeenCalledWith(
+        component.algorithmicSystems[0].title
+      );
+    });
   });
 });

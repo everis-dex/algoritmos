@@ -13,10 +13,7 @@ import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import { Subscription } from 'rxjs';
 import { CardService } from '../../../../services/card.service';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
-import {
-  getAlgorithmNameByID,
-  getStateColor,
-} from '../../../../shared/utilities';
+import { getAlgorithmicSystemNameById } from '../../../../shared/utilities';
 
 @Component({
   selector: 'app-current-algorithmic-systems',
@@ -31,11 +28,12 @@ export class CurrentAlgorithmicSystemsComponent
   @Output()
   private readonly _changeView = new EventEmitter<string>();
   @Output()
+  private readonly _setDetails = new EventEmitter<AlgorithmicSystemCard>();
+  @Output()
   private readonly _setHeader = new EventEmitter<string>();
 
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
-  public getStateColor = getStateColor;
-  public getAlgorithmNameByID = getAlgorithmNameByID;
+  public getAlgorithmicSystemNameById = getAlgorithmicSystemNameById;
 
   private _algorithmicSystemsSuscription!: Subscription;
 
@@ -51,6 +49,12 @@ export class CurrentAlgorithmicSystemsComponent
   @HostListener('window:resize')
   onResize(): void {
     this.setMaxHeightForElements();
+  }
+
+  public getAlgorithmicSystemDetails(
+    algorithmicSystemCard: AlgorithmicSystemCard
+  ): AlgorithmicSystemCard {
+    return algorithmicSystemCard;
   }
 
   public setMaxHeightForElements(): void {
@@ -92,11 +96,15 @@ export class CurrentAlgorithmicSystemsComponent
 
   public setHeader(algorithmicSystemId: number): void {
     this._setHeader.emit(
-      this.getAlgorithmNameByID(algorithmicSystemId, this.algorithmicSystems)
+      this.getAlgorithmicSystemNameById(
+        algorithmicSystemId,
+        this.algorithmicSystems
+      )
     );
   }
 
-  public changeView(view: string): void {
-    this._changeView.emit(view);
+  public setView(details?: AlgorithmicSystemCard): void {
+    this._changeView.emit('system-detail');
+    if (details) this._setDetails.emit(details);
   }
 }

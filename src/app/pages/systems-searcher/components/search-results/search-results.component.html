@@ -6,9 +6,7 @@
         resultats
     </p>
     @for (result of searchResults.slice(0, maxSearchResultsPerPage); track $index) {
-    <app-algorithmic-system-card [stateColor]="getStateColor(result.state)" [state]="result.state"
-        [title]="result.title" [description]="result.description" [categoryChips]="result.categoryChips"
-        (_changeView)="changeView('system-detail')"
+    <app-algorithmic-system-card [algorithmicSystem]="result" (_changeView)="setView($event)"
         (_setHeader)="getAlgorithmID(result.id)"></app-algorithmic-system-card>
     }
     } @else {
