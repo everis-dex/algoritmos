@@ -15,8 +15,6 @@ export class AlgorithmicSystemCardComponent {
 
   @Output()
   private readonly _changeView = new EventEmitter<AlgorithmicSystemCard>();
-  @Output()
-  private readonly _setHeader = new EventEmitter<number>();
 
   public getStateColor = getStateColor;
 
@@ -27,6 +25,5 @@ export class AlgorithmicSystemCardComponent {
     event.preventDefault();
 
     this._changeView.emit(algorithmicSystem);
-    this._setHeader.emit(algorithmicSystem.id);
   }
 }

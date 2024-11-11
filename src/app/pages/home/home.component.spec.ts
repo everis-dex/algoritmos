@@ -42,15 +42,4 @@ describe('HomeComponent', () => {
       expect(setDetailsSpy).toHaveBeenCalledWith(details);
     });
   });
-
-  describe('setHeader', () => {
-    it('should emit setHeader event to the given algorithmic system name', () => {
-      const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
-
-      const algorithmicSystemName = 'Anonimitzador de documents';
-      component.setHeader(algorithmicSystemName);
-
-      expect(setHeaderSpy).toHaveBeenCalledWith(algorithmicSystemName);
-    });
-  });
 });

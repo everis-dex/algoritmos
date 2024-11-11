@@ -32,17 +32,6 @@ describe('SystemsSearcherComponent', () => {
     });
   });
 
-  describe('setHeader', () => {
-    it('should emit setHeader event to the given header', () => {
-      const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
-
-      const testHeader = 'test-header';
-      component.setHeader(testHeader);
-
-      expect(setHeaderSpy).toHaveBeenCalledWith(testHeader);
-    });
-  });
-
   describe('setDetails', () => {
     it('should emit setDetails event to the given details', () => {
       const setDetailsSpy = spyOn(component['_setDetails'], 'emit');

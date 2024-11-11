@@ -32,7 +32,16 @@ describe('CurrentAlgorithmicSystemsComponent', () => {
   });
 
   describe('setView', () => {
-    it('should emit changeView event to the given view', () => {
+    it('should emit changeView event when argument is a string', () => {
+      const changeViewSpy = spyOn(component['_changeView'], 'emit');
+
+      const view = 'systems-searcher';
+      component.setView(view);
+
+      expect(changeViewSpy).toHaveBeenCalledWith(view);
+    });
+
+    it('should emit changeView event when argument is an object', () => {
       const changeViewSpy = spyOn(component['_changeView'], 'emit');
       const setDetailsSpy = spyOn(component['_setDetails'], 'emit');
 
@@ -41,18 +50,6 @@ describe('CurrentAlgorithmicSystemsComponent', () => {
 
       expect(changeViewSpy).toHaveBeenCalledWith('system-detail');
       expect(setDetailsSpy).toHaveBeenCalledWith(details);
-    });
-  });
-
-  describe('setHeader', () => {
-    it('should emit setHeader event to the given algorithmic system id', () => {
-      const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
-
-      component.setHeader(component.algorithmicSystems[0].id);
-
-      expect(setHeaderSpy).toHaveBeenCalledWith(
-        component.algorithmicSystems[0].title
-      );
     });
   });
 });

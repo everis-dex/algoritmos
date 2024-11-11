@@ -33,17 +33,4 @@ describe('SearchResultsComponent', () => {
       expect(setDetailsSpy).toHaveBeenCalledWith(details);
     });
   });
-
-  describe('getAlgorithmicSystemId', () => {
-    it('should emit setHeader event to the given algorithm id', () => {
-      const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
-
-      component.searchResults = mockAlgorithmicSystems;
-      component.getAlgorithmicSystemId(component.searchResults[0].id);
-
-      expect(setHeaderSpy).toHaveBeenCalledWith(
-        component.searchResults[0].title
-      );
-    });
-  });
 });

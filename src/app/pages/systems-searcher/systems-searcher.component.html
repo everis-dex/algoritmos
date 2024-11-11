@@ -3,8 +3,7 @@
   <app-search-filters class="filters" (_filtersApplied)="filtersApplied($event)"></app-search-filters>
   <div class="results">
     <app-search-results [searchResults]="searchResults" [totalSearchResultsLength]="totalSearchResultsLength"
-      (_changeView)="changeView($event)" (_setDetails)="setDetails($event)"
-      (_setHeader)="setHeader($event)"></app-search-results>
+      (_changeView)="changeView($event)" (_setDetails)="setDetails($event)"></app-search-results>
     <app-search-pagination [totalPages]="totalPages" (_changePage)="changePage($event)"></app-search-pagination>
   </div>
 </section>

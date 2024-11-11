@@ -13,7 +13,6 @@ import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import { Subscription } from 'rxjs';
 import { CardService } from '../../../../services/card.service';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
-import { getAlgorithmicSystemNameById } from '../../../../shared/utilities';
 
 @Component({
   selector: 'app-current-algorithmic-systems',
@@ -29,11 +28,8 @@ export class CurrentAlgorithmicSystemsComponent
   private readonly _changeView = new EventEmitter<string>();
   @Output()
   private readonly _setDetails = new EventEmitter<AlgorithmicSystemCard>();
-  @Output()
-  private readonly _setHeader = new EventEmitter<string>();
 
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
-  public getAlgorithmicSystemNameById = getAlgorithmicSystemNameById;
 
   private _algorithmicSystemsSuscription!: Subscription;
 
@@ -52,9 +48,9 @@ export class CurrentAlgorithmicSystemsComponent
   }
 
   public getAlgorithmicSystemDetails(
-    algorithmicSystemCard: AlgorithmicSystemCard
+    algorithmicSystem: AlgorithmicSystemCard
   ): AlgorithmicSystemCard {
-    return algorithmicSystemCard;
+    return algorithmicSystem;
   }
 
   public setMaxHeightForElements(): void {
@@ -94,17 +90,12 @@ export class CurrentAlgorithmicSystemsComponent
       this._algorithmicSystemsSuscription.unsubscribe();
   }
 
-  public setHeader(algorithmicSystemId: number): void {
-    this._setHeader.emit(
-      this.getAlgorithmicSystemNameById(
-        algorithmicSystemId,
-        this.algorithmicSystems
-      )
-    );
-  }
-
-  public setView(details?: AlgorithmicSystemCard): void {
-    this._changeView.emit('system-detail');
-    if (details) this._setDetails.emit(details);
+  public setView(event: string | AlgorithmicSystemCard): void {
+    if (typeof event === 'string') {
+      this._changeView.emit(event);
+    } else {
+      this._changeView.emit('system-detail');
+      this._setDetails.emit(event);
+    }
   }
 }

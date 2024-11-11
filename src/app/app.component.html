@@ -1,12 +1,10 @@
-<app-banner [currentView]="currentView" [algorithmicSystemName]="algorithmicSystemName"
+<app-banner [currentView]="currentView" [algorithmicSystemName]="algorithmicSystemDetails.title"
   (_changeView)="changeView()"></app-banner>
 <main class="app-container">
   @if (currentView === 'home') {
-  <app-home (_changeView)="changeView($event)" (_setDetails)="setDetails($event)"
-    (_setHeader)="setHeader($event)"></app-home>
+  <app-home (_changeView)="changeView($event)" (_setDetails)="setDetails($event)"></app-home>
   } @else if (currentView === 'systems-searcher') {
-  <app-systems-searcher (_changeView)="changeView($event)" (_setDetails)="setDetails($event)"
-    (_setHeader)="setHeader($event)"></app-systems-searcher>
+  <app-systems-searcher (_changeView)="changeView($event)" (_setDetails)="setDetails($event)"></app-systems-searcher>
   } @else if (currentView === 'system-detail') {
   <app-system-detail [algorithmicSystem]="algorithmicSystemDetails"></app-system-detail>
   }

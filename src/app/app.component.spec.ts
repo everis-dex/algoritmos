@@ -45,13 +45,4 @@ describe('AppComponent', () => {
       expect(component.algorithmicSystemDetails).toEqual(details);
     });
   });
-
-  describe('setHeader', () => {
-    it('should set algorithmicSystemName to the given name', () => {
-      const name = 'Anonimitzador de documents';
-      component.setHeader(name);
-
-      expect(component.algorithmicSystemName).toBe(name);
-    });
-  });
 });

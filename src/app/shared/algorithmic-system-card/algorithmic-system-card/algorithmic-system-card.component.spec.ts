@@ -22,16 +22,14 @@ describe('AlgorithmicSystemCardComponent', () => {
   });
 
   describe('redirectToAlgorithmicSystemDetails', () => {
-    it('should emit changeView and setHeader events', () => {
+    it('should emit changeView event to the given algorithmic system', () => {
       const changeViewSpy = spyOn(component['_changeView'], 'emit');
-      const setHeaderSpy = spyOn(component['_setHeader'], 'emit');
 
       const event = new MouseEvent('click');
       const algorithmicSystem = mockAlgorithmicSystems[0];
       component.redirectToAlgorithmicSystemDetails(event, algorithmicSystem);
 
-      expect(changeViewSpy).toHaveBeenCalled();
-      expect(setHeaderSpy).toHaveBeenCalledWith(algorithmicSystem.id);
+      expect(changeViewSpy).toHaveBeenCalledWith(algorithmicSystem);
     });
   });
 });

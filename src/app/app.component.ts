@@ -21,7 +21,6 @@ import { FooterComponent } from './shared/footer/footer/footer.component';
 })
 export class AppComponent {
   public currentView = 'home';
-  public algorithmicSystemName = '';
   public algorithmicSystemDetails: AlgorithmicSystemCard = {
     id: 0,
     state: '',
@@ -36,9 +35,5 @@ export class AppComponent {
 
   public setDetails(details: AlgorithmicSystemCard): void {
     this.algorithmicSystemDetails = details;
-  }
-
-  public setHeader(name: string): void {
-    this.algorithmicSystemName = name;
   }
 }

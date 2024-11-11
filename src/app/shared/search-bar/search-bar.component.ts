@@ -121,7 +121,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         );
       }
 
-      if (this.hasFilterSelector) this.redirectToSystemsSearcherView();
+      if (this.hasFilterSelector) this.redirectToSystemsSearcherView({});
     }
   }
 
@@ -140,9 +140,15 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     );
   }
 
-  public redirectToSystemsSearcherView(currentSearch?: string): void {
+  public redirectToSystemsSearcherView({
+    event,
+    currentSearch,
+  }: {
+    event?: string;
+    currentSearch?: string;
+  }): void {
     if (currentSearch)
       this._sessionStorageService.setItem('lastSearch', currentSearch);
-    this._changeView.emit('systems-searcher');
+    this._changeView.emit(event ?? 'systems-searcher');
   }
 }
