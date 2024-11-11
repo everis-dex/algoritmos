@@ -4,7 +4,7 @@
     @if (currentView === 'home') {
     <li>Registre de sistemes d'IA</li>
     } @else {
-    <li><a href="#" (click)="redirectToHomeView()">Registre de sistemes d'IA</a></li>
+    <li><a href="#" (click)="redirectToHomeView($event)">Registre de sistemes d'IA</a></li>
     @if (currentView === 'systems-searcher') {
     <li>Cercador de sistemes</li>
     } @else if (currentView === 'system-detail') {

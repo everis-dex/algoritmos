@@ -9,7 +9,8 @@
       padding-bottom: 1rem;
     }
 
-    .algorithmic-systems-card-container {
+    .current-algorithmic-systems-container__cards,
+    .topic-cards-container__cards {
       display: grid;
       gap: 1.5rem;
     }
