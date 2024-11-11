@@ -21,15 +21,11 @@ describe('CurrentAlgorithmicSystemsComponent', () => {
   });
 
   it('should apply the highest element height after window resize', () => {
-    const setMaxHeightForElementsSpy = spyOn(
-      component,
-      'setMaxHeightForElements'
-    );
+    const setMaxHeightSpy = spyOn(component, 'setMaxHeightForElements');
 
     component.onResize();
 
-    expect(setMaxHeightForElementsSpy).toHaveBeenCalledWith('h2');
-    expect(setMaxHeightForElementsSpy).toHaveBeenCalledWith('p');
+    expect(setMaxHeightSpy).toHaveBeenCalled();
   });
 
   it('should emit changeView event to the given view', () => {

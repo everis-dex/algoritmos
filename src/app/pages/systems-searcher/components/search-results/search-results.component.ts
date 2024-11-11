@@ -5,6 +5,7 @@ import {
   getStateColor,
 } from '../../../../shared/utilities';
 import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card/algorithmic-system-card.component';
+import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../../../constants/search-pagination.const';
 
 @Component({
   selector: 'app-search-results',
@@ -26,6 +27,7 @@ export class SearchResultsComponent {
 
   public getStateColor = getStateColor;
   public getAlgorithmNameByID = getAlgorithmNameByID;
+  public maxSearchResultsPerPage = MAX_SEARCH_RESULTS_PER_PAGE;
 
   public changeView(view: string): void {
     this._changeView.emit(view);

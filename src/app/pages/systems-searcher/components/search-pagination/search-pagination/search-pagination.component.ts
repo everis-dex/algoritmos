@@ -35,23 +35,17 @@ export class SearchPaginationComponent implements OnInit {
   }
 
   public handlePage(page: number): void {
-    this.pageSelected = {
-      isFirst: page === 1,
-      isMiddle: page !== 1 && page !== this.totalPages,
-      isLast: page === this.totalPages,
-    };
-
     this.currentPage = page;
     this._changePage.emit(this.currentPage);
+    this.pageSelected = {
+      isFirst: page === 1,
+      isMiddle: page !== 1,
+      isLast: page === this.totalPages,
+    };
   }
 
   public handlePreviousPage(initialPage?: number): void {
-    if (initialPage) {
-      this.currentPage = initialPage;
-    } else if (this.currentPage !== 1) {
-      this.currentPage--;
-    }
-
+    this.currentPage = initialPage ?? this.currentPage - 1;
     this._changePage.emit(this.currentPage);
     this.pageSelected = {
       isFirst: this.currentPage === 1,
@@ -61,12 +55,7 @@ export class SearchPaginationComponent implements OnInit {
   }
 
   public handleNextPage(lastPage?: number): void {
-    if (lastPage) {
-      this.currentPage = lastPage;
-    } else if (this.currentPage !== this.totalPages) {
-      this.currentPage++;
-    }
-
+    this.currentPage = lastPage ?? this.currentPage + 1;
     this._changePage.emit(this.currentPage);
     this.pageSelected = {
       isFirst: false,

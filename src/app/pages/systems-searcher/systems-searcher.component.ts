@@ -12,6 +12,7 @@ import { CardService } from '../../services/card.service';
 import { AlgorithmicSystemCard } from '../../interfaces/cards';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { SearchPaginationComponent } from './components/search-pagination/search-pagination/search-pagination.component';
+import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../constants/search-pagination.const';
 
 @Component({
   selector: 'app-systems-searcher',
@@ -47,7 +48,9 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.searchResults = response;
         this.totalSearchResultsLength = this.searchResults.length;
-        this.totalPages = Math.ceil(this.searchResults.length / 6);
+        this.totalPages = Math.ceil(
+          this.searchResults.length / MAX_SEARCH_RESULTS_PER_PAGE
+        );
       });
   }
 
@@ -65,7 +68,10 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
     this._algorithmicSystemsSuscription = this._algorithmicSystemService
       .getAlgorithmicSystems()
       .subscribe((response) => {
-        this.searchResults = response.slice((page - 1) * 6, page * 6);
+        this.searchResults = response.slice(
+          (page - 1) * MAX_SEARCH_RESULTS_PER_PAGE,
+          page * MAX_SEARCH_RESULTS_PER_PAGE
+        );
       });
   }
 

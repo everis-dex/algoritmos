@@ -129,11 +129,13 @@
   }
   .search-pagination-container:last-of-type {
     display: flex;
+    margin-bottom: 2rem;
   }
 }
 @media (min-width: $desktop) {
   .search-pagination-container:first-of-type {
     display: flex;
+    margin-bottom: 4rem;
   }
   .search-pagination-container:last-of-type {
     display: none;
