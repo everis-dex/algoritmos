@@ -50,6 +50,15 @@ describe('SystemsSearcherComponent', () => {
     });
   });
 
+  it('should change the page and scroll the window to the top', () => {
+    const windowSpy = spyOn(window, 'scrollTo');
+
+    const page = 2;
+    component.changePage(page);
+
+    expect(windowSpy).toHaveBeenCalled();
+  });
+
   it('should update filter list correctly', () => {
     const updatedFilterList = [
       { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },

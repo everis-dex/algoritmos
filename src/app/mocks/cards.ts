@@ -106,6 +106,14 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
       "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
     categoryChips: ['Tecnologia, recerca i innovació'],
   },
+  {
+    id: 13,
+    state: 'En producció',
+    title: 'Previsió d’afluència de visitants',
+    description:
+      "El projecte implementa un algoritme per la gestió de les reserves d'energia en un entorn residencial",
+    categoryChips: ['Tecnologia, recerca i innovació'],
+  },
 ];
 
 export const mockTopics: TopicCard[] = [

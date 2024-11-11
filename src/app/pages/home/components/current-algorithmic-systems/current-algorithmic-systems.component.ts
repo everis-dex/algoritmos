@@ -45,23 +45,23 @@ export class CurrentAlgorithmicSystemsComponent
   ) {}
 
   ngAfterViewInit(): void {
-    this.setMaxHeightForElements('h2');
-    this.setMaxHeightForElements('p');
-    this.setMaxHeightForElements(
-      '.algorithmic-system-card-container__category-chip-container'
-    );
+    this.setMaxHeightForElements();
   }
 
   @HostListener('window:resize')
   onResize(): void {
-    this.setMaxHeightForElements('h2');
-    this.setMaxHeightForElements('p');
-    this.setMaxHeightForElements(
+    this.setMaxHeightForElements();
+  }
+
+  public setMaxHeightForElements(): void {
+    this._setMaxHeight('h2');
+    this._setMaxHeight('p');
+    this._setMaxHeight(
       '.algorithmic-system-card-container__category-chip-container'
     );
   }
 
-  public setMaxHeightForElements(selector: string): void {
+  private _setMaxHeight(selector: string): void {
     let highestHeight = 0;
 
     const elements = this._el.nativeElement.querySelectorAll(selector);

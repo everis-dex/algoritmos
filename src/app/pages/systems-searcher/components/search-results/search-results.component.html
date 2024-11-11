@@ -1,11 +1,11 @@
 <div class="search-results">
-    @if (searchResults.length > 0) {
+    @if (totalSearchResultsLength) {
     <p class="search-results__results-found">
         S'han trobat
-        <span class="search-results__bold">{{searchResults.length}}</span>
+        <span class="search-results__bold">{{totalSearchResultsLength}}</span>
         resultats
     </p>
-    @for (result of searchResults; track result) {
+    @for (result of searchResults.slice(0, maxSearchResultsPerPage); track $index) {
     <app-algorithmic-system-card [stateColor]="getStateColor(result.state)" [state]="result.state"
         [title]="result.title" [description]="result.description" [categoryChips]="result.categoryChips"
         (_changeView)="changeView('system-detail')"

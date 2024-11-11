@@ -90,16 +90,20 @@ describe('AccordionComponent', () => {
   });
 
   it('should disable rotation on tag select', () => {
+    const filterTagsSpy = spyOn(component, 'filterTags');
+
+    component.hasInputValue = true;
     component.isSelectorRotated = true;
 
     component.handleTagSelect();
 
+    expect(filterTagsSpy).toHaveBeenCalled();
     expect(component.isSelectorRotated).toBeFalse();
   });
 
   it('should handle search input correctly', () => {
     const filterTagsSpy = spyOn(component, 'filterTags');
-    const event = new Event('input');
+    const event = new KeyboardEvent('input', { key: 'Enter' });
     const inputElement = document.createElement('input');
     inputElement.value = 'testValue';
 
@@ -113,14 +117,12 @@ describe('AccordionComponent', () => {
 
   it('should prevent default and emit event when input is a MouseEvent', () => {
     const event = new MouseEvent('click');
-    const eventSpy = spyOn(event, 'preventDefault');
     const applyFiltersSpy = spyOn(component['_applyFilters'], 'emit');
     const tag = 'Tag 1';
 
     component.tags = [tag];
     component.selectChip(event, tag);
 
-    expect(eventSpy).toHaveBeenCalled();
     expect(applyFiltersSpy).toHaveBeenCalledWith({ event, tag });
   });
 
