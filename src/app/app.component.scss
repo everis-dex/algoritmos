@@ -59,15 +59,25 @@
   }
 }
 
-.app-container > * {
+.wrapper {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  min-height: 100vh;
+}
 
-  @media (min-width: $mobile) and (max-width: $desktop) {
-    padding-top: 2rem;
-  }
-  @media (min-width: $desktop) {
-    padding-top: 1.5rem;
+.app-container {
+  flex: 1;
+
+  main > * {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @media (min-width: $mobile) and (max-width: $desktop) {
+      padding-top: 2rem;
+    }
+    @media (min-width: $desktop) {
+      padding-top: 1.5rem;
+    }
   }
 }
