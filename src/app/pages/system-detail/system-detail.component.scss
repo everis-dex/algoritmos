@@ -1,0 +1,18 @@
+@import "../../../assets/scss/styles.scss";
+
+section {
+  display: grid;
+  gap: 1.75rem;
+
+  @media (min-width: $desktop) {
+    grid-template-columns: repeat(12, 1fr);
+
+    .tabs {
+      grid-column: span 8;
+    }
+
+    .aside {
+      grid-column: span 4;
+    }
+  }
+}

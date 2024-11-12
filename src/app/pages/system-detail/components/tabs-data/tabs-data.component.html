@@ -1,0 +1,18 @@
+<div class="tabs-data-container">
+  <div class="tabs-data-container__tabs">
+    @for (tab of tabsData; track $index) {
+    <div class="tabs-data-container__tab">
+      <button type="button" (click)="getTabProperties(tabsData, $index)">{{getTabKeys(tab)}}</button>
+      <div [ngClass]="{'tabs-data-container__tab--border-bottom': currentIndex === $index}"></div>
+    </div>
+    <div class="tabs-data-container__tabs__separator"></div>
+    }
+  </div>
+  @if (labelsData) {
+  <div class="tabs-data-container__tabs__content">
+    @for (label of labelsData; track $index) {
+    <app-tab-data-field [label]="label"></app-tab-data-field>
+    }
+  </div>
+  }
+</div>
