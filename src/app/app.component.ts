@@ -5,6 +5,7 @@ import { SystemDetailComponent } from './pages/system-detail/system-detail.compo
 import { BannerComponent } from './shared/banner/banner.component';
 import { TopicCardComponent } from './shared/topic-card/topic-card.component';
 import { FooterComponent } from './shared/footer/footer/footer.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { FooterComponent } from './shared/footer/footer/footer.component';
     BannerComponent,
     TopicCardComponent,
     FooterComponent,
+    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

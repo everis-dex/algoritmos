@@ -1,9 +1,9 @@
-<a [attr.href]="url" [attr.title]="title" class="topic-card-link">
-  <div class="topic-card-link--before" [style.backgroundImage]="'url(' + image + ')'"></div>
+<a [attr.href]="topic.url" [attr.title]="topic.title" class="topic-card-link">
+  <div class="topic-card-link--before" [style.backgroundImage]="'url(' + topic.image + ')'"></div>
   <div class="topic-card-link__content">
-    <h3 class="topic-card-link__content__title">{{ title }}</h3>
+    <h3 class="topic-card-link__content__title">{{ topic.title }}</h3>
     <p class="topic-card-link__content__description">
-      {{ description }}
+      {{ topic.description }}
     </p>
   </div>
 </a>

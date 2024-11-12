@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { TopicCard } from '../../interfaces/cards';
 @Component({
   selector: 'app-topic-card',
   standalone: true,
@@ -8,11 +9,5 @@ import { Component, Input } from '@angular/core';
 })
 export class TopicCardComponent {
   @Input()
-  public image!: string;
-  @Input()
-  public title!: string;
-  @Input()
-  public description!: string;
-  @Input()
-  public url!: string;
+  public topic!: TopicCard;
 }

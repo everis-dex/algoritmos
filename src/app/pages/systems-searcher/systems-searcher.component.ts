@@ -48,9 +48,11 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         this.searchResults = response;
         this.totalSearchResultsLength = this.searchResults.length;
-        this.totalPages = Math.ceil(
-          this.searchResults.length / MAX_SEARCH_RESULTS_PER_PAGE
-        );
+        if (this.totalSearchResultsLength > 6) {
+          this.totalPages = Math.ceil(
+            this.searchResults.length / MAX_SEARCH_RESULTS_PER_PAGE
+          );
+        }
       });
   }
 
