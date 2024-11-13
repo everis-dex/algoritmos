@@ -1,11 +1,13 @@
-export type ITabsData = Record<
-  string,
-  {
-    labels: ILabelsData[];
-  }
->[];
-export interface ILabelsData {
-  title: string;
-  description?: string;
-  text?: string;
+export interface ITabData {
+  id: number;
+  tab: string;
+  fields: IFieldData[];
+}
+export interface IFieldData {
+  field: string;
+  description?: {
+    text: string;
+    isVisible: boolean;
+  };
+  content?: string;
 }

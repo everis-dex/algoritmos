@@ -1,4 +1,4 @@
-@import "../../../../assets/scss/styles.scss";
+@import "../../../assets/scss/styles.scss";
 
 .accordion-container {
   align-items: center;
@@ -125,5 +125,13 @@
         background-color: $pink-very-light;
       }
     }
+  }
+
+  &__fields {
+    box-shadow: 0px 0px 1px 0px #00000040;
+    padding: 1.5rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }

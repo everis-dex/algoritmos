@@ -1,19 +1,21 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Accordion } from '../../../interfaces/accordion';
-import { ChipsComponent } from '../../chips/chips.component';
-import { TAGS, TAGS_ID } from '../../../constants/search-filters.const';
+import { ChipsComponent } from '../chips/chips.component';
+import { TAGS, TAGS_ID } from '../../constants/search-filters.const';
+import { ITabData } from '../../pages/system-detail/components/tabs-data/tabs-data.model';
+import { IAccordionData } from './accordion.model';
+import { TabFieldDataComponent } from '../tab-field-data/tab-field-data.component';
 
 @Component({
   selector: 'app-accordion',
   standalone: true,
-  imports: [CommonModule, ChipsComponent],
+  imports: [CommonModule, ChipsComponent, TabFieldDataComponent],
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.scss',
 })
 export class AccordionComponent implements OnInit {
   @Input()
-  public accordionList!: Accordion[];
+  public accordionList!: IAccordionData[] | ITabData[];
   @Input()
   public filterList!: { filter: string; optionsSelected: string[] }[];
   @Input()
@@ -26,6 +28,8 @@ export class AccordionComponent implements OnInit {
   }>();
   @Output()
   private readonly _removeFilters = new EventEmitter<string>();
+  @Output()
+  private readonly _setTabFields = new EventEmitter<number>();
 
   public toggleStates: Record<string, { display: boolean; rotation: boolean }> =
     {};
@@ -39,6 +43,16 @@ export class AccordionComponent implements OnInit {
     this.accordionList?.forEach((accordion) => {
       this.toggleStates[accordion.id] = { display: false, rotation: false };
     });
+  }
+
+  public isAccordionData(
+    item: IAccordionData | ITabData
+  ): item is IAccordionData {
+    return (item as IAccordionData).chips !== undefined;
+  }
+
+  public isTabData(item: IAccordionData | ITabData): item is ITabData {
+    return (item as ITabData).fields !== undefined;
   }
 
   public getOptionsSelected(index: number): string[] {
@@ -77,6 +91,7 @@ export class AccordionComponent implements OnInit {
       display: !this.toggleStates[id]?.display,
       rotation: !this.toggleStates[id]?.rotation,
     };
+    this._setTabFields.emit(id - 1);
   }
 
   public handleTagSelect(): void {
