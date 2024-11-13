@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AlgorithmicSystemCard } from '../../../interfaces/cards';
+import { getStateColor } from '../../utilities';
 
 @Component({
   selector: 'app-algorithmic-system-card',
@@ -9,30 +11,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class AlgorithmicSystemCardComponent {
   @Input()
-  public id!: number;
-  @Input()
-  public stateColor!: string;
-  @Input()
-  public state!: string;
-  @Input()
-  public title!: string;
-  @Input()
-  public description!: string;
-  @Input()
-  public categoryChips!: string[];
+  public algorithmicSystem!: AlgorithmicSystemCard;
 
   @Output()
-  private readonly _changeView = new EventEmitter<void>();
-  @Output()
-  private readonly _setHeader = new EventEmitter<number>();
+  private readonly _changeView = new EventEmitter<AlgorithmicSystemCard>();
 
-  public redirectToAlgorithmicSystemDetail(
+  public getStateColor = getStateColor;
+
+  public redirectToAlgorithmicSystemDetails(
     event: MouseEvent,
-    algorithmicSystemId: number
+    algorithmicSystem: AlgorithmicSystemCard
   ): void {
     event.preventDefault();
 
-    this._changeView.emit();
-    this._setHeader.emit(algorithmicSystemId);
+    this._changeView.emit(algorithmicSystem);
   }
 }

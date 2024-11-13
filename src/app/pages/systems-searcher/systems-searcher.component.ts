@@ -28,9 +28,9 @@ import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../constants/search-pagination.c
 })
 export class SystemsSearcherComponent implements OnInit, OnDestroy {
   @Output()
-  private readonly _setHeader = new EventEmitter<string>();
-  @Output()
   private readonly _changeView = new EventEmitter<string>();
+  @Output()
+  private readonly _setDetails = new EventEmitter<AlgorithmicSystemCard>();
 
   public searchResults: AlgorithmicSystemCard[] = [];
   public filterList: { filter: string; optionsSelected: string[] }[] = [];
@@ -87,7 +87,7 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
     this._changeView.emit(view);
   }
 
-  public setHeader(name: string): void {
-    this._setHeader.emit(name);
+  public setDetails(details: AlgorithmicSystemCard): void {
+    this._setDetails.emit(details);
   }
 }

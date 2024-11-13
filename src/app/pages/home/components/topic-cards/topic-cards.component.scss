@@ -15,7 +15,7 @@
   .topic-cards-container {
     padding-top: 2rem;
 
-    div {
+    &__cards {
       grid-template-columns: repeat(2, 1fr);
     }
   }

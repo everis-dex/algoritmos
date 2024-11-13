@@ -9,9 +9,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class SystemsSearcherLinkComponent {
   @Output()
-  private readonly _changeView = new EventEmitter<void>();
+  private readonly _changeView = new EventEmitter<string>();
 
   public redirectToSystemsSearcherView(): void {
-    this._changeView.emit();
+    this._changeView.emit('systems-searcher');
   }
 }
