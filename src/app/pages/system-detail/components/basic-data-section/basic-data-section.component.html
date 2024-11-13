@@ -1,1 +1,24 @@
-<p>basic-data-section works!</p>
+@if (algorithmicSystem) {
+<section class="basic-data-container">
+  <span class="basic-data-container__state"><img src="assets/icons/Oval_{{getStateColor(algorithmicSystem.state)}}.svg"
+      alt="Estat del sistema algorítmic">{{
+    algorithmicSystem.state }}</span>
+  <div class="basic-data-container__paragraph-container">
+    <p class="basic-data-container__paragraph">Descripció breu</p>
+    <p>{{algorithmicSystem.description}}</p>
+  </div>
+  <div class="basic-data-container__category-chip-container">
+    @for (categoryChip of algorithmicSystem.categoryChips; track $index) {
+    <div class="basic-data-container__category-chip">{{ categoryChip }}</div>
+    }
+  </div>
+  <div class="basic-data-container__paragraph-container">
+    <p class="basic-data-container__paragraph">Etiquetes</p>
+    <div class="basic-data-container__tag-container">
+      @for (tag of algorithmicSystem.tags; track $index) {
+      <div class="basic-data-container__tag">{{ tag }}</div>
+      }
+    </div>
+  </div>
+</section>
+}

@@ -36,7 +36,7 @@
       </div>
       @for (currentSearch of currentSearches; track currentSearch; let i = $index) {
       <div class="searcher-container__filter__section__current-search-container">
-        <button (click)="redirectToSystemsSearcherView(currentSearch)">
+        <button (click)="redirectToSystemsSearcherView({currentSearch})">
           <img src="assets/icons/Restart.svg" alt="Restaurar">{{ currentSearch }}
         </button>
         <button (click)="deleteSearch(i)">
@@ -50,7 +50,8 @@
       <h4>Categories populars</h4>
       <app-chips [chips]="popularCategories" (_selectChip)="selectCategory($event)"></app-chips>
     </section>
-    <app-systems-searcher-link (_changeView)="redirectToSystemsSearcherView()"></app-systems-searcher-link>
+    <app-systems-searcher-link
+      (_changeView)="redirectToSystemsSearcherView({event: $event})"></app-systems-searcher-link>
   </div>
   }
 </section>

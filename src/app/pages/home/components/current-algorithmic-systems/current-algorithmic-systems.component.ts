@@ -13,10 +13,6 @@ import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import { Subscription } from 'rxjs';
 import { CardService } from '../../../../services/card.service';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
-import {
-  getAlgorithmNameByID,
-  getStateColor,
-} from '../../../../shared/utilities';
 
 @Component({
   selector: 'app-current-algorithmic-systems',
@@ -31,11 +27,9 @@ export class CurrentAlgorithmicSystemsComponent
   @Output()
   private readonly _changeView = new EventEmitter<string>();
   @Output()
-  private readonly _setHeader = new EventEmitter<string>();
+  private readonly _setDetails = new EventEmitter<AlgorithmicSystemCard>();
 
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
-  public getStateColor = getStateColor;
-  public getAlgorithmNameByID = getAlgorithmNameByID;
 
   private _algorithmicSystemsSuscription!: Subscription;
 
@@ -51,6 +45,12 @@ export class CurrentAlgorithmicSystemsComponent
   @HostListener('window:resize')
   onResize(): void {
     this.setMaxHeightForElements();
+  }
+
+  public getAlgorithmicSystemDetails(
+    algorithmicSystem: AlgorithmicSystemCard
+  ): AlgorithmicSystemCard {
+    return algorithmicSystem;
   }
 
   public setMaxHeightForElements(): void {
@@ -90,13 +90,12 @@ export class CurrentAlgorithmicSystemsComponent
       this._algorithmicSystemsSuscription.unsubscribe();
   }
 
-  public setHeader(algorithmicSystemId: number): void {
-    this._setHeader.emit(
-      this.getAlgorithmNameByID(algorithmicSystemId, this.algorithmicSystems)
-    );
-  }
-
-  public changeView(view: string): void {
-    this._changeView.emit(view);
+  public setView(event: string | AlgorithmicSystemCard): void {
+    if (typeof event === 'string') {
+      this._changeView.emit(event);
+    } else {
+      this._changeView.emit('system-detail');
+      this._setDetails.emit(event);
+    }
   }
 }

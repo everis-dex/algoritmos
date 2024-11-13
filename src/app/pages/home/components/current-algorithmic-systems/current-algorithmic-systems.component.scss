@@ -1,11 +1,11 @@
 @import "../../../../../assets/scss/styles.scss";
 
-.current-algorithmic-systems-section-container {
+.current-algorithmic-systems-container {
   gap: 1rem;
 }
 
 @media (min-width: $mobile) and (max-width: $desktop) {
-  .current-algorithmic-systems-section-container {
+  .current-algorithmic-systems-container {
     margin-top: 1.75rem;
 
     &__link:last-child {
@@ -14,7 +14,7 @@
   }
 }
 @media (min-width: $desktop) {
-  .current-algorithmic-systems-section-container {
+  .current-algorithmic-systems-container {
     margin-top: 0;
 
     h1 {
@@ -27,12 +27,12 @@
   }
 }
 @media (min-width: $desktop) and (max-width: $large-desktop) {
-  .current-algorithmic-systems-section-container div {
+  .current-algorithmic-systems-container div {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (min-width: $large-desktop) {
-  .current-algorithmic-systems-section-container div {
+  .current-algorithmic-systems-container div {
     grid-template-columns: repeat(4, 1fr);
   }
 }

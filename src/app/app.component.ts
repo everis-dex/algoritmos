@@ -3,7 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { SystemsSearcherComponent } from './pages/systems-searcher/systems-searcher.component';
 import { SystemDetailComponent } from './pages/system-detail/system-detail.component';
 import { BannerComponent } from './shared/banner/banner.component';
-import { TopicCardComponent } from './shared/topic-card/topic-card.component';
+import { AlgorithmicSystemCard } from './interfaces/cards';
 import { FooterComponent } from './shared/footer/footer/footer.component';
 import { CommonModule } from '@angular/common';
 
@@ -15,7 +15,6 @@ import { CommonModule } from '@angular/common';
     SystemsSearcherComponent,
     SystemDetailComponent,
     BannerComponent,
-    TopicCardComponent,
     FooterComponent,
     CommonModule,
   ],
@@ -24,13 +23,19 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   public currentView = 'home';
-  public algorithmicSystemName = '';
+  public algorithmicSystemDetails: AlgorithmicSystemCard = {
+    id: 0,
+    state: '',
+    title: '',
+    description: '',
+    categoryChips: [],
+  };
 
-  public changeView(view?: string) {
+  public changeView(view?: string): void {
     this.currentView = view ?? 'home';
   }
 
-  public setHeader(name: string) {
-    this.algorithmicSystemName = name;
+  public setDetails(details: AlgorithmicSystemCard): void {
+    this.algorithmicSystemDetails = details;
   }
 }

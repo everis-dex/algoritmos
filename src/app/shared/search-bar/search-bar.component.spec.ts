@@ -176,7 +176,7 @@ describe('SearchBarComponent', () => {
 
     sessionStorageService.setItem('lastSearch', currentSearch);
 
-    component.redirectToSystemsSearcherView(currentSearch);
+    component.redirectToSystemsSearcherView({ currentSearch });
 
     expect(changeViewSpy).toHaveBeenCalledWith('systems-searcher');
   });

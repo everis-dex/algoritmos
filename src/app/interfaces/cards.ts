@@ -4,6 +4,7 @@ export interface AlgorithmicSystemCard {
   title: string;
   description: string;
   categoryChips: string[];
+  tags?: string[];
 }
 
 export interface TopicCard {

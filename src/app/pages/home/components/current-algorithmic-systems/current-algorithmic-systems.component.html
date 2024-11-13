@@ -1,15 +1,13 @@
-<section class="current-algorithmic-systems-section-container">
-  <app-systems-searcher-link class="current-algorithmic-systems-section-container__link"
-    (_changeView)="changeView('systems-searcher')"></app-systems-searcher-link>
+<section class="current-algorithmic-systems-container">
+  <app-systems-searcher-link class="current-algorithmic-systems-container__link"
+    (_changeView)="setView($event)"></app-systems-searcher-link>
   <h1>Sistemes Algorísmics recents</h1>
-  <div>
+  <div class="current-algorithmic-systems-container__cards">
     @for (algorithmicSystem of algorithmicSystems; track $index) {
-    <app-algorithmic-system-card [stateColor]="getStateColor(algorithmicSystem.state)" [state]="algorithmicSystem.state"
-      [title]="algorithmicSystem.title" [description]="algorithmicSystem.description"
-      [categoryChips]="algorithmicSystem.categoryChips" (_changeView)="changeView('system-detail')"
-      (_setHeader)="setHeader(algorithmicSystem.id)"></app-algorithmic-system-card>
+    <app-algorithmic-system-card [algorithmicSystem]="getAlgorithmicSystemDetails(algorithmicSystem)"
+      (_changeView)="setView($event)"></app-algorithmic-system-card>
     }
   </div>
-  <app-systems-searcher-link class="current-algorithmic-systems-section-container__link"
-    (_changeView)="changeView('systems-searcher')"></app-systems-searcher-link>
+  <app-systems-searcher-link class="current-algorithmic-systems-container__link"
+    (_changeView)="setView($event)"></app-systems-searcher-link>
 </section>

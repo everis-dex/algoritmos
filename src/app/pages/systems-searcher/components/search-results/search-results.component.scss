@@ -2,7 +2,6 @@
 
 .search-results {
   display: grid;
-  gap: 1.25rem;
 
   &__results-found,
   li {
@@ -32,12 +31,20 @@
 }
 
 @media (min-width: $mobile) and (max-width: $desktop) {
-  .search-results__results-found {
-    justify-self: flex-start;
+  .search-results {
+    gap: 1.5rem;
+
+    &__results-found {
+      justify-self: flex-start;
+    }
   }
 }
 @media (min-width: $desktop) {
-  .search-results__results-found {
-    justify-self: end;
+  .search-results {
+    gap: 1.25rem;
+
+    &__results-found {
+      justify-self: end;
+    }
   }
 }

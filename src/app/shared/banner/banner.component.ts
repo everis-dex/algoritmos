@@ -17,7 +17,8 @@ export class BannerComponent {
   @Output()
   private readonly _changeView = new EventEmitter<void>();
 
-  public redirectToHomeView(): void {
+  public redirectToHomeView(event: Event): void {
+    event.preventDefault();
     this._changeView.emit();
   }
 }
