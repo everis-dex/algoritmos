@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { BasicDataComponent } from './components/basic-data/basic-data.component';
 import { AlgorithmicSystemCard } from '../../interfaces/cards';
 import { TabsDataComponent } from './components/tabs-data/tabs-data.component';
@@ -19,7 +19,16 @@ export class SystemDetailComponent implements OnInit {
   @Input()
   public algorithmicSystem!: AlgorithmicSystemCard;
 
+  public marginTop = 0;
+
+  constructor(private readonly _cdr: ChangeDetectorRef) {}
+
   ngOnInit(): void {
     window.scrollTo(0, 0);
+  }
+
+  public setMarginTop(value: number): void {
+    this.marginTop = value;
+    this._cdr.detectChanges();
   }
 }
