@@ -29,7 +29,7 @@ input {
 
 button {
   &:focus {
-    outline: auto;
+    outline: revert;
   }
   &:not([type="submit"]) {
     display: flex;

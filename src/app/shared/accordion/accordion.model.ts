@@ -1,4 +1,4 @@
-export interface Accordion {
+export interface IAccordionData {
   id: number;
   name: string;
   chips?: string[];

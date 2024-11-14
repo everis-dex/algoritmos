@@ -1,0 +1,22 @@
+<div class="tabs-data-container">
+  <div class="tabs-data-container--desktop">
+    <div class="tabs-data-container__tabs">
+      @for (tab of tabsData; track $index) {
+      <button type="button" (click)="setTabFields($index)" class="tabs-data-container__tab">
+        {{getTabs(tab)}}
+        <div [ngClass]="{'tabs-data-container__tab--border-bottom': currentTabIndex === $index}"></div>
+      </button>
+      <div class="tabs-data-container__tabs__separator"></div>
+      }
+    </div>
+    @if (tabsData[currentTabIndex].fields) {
+    <div class="tabs-data-container__tabs__fields">
+      @for (tabField of tabsData[currentTabIndex].fields; track $index) {
+      <app-tab-field-data [field]="tabField"></app-tab-field-data>
+      }
+    </div>
+    }
+  </div>
+  <app-accordion [accordionList]="tabsData" (_setTabFields)="setTabFields($event)"
+    class="tabs-data-container--mobile"></app-accordion>
+</div>

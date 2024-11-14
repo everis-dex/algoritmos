@@ -1,0 +1,26 @@
+@import "../../../assets/scss/styles.scss";
+
+.system-detail-container {
+  display: grid;
+  gap: 1.75rem;
+
+  @media (min-width: $desktop) {
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto auto;
+
+    &__basic-data-container {
+      grid-column: 1 / span 8;
+      grid-row: 1;
+    }
+
+    &__tabs-data-container {
+      grid-column: 1 / span 8;
+      grid-row: 2;
+    }
+
+    &__aside-container {
+      grid-column: 9 / span 4;
+      grid-row: 2;
+    }
+  }
+}
