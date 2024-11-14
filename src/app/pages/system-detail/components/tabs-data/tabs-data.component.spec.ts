@@ -30,6 +30,19 @@ describe('TabsDataComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('onresize', () => {
+    it('should get tabs height correctly', () => {
+      const setMarginTopSpy = spyOn(component['_setMarginTop'], 'emit');
+      const tabsContainer = fixture.nativeElement.querySelector(
+        '.tabs-data-container__tabs'
+      );
+
+      component.onResize();
+
+      expect(setMarginTopSpy).toHaveBeenCalledWith(tabsContainer.offsetHeight);
+    });
+  });
+
   describe('getTabs', () => {
     it('should get tabs correctly', () => {
       const tabData = tabsData[0];
