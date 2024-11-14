@@ -1,6 +1,6 @@
 @for (accordionItem of accordionList; track accordionItem) {
 @if (isAccordionData(accordionItem)) {
-<button type="button" (click)="toggle(accordionItem.id)" class="accordion-container">{{
+<button type="button" (click)="toggle(accordionItem.id)" class="accordion-container filter-accordion">{{
   accordionItem.name }}<img src="assets/icons/Icon_angle-down.svg" alt="Fletxa d'expansió del contingut desplegable"
     [ngClass]="{'accordion-container--rotate-left': toggleStates[accordionItem.id].rotation, 'accordion-container--rotate-right': !toggleStates[accordionItem.id].rotation}"></button>
 @if (toggleStates[accordionItem.id].display) {
@@ -40,7 +40,7 @@
 }
 }
 } @else if (isTabData(accordionItem)) {
-<button type="button" (click)="toggle(accordionItem.id)" class="accordion-container">{{
+<button type="button" (click)="toggle(accordionItem.id)" class="accordion-container tab-accordion">{{
   accordionItem.tab }}<img src="assets/icons/Icon_angle-down.svg" alt="Fletxa d'expansió del contingut desplegable"
     [ngClass]="{'accordion-container--rotate-left': toggleStates[accordionItem.id].rotation, 'accordion-container--rotate-right': !toggleStates[accordionItem.id].rotation}"></button>
 @if (toggleStates[accordionItem.id].display) {

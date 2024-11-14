@@ -1,13 +1,22 @@
 @import "../../../assets/scss/styles.scss";
 
+.filter-accordion {
+  color: $grey-black;
+}
+
+.tab-accordion {
+  color: $grey-dark;
+}
+
 .accordion-container {
   align-items: center;
   justify-content: space-between;
-  color: $grey-black;
   width: 100%;
+  font-size: 1rem;
   font-weight: 600;
   padding: 1rem;
   border-bottom: 0.0625rem solid $grey-very-light;
+  text-align: left;
 
   &--rotate-left {
     transform: rotate(-180deg);

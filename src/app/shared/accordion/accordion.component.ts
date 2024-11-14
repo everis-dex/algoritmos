@@ -48,11 +48,11 @@ export class AccordionComponent implements OnInit {
   public isAccordionData(
     item: IAccordionData | ITabData
   ): item is IAccordionData {
-    return (item as IAccordionData).chips !== undefined;
+    return (item as IAccordionData).name !== undefined;
   }
 
   public isTabData(item: IAccordionData | ITabData): item is ITabData {
-    return (item as ITabData).fields !== undefined;
+    return (item as ITabData).tab !== undefined;
   }
 
   public getOptionsSelected(index: number): string[] {
