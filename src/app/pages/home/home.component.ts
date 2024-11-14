@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AlgorithmicSystemCard } from '../../interfaces/cards';
-import { CurrentAlgorithmicSystemsComponent } from './components/current-algorithmic-systems/current-algorithmic-systems.component';
+import { AlgorithmicSystemsCardsComponent } from './components/algorithmic-systems-cards/algorithmic-systems-cards.component';
 import { TopicCardsComponent } from './components/topic-cards/topic-cards.component';
 import { SearchBarComponent } from '../../shared/search-bar/search-bar.component';
 
@@ -9,7 +9,7 @@ import { SearchBarComponent } from '../../shared/search-bar/search-bar.component
   standalone: true,
   imports: [
     SearchBarComponent,
-    CurrentAlgorithmicSystemsComponent,
+    AlgorithmicSystemsCardsComponent,
     TopicCardsComponent,
   ],
   templateUrl: './home.component.html',

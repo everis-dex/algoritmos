@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { BasicDataSectionComponent } from './components/basic-data-section/basic-data-section.component';
+import { BasicDataComponent } from './components/basic-data/basic-data.component';
 import { AlgorithmicSystemCard } from '../../interfaces/cards';
+import { TabsDataComponent } from './components/tabs-data/tabs-data.component';
 
 @Component({
   selector: 'app-system-detail',
   standalone: true,
-  imports: [BasicDataSectionComponent],
+  imports: [BasicDataComponent, TabsDataComponent],
   templateUrl: './system-detail.component.html',
   styleUrl: './system-detail.component.scss',
 })

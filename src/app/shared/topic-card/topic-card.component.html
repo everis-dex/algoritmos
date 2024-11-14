@@ -1,3 +1,4 @@
+@if (topic) {
 <a [attr.href]="topic.url" [attr.title]="topic.title" class="topic-card-link">
   <div class="topic-card-link--before" [style.backgroundImage]="'url(' + topic.image + ')'"></div>
   <div class="topic-card-link__content">
@@ -7,3 +8,4 @@
     </p>
   </div>
 </a>
+}

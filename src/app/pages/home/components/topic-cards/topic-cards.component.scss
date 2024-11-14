@@ -2,18 +2,20 @@
 
 .topic-cards-container {
   background-color: $white-smoke;
-  padding-bottom: 2rem;
-  gap: 1.5rem;
 }
 
 @media (min-width: $mobile) and (max-width: $desktop) {
   .topic-cards-container {
     padding-top: 1rem;
+    padding-bottom: 2rem;
+    gap: 1rem;
   }
 }
 @media (min-width: $desktop) {
   .topic-cards-container {
     padding-top: 2rem;
+    padding-bottom: 3.4375rem;
+    gap: 1.5rem;
 
     &__cards {
       grid-template-columns: repeat(2, 1fr);

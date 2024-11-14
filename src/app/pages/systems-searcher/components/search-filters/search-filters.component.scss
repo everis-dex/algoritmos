@@ -7,6 +7,11 @@
     align-items: center;
     height: 3.25rem;
 
+    @media (min-width: $mobile) and (max-width: $desktop) {
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
     h3 {
       letter-spacing: 0.015rem;
       color: $grey-black;
