@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlgorithmicSystemCardComponent } from './algorithmic-system-card.component';
-import { mockAlgorithmicSystems } from '../../../mocks/cards';
+import { mockAlgorithmicSystems } from '../../mocks/cards';
 
 describe('AlgorithmicSystemCardComponent', () => {
   let component: AlgorithmicSystemCardComponent;

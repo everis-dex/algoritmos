@@ -23,7 +23,8 @@ describe('BannerComponent', () => {
   it('should emit changeView event', () => {
     const changeViewSpy = spyOn(component['_changeView'], 'emit');
 
-    component.redirectToHomeView();
+    const event = new Event('click');
+    component.redirectToHomeView(event);
 
     expect(changeViewSpy).toHaveBeenCalled();
   });
