@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CurrentAlgorithmicSystemsComponent } from './current-algorithmic-systems.component';
+import { AlgorithmicSystemsCardsComponent } from './algorithmic-systems-cards.component';
 import { mockAlgorithmicSystems } from '../../../../mocks/cards';
 
-describe('CurrentAlgorithmicSystemsComponent', () => {
-  let component: CurrentAlgorithmicSystemsComponent;
-  let fixture: ComponentFixture<CurrentAlgorithmicSystemsComponent>;
+describe('AlgorithmicSystemsCardsComponent', () => {
+  let component: AlgorithmicSystemsCardsComponent;
+  let fixture: ComponentFixture<AlgorithmicSystemsCardsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CurrentAlgorithmicSystemsComponent],
+      imports: [AlgorithmicSystemsCardsComponent],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CurrentAlgorithmicSystemsComponent);
+    fixture = TestBed.createComponent(AlgorithmicSystemsCardsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

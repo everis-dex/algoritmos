@@ -8,20 +8,20 @@ import {
   AfterViewInit,
   HostListener,
 } from '@angular/core';
-import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card/algorithmic-system-card.component';
+import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card.component';
 import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import { Subscription } from 'rxjs';
 import { CardService } from '../../../../services/card.service';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
 
 @Component({
-  selector: 'app-current-algorithmic-systems',
+  selector: 'app-algorithmic-systems-cards',
   standalone: true,
   imports: [AlgorithmicSystemCardComponent, SystemsSearcherLinkComponent],
-  templateUrl: './current-algorithmic-systems.component.html',
-  styleUrl: './current-algorithmic-systems.component.scss',
+  templateUrl: './algorithmic-systems-cards.component.html',
+  styleUrl: './algorithmic-systems-cards.component.scss',
 })
-export class CurrentAlgorithmicSystemsComponent
+export class AlgorithmicSystemsCardsComponent
   implements OnInit, OnDestroy, AfterViewInit
 {
   @Output()

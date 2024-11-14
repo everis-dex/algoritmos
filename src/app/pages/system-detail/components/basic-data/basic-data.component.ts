@@ -3,13 +3,13 @@ import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import { getStateColor } from '../../../../shared/utilities';
 
 @Component({
-  selector: 'app-basic-data-section',
+  selector: 'app-basic-data',
   standalone: true,
   imports: [],
-  templateUrl: './basic-data-section.component.html',
-  styleUrl: './basic-data-section.component.scss',
+  templateUrl: './basic-data.component.html',
+  styleUrl: './basic-data.component.scss',
 })
-export class BasicDataSectionComponent {
+export class BasicDataComponent {
   @Input()
   public algorithmicSystem!: AlgorithmicSystemCard;
 

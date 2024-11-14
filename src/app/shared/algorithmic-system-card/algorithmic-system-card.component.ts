@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AlgorithmicSystemCard } from '../../../interfaces/cards';
-import { getStateColor } from '../../utilities';
+import { AlgorithmicSystemCard } from '../../interfaces/cards';
+import { getStateColor } from '../utilities';
 
 @Component({
   selector: 'app-algorithmic-system-card',

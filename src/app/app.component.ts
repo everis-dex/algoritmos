@@ -4,7 +4,7 @@ import { SystemsSearcherComponent } from './pages/systems-searcher/systems-searc
 import { SystemDetailComponent } from './pages/system-detail/system-detail.component';
 import { BannerComponent } from './shared/banner/banner.component';
 import { AlgorithmicSystemCard } from './interfaces/cards';
-import { FooterComponent } from './shared/footer/footer/footer.component';
+import { FooterComponent } from './shared/footer/footer.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
