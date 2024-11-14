@@ -47,15 +47,15 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this._setMarginTop.emit(this._setTabsHeight());
+    this._setMarginTop.emit(this._getTabsHeight());
   }
 
   @HostListener('window:resize')
   onResize(): void {
-    this._setMarginTop.emit(this._setTabsHeight());
+    this._setMarginTop.emit(this._getTabsHeight());
   }
 
-  private _setTabsHeight(): number {
+  private _getTabsHeight(): number {
     const tabsContainer = this._el.nativeElement.querySelector(
       '.tabs-data-container__tabs'
     );

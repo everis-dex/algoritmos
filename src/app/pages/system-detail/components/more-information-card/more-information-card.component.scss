@@ -7,6 +7,13 @@
   padding: 1.5rem;
   border: 1px solid $grey-very-light;
 
+  @media (min-width: $mobile) and (max-width: $desktop) {
+    margin-top: 1.5rem;
+  }
+  @media (min-width: $desktop) {
+    margin-top: 2rem;
+  }
+
   a {
     font-weight: 600;
     color: $red-bright;
