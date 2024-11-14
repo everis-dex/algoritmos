@@ -4,9 +4,13 @@
   display: grid;
   gap: 1.75rem;
 
+  @media (min-width: $mobile) and (max-width: $desktop) {
+    padding-bottom: 5.375rem;
+  }
   @media (min-width: $desktop) {
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: auto auto;
+    padding-bottom: 2rem;
 
     &__basic-data-container {
       grid-column: 1 / span 8;
