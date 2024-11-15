@@ -3,8 +3,8 @@
     [algorithmicSystem]="algorithmicSystem"></app-basic-data>
   <app-tabs-data class="system-detail-container__tabs-data-container"
     (_setMarginTop)="setMarginTop($event)"></app-tabs-data>
-  <aside class="system-detail-container__aside-container" [style.marginTop.px]="marginTop"
-    aria-label="Documents i més informació pràctica">
+  <div class="system-detail-container__sidebar-container" [style.marginTop.px]="marginTop">
+    <app-documents></app-documents>
     <app-more-information-card></app-more-information-card>
-  </aside>
+  </div>
 </section>

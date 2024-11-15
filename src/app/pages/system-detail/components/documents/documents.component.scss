@@ -1,0 +1,92 @@
+@import "../../../../../assets/scss/styles.scss";
+
+.documents-container {
+  border-top: 6px solid $red-bright;
+  box-shadow: 0px 1px 5px 0px #0000001f, 0px 2px 2px 0px #00000024,
+    0px 3px 1px -2px #00000033;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: all 0.4s ease;
+
+  &:hover {
+    transform: translate3D(0, -1px, 0) scale(1.03);
+    -webkit-box-shadow: 0px 5px 3px 0px $grey-very-light;
+    -moz-box-shadow: 0px 5px 3px 0px $grey-very-light;
+    box-shadow: 0px 5px 3px 0px $grey-very-light;
+  }
+
+  @media (min-width: $mobile) and (max-width: $desktop) {
+    padding: 0.25rem 0.875rem 0.875rem;
+  }
+  @media (min-width: $desktop) {
+    padding: 1.125rem 0.625rem 1rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+
+    &__header {
+      font-weight: 600;
+
+      @media (min-width: $mobile) and (max-width: $desktop) {
+        font-size: 1.125rem;
+        line-height: 1.5rem;
+        padding-top: 1.5rem;
+        padding-left: 0.625rem;
+      }
+      @media (min-width: $desktop) {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        padding-top: 0.75rem;
+        padding-left: 0.75rem;
+      }
+    }
+
+    &__list {
+      border-bottom: 1px solid $grey-very-light;
+      padding-left: 0;
+
+      &__item {
+        display: flex;
+        align-items: center;
+        border-top: 1px solid $grey-very-light;
+        padding: 0.75rem 0;
+
+        &:hover {
+          background-color: $grey-very-ultra-light;
+        }
+
+        @media (min-width: $desktop) {
+          margin: auto 0.75rem;
+        }
+
+        button {
+          font-size: 0.875rem;
+          line-height: 1.3125rem;
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          flex-wrap: wrap;
+
+          span {
+            &:first-of-type {
+              font-weight: 600;
+              color: $grey-dark;
+
+              &:hover {
+                text-decoration: underline;
+              }
+            }
+            &:last-of-type {
+              font-weight: 400;
+              color: $grey-medium;
+            }
+          }
+        }
+      }
+    }
+  }
+}

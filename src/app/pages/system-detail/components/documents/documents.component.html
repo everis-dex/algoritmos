@@ -1,0 +1,17 @@
+<div class="documents-container">
+  <div class="documents-container__content">
+    <h2 class="documents-container__content__header">Documents</h2>
+    <ul class="documents-container__content__list">
+      @for (document of documents; track $index) {
+      <li class="documents-container__content__list__item">
+        <img src="assets/icons/Icono_rojo.svg" alt="Icona de la vinyeta del document">
+        <button type="button">
+          <span>{{document.name}}</span>
+          <img src="assets/icons/Icono_excel.svg" alt="Icona del format del document">
+          <span>[{{document.size}}]</span>
+        </button>
+      </li>
+      }
+    </ul>
+  </div>
+</div>
