@@ -74,7 +74,7 @@ export const tabsData: ITabData[] = [
   },
   {
     id: 2,
-    tab: 'Informació bàsica',
+    tab: 'Informació tècnica',
     fields: [
       {
         field: 'Tasca del sistema en el procediment',
