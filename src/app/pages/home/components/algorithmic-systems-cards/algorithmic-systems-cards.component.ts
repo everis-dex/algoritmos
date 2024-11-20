@@ -91,9 +91,7 @@ export class AlgorithmicSystemsCardsComponent
 
   ngAfterViewChecked(): void {
     if (Object.values(this._translationLiterals).length > 0)
-      this._translationService.saveLiterals(
-        this._translationLiterals
-      );
+      this._translationService.saveLiterals(this._translationLiterals);
   }
 
   ngOnInit(): void {
@@ -115,15 +113,8 @@ export class AlgorithmicSystemsCardsComponent
     key: string,
     params?: Record<string, string | number>
   ): string {
-    const literal = this._translationService.getLiteral(
-      key,
-      params
-    );
-    this._getLiterals(
-      key,
-      literal,
-      this._translationLiterals
-    );
+    const literal = this._translationService.getLiteral(key, params);
+    this._getLiterals(key, literal, this._translationLiterals);
     if (this._translatedTexts) return this._translatedTexts[key];
     return '';
   }

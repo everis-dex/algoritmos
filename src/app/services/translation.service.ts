@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
+import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,10 @@ export class TranslationService {
   private readonly _apiUrl =
     'https://translate.googleapis.com/translate_a/single';
 
-  constructor(private readonly _http: HttpClient) {
+  constructor(
+    private readonly _http: HttpClient,
+    private readonly _sessionStorageService: SessionStorageService
+  ) {
     this._loadLiterals().subscribe((literals) => {
       this._literals = literals;
     });
@@ -30,7 +34,15 @@ export class TranslationService {
         console.error('Error al traducir:', error);
         return of(text);
       }),
-      map((response) => response[0][0][0])
+      map((response) => {
+        if (Array.isArray(response[0])) {
+          return response[0]
+            .filter((fragment) => Array.isArray(fragment) && fragment[0])
+            .map((fragment) => fragment[0])
+            .join(' ');
+        }
+        return text;
+      })
     );
   }
 
@@ -72,36 +84,24 @@ export class TranslationService {
     return this._translatedTexts;
   }
 
-  public saveLiterals(
-    literals: Record<string, string>
-  ): void {
-    const storedLiterals = JSON.parse(
-      sessionStorage.getItem('literals') ?? '{}'
-    );
-
+  public saveLiterals(literals: Record<string, string>): void {
+    const storedLiterals =
+      this._sessionStorageService.getItem<Record<string, string>>('literals');
     for (const [key, value] of Object.entries(literals)) {
-      if (!storedLiterals[key]) {
+      if (storedLiterals && !storedLiterals[key]) {
         storedLiterals[key] = value;
       }
     }
-
-    sessionStorage.setItem(
-      'literals',
-      JSON.stringify(storedLiterals)
-    );
+    this._sessionStorageService.setItem('literals', storedLiterals);
   }
 
-  public translateLiterals(
-    literals: Record<string, string>
-  ): void {
+  public translateLiterals(literals: Record<string, string>): void {
     const literalsKeys = Object.keys(literals);
     const untranslatedKeys = literalsKeys.filter(
       (key) => !this._translatedTexts[key]
     );
     if (untranslatedKeys.length === 0) return;
-    const untranslatedValues = untranslatedKeys.map(
-      (key) => literals[key]
-    );
+    const untranslatedValues = untranslatedKeys.map((key) => literals[key]);
     this._translateText(untranslatedValues.join('|'), 'es').subscribe(
       (translatedText) => {
         const translatedTextsArray = translatedText.split('|');

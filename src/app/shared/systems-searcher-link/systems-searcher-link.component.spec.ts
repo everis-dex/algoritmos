@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SystemsSearcherLinkComponent } from './systems-searcher-link.component';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('SystemsSearcherLinkComponent', () => {
   let component: SystemsSearcherLinkComponent;
@@ -9,6 +10,7 @@ describe('SystemsSearcherLinkComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SystemsSearcherLinkComponent],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SystemsSearcherLinkComponent);

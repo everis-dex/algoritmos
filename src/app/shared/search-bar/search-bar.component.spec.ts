@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchBarComponent } from './search-bar.component';
 import { SessionStorageService } from '../../services/session-storage.service';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
@@ -20,6 +21,7 @@ describe('SearchBarComponent', () => {
       imports: [SearchBarComponent],
       providers: [
         { provide: SessionStorageService, useValue: sessionStorageService },
+        provideHttpClient(),
       ],
     }).compileComponents();
 

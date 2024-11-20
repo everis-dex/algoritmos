@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SystemsSearcherComponent } from './systems-searcher.component';
 import { mockAlgorithmicSystems } from '../../mocks/cards';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('SystemsSearcherComponent', () => {
   let component: SystemsSearcherComponent;
@@ -10,6 +11,7 @@ describe('SystemsSearcherComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SystemsSearcherComponent],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SystemsSearcherComponent);
