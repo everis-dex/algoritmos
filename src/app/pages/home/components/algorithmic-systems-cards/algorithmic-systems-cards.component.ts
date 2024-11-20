@@ -7,22 +7,30 @@ import {
   Output,
   AfterViewInit,
   HostListener,
+  AfterViewChecked,
 } from '@angular/core';
 import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card.component';
 import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import { Subscription } from 'rxjs';
 import { CardService } from '../../../../services/card.service';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
+import { TranslationService } from '../../../../services/translation.service';
+import { CommonModule } from '@angular/common';
+import { getLiterals } from '../../../../shared/utilities';
 
 @Component({
   selector: 'app-algorithmic-systems-cards',
   standalone: true,
-  imports: [AlgorithmicSystemCardComponent, SystemsSearcherLinkComponent],
+  imports: [
+    AlgorithmicSystemCardComponent,
+    SystemsSearcherLinkComponent,
+    CommonModule,
+  ],
   templateUrl: './algorithmic-systems-cards.component.html',
   styleUrl: './algorithmic-systems-cards.component.scss',
 })
 export class AlgorithmicSystemsCardsComponent
-  implements OnInit, OnDestroy, AfterViewInit
+  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
 {
   @Output()
   private readonly _changeView = new EventEmitter<string>();
@@ -31,11 +39,15 @@ export class AlgorithmicSystemsCardsComponent
 
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
 
-  private _algorithmicSystemsSuscription!: Subscription;
+  private readonly _componentSubscriptions: Subscription[] = [];
+  private readonly _translationLiterals: Record<string, string> = {};
+  private _translatedTexts: Record<string, string> = {};
+  private readonly _getLiterals = getLiterals;
 
   constructor(
     private readonly _algorithmicSystemService: CardService,
-    private readonly _el: ElementRef
+    private readonly _el: ElementRef,
+    private readonly _translationService: TranslationService
   ) {}
 
   ngAfterViewInit(): void {
@@ -77,8 +89,16 @@ export class AlgorithmicSystemsCardsComponent
     });
   }
 
+  ngAfterViewChecked(): void {
+    if (Object.values(this._translationLiterals).length > 0)
+      this._translationService.saveLiterals(
+        this._translationLiterals
+      );
+  }
+
   ngOnInit(): void {
-    this._algorithmicSystemsSuscription = this._algorithmicSystemService
+    this._translatedTexts = this._translationService.getTranslations();
+    this._algorithmicSystemService
       .getAlgorithmicSystems()
       .subscribe((response) => {
         this.algorithmicSystems = response.slice(0, 4);
@@ -86,8 +106,26 @@ export class AlgorithmicSystemsCardsComponent
   }
 
   ngOnDestroy(): void {
-    if (this._algorithmicSystemsSuscription)
-      this._algorithmicSystemsSuscription.unsubscribe();
+    this._componentSubscriptions.forEach((subscription) =>
+      subscription.unsubscribe()
+    );
+  }
+
+  public getTranslatedText(
+    key: string,
+    params?: Record<string, string | number>
+  ): string {
+    const literal = this._translationService.getLiteral(
+      key,
+      params
+    );
+    this._getLiterals(
+      key,
+      literal,
+      this._translationLiterals
+    );
+    if (this._translatedTexts) return this._translatedTexts[key];
+    return '';
   }
 
   public setView(event: string | AlgorithmicSystemCard): void {

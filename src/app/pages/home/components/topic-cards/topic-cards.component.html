@@ -1,5 +1,5 @@
 <section class="topic-cards-container">
-  <h1>Et pot interessar</h1>
+  <h1>{{ getTranslatedText('home.topics-header') }}</h1>
   <div class="topic-cards-container__cards">
     @for (topic of topics; track $index) {
     <app-topic-card [topic]="topic"></app-topic-card>

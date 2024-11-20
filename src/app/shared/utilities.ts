@@ -9,7 +9,18 @@ export function getStateColor(state: string): string {
   const stateColorConfig: Record<string, string> = {
     'En producció': 'Green',
     'En desenvolupament': 'Yellow',
-    'Desmantellat': 'Red',
+    Desmantellat: 'Red',
   };
   return stateColorConfig[state];
+}
+export function getLiterals(
+  key: string,
+  translationLiteral: string | void,
+  translationLiterals: Record<string, string>
+): void {
+  if (typeof translationLiteral === 'string') {
+    if (!translationLiterals[key]?.includes(translationLiteral)) {
+      translationLiterals[key] = translationLiteral;
+    }
+  }
 }

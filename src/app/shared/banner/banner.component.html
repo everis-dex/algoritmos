@@ -1,27 +1,28 @@
 <nav class="banner-container">
   <ul>
-    <li><a href="https://administraciodigital.gencat.cat/ca/inici/">Inici</a></li>
+    <li><a href="https://administraciodigital.gencat.cat/ca/inici/">{{ getTranslatedText('banner.gencat-link')
+        }}</a></li>
     @if (currentView === 'home') {
-    <li>Registre de sistemes d'IA</li>
+    <li>{{ getTranslatedText('banner.home.link') }}</li>
     } @else {
-    <li><a href="#" (click)="redirectToHomeView($event)">Registre de sistemes d'IA</a></li>
+    <li><a href="#" (click)="redirectToHomeView($event)">{{ getTranslatedText('banner.home.link') }}</a></li>
     @if (currentView === 'systems-searcher') {
-    <li>Cercador de sistemes</li>
+    <li>{{ getTranslatedText('banner.systems-searcher.link') }}</li>
     } @else if (currentView === 'system-detail') {
-    <li>{{ algorithmicSystemName }}</li>
+    <li>{{ getTranslatedText('banner.system-detail.link', { algorithmicSystemName: algorithmicSystemName }) }}</li>
     }
     }
   </ul>
   <div
     [ngClass]="{'banner-container__home-header': currentView === 'home', 'banner-container__other-view-header': currentView !== 'home'}">
-    <h1>Registre d'IA</h1>
+    <h1>{{ getTranslatedText('banner.home.header') }}</h1>
     <div class="banner-container__home-header--before"></div>
-    <h2>Cerca un dels nostres sistemes</h2>
+    <h2>{{ getTranslatedText('banner.home.subheader') }}</h2>
     <img src="assets/images/Imagen.svg" alt="Imatge de la capçalera">
   </div>
   @if (currentView === 'systems-searcher') {
-  <h1>Cerca un dels nostres sistemes</h1>
+  <h1>{{ getTranslatedText('banner.systems-searcher.header') }}</h1>
   } @else if (currentView === 'system-detail') {
-  <h1>{{ algorithmicSystemName }}</h1>
+  <h1>{{ getTranslatedText('banner.system-detail.header', { algorithmicSystemName: algorithmicSystemName }) }}</h1>
   }
 </nav>

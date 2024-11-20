@@ -1,0 +1,90 @@
+{
+  "banner": {
+    "gencat-link": "Inici",
+    "home": {
+      "header": "Registre d'IA",
+      "subheader": "Cerca un dels nostres sistemes",
+      "link": "Registre de sistemes d'IA"
+    },
+    "systems-searcher": {
+      "header": "Cerca un dels nostres sistemes",
+      "link": "Cercador de sistemes"
+    },
+    "system-detail": {
+      "header": "{{algorithmicSystemName}}",
+      "link": "{{algorithmicSystemName}}"
+    }
+  },
+  "input-label": "Cerca per paraula, categoria...",
+  "home": {
+    "algorithmic-systems-header": "Sistemes algorísmics recents",
+    "topics-header": "Et pot interessar",
+    "searcher-filter": {
+      "selector": {
+        "category-selected": "{{categorySelected}}",
+        "no-category-selected": "Filtra per categoria"
+      },
+      "current-searches": {
+        "header": "Cerques recents",
+        "button": {
+          "desktop": "Restaurar recents",
+          "mobile": "Restaurar"
+        }
+      },
+      "popular-categories-header": "Categories populars"
+    },
+    "link": "Consulta tots els sistemes d'IA"
+  },
+  "systems-searcher": {
+    "filters": {
+      "header": "Filtres",
+      "button": "Restaurar filtres",
+      "accordion-list": {
+        "category-name": "Categoria",
+        "tags": {
+          "name": "Etiquetes",
+          "selector": {
+            "label": "Selecciona",
+            "input-label": "Cerca"
+          }
+        },
+        "states-name": "Estats",
+        "algorithms-name": "Tipus d'algorisme"
+      }
+    },
+    "results": {
+      "one-result": "S'ha trobat {{totalSearchResults}} resultat",
+      "more-than-one-result": "S'han trobat {{totalSearchResults}} resultats"
+    },
+    "pagination": {
+      "previous-button": "anterior",
+      "next-button": "següent",
+      "total-pages": "Total de pàgines: {{totalPages}}"
+    }
+  },
+  "system-detail": {
+    "system-detail-resume": {
+      "description-title": "Descripció breu",
+      "tags-title": "Etiquetes"
+    },
+    "tabs": {
+      "general-information": "Informació general",
+      "technical-information": "Informació tècnica",
+      "normative-information": "Informació normativa i transparència"
+    },
+    "documents-header": "Documents",
+    "more-information": {
+      "header": "Més informació",
+      "paragraphs": {
+        "paragraph-1": {
+          "text": "Si la teva pregunta és genèrica o vols més informació d'intel·ligència artificial a la Generalitat, consulta l'apartat:",
+          "link": "d'Informació pràctica"
+        },
+        "paragraph-2": {
+          "text": "Tens alguna pregunta sobre els sistemes d'IA? Contacta amb nosaltres a través de:",
+          "link": "Bústia de contacte"
+        }
+      }
+    }
+  }
+}

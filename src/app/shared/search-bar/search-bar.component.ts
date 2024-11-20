@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   Component,
   EventEmitter,
   HostListener,
@@ -9,10 +10,13 @@ import {
 } from '@angular/core';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { CommonModule } from '@angular/common';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ChipsComponent } from '../chips/chips.component';
 import { SystemsSearcherLinkComponent } from '../systems-searcher-link/systems-searcher-link.component';
 import { Subscription } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
+import { TranslationService } from '../../services/translation.service';
+import { getLiterals } from '../utilities';
 
 @Component({
   selector: 'app-search-bar',
@@ -21,12 +25,13 @@ import { CategoryService } from '../../services/category.service';
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
 })
-export class SearchBarComponent implements OnInit, OnDestroy {
+export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
   public popularCategories: string[] = [];
   public categorySelected = '';
   public isFilterVisible = false;
   public currentSearches: string[];
   public hasInputValue = false;
+  public isDesktop = false;
 
   @Input()
   public hasFilterSelector!: boolean;
@@ -34,36 +39,50 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Output()
   private readonly _changeView = new EventEmitter<string>();
 
-  private _categoriesSuscription!: Subscription;
+  private readonly _componentSubscriptions: Subscription[] = [];
+  private readonly _translationLiterals: Record<string, string> = {};
+  private _translatedTexts: Record<string, string> = {};
+  private readonly _getLiterals = getLiterals;
 
   constructor(
     private readonly _categoryService: CategoryService,
-    private readonly _sessionStorageService: SessionStorageService
+    private readonly _sessionStorageService: SessionStorageService,
+    private readonly _translationService: TranslationService,
+    private readonly _breakpointObserver: BreakpointObserver
   ) {
     this.currentSearches =
       this._sessionStorageService.getItem('currentSearches') || [];
   }
 
   ngOnInit(): void {
+    this._translatedTexts = this._translationService.getTranslations();
+    this._checkBreakpoint();
     const popularCategories =
       this._sessionStorageService.getItem<string[]>('popularCategories');
     if (popularCategories !== null) {
       this.popularCategories = popularCategories;
     } else {
-      this._categoriesSuscription = this._categoryService
-        .getCategories()
-        .subscribe((categories) => {
-          this.popularCategories = categories;
-          this._sessionStorageService.setItem(
-            'popularCategories',
-            this.popularCategories
-          );
-        });
+      this._categoryService.getCategories().subscribe((categories) => {
+        this.popularCategories = categories;
+        this._sessionStorageService.setItem(
+          'popularCategories',
+          this.popularCategories
+        );
+      });
     }
   }
 
+  ngAfterViewChecked(): void {
+    if (Object.values(this._translationLiterals).length > 0)
+      this._translationService.saveLiterals(
+        this._translationLiterals
+      );
+  }
+
   ngOnDestroy(): void {
-    if (this._categoriesSuscription) this._categoriesSuscription.unsubscribe();
+    this._componentSubscriptions.forEach((subscription) =>
+      subscription.unsubscribe()
+    );
   }
 
   @HostListener('document:click', ['$event'])
@@ -83,6 +102,31 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         this.isFilterVisible = false;
       }
     }
+  }
+
+  private _checkBreakpoint(): void {
+    this._breakpointObserver
+      .observe([Breakpoints.Handset])
+      .subscribe((result) => {
+        this.isDesktop = !result.matches;
+      });
+  }
+
+  public getTranslatedText(
+    key: string,
+    params?: Record<string, string | number>
+  ): string {
+    const literal = this._translationService.getLiteral(
+      key,
+      params
+    );
+    this._getLiterals(
+      key,
+      literal,
+      this._translationLiterals
+    );
+    if (this._translatedTexts) return this._translatedTexts[key];
+    return '';
   }
 
   public handleCategorySelect(): void {
