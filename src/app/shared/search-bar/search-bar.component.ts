@@ -38,13 +38,12 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   @Output()
   private readonly _changeView = new EventEmitter<string>();
-  @Output()
-  private readonly _translateLiterals = new EventEmitter<void>();
 
   private readonly _componentSubscriptions: Subscription[] = [];
-  private readonly _translationLiterals: Record<string, string> = {};
+  private readonly _literals: Record<string, string> = {};
   private _translatedTexts: Record<string, string> = {};
   private readonly _getLiterals = getLiterals;
+  private readonly _categoriesSelected: string[] = [];
 
   constructor(
     private readonly _categoryService: CategoryService,
@@ -75,8 +74,8 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   ngAfterViewChecked(): void {
-    if (Object.values(this._translationLiterals).length > 0)
-      this._translationService.saveLiterals(this._translationLiterals);
+    if (Object.values(this._literals).length > 0)
+      this._translationService.saveLiterals(this._literals);
   }
 
   ngOnDestroy(): void {
@@ -117,19 +116,30 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
     params?: Record<string, string | number>
   ): string {
     const literal = this._translationService.getLiteral(key, params);
-    this._getLiterals(key, literal, this._translationLiterals);
+    this._getLiterals(key, literal, this._literals);
     if (this._translatedTexts) return this._translatedTexts[key];
     return '';
   }
 
+  public getLiteralKey(): string {
+    return `home.searcher-filter.selector.${
+      this.categorySelected ? 'category-selected' : 'no-category-selected'
+    }`;
+  }
+
   public handleCategorySelect(): void {
     this.isFilterVisible = !this.isFilterVisible;
-    this._translateLiterals.emit();
   }
 
   public selectCategory(categorySelected: string): void {
     this.categorySelected = categorySelected;
+    if (!this._categoriesSelected.includes(this.categorySelected))
+      this._categoriesSelected.push(this.categorySelected);
     this.isFilterVisible = false;
+    this._translationService.translateLiterals(this._literals, {
+      key: 'home.searcher-filter.selector.category-selected',
+      value: this._categoriesSelected,
+    });
   }
 
   public handleInput(event: Event): void {

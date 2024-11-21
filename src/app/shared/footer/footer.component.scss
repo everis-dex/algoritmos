@@ -31,11 +31,11 @@
 
     &__icons-group {
       flex-direction: column;
-    }
 
-    & > img {
-      margin-top: 1.5rem;
-      max-width: 60%;
+      & > img {
+        margin-top: 1.5rem;
+        max-width: 60%;
+      }
     }
   }
   @media (min-width: $desktop) {
@@ -52,11 +52,11 @@
       div {
         max-width: 50%;
       }
-    }
 
-    & > img {
-      margin-top: 0;
-      max-width: 40%;
+      & > img {
+        margin-top: 0;
+        max-width: 40%;
+      }
     }
   }
 }

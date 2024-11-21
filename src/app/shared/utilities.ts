@@ -15,12 +15,12 @@ export function getStateColor(state: string): string {
 }
 export function getLiterals(
   key: string,
-  translationLiteral: string | void,
-  translationLiterals: Record<string, string>
+  literal: string | void,
+  literals: Record<string, string>
 ): void {
-  if (typeof translationLiteral === 'string') {
-    if (!translationLiterals[key]?.includes(translationLiteral)) {
-      translationLiterals[key] = translationLiteral;
+  if (typeof literal === 'string') {
+    if (!literals[key]?.includes(literal)) {
+      literals[key] = literal;
     }
   }
 }

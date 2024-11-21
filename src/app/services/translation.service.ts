@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
-import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,13 +8,11 @@ import { SessionStorageService } from './session-storage.service';
 export class TranslationService {
   private _translatedTexts: Record<string, string> = {};
   private _literals: Record<string, unknown> = {};
+  private _storedLiterals: Record<string, string> = {};
   private readonly _apiUrl =
     'https://translate.googleapis.com/translate_a/single';
 
-  constructor(
-    private readonly _http: HttpClient,
-    private readonly _sessionStorageService: SessionStorageService
-  ) {
+  constructor(private readonly _http: HttpClient) {
     this._loadLiterals().subscribe((literals) => {
       this._literals = literals;
     });
@@ -85,31 +82,41 @@ export class TranslationService {
   }
 
   public saveLiterals(literals: Record<string, string>): void {
-    const storedLiterals =
-      this._sessionStorageService.getItem<Record<string, string>>('literals');
-    for (const [key, value] of Object.entries(literals)) {
-      if (storedLiterals && !storedLiterals[key]) {
-        storedLiterals[key] = value;
-      }
-    }
-    this._sessionStorageService.setItem('literals', storedLiterals);
+    this._storedLiterals = {
+      ...this._storedLiterals,
+      ...literals,
+    };
   }
 
-  public translateLiterals(literals: Record<string, string>): void {
-    const literalsKeys = Object.keys(literals);
-    const untranslatedKeys = literalsKeys.filter(
-      (key) => !this._translatedTexts[key]
-    );
-    if (untranslatedKeys.length === 0) return;
-    const untranslatedValues = untranslatedKeys.map((key) => literals[key]);
-    this._translateText(untranslatedValues.join('|'), 'es').subscribe(
-      (translatedText) => {
-        const translatedTextsArray = translatedText.split('|');
-        untranslatedKeys.forEach((key, index) => {
-          this._translatedTexts[key] = translatedTextsArray[index];
+  public getStoredLiterals(): Record<string, string> {
+    return this._storedLiterals;
+  }
+
+  public translateLiterals(
+    literals: Record<string, string>,
+    updatedLiteral?: { key: string; value: string[] }
+  ): void {
+    if (!updatedLiteral) {
+      const literalsKeys = Object.keys(literals);
+      const untranslatedKeys = literalsKeys.filter(
+        (key) => !this._translatedTexts[key]
+      );
+      if (untranslatedKeys.length === 0) return;
+      const untranslatedValues = untranslatedKeys.map((key) => literals[key]);
+      this._translateText(untranslatedValues.join('|'), 'es').subscribe(
+        (translatedText) => {
+          const translatedTextsArray = translatedText.split('|');
+          untranslatedKeys.forEach((key, index) => {
+            this._translatedTexts[key] = translatedTextsArray[index];
+          });
+        }
+      );
+    } else {
+      updatedLiteral.value.forEach((value) => {
+        this._translateText(value, 'es').subscribe((translatedText) => {
+          this._translatedTexts[updatedLiteral.key] = translatedText;
         });
-        sessionStorage.removeItem('literals');
-      }
-    );
+      });
+    }
   }
 }

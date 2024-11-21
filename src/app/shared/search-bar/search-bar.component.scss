@@ -92,6 +92,7 @@
       align-items: center;
       font-size: 1rem;
       line-height: 1.5rem;
+      text-align: left;
 
       img {
         position: absolute;
@@ -203,7 +204,7 @@
 
       &__category-button {
         max-width: 25rem;
-        height: auto;
+        height: 3rem;
         position: relative;
         top: 0;
 

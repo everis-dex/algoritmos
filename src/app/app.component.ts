@@ -1,4 +1,4 @@
-import { AfterViewChecked, ChangeDetectorRef, Component } from '@angular/core';
+import { AfterViewChecked, Component } from '@angular/core';
 import { HomeComponent } from './pages/home/home.component';
 import { SystemsSearcherComponent } from './pages/systems-searcher/systems-searcher.component';
 import { SystemDetailComponent } from './pages/system-detail/system-detail.component';
@@ -7,7 +7,6 @@ import { AlgorithmicSystemCard } from './interfaces/cards';
 import { FooterComponent } from './shared/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { TranslationService } from './services/translation.service';
-import { SessionStorageService } from './services/session-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -33,20 +32,14 @@ export class AppComponent implements AfterViewChecked {
     categoryChips: [],
   };
 
-  private _isLiteralsLoaded = false;
-
-  constructor(
-    private readonly _translationService: TranslationService,
-    private readonly _cdr: ChangeDetectorRef,
-    private readonly _sessionStorageService: SessionStorageService
-  ) {}
+  constructor(private readonly _translationService: TranslationService) {}
 
   ngAfterViewChecked(): void {
-    this._translateLiterals();
+    this.translateLiterals();
   }
 
   public changeView(view?: string): void {
-    this._isLiteralsLoaded = false;
+    this.translateLiterals();
     this.currentView = view ?? 'home';
   }
 
@@ -54,19 +47,8 @@ export class AppComponent implements AfterViewChecked {
     this.algorithmicSystemDetails = details;
   }
 
-  private _translateLiterals(): void {
-    if (!this._isLiteralsLoaded) {
-      const storedLiterals =
-        this._sessionStorageService.getItem<Record<string, string>>('literals');
-      if (storedLiterals && Object.keys(storedLiterals).length > 0) {
-        this._translationService.translateLiterals(storedLiterals);
-        this._isLiteralsLoaded = true;
-      }
-    }
-  }
-
-  public manageLiterals(): void {
-    this._isLiteralsLoaded = false;
-    this._cdr.detectChanges();
+  public translateLiterals(): void {
+    const literals = this._translationService.getStoredLiterals();
+    if (literals) this._translationService.translateLiterals(literals);
   }
 }

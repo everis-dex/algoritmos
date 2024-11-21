@@ -20,8 +20,6 @@ export class HomeComponent implements OnInit {
   private readonly _changeView = new EventEmitter<string>();
   @Output()
   private readonly _setDetails = new EventEmitter<AlgorithmicSystemCard>();
-  @Output()
-  private readonly _translateLiterals = new EventEmitter<void>();
 
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
 
@@ -35,9 +33,5 @@ export class HomeComponent implements OnInit {
 
   public setDetails(details: AlgorithmicSystemCard): void {
     this._setDetails.emit(details);
-  }
-
-  public translateLiterals(): void {
-    this._translateLiterals.emit();
   }
 }

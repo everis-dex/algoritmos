@@ -20,7 +20,7 @@ export class TopicCardsComponent
   public topics: TopicCard[] = [];
 
   private readonly _componentSubscriptions: Subscription[] = [];
-  private readonly _translationLiterals: Record<string, string> = {};
+  private readonly _literals: Record<string, string> = {};
   private _translatedTexts: Record<string, string> = {};
   private readonly _getLiterals = getLiterals;
 
@@ -30,8 +30,8 @@ export class TopicCardsComponent
   ) {}
 
   ngAfterViewChecked(): void {
-    if (Object.values(this._translationLiterals).length > 0)
-      this._translationService.saveLiterals(this._translationLiterals);
+    if (Object.values(this._literals).length > 0)
+      this._translationService.saveLiterals(this._literals);
   }
 
   ngOnInit(): void {
@@ -52,7 +52,7 @@ export class TopicCardsComponent
     params?: Record<string, string | number>
   ): string {
     const literal = this._translationService.getLiteral(key, params);
-    this._getLiterals(key, literal, this._translationLiterals);
+    this._getLiterals(key, literal, this._literals);
     if (this._translatedTexts) return this._translatedTexts[key];
     return '';
   }
