@@ -15,17 +15,6 @@ export function getStateColor(state: string): string {
   };
   return stateColorConfig[state];
 }
-export function getLiterals(
-  key: string,
-  literal: string | void,
-  literals: Record<string, string>
-): void {
-  if (typeof literal === 'string') {
-    if (!literals[key]?.includes(literal)) {
-      literals[key] = literal;
-    }
-  }
-}
 export function translateText(
   textsSelected: string[],
   currentTextSelected: string,

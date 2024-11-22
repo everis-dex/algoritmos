@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
   AfterContentChecked,
-  AfterViewChecked,
   Component,
   EventEmitter,
   OnInit,
@@ -15,7 +14,6 @@ import {
   TAGS_ID,
 } from '../../../../constants/search-filters.const';
 import { TranslationService } from '../../../../services/translation.service';
-import { getLiterals } from '../../../../shared/utilities';
 
 @Component({
   selector: 'app-search-filters',
@@ -24,9 +22,7 @@ import { getLiterals } from '../../../../shared/utilities';
   templateUrl: './search-filters.component.html',
   styleUrl: './search-filters.component.scss',
 })
-export class SearchFiltersComponent
-  implements OnInit, AfterViewChecked, AfterContentChecked
-{
+export class SearchFiltersComponent implements OnInit, AfterContentChecked {
   @Output()
   private readonly _filtersApplied = new EventEmitter<
     { filter: string; optionsSelected: string[] }[]
@@ -40,19 +36,12 @@ export class SearchFiltersComponent
     }));
   public resetTagsSelected = false;
 
-  private readonly _literals: Record<string, string> = {};
   private _translatedLiterals: Record<string, string> = {};
-  private readonly _getLiterals = getLiterals;
 
   constructor(private readonly _translationService: TranslationService) {}
 
   ngOnInit(): void {
     this._translatedLiterals = this._translationService.getTranslatedLiterals();
-  }
-
-  ngAfterViewChecked(): void {
-    if (Object.values(this._literals).length > 0)
-      this._translationService.storeLiterals(this._literals);
   }
 
   ngAfterContentChecked(): void {
@@ -140,8 +129,7 @@ export class SearchFiltersComponent
   }
 
   public getTranslatedText(key: string): string {
-    const literal = this._translationService.getLiteral(key);
-    this._getLiterals(key, literal, this._literals);
+    this._translationService.storeLiterals(key);
     if (this._translatedLiterals) return this._translatedLiterals[key];
     return '';
   }

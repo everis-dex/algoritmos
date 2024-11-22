@@ -62,7 +62,6 @@ export class AppComponent implements AfterViewChecked {
 
   public translateLiterals(): void {
     const literals = this._translationService.getStoredLiterals();
-    console.log("hola")
     if (literals) this._translationService.translateLiterals(literals);
   }
 }

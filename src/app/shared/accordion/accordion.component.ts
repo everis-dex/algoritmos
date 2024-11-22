@@ -1,18 +1,10 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterViewChecked,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ChipsComponent } from '../chips/chips.component';
 import { TAGS, TAGS_ID } from '../../constants/search-filters.const';
 import { ITabData } from '../../pages/system-detail/components/tabs-data/tabs-data.model';
 import { IAccordionData } from './accordion.model';
 import { TabFieldDataComponent } from '../tab-field-data/tab-field-data.component';
-import { getLiterals } from '../utilities';
 import { TranslationService } from '../../services/translation.service';
 
 @Component({
@@ -22,7 +14,7 @@ import { TranslationService } from '../../services/translation.service';
   templateUrl: './accordion.component.html',
   styleUrl: './accordion.component.scss',
 })
-export class AccordionComponent implements OnInit, AfterViewChecked {
+export class AccordionComponent implements OnInit {
   @Input()
   public accordionList!: IAccordionData[] | ITabData[];
   @Input()
@@ -48,9 +40,7 @@ export class AccordionComponent implements OnInit, AfterViewChecked {
   public hasInputValue = false;
   public filteredTags: string[] = [...this.tags];
 
-  private readonly _literals: Record<string, string> = {};
   private _translatedLiterals: Record<string, string> = {};
-  private readonly _getLiterals = getLiterals;
 
   constructor(private readonly _translationService: TranslationService) {}
 
@@ -59,11 +49,6 @@ export class AccordionComponent implements OnInit, AfterViewChecked {
     this.accordionList?.forEach((accordion) => {
       this.toggleStates[accordion.id] = { display: false, rotation: false };
     });
-  }
-
-  ngAfterViewChecked(): void {
-    if (Object.values(this._literals).length > 0)
-      this._translationService.storeLiterals(this._literals);
   }
 
   public isAccordionData(
@@ -148,8 +133,7 @@ export class AccordionComponent implements OnInit, AfterViewChecked {
   }
 
   public getTranslatedText(key: string): string {
-    const literal = this._translationService.getLiteral(key);
-    this._getLiterals(key, literal, this._literals);
+    this._translationService.storeLiterals(key);
     if (this._translatedLiterals) return this._translatedLiterals[key];
     return '';
   }

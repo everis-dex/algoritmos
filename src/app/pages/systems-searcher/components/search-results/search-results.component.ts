@@ -1,13 +1,6 @@
-import {
-  AfterViewChecked,
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
-import { getLiterals, getStateColor } from '../../../../shared/utilities';
+import { getStateColor } from '../../../../shared/utilities';
 import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card.component';
 import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../../../constants/search-pagination.const';
 import { TranslationService } from '../../../../services/translation.service';
@@ -19,7 +12,7 @@ import { TranslationService } from '../../../../services/translation.service';
   templateUrl: './search-results.component.html',
   styleUrl: './search-results.component.scss',
 })
-export class SearchResultsComponent implements OnInit, AfterViewChecked {
+export class SearchResultsComponent implements OnInit {
   @Input()
   public searchResults: AlgorithmicSystemCard[] = [];
   @Input()
@@ -33,19 +26,12 @@ export class SearchResultsComponent implements OnInit, AfterViewChecked {
   public getStateColor = getStateColor;
   public maxSearchResultsPerPage = MAX_SEARCH_RESULTS_PER_PAGE;
 
-  private readonly _literals: Record<string, string> = {};
   private _translatedLiterals: Record<string, string> = {};
-  private readonly _getLiterals = getLiterals;
 
   constructor(private readonly _translationService: TranslationService) {}
 
   ngOnInit(): void {
     this._translatedLiterals = this._translationService.getTranslatedLiterals();
-  }
-
-  ngAfterViewChecked(): void {
-    if (Object.values(this._literals).length > 0)
-      this._translationService.storeLiterals(this._literals);
   }
 
   public setView(details: AlgorithmicSystemCard): void {
@@ -65,8 +51,7 @@ export class SearchResultsComponent implements OnInit, AfterViewChecked {
     key: string,
     params?: Record<string, string | number>
   ): string {
-    const literal = this._translationService.getLiteral(key, params);
-    this._getLiterals(key, literal, this._literals);
+    this._translationService.storeLiterals(key);
     if (this._translatedLiterals) {
       if (params) {
         return this._translatedLiterals[key]?.replace(

@@ -48,7 +48,7 @@ export class TranslationService {
     return this._http.get<Record<string, unknown>>(path);
   }
 
-  public getLiteral(
+  private _getLiteral(
     key: string,
     params?: Record<string, string | number>
   ): string | void {
@@ -81,11 +81,26 @@ export class TranslationService {
     return this._translatedLiterals;
   }
 
-  public storeLiterals(literals: Record<string, string>): void {
-    this._storedLiterals = {
-      ...this._storedLiterals,
-      ...literals,
-    };
+  public storeLiterals(key: string): void {
+    const literal = this._getLiteral(key);
+    if (typeof literal === 'string') {
+      const literals = this._getLiterals(key, literal, this._storedLiterals);
+      this._storedLiterals = {
+        ...this._storedLiterals,
+        ...literals,
+      };
+    }
+  }
+
+  private _getLiterals(
+    key: string,
+    literal: string,
+    literals: Record<string, string>
+  ): Record<string, string> {
+    if (!literals[key]?.includes(literal)) {
+      literals[key] = literal;
+    }
+    return literals;
   }
 
   public getStoredLiterals(): Record<string, string> {

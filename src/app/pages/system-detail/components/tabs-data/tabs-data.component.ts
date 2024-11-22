@@ -1,5 +1,4 @@
 import {
-  AfterViewChecked,
   AfterViewInit,
   Component,
   ElementRef,
@@ -17,7 +16,6 @@ import { AccordionComponent } from '../../../../shared/accordion/accordion.compo
 import { Subscription } from 'rxjs';
 import { FieldContentService } from '../../../../services/field-content.service';
 import { TranslationService } from '../../../../services/translation.service';
-import { getLiterals } from '../../../../shared/utilities';
 
 @Component({
   selector: 'app-tabs-data',
@@ -26,9 +24,7 @@ import { getLiterals } from '../../../../shared/utilities';
   templateUrl: './tabs-data.component.html',
   styleUrl: './tabs-data.component.scss',
 })
-export class TabsDataComponent
-  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
-{
+export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output()
   private readonly _setMarginTop = new EventEmitter<number>();
 
@@ -36,9 +32,7 @@ export class TabsDataComponent
   public currentTabIndex = 0;
 
   private readonly _componentSubscriptions: Subscription[] = [];
-  private readonly _literals: Record<string, string> = {};
   private _translatedLiterals: Record<string, string> = {};
-  private readonly _getLiterals = getLiterals;
 
   constructor(
     private readonly _fieldContentService: FieldContentService,
@@ -59,11 +53,6 @@ export class TabsDataComponent
 
   ngAfterViewInit(): void {
     this._setMarginTop.emit(this._getTabsHeight());
-  }
-
-  ngAfterViewChecked(): void {
-    if (Object.values(this._literals).length > 0)
-      this._translationService.storeLiterals(this._literals);
   }
 
   @HostListener('window:resize')
@@ -103,8 +92,7 @@ export class TabsDataComponent
   }
 
   public getTranslatedText(key: string): string {
-    const literal = this._translationService.getLiteral(key);
-    this._getLiterals(key, literal, this._literals);
+    this._translationService.storeLiterals(key);
     if (this._translatedLiterals) return this._translatedLiterals[key];
     return '';
   }

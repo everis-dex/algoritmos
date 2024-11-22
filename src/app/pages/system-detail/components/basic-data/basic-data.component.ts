@@ -1,6 +1,6 @@
-import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
-import { getLiterals, getStateColor } from '../../../../shared/utilities';
+import { getStateColor } from '../../../../shared/utilities';
 import { TranslationService } from '../../../../services/translation.service';
 
 @Component({
@@ -10,15 +10,13 @@ import { TranslationService } from '../../../../services/translation.service';
   templateUrl: './basic-data.component.html',
   styleUrl: './basic-data.component.scss',
 })
-export class BasicDataComponent implements OnInit, AfterViewChecked {
+export class BasicDataComponent implements OnInit {
   @Input()
   public algorithmicSystem!: AlgorithmicSystemCard;
 
   public getStateColor = getStateColor;
 
-  private readonly _literals: Record<string, string> = {};
   private _translatedLiterals: Record<string, string> = {};
-  private readonly _getLiterals = getLiterals;
 
   constructor(private readonly _translationService: TranslationService) {}
 
@@ -26,14 +24,8 @@ export class BasicDataComponent implements OnInit, AfterViewChecked {
     this._translatedLiterals = this._translationService.getTranslatedLiterals();
   }
 
-  ngAfterViewChecked(): void {
-    if (Object.values(this._literals).length > 0)
-      this._translationService.storeLiterals(this._literals);
-  }
-
   public getTranslatedText(key: string): string {
-    const literal = this._translationService.getLiteral(key);
-    this._getLiterals(key, literal, this._literals);
+    this._translationService.storeLiterals(key);
     if (this._translatedLiterals) return this._translatedLiterals[key];
     return '';
   }

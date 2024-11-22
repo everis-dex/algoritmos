@@ -1,5 +1,4 @@
 import {
-  AfterViewChecked,
   Component,
   EventEmitter,
   HostListener,
@@ -16,7 +15,7 @@ import { SystemsSearcherLinkComponent } from '../systems-searcher-link/systems-s
 import { Subscription } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
 import { TranslationService } from '../../services/translation.service';
-import { getLiterals, translateText } from '../utilities';
+import { translateText } from '../utilities';
 
 @Component({
   selector: 'app-search-bar',
@@ -25,7 +24,7 @@ import { getLiterals, translateText } from '../utilities';
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
 })
-export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class SearchBarComponent implements OnInit, OnDestroy {
   public popularCategories: string[] = [];
   public categorySelected = '';
   public isFilterVisible = false;
@@ -41,9 +40,7 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
   private readonly _changeView = new EventEmitter<string>();
 
   private readonly _componentSubscriptions: Subscription[] = [];
-  private readonly _literals: Record<string, string> = {};
   private _translatedLiterals: Record<string, string> = {};
-  private readonly _getLiterals = getLiterals;
   private readonly _translateText = translateText;
   private readonly _categoriesSelected: string[] = [];
 
@@ -73,11 +70,6 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
         );
       });
     }
-  }
-
-  ngAfterViewChecked(): void {
-    if (Object.values(this._literals).length > 0)
-      this._translationService.storeLiterals(this._literals);
   }
 
   ngOnDestroy(): void {
@@ -114,8 +106,7 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   public getTranslatedText(key: string): string {
-    const literal = this._translationService.getLiteral(key);
-    this._getLiterals(key, literal, this._literals);
+    this._translationService.storeLiterals(key);
     if (this._translatedLiterals) return this._translatedLiterals[key];
     return '';
   }

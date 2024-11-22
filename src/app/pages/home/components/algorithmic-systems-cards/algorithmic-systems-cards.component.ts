@@ -7,7 +7,6 @@ import {
   Output,
   AfterViewInit,
   HostListener,
-  AfterViewChecked,
 } from '@angular/core';
 import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card.component';
 import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
@@ -16,7 +15,6 @@ import { CardService } from '../../../../services/card.service';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
 import { TranslationService } from '../../../../services/translation.service';
 import { CommonModule } from '@angular/common';
-import { getLiterals } from '../../../../shared/utilities';
 
 @Component({
   selector: 'app-algorithmic-systems-cards',
@@ -30,7 +28,7 @@ import { getLiterals } from '../../../../shared/utilities';
   styleUrl: './algorithmic-systems-cards.component.scss',
 })
 export class AlgorithmicSystemsCardsComponent
-  implements OnInit, OnDestroy, AfterViewInit, AfterViewChecked
+  implements OnInit, OnDestroy, AfterViewInit
 {
   @Output()
   private readonly _changeView = new EventEmitter<string>();
@@ -40,9 +38,7 @@ export class AlgorithmicSystemsCardsComponent
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
 
   private readonly _componentSubscriptions: Subscription[] = [];
-  private readonly _literals: Record<string, string> = {};
   private _translatedLiterals: Record<string, string> = {};
-  private readonly _getLiterals = getLiterals;
 
   constructor(
     private readonly _algorithmicSystemService: CardService,
@@ -89,11 +85,6 @@ export class AlgorithmicSystemsCardsComponent
     });
   }
 
-  ngAfterViewChecked(): void {
-    if (Object.values(this._literals).length > 0)
-      this._translationService.storeLiterals(this._literals);
-  }
-
   ngOnInit(): void {
     this._translatedLiterals = this._translationService.getTranslatedLiterals();
     this._algorithmicSystemService
@@ -110,8 +101,7 @@ export class AlgorithmicSystemsCardsComponent
   }
 
   public getTranslatedText(key: string): string {
-    const literal = this._translationService.getLiteral(key);
-    this._getLiterals(key, literal, this._literals);
+    this._translationService.storeLiterals(key);
     if (this._translatedLiterals) return this._translatedLiterals[key];
     return '';
   }
