@@ -7,6 +7,7 @@ import { AlgorithmicSystemCard } from './interfaces/cards';
 import { FooterComponent } from './shared/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { TranslationService } from './services/translation.service';
+import { translateText } from './shared/utilities';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,10 @@ export class AppComponent implements AfterViewChecked {
     description: '',
     categoryChips: [],
   };
+  public translatedAlgorithmicSystemName: Record<string, string> = {};
+
+  private readonly _algorithmicSystemNames: string[] = [];
+  private readonly _translateText = translateText;
 
   constructor(private readonly _translationService: TranslationService) {}
 
@@ -45,10 +50,19 @@ export class AppComponent implements AfterViewChecked {
 
   public setDetails(details: AlgorithmicSystemCard): void {
     this.algorithmicSystemDetails = details;
+    const algorithmicSystemNameToTranslate =
+      this._translationService.translateText(details.title, 'es');
+    this._translateText(
+      this._algorithmicSystemNames,
+      details.title,
+      this.translatedAlgorithmicSystemName,
+      algorithmicSystemNameToTranslate
+    );
   }
 
   public translateLiterals(): void {
     const literals = this._translationService.getStoredLiterals();
+    console.log("hola")
     if (literals) this._translationService.translateLiterals(literals);
   }
 }

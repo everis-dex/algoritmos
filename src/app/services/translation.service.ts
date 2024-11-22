@@ -6,7 +6,7 @@ import { catchError, map, Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class TranslationService {
-  private _translatedTexts: Record<string, string> = {};
+  private _translatedLiterals: Record<string, string> = {};
   private _literals: Record<string, unknown> = {};
   private _storedLiterals: Record<string, string> = {};
   private readonly _apiUrl =
@@ -18,7 +18,7 @@ export class TranslationService {
     });
   }
 
-  private _translateText(text: string, targetLang: string): Observable<string> {
+  public translateText(text: string, targetLang: string): Observable<string> {
     const params = new HttpParams()
       .set('client', 'gtx')
       .set('sl', 'ca')
@@ -77,11 +77,11 @@ export class TranslationService {
     );
   }
 
-  public getTranslations(): Record<string, string> {
-    return this._translatedTexts;
+  public getTranslatedLiterals(): Record<string, string> {
+    return this._translatedLiterals;
   }
 
-  public saveLiterals(literals: Record<string, string>): void {
+  public storeLiterals(literals: Record<string, string>): void {
     this._storedLiterals = {
       ...this._storedLiterals,
       ...literals,
@@ -92,31 +92,20 @@ export class TranslationService {
     return this._storedLiterals;
   }
 
-  public translateLiterals(
-    literals: Record<string, string>,
-    updatedLiteral?: { key: string; value: string[] }
-  ): void {
-    if (!updatedLiteral) {
-      const literalsKeys = Object.keys(literals);
-      const untranslatedKeys = literalsKeys.filter(
-        (key) => !this._translatedTexts[key]
-      );
-      if (untranslatedKeys.length === 0) return;
-      const untranslatedValues = untranslatedKeys.map((key) => literals[key]);
-      this._translateText(untranslatedValues.join('|'), 'es').subscribe(
-        (translatedText) => {
-          const translatedTextsArray = translatedText.split('|');
-          untranslatedKeys.forEach((key, index) => {
-            this._translatedTexts[key] = translatedTextsArray[index];
-          });
-        }
-      );
-    } else {
-      updatedLiteral.value.forEach((value) => {
-        this._translateText(value, 'es').subscribe((translatedText) => {
-          this._translatedTexts[updatedLiteral.key] = translatedText;
+  public translateLiterals(literals: Record<string, string>): void {
+    const literalsKeys = Object.keys(literals);
+    const untranslatedKeys = literalsKeys.filter(
+      (key) => !this._translatedLiterals[key]
+    );
+    if (untranslatedKeys.length === 0) return;
+    const untranslatedValues = untranslatedKeys.map((key) => literals[key]);
+    this.translateText(untranslatedValues.join('|'), 'es').subscribe(
+      (translatedText) => {
+        const translatedTextsArray = translatedText.split('|');
+        untranslatedKeys.forEach((key, index) => {
+          this._translatedLiterals[key] = translatedTextsArray[index];
         });
-      });
-    }
+      }
+    );
   }
 }

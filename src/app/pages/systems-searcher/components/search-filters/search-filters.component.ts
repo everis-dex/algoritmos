@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterViewChecked,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { AccordionComponent } from '../../../../shared/accordion/accordion.component';
 import {
   ALGORITHMS,
@@ -7,6 +14,8 @@ import {
   STATES,
   TAGS_ID,
 } from '../../../../constants/search-filters.const';
+import { TranslationService } from '../../../../services/translation.service';
+import { getLiterals } from '../../../../shared/utilities';
 
 @Component({
   selector: 'app-search-filters',
@@ -15,36 +24,68 @@ import {
   templateUrl: './search-filters.component.html',
   styleUrl: './search-filters.component.scss',
 })
-export class SearchFiltersComponent {
+export class SearchFiltersComponent
+  implements OnInit, AfterViewChecked, AfterContentChecked
+{
   @Output()
   private readonly _filtersApplied = new EventEmitter<
     { filter: string; optionsSelected: string[] }[]
   >();
 
-  public filters = [
-    {
-      id: 1,
-      name: 'Categoria',
-      chips: CATEGORIES,
-    },
-    { id: 2, name: 'Etiquetes' },
-    {
-      id: 3,
-      name: 'Estats',
-      chips: STATES,
-    },
-    {
-      id: 4,
-      name: "Tipus d'algorisme",
-      chips: ALGORITHMS,
-    },
-  ];
+  public filters: { id: number; name: string; chips?: string[] }[] = [];
   public filterList: { filter: string; optionsSelected: string[] }[] =
     this.filters.map((filter) => ({
       filter: filter.name,
       optionsSelected: [],
     }));
   public resetTagsSelected = false;
+
+  private readonly _literals: Record<string, string> = {};
+  private _translatedLiterals: Record<string, string> = {};
+  private readonly _getLiterals = getLiterals;
+
+  constructor(private readonly _translationService: TranslationService) {}
+
+  ngOnInit(): void {
+    this._translatedLiterals = this._translationService.getTranslatedLiterals();
+  }
+
+  ngAfterViewChecked(): void {
+    if (Object.values(this._literals).length > 0)
+      this._translationService.storeLiterals(this._literals);
+  }
+
+  ngAfterContentChecked(): void {
+    this.filters = [
+      {
+        id: 1,
+        name: this.getTranslatedText(
+          'systems-searcher.filters.accordion-list.category-name'
+        ),
+        chips: CATEGORIES,
+      },
+      {
+        id: 2,
+        name: this.getTranslatedText(
+          'systems-searcher.filters.accordion-list.tags.name'
+        ),
+      },
+      {
+        id: 3,
+        name: this.getTranslatedText(
+          'systems-searcher.filters.accordion-list.states-name'
+        ),
+        chips: STATES,
+      },
+      {
+        id: 4,
+        name: this.getTranslatedText(
+          'systems-searcher.filters.accordion-list.algorithms-name'
+        ),
+        chips: ALGORITHMS,
+      },
+    ];
+  }
 
   public resetFilters(id?: number): void {
     if (id) {
@@ -96,5 +137,12 @@ export class SearchFiltersComponent {
         filterIndex
       ].optionsSelected.filter((option) => option !== event);
     }
+  }
+
+  public getTranslatedText(key: string): string {
+    const literal = this._translationService.getLiteral(key);
+    this._getLiterals(key, literal, this._literals);
+    if (this._translatedLiterals) return this._translatedLiterals[key];
+    return '';
   }
 }

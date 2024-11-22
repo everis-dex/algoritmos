@@ -16,7 +16,7 @@ import { SystemsSearcherLinkComponent } from '../systems-searcher-link/systems-s
 import { Subscription } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
 import { TranslationService } from '../../services/translation.service';
-import { getLiterals } from '../utilities';
+import { getLiterals, translateText } from '../utilities';
 
 @Component({
   selector: 'app-search-bar',
@@ -32,6 +32,7 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
   public currentSearches: string[];
   public hasInputValue = false;
   public isDesktop = false;
+  public translatedCategoriesSelected: Record<string, string> = {};
 
   @Input()
   public hasFilterSelector!: boolean;
@@ -41,8 +42,9 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   private readonly _componentSubscriptions: Subscription[] = [];
   private readonly _literals: Record<string, string> = {};
-  private _translatedTexts: Record<string, string> = {};
+  private _translatedLiterals: Record<string, string> = {};
   private readonly _getLiterals = getLiterals;
+  private readonly _translateText = translateText;
   private readonly _categoriesSelected: string[] = [];
 
   constructor(
@@ -56,7 +58,7 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
   }
 
   ngOnInit(): void {
-    this._translatedTexts = this._translationService.getTranslations();
+    this._translatedLiterals = this._translationService.getTranslatedLiterals();
     this._checkBreakpoint();
     const popularCategories =
       this._sessionStorageService.getItem<string[]>('popularCategories');
@@ -75,7 +77,7 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   ngAfterViewChecked(): void {
     if (Object.values(this._literals).length > 0)
-      this._translationService.saveLiterals(this._literals);
+      this._translationService.storeLiterals(this._literals);
   }
 
   ngOnDestroy(): void {
@@ -111,20 +113,11 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
       });
   }
 
-  public getTranslatedText(
-    key: string,
-    params?: Record<string, string | number>
-  ): string {
-    const literal = this._translationService.getLiteral(key, params);
+  public getTranslatedText(key: string): string {
+    const literal = this._translationService.getLiteral(key);
     this._getLiterals(key, literal, this._literals);
-    if (this._translatedTexts) return this._translatedTexts[key];
+    if (this._translatedLiterals) return this._translatedLiterals[key];
     return '';
-  }
-
-  public getLiteralKey(): string {
-    return `home.searcher-filter.selector.${
-      this.categorySelected ? 'category-selected' : 'no-category-selected'
-    }`;
   }
 
   public handleCategorySelect(): void {
@@ -133,13 +126,17 @@ export class SearchBarComponent implements OnInit, OnDestroy, AfterViewChecked {
 
   public selectCategory(categorySelected: string): void {
     this.categorySelected = categorySelected;
-    if (!this._categoriesSelected.includes(this.categorySelected))
-      this._categoriesSelected.push(this.categorySelected);
     this.isFilterVisible = false;
-    this._translationService.translateLiterals(this._literals, {
-      key: 'home.searcher-filter.selector.category-selected',
-      value: this._categoriesSelected,
-    });
+    const categorySelectedToTranslate = this._translationService.translateText(
+      this.categorySelected,
+      'es'
+    );
+    this._translateText(
+      this._categoriesSelected,
+      this.categorySelected,
+      this.translatedCategoriesSelected,
+      categorySelectedToTranslate
+    );
   }
 
   public handleInput(event: Event): void {

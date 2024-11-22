@@ -9,10 +9,6 @@
     "systems-searcher": {
       "header": "Cerca un dels nostres sistemes",
       "link": "Cercador de sistemes"
-    },
-    "system-detail": {
-      "header": "{{algorithmicSystemName}}",
-      "link": "{{algorithmicSystemName}}"
     }
   },
   "input-label": "Cerca per paraula, categoria...",
@@ -21,7 +17,6 @@
     "topics-header": "Et pot interessar",
     "searcher-filter": {
       "selector": {
-        "category-selected": "{{categorySelected}}",
         "no-category-selected": "Filtra per categoria"
       },
       "current-searches": {
@@ -54,12 +49,23 @@
     },
     "results": {
       "one-result": "S'ha trobat {{totalSearchResults}} resultat",
-      "more-than-one-result": "S'han trobat {{totalSearchResults}} resultats"
+      "more-than-one-result": "S'han trobat {{totalSearchResults}} resultats",
+      "no-results": {
+        "header": "No s'han trobat resultats amb la vostra condició de cerca.",
+        "subheader": "Suggeriments:",
+        "list": {
+          "first-item": "Comprobeu que els termes de la cerca són correctes.",
+          "second-item": "Probeu la cerca amb diferents paraules clau.",
+          "third-item": "Probeu amb paraules clau generals",
+          "last-item": "Comprobeu els criteris i l'àmbit de cerca."
+        }
+      }
     },
     "pagination": {
       "previous-button": "anterior",
       "next-button": "següent",
-      "total-pages": "Total de pàgines: {{totalPages}}"
+      "total-pages": "Total de pàgines: ",
+      "page": "Pàgina"
     }
   },
   "system-detail": {
@@ -77,8 +83,8 @@
       "header": "Més informació",
       "paragraphs": {
         "paragraph-1": {
-          "text": "Si la teva pregunta és genèrica o vols més informació d'intel·ligència artificial a la Generalitat, consulta l'apartat:",
-          "link": "d'Informació pràctica"
+          "text": "Si la teva pregunta és genèrica o vols més informació d'intel·ligència artificial a la Generalitat, consulta l'apartat: ",
+          "link": "d'Informació pràctica."
         },
         "paragraph-2": {
           "text": "Tens alguna pregunta sobre els sistemes d'IA? Contacta amb nosaltres a través de:",

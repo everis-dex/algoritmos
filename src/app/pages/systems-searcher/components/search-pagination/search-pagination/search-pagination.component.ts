@@ -1,5 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { getLiterals } from '../../../../../shared/utilities';
+import { TranslationService } from '../../../../../services/translation.service';
 
 @Component({
   selector: 'app-search-pagination',
@@ -8,7 +17,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   templateUrl: './search-pagination.component.html',
   styleUrl: './search-pagination.component.scss',
 })
-export class SearchPaginationComponent implements OnInit {
+export class SearchPaginationComponent implements OnInit, AfterViewChecked {
   @Input()
   public totalPages!: number;
 
@@ -23,8 +32,20 @@ export class SearchPaginationComponent implements OnInit {
   };
   public currentPage = 1;
 
+  private readonly _literals: Record<string, string> = {};
+  private _translatedLiterals: Record<string, string> = {};
+  private readonly _getLiterals = getLiterals;
+
+  constructor(private readonly _translationService: TranslationService) {}
+
   ngOnInit(): void {
+    this._translatedLiterals = this._translationService.getTranslatedLiterals();
     this._getTotalPages();
+  }
+
+  ngAfterViewChecked(): void {
+    if (Object.values(this._literals).length > 0)
+      this._translationService.storeLiterals(this._literals);
   }
 
   private _getTotalPages(): number[] {
@@ -62,5 +83,12 @@ export class SearchPaginationComponent implements OnInit {
       isMiddle: this.currentPage !== this.totalPages,
       isLast: this.currentPage === this.totalPages,
     };
+  }
+
+  public getTranslatedText(key: string): string {
+    const literal = this._translationService.getLiteral(key);
+    this._getLiterals(key, literal, this._literals);
+    if (this._translatedLiterals) return this._translatedLiterals[key];
+    return '';
   }
 }

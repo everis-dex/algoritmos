@@ -1,15 +1,7 @@
 <div class="search-results">
     @if (totalSearchResultsLength) {
-    <p class="search-results__results-found">
-        @if (totalSearchResultsLength === 1) {
-        S'ha trobat
-        <span class="search-results__bold">{{totalSearchResultsLength}}</span>
-        resultat
-        } @else {
-        S'han trobat
-        <span class="search-results__bold">{{totalSearchResultsLength}}</span>
-        resultats
-        }
+    <p [innerHTML]="getTranslatedText(getNumberOfSearchResults(), { totalSearchResultsLength: totalSearchResultsLength })"
+        class="search-results__results-found">
     </p>
     @for (result of searchResults.slice(0, maxSearchResultsPerPage); track $index) {
     <app-algorithmic-system-card [algorithmicSystem]="result"
@@ -18,14 +10,14 @@
     } @else {
     <div class="search-results__no-results">
         <h2 class="search-results__bold">
-            No s'han trobat resultats amb la vostra condició de cerca.
+            {{ getTranslatedText('systems-searcher.results.no-results.header') }}
         </h2>
-        <p class="search-results__bold">Suggeriments:</p>
+        <p class="search-results__bold">{{ getTranslatedText('systems-searcher.results.no-results.subheader') }}</p>
         <ul class="search-results__no-results__suggestion-list">
-            <li>Comprobeu que els termes de la cerca són correctes.</li>
-            <li>Probeu la cerca amb diferents paraules clau.</li>
-            <li>Probeu amb paraules clau generals.</li>
-            <li>Comprobeu els criteris i l'àmbit de cerca.</li>
+            <li>{{ getTranslatedText('systems-searcher.results.no-results.list.first-item') }}</li>
+            <li>{{ getTranslatedText('systems-searcher.results.no-results.list.second-item') }}</li>
+            <li>{{ getTranslatedText('systems-searcher.results.no-results.third-item') }}</li>
+            <li>{{ getTranslatedText('systems-searcher.results.no-results.last-item') }}</li>
         </ul>
     </div>
     }

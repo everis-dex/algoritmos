@@ -1,7 +1,7 @@
 <aside class="searcher-filter-container" aria-labelledby="Filtres">
   <div>
-    <h3 id="Filtres">Filtres</h3>
-    <button (click)="resetFilters()">Restaurar filtres</button>
+    <h3 id="Filtres">{{ getTranslatedText('systems-searcher.filters.header') }}</h3>
+    <button (click)="resetFilters()">{{ getTranslatedText('systems-searcher.filters.button') }}</button>
   </div>
   <app-accordion [accordionList]="filters" [filterList]="filterList" [resetTagsSelected]="resetTagsSelected"
     (_applyFilters)="applyFilters($event)" (_removeFilters)="removeFilters($event)"></app-accordion>

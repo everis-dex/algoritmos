@@ -17,6 +17,7 @@ export class AlgorithmicSystemCardComponent {
   private readonly _changeView = new EventEmitter<AlgorithmicSystemCard>();
 
   public getStateColor = getStateColor;
+  public translatedAlgorithmicSystemName = '';
 
   public redirectToAlgorithmicSystemDetails(
     event: MouseEvent,

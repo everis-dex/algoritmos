@@ -7,7 +7,8 @@
       (keydown)="handleSearch($event)">
     @if (hasFilterSelector) {
     <button type="button" (click)="handleCategorySelect()" class="searcher-container__form__category-button">
-      {{ getTranslatedText(getLiteralKey(), { categorySelected: categorySelected }) }}
+      {{ !categorySelected ? getTranslatedText('home.searcher-filter.selector.no-category-selected') :
+      translatedCategoriesSelected[categorySelected] }}
       <img src="assets/icons/select_divisor.svg" alt="Divisor del selector">
       <img src="assets/icons/select.svg" alt="Fletxes del selector">
     </button>

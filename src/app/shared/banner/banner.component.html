@@ -9,7 +9,7 @@
     @if (currentView === 'systems-searcher') {
     <li>{{ getTranslatedText('banner.systems-searcher.link') }}</li>
     } @else if (currentView === 'system-detail') {
-    <li>{{ getTranslatedText('banner.system-detail.link', { algorithmicSystemName: algorithmicSystemName }) }}</li>
+    <li>{{ translatedAlgorithmicSystemName }}</li>
     }
     }
   </ul>
@@ -23,6 +23,6 @@
   @if (currentView === 'systems-searcher') {
   <h1>{{ getTranslatedText('banner.systems-searcher.header') }}</h1>
   } @else if (currentView === 'system-detail') {
-  <h1>{{ getTranslatedText('banner.system-detail.header', { algorithmicSystemName: algorithmicSystemName }) }}</h1>
+  <h1>{{ translatedAlgorithmicSystemName }}</h1>
   }
 </nav>
