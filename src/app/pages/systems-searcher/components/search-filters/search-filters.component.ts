@@ -35,42 +35,41 @@ export class SearchFiltersComponent implements OnInit, AfterContentChecked {
       optionsSelected: [],
     }));
   public resetTagsSelected = false;
-
-  private _translatedLiterals: Record<string, string> = {};
+  public translatedLiterals: Record<string, string> = {};
 
   constructor(private readonly _translationService: TranslationService) {}
 
   ngOnInit(): void {
-    this._translatedLiterals = this._translationService.getTranslatedLiterals();
+    this.translatedLiterals = this._translationService.getTranslatedLiterals();
   }
 
   ngAfterContentChecked(): void {
     this.filters = [
       {
         id: 1,
-        name: this.getTranslatedText(
+        name: this.translatedLiterals[
           'systems-searcher.filters.accordion-list.category-name'
-        ),
+        ],
         chips: CATEGORIES,
       },
       {
         id: 2,
-        name: this.getTranslatedText(
+        name: this.translatedLiterals[
           'systems-searcher.filters.accordion-list.tags.name'
-        ),
+        ],
       },
       {
         id: 3,
-        name: this.getTranslatedText(
+        name: this.translatedLiterals[
           'systems-searcher.filters.accordion-list.states-name'
-        ),
+        ],
         chips: STATES,
       },
       {
         id: 4,
-        name: this.getTranslatedText(
+        name: this.translatedLiterals[
           'systems-searcher.filters.accordion-list.algorithms-name'
-        ),
+        ],
         chips: ALGORITHMS,
       },
     ];
@@ -126,11 +125,5 @@ export class SearchFiltersComponent implements OnInit, AfterContentChecked {
         filterIndex
       ].optionsSelected.filter((option) => option !== event);
     }
-  }
-
-  public getTranslatedText(key: string): string {
-    this._translationService.storeLiterals(key);
-    if (this._translatedLiterals) return this._translatedLiterals[key];
-    return '';
   }
 }

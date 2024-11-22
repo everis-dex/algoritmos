@@ -1,8 +1,6 @@
 <div class="search-results">
     @if (totalSearchResultsLength) {
-    <p [innerHTML]="getTranslatedText(getNumberOfSearchResults(), { totalSearchResultsLength: totalSearchResultsLength })"
-        class="search-results__results-found">
-    </p>
+    <p class="search-results__results-found">{{ getTotalSearchResults() }}</p>
     @for (result of searchResults.slice(0, maxSearchResultsPerPage); track $index) {
     <app-algorithmic-system-card [algorithmicSystem]="result"
         (_changeView)="setView($event)"></app-algorithmic-system-card>
@@ -10,14 +8,14 @@
     } @else {
     <div class="search-results__no-results">
         <h2 class="search-results__bold">
-            {{ getTranslatedText('systems-searcher.results.no-results.header') }}
+            {{ translatedLiterals['systems-searcher.results.no-results.header'] }}
         </h2>
-        <p class="search-results__bold">{{ getTranslatedText('systems-searcher.results.no-results.subheader') }}</p>
+        <p class="search-results__bold">{{ translatedLiterals['systems-searcher.results.no-results.subheader'] }}</p>
         <ul class="search-results__no-results__suggestion-list">
-            <li>{{ getTranslatedText('systems-searcher.results.no-results.list.first-item') }}</li>
-            <li>{{ getTranslatedText('systems-searcher.results.no-results.list.second-item') }}</li>
-            <li>{{ getTranslatedText('systems-searcher.results.no-results.third-item') }}</li>
-            <li>{{ getTranslatedText('systems-searcher.results.no-results.last-item') }}</li>
+            <li>{{ translatedLiterals['systems-searcher.results.no-results.list.first-item'] }}</li>
+            <li>{{ translatedLiterals['systems-searcher.results.no-results.list.second-item'] }}</li>
+            <li>{{ translatedLiterals['systems-searcher.results.no-results.third-item'] }}</li>
+            <li>{{ translatedLiterals['systems-searcher.results.no-results.last-item'] }}</li>
         </ul>
     </div>
     }

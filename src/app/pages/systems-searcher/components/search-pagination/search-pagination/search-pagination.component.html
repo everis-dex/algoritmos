@@ -6,7 +6,7 @@
       class="search-pagination-container__left-arrow-img-button"><img alt="Anar a la pàgina anterior"></button>
     <button type="button" (click)="handlePreviousPage()" [disabled]="pageSelected.isFirst"
       class="search-pagination-container__page-navigation-button">{{
-      getTranslatedText('systems-searcher.pagination.previous-button') }}</button>
+      translatedLiterals['systems-searcher.pagination.previous-button'] }}</button>
     @for (page of pages; track page) {
     <button type="button" (click)="handlePage(page)" [disabled]="page === currentPage"
       [ngClass]="{'search-pagination-container__page-number-button--selected': page === currentPage}"
@@ -14,19 +14,19 @@
     }
     <button type="button" (click)="handleNextPage()" [disabled]="pageSelected.isLast"
       class="search-pagination-container__page-navigation-button">{{
-      getTranslatedText('systems-searcher.pagination.next-button') }}</button>
+      translatedLiterals['systems-searcher.pagination.next-button'] }}</button>
     <button type="button" (click)="handleNextPage()" [disabled]="pageSelected.isLast"
       class="search-pagination-container__right-arrow-img-button"><img alt="Anar a la pàgina següent"></button>
     <button type="button" (click)="handleNextPage(totalPages)" [disabled]="pageSelected.isLast"
       class="search-pagination-container__double-right-arrow-img-button"><img alt="Anar a l'última pàgina"></button>
   </section>
-  <p>{{ getTranslatedText('systems-searcher.pagination.total-pages') + totalPages }}</p>
+  <p>{{ translatedLiterals['systems-searcher.pagination.total-pages'] + totalPages }}</p>
 </div>
 <div class="search-pagination-container">
   <button type="button" (click)="handlePreviousPage()" [disabled]="pageSelected.isFirst"
     class="search-pagination-container__left-arrow-img-button search-pagination-container__left-arrow-img-button--mobile"><img
       alt="Anar a la pàgina anterior"></button>
-  <p>{{ getTranslatedText('systems-searcher.pagination.page') + currentPage }}</p>
+  <p>{{ translatedLiterals['systems-searcher.pagination.page'] + currentPage }}</p>
   <button type="button" (click)="handleNextPage()" [disabled]="pageSelected.isLast"
     class="search-pagination-container__right-arrow-img-button search-pagination-container__right-arrow-img-button--mobile"><img
       alt="Anar a la pàgina següent"></button>

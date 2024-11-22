@@ -6,17 +6,11 @@ import { catchError, map, Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class TranslationService {
-  private _translatedLiterals: Record<string, string> = {};
-  private _literals: Record<string, unknown> = {};
-  private _storedLiterals: Record<string, string> = {};
+  public translatedLiterals: Record<string, string> = {};
   private readonly _apiUrl =
     'https://translate.googleapis.com/translate_a/single';
 
-  constructor(private readonly _http: HttpClient) {
-    this._loadLiterals().subscribe((literals) => {
-      this._literals = literals;
-    });
-  }
+  constructor(private readonly _http: HttpClient) {}
 
   public translateText(text: string, targetLang: string): Observable<string> {
     const params = new HttpParams()
@@ -43,82 +37,46 @@ export class TranslationService {
     );
   }
 
-  private _loadLiterals(): Observable<Record<string, unknown>> {
+  public loadLiterals(): Observable<Record<string, unknown>> {
     const path = 'assets/i18n/ca.json';
     return this._http.get<Record<string, unknown>>(path);
   }
 
-  private _getLiteral(
-    key: string,
-    params?: Record<string, string | number>
-  ): string | void {
-    let result: unknown = this._literals;
-
-    const keys = key.split('.');
-    for (const k of keys) {
-      if (result && typeof result === 'object' && k in result) {
-        result = (result as Record<string, unknown>)[k];
+  private _extractLiterals(
+    literals: Record<string, unknown>,
+    parentKey = ''
+  ): { key: string; value: string }[] {
+    let literalsList: { key: string; value: string }[] = [];
+    for (const key in literals) {
+      if (Object.hasOwn(literals, key)) {
+        const value = literals[key];
+        const currentKey = parentKey ? `${parentKey}.${key}` : key;
+        if (typeof value === 'string') {
+          literalsList.push({ key: currentKey, value });
+        } else if (typeof value === 'object' && value !== null) {
+          literalsList = literalsList.concat(
+            this._extractLiterals(value as Record<string, unknown>, currentKey)
+          );
+        }
       }
     }
-    if (typeof result === 'string') {
-      if (params) return this._replaceParams(result, params);
-      return result;
-    }
-  }
-
-  private _replaceParams(
-    text: string,
-    params: Record<string, string | number>
-  ): string {
-    return Object.entries(params).reduce(
-      (result, [key, value]) =>
-        result.replace(new RegExp(`{{${key}}}`, 'g'), String(value)),
-      text
-    );
+    return literalsList;
   }
 
   public getTranslatedLiterals(): Record<string, string> {
-    return this._translatedLiterals;
+    return this.translatedLiterals;
   }
 
-  public storeLiterals(key: string): void {
-    const literal = this._getLiteral(key);
-    if (typeof literal === 'string') {
-      const literals = this._getLiterals(key, literal, this._storedLiterals);
-      this._storedLiterals = {
-        ...this._storedLiterals,
-        ...literals,
-      };
-    }
-  }
-
-  private _getLiterals(
-    key: string,
-    literal: string,
-    literals: Record<string, string>
-  ): Record<string, string> {
-    if (!literals[key]?.includes(literal)) {
-      literals[key] = literal;
-    }
-    return literals;
-  }
-
-  public getStoredLiterals(): Record<string, string> {
-    return this._storedLiterals;
-  }
-
-  public translateLiterals(literals: Record<string, string>): void {
-    const literalsKeys = Object.keys(literals);
-    const untranslatedKeys = literalsKeys.filter(
-      (key) => !this._translatedLiterals[key]
+  public translateLiterals(literals: Record<string, unknown>): void {
+    const extractedLiterals = this._extractLiterals(literals);
+    const literalsToTranslate = extractedLiterals.map(
+      (literal) => literal.value
     );
-    if (untranslatedKeys.length === 0) return;
-    const untranslatedValues = untranslatedKeys.map((key) => literals[key]);
-    this.translateText(untranslatedValues.join('|'), 'es').subscribe(
+    this.translateText(literalsToTranslate.join('|'), 'es').subscribe(
       (translatedText) => {
         const translatedTextsArray = translatedText.split('|');
-        untranslatedKeys.forEach((key, index) => {
-          this._translatedLiterals[key] = translatedTextsArray[index];
+        extractedLiterals.forEach((literal, index) => {
+          this.translatedLiterals[literal.key] = translatedTextsArray[index];
         });
       }
     );

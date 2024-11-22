@@ -18,14 +18,14 @@
 <div class="accordion-container__form-select"
   [ngClass]="{'accordion-container__form-select--padding-top': !hasTagsSelected || resetTagsSelected}">
   <button type="button" (click)="handleTagSelect()">{{
-    getTranslatedText('systems-searcher.filters.accordion-list.tags.selector.label') }}<img
+    translatedLiterals['systems-searcher.filters.accordion-list.tags.selector.label'] }}<img
       src="assets/icons/Icon_angle-down.svg" alt="Fletxa d'expansió del contingut desplegable"
       [ngClass]="{'accordion-container--rotate-left': isSelectorRotated, 'accordion-container--rotate-right': !isSelectorRotated}"></button>
   @if (isSelectorRotated) {
   <form aria-label="Cercador d'etiquetes">
     <label for="tag-input"
       [ngClass]="{'accordion-container__form-select__label--visible': !hasInputValue, 'accordion-container__form-select__label--hidden': hasInputValue}">{{
-      getTranslatedText('systems-searcher.filters.accordion-list.tags.selector.input-label') }}</label>
+      translatedLiterals['systems-searcher.filters.accordion-list.tags.selector.input-label'] }}</label>
     <input id="tag-input" type="text" (input)="handleInput($event)" (keydown)="handleInput($event)">
     <button type="submit" tabindex="-1" style="display: none;"></button>
     <img src="assets/icons/Buscador_Boton.svg" alt="Botó del cercador">

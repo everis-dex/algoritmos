@@ -2,12 +2,12 @@
   <form class="searcher-container__form" aria-label="Cercador">
     <label for="search-input"
       [ngClass]="{'searcher-container__form__label--visible': !hasInputValue, 'searcher-container__form__label--hidden': hasInputValue}">{{
-      getTranslatedText('input-label') }}</label>
+      translatedLiterals['input-label'] }}</label>
     <input [style.width]="!hasFilterSelector && '100%'" id="search-input" type="text" (input)="handleInput($event)"
       (keydown)="handleSearch($event)">
     @if (hasFilterSelector) {
     <button type="button" (click)="handleCategorySelect()" class="searcher-container__form__category-button">
-      {{ !categorySelected ? getTranslatedText('home.searcher-filter.selector.no-category-selected') :
+      {{ !categorySelected ? translatedLiterals['home.searcher-filter.selector.no-category-selected'] :
       translatedCategoriesSelected[categorySelected] }}
       <img src="assets/icons/select_divisor.svg" alt="Divisor del selector">
       <img src="assets/icons/select.svg" alt="Fletxes del selector">
@@ -32,10 +32,10 @@
     @if (currentSearches.length > 0) {
     <section class="searcher-container__filter__section" id="current-searches">
       <div class="searcher-container__filter__section__header">
-        <h4>{{ getTranslatedText('home.searcher-filter.current-searches.header') }}</h4>
+        <h4>{{ translatedLiterals['home.searcher-filter.current-searches.header'] }}</h4>
         <button class="searcher-container__filter__section__header__button" (click)="resetSearch()">{{
-          isDesktop ? (getTranslatedText('home.searcher-filter.current-searches.button.desktop')) :
-          (getTranslatedText('home.searcher-filter.current-searches.button.mobile'))}}</button>
+          isDesktop ? (translatedLiterals['home.searcher-filter.current-searches.button.desktop']) :
+          (translatedLiterals['home.searcher-filter.current-searches.button.mobile'])}}</button>
       </div>
       @for (currentSearch of currentSearches; track currentSearch; let i = $index) {
       <div class="searcher-container__filter__section__current-search-container">
@@ -50,7 +50,7 @@
     </section>
     }
     <section class="searcher-container__filter__section" id="popular-categories">
-      <h4>{{ getTranslatedText('home.searcher-filter.popular-categories-header') }}</h4>
+      <h4>{{ translatedLiterals['home.searcher-filter.popular-categories-header'] }}</h4>
       <app-chips [chips]="popularCategories" (_selectChip)="selectCategory($event)"></app-chips>
     </section>
     <app-systems-searcher-link

@@ -1,7 +1,7 @@
 <section class="current-algorithmic-systems-container">
   <app-systems-searcher-link class="current-algorithmic-systems-container__link"
     (_changeView)="setView($event)"></app-systems-searcher-link>
-  <h1>{{ getTranslatedText('home.algorithmic-systems-header') }}</h1>
+  <h1>{{ translatedLiterals['home.algorithmic-systems-header'] }}</h1>
   <div class="current-algorithmic-systems-container__cards">
     @for (algorithmicSystem of algorithmicSystems; track $index) {
     <app-algorithmic-system-card [algorithmicSystem]="getAlgorithmicSystemDetails(algorithmicSystem)"

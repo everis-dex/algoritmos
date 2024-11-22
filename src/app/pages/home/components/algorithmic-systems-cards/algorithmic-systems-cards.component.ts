@@ -36,9 +36,9 @@ export class AlgorithmicSystemsCardsComponent
   private readonly _setDetails = new EventEmitter<AlgorithmicSystemCard>();
 
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
+  public translatedLiterals: Record<string, string> = {};
 
   private readonly _componentSubscriptions: Subscription[] = [];
-  private _translatedLiterals: Record<string, string> = {};
 
   constructor(
     private readonly _algorithmicSystemService: CardService,
@@ -86,7 +86,7 @@ export class AlgorithmicSystemsCardsComponent
   }
 
   ngOnInit(): void {
-    this._translatedLiterals = this._translationService.getTranslatedLiterals();
+    this.translatedLiterals = this._translationService.getTranslatedLiterals();
     this._algorithmicSystemService
       .getAlgorithmicSystems()
       .subscribe((response) => {
@@ -98,12 +98,6 @@ export class AlgorithmicSystemsCardsComponent
     this._componentSubscriptions.forEach((subscription) =>
       subscription.unsubscribe()
     );
-  }
-
-  public getTranslatedText(key: string): string {
-    this._translationService.storeLiterals(key);
-    if (this._translatedLiterals) return this._translatedLiterals[key];
-    return '';
   }
 
   public setView(event: string | AlgorithmicSystemCard): void {

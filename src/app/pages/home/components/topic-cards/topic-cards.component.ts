@@ -15,9 +15,9 @@ import { CommonModule } from '@angular/common';
 })
 export class TopicCardsComponent implements OnInit, OnDestroy {
   public topics: TopicCard[] = [];
+  public translatedLiterals: Record<string, string> = {};
 
   private readonly _componentSubscriptions: Subscription[] = [];
-  private _translatedLiterals: Record<string, string> = {};
 
   constructor(
     private readonly _topicsService: CardService,
@@ -25,7 +25,7 @@ export class TopicCardsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this._translatedLiterals = this._translationService.getTranslatedLiterals();
+    this.translatedLiterals = this._translationService.getTranslatedLiterals();
     this._topicsService.getTopics().subscribe((response) => {
       this.topics = response;
     });
@@ -35,11 +35,5 @@ export class TopicCardsComponent implements OnInit, OnDestroy {
     this._componentSubscriptions.forEach((subscription) =>
       subscription.unsubscribe()
     );
-  }
-
-  public getTranslatedText(key: string): string {
-    this._translationService.storeLiterals(key);
-    if (this._translatedLiterals) return this._translatedLiterals[key];
-    return '';
   }
 }

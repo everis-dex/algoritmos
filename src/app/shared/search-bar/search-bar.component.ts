@@ -32,6 +32,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   public hasInputValue = false;
   public isDesktop = false;
   public translatedCategoriesSelected: Record<string, string> = {};
+  public translatedLiterals: Record<string, string> = {};
 
   @Input()
   public hasFilterSelector!: boolean;
@@ -40,7 +41,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private readonly _changeView = new EventEmitter<string>();
 
   private readonly _componentSubscriptions: Subscription[] = [];
-  private _translatedLiterals: Record<string, string> = {};
   private readonly _translateText = translateText;
   private readonly _categoriesSelected: string[] = [];
 
@@ -55,7 +55,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._translatedLiterals = this._translationService.getTranslatedLiterals();
+    this.translatedLiterals = this._translationService.getTranslatedLiterals();
     this._checkBreakpoint();
     const popularCategories =
       this._sessionStorageService.getItem<string[]>('popularCategories');
@@ -103,12 +103,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       .subscribe((result) => {
         this.isDesktop = !result.matches;
       });
-  }
-
-  public getTranslatedText(key: string): string {
-    this._translationService.storeLiterals(key);
-    if (this._translatedLiterals) return this._translatedLiterals[key];
-    return '';
   }
 
   public handleCategorySelect(): void {

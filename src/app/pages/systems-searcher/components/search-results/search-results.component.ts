@@ -25,13 +25,12 @@ export class SearchResultsComponent implements OnInit {
 
   public getStateColor = getStateColor;
   public maxSearchResultsPerPage = MAX_SEARCH_RESULTS_PER_PAGE;
-
-  private _translatedLiterals: Record<string, string> = {};
+  public translatedLiterals: Record<string, string> = {};
 
   constructor(private readonly _translationService: TranslationService) {}
 
   ngOnInit(): void {
-    this._translatedLiterals = this._translationService.getTranslatedLiterals();
+    this.translatedLiterals = this._translationService.getTranslatedLiterals();
   }
 
   public setView(details: AlgorithmicSystemCard): void {
@@ -47,20 +46,10 @@ export class SearchResultsComponent implements OnInit {
     }`;
   }
 
-  public getTranslatedText(
-    key: string,
-    params?: Record<string, string | number>
-  ): string {
-    this._translationService.storeLiterals(key);
-    if (this._translatedLiterals) {
-      if (params) {
-        return this._translatedLiterals[key]?.replace(
-          '{{totalSearchResults}}',
-          `<strong>${this.totalSearchResultsLength}</strong>`
-        );
-      }
-      return this._translatedLiterals[key];
-    }
-    return '';
+  public getTotalSearchResults(): string {
+    return this.translatedLiterals[this.getNumberOfSearchResults()].replace(
+      '{{totalSearchResults}}',
+      `${this.totalSearchResultsLength}`
+    );
   }
 }

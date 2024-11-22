@@ -1,4 +1,4 @@
-import { AfterViewChecked, Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './pages/home/home.component';
 import { SystemsSearcherComponent } from './pages/systems-searcher/systems-searcher.component';
 import { SystemDetailComponent } from './pages/system-detail/system-detail.component';
@@ -23,7 +23,7 @@ import { translateText } from './shared/utilities';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements AfterViewChecked {
+export class AppComponent implements OnInit {
   public currentView = 'home';
   public algorithmicSystemDetails: AlgorithmicSystemCard = {
     id: 0,
@@ -39,12 +39,13 @@ export class AppComponent implements AfterViewChecked {
 
   constructor(private readonly _translationService: TranslationService) {}
 
-  ngAfterViewChecked(): void {
-    this.translateLiterals();
+  ngOnInit(): void {
+    this._translationService.loadLiterals().subscribe((literals) => {
+      this._translationService.translateLiterals(literals);
+    });
   }
 
   public changeView(view?: string): void {
-    this.translateLiterals();
     this.currentView = view ?? 'home';
   }
 
@@ -58,10 +59,5 @@ export class AppComponent implements AfterViewChecked {
       this.translatedAlgorithmicSystemName,
       algorithmicSystemNameToTranslate
     );
-  }
-
-  public translateLiterals(): void {
-    const literals = this._translationService.getStoredLiterals();
-    if (literals) this._translationService.translateLiterals(literals);
   }
 }

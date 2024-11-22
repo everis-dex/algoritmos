@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TranslationService } from '../../../../../services/translation.service';
 
 @Component({
@@ -29,13 +23,12 @@ export class SearchPaginationComponent implements OnInit {
     isLast: false,
   };
   public currentPage = 1;
-
-  private _translatedLiterals: Record<string, string> = {};
+  public translatedLiterals: Record<string, string> = {};
 
   constructor(private readonly _translationService: TranslationService) {}
 
   ngOnInit(): void {
-    this._translatedLiterals = this._translationService.getTranslatedLiterals();
+    this.translatedLiterals = this._translationService.getTranslatedLiterals();
     this._getTotalPages();
   }
 
@@ -74,11 +67,5 @@ export class SearchPaginationComponent implements OnInit {
       isMiddle: this.currentPage !== this.totalPages,
       isLast: this.currentPage === this.totalPages,
     };
-  }
-
-  public getTranslatedText(key: string): string {
-    this._translationService.storeLiterals(key);
-    if (this._translatedLiterals) return this._translatedLiterals[key];
-    return '';
   }
 }

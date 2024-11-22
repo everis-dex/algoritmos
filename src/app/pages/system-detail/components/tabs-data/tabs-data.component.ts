@@ -30,9 +30,9 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public tabsData: ITabData[] = tabsData;
   public currentTabIndex = 0;
+  public translatedLiterals: Record<string, string> = {};
 
   private readonly _componentSubscriptions: Subscription[] = [];
-  private _translatedLiterals: Record<string, string> = {};
 
   constructor(
     private readonly _fieldContentService: FieldContentService,
@@ -41,7 +41,7 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this._translatedLiterals = this._translationService.getTranslatedLiterals();
+    this.translatedLiterals = this._translationService.getTranslatedLiterals();
     this._getTabFieldContent(this.currentTabIndex);
   }
 
@@ -69,7 +69,7 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
 
   public getTabs(tabData: ITabData): string {
     this.tabsData = tabsData.map((tab) => {
-      tab.tab = this.getTranslatedText(`system-detail.tabs.${tab.key}`);
+      tab.tab = this.translatedLiterals[`system-detail.tabs.${tab.key}`];
       return tab;
     });
     return tabData.tab;
@@ -89,11 +89,5 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
     this.currentTabIndex = index;
     this._getTabFieldContent(this.currentTabIndex);
     return this.tabsData[this.currentTabIndex].fields;
-  }
-
-  public getTranslatedText(key: string): string {
-    this._translationService.storeLiterals(key);
-    if (this._translatedLiterals) return this._translatedLiterals[key];
-    return '';
   }
 }

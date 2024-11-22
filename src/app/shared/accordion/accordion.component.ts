@@ -39,13 +39,12 @@ export class AccordionComponent implements OnInit {
   public hasTagsSelected = false;
   public hasInputValue = false;
   public filteredTags: string[] = [...this.tags];
-
-  private _translatedLiterals: Record<string, string> = {};
+  public translatedLiterals: Record<string, string> = {};
 
   constructor(private readonly _translationService: TranslationService) {}
 
   ngOnInit(): void {
-    this._translatedLiterals = this._translationService.getTranslatedLiterals();
+    this.translatedLiterals = this._translationService.getTranslatedLiterals();
     this.accordionList?.forEach((accordion) => {
       this.toggleStates[accordion.id] = { display: false, rotation: false };
     });
@@ -130,11 +129,5 @@ export class AccordionComponent implements OnInit {
       if (this.filterList[index - 1].optionsSelected.length === 0)
         this.hasTagsSelected = false;
     }
-  }
-
-  public getTranslatedText(key: string): string {
-    this._translationService.storeLiterals(key);
-    if (this._translatedLiterals) return this._translatedLiterals[key];
-    return '';
   }
 }

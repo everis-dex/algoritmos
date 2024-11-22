@@ -20,22 +20,16 @@ export class BannerComponent implements OnInit {
   @Output()
   private readonly _changeView = new EventEmitter<void>();
 
-  private _translatedLiterals: Record<string, string> = {};
+  public translatedLiterals: Record<string, string> = {};
 
   constructor(private readonly _translationService: TranslationService) {}
 
   ngOnInit(): void {
-    this._translatedLiterals = this._translationService.getTranslatedLiterals();
+    this.translatedLiterals = this._translationService.getTranslatedLiterals();
   }
 
   public redirectToHomeView(event: Event): void {
     event.preventDefault();
     this._changeView.emit();
-  }
-
-  public getTranslatedText(key: string): string {
-    this._translationService.storeLiterals(key);
-    if (this._translatedLiterals) return this._translatedLiterals[key];
-    return '';
   }
 }

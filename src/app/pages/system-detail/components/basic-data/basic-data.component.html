@@ -5,7 +5,7 @@
     algorithmicSystem.state }}</span>
   <div class="basic-data-container__paragraph-container">
     <p class="basic-data-container__paragraph">{{
-      getTranslatedText('system-detail.system-detail-resume.description-title') }}</p>
+      translatedLiterals['system-detail.system-detail-resume.description-title'] }}</p>
     <p>{{algorithmicSystem.description}}</p>
   </div>
   <div class="basic-data-container__category-chip-container">
@@ -14,7 +14,7 @@
     }
   </div>
   <div class="basic-data-container__paragraph-container">
-    <p class="basic-data-container__paragraph">{{ getTranslatedText('system-detail.system-detail-resume.tags-title') }}
+    <p class="basic-data-container__paragraph">{{ translatedLiterals['system-detail.system-detail-resume.tags-title'] }}
     </p>
     <div class="basic-data-container__tag-container">
       @for (tag of algorithmicSystem.tags; track $index) {
