@@ -1,6 +1,6 @@
 <div class="search-results">
     @if (totalSearchResultsLength) {
-    <p [innerHTML]="getTotalSearchResults()" class="search-results__results-found"></p>
+    <p [innerHTML]="getTotalSearchResults(totalSearchResultsLength)" class="search-results__results-found"></p>
     @for (result of searchResults.slice(0, maxSearchResultsPerPage); track $index) {
     <app-algorithmic-system-card [algorithmicSystem]="result"
         (_changeView)="setView($event)"></app-algorithmic-system-card>
@@ -10,7 +10,7 @@
         <h2 class="search-results__bold">
             {{ translatedLiterals['systems-searcher.results.no-results.header'] }}
         </h2>
-        <p class="search-results__bold">{{ translatedLiterals['systems-searcher.results.no-results.subheader'] }}</p>
+        <p class="search-results__bold">{{ translatedLiterals['systems-searcher.results.no-results.subheader'] + ':' }}</p>
         <ul class="search-results__no-results__suggestion-list">
             <li>{{ translatedLiterals['systems-searcher.results.no-results.list.item-1'] }}</li>
             <li>{{ translatedLiterals['systems-searcher.results.no-results.list.item-2'] }}</li>

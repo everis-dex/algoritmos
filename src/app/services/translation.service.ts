@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { catchError, map, Observable, of } from 'rxjs';
 
 @Injectable({
@@ -10,7 +11,10 @@ export class TranslationService {
   private readonly _apiUrl =
     'https://translate.googleapis.com/translate_a/single';
 
-  constructor(private readonly _http: HttpClient) {}
+  constructor(
+    private readonly _http: HttpClient,
+    private _translateService: TranslateService
+  ) {}
 
   public translateText(text: string, targetLang: string): Observable<string> {
     const params = new HttpParams()
@@ -72,13 +76,21 @@ export class TranslationService {
     const literalsToTranslate = extractedLiterals.map(
       (literal) => literal.value
     );
-    this.translateText(literalsToTranslate.join('|'), 'es').subscribe(
-      (translatedText) => {
+    this.translateText(literalsToTranslate.join('|'), 'it').subscribe({
+      next: (translatedText) => {
         const translatedTextsArray = translatedText.split('|');
+        console.log(translatedTextsArray);
         extractedLiterals.forEach((literal, index) => {
           this.translatedLiterals[literal.key] = translatedTextsArray[index];
         });
-      }
-    );
+      },
+      error: () => {
+        extractedLiterals.forEach((literal) => {
+          this._translateService.get(literal.key).subscribe((translation) => {
+            this.translatedLiterals[literal.key] = translation;
+          });
+        });
+      },
+    });
   }
 }

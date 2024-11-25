@@ -29,6 +29,6 @@ export const TAGS = [
   'Anàlisi de dades',
   'Protecció de dades',
 ];
-export const STATES = ['En desenvolupament', 'En producció', 'Desmantellat'];
-export const ALGORITHMS = ["Algorisme d'IA", 'Algorisme determinista'];
+export const STATES = ['En desenvolupament', 'Actiu', 'Inactiu'];
+export const ALGORITHMS = ["Sistema d'IA", 'Algorisme determinista'];
 export const TAGS_ID = 2;

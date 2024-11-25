@@ -17,7 +17,7 @@ export class TopicCardsComponent implements OnInit, OnDestroy {
   public topics: TopicCard[] = [];
   public translatedLiterals: Record<string, string> = {};
 
-  private readonly _componentSubscriptions: Subscription[] = [];
+  private _componentSubscription!: Subscription;
 
   constructor(
     private readonly _topicsService: CardService,
@@ -26,14 +26,14 @@ export class TopicCardsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.translatedLiterals = this._translationService.getTranslatedLiterals();
-    this._topicsService.getTopics().subscribe((response) => {
-      this.topics = response;
-    });
+    this._componentSubscription = this._topicsService
+      .getTopics()
+      .subscribe((response) => {
+        this.topics = response;
+      });
   }
 
   ngOnDestroy(): void {
-    this._componentSubscriptions.forEach((subscription) =>
-      subscription.unsubscribe()
-    );
+    if (this._componentSubscription) this._componentSubscription.unsubscribe();
   }
 }

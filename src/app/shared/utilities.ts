@@ -9,12 +9,23 @@ import { Observable } from 'rxjs';
  */
 export function getStateColor(state: string): string {
   const stateColorConfig: Record<string, string> = {
-    'En producció': 'Green',
+    'Actiu': 'Green',
     'En desenvolupament': 'Yellow',
-    'Desmantellat': 'Red',
+    'Inactiu': 'Red',
   };
   return stateColorConfig[state];
 }
+
+/**
+ * Translates the selected text if it hasn't been translated yet and updates the translatedTexts record.
+ *
+ * @export
+ * @param {string[]} textsSelected - The list of selected texts to be translated.
+ * @param {string} currentTextSelected - The text currently selected for translation.
+ * @param {Record<string, string>} translatedTexts - A record that stores the translations of texts.
+ * @param {Observable<string>} textToTranslate - An observable that emits the translated text.
+ * @return {void}
+ */
 export function translateText(
   textsSelected: string[],
   currentTextSelected: string,

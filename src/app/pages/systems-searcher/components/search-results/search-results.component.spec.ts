@@ -35,4 +35,27 @@ describe('SearchResultsComponent', () => {
       expect(setDetailsSpy).toHaveBeenCalledWith(details);
     });
   });
+
+  describe('getTotalSearchResults', () => {
+    it('should return the correct translated string for a single search result', () => {
+      component.translatedLiterals = {
+        'systems-searcher.results.one-result':
+          'Se ha encontrado {{totalSearchResults}} resultado',
+      };
+
+      component.totalSearchResultsLength = 1;
+      const totalSearchResults = component.getTotalSearchResults(
+        component.totalSearchResultsLength
+      );
+
+      expect(totalSearchResults).toEqual(
+        component.translatedLiterals[
+          'systems-searcher.results.one-result'
+        ].replace(
+          '{{totalSearchResults}}',
+          `<strong>${component.totalSearchResultsLength}</strong>`
+        )
+      );
+    });
+  });
 });

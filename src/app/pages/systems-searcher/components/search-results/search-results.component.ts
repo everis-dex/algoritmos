@@ -38,21 +38,17 @@ export class SearchResultsComponent implements OnInit {
     this._setDetails.emit(details);
   }
 
-  public getNumberOfSearchResults(): string {
-    return `systems-searcher.results.${
-      this.totalSearchResultsLength === 1
-        ? 'one-result'
-        : 'more-than-one-result'
-    }`;
-  }
-
-  public getTotalSearchResults(): string {
+  public getTotalSearchResults(totalSearchResultsLength: number): string {
     const translatedTotalSearchResults =
-      this.translatedLiterals[this.getNumberOfSearchResults()];
+      this.translatedLiterals[
+        `systems-searcher.results.${
+          totalSearchResultsLength === 1 ? 'one-result' : 'more-than-one-result'
+        }`
+      ];
     if (translatedTotalSearchResults)
       return translatedTotalSearchResults.replace(
         '{{totalSearchResults}}',
-        `<strong>${this.totalSearchResultsLength}</strong>`
+        `<strong>${totalSearchResultsLength}</strong>`
       );
     return '';
   }

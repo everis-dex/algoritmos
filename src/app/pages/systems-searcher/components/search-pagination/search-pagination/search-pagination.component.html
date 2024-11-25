@@ -20,7 +20,7 @@
     <button type="button" (click)="handleNextPage(totalPages)" [disabled]="pageSelected.isLast"
       class="search-pagination-container__double-right-arrow-img-button"><img alt="Anar a l'última pàgina"></button>
   </section>
-  <p>{{ translatedLiterals['systems-searcher.pagination.total-pages'] + totalPages }}</p>
+  <p>{{ translatedLiterals['systems-searcher.pagination.total-pages'] + ': ' + totalPages}}</p>
 </div>
 <div class="search-pagination-container">
   <button type="button" (click)="handlePreviousPage()" [disabled]="pageSelected.isFirst"

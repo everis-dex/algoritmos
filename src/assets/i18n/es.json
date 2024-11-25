@@ -1,0 +1,127 @@
+{
+  "banner": {
+    "gencat-link": "Inicio",
+    "home": {
+      "header": "Registro de IA",
+      "subheader": "Busca uno de nuestros sistemas",
+      "link": "Registro de sistemas de IA"
+    },
+    "systems-searcher": {
+      "header": "Busca uno de nuestros sistemes",
+      "link": "Buscador de sistemas"
+    }
+  },
+  "input-label": "Busca por palabra, categoría...",
+  "home": {
+    "algorithmic-systems-header": "Sistemas algorítmicos recientes",
+    "topics-header": "Puede interesarte",
+    "searcher-filter": {
+      "selector": {
+        "no-category-selected": "Filtra por categoría"
+      },
+      "current-searches": {
+        "header": "Búsquedas recientes",
+        "button": {
+          "desktop": "Restaurar recientes",
+          "mobile": "Restaurar"
+        }
+      },
+      "popular-categories-header": "Categorías populares"
+    },
+    "link": "Consulta todos los sistemas de IA"
+  },
+  "systems-searcher": {
+    "filters": {
+      "header": "Filtros",
+      "button": "Restaurar filtros",
+      "accordion-list": {
+        "categories": {
+          "name": "Categoría",
+          "chips": {
+            "chip-0": "Administración pública, gobierno y relaciones institucionales",
+            "chip-1": "Agricultura, ramadería, pesca y alimentación",
+            "chip-2": "Salud",
+            "chip-3": "Comercio, consumo y turismo",
+            "chip-4": "Economía",
+            "chip-5": "Cultura, lengua e identidad",
+            "chip-6": "Deportes y ocio",
+            "chip-7": "Educación, formación y universidades",
+            "chip-8": "Justicia y derecho",
+            "chip-9": "Finanzas públicas y hacienda",
+            "chip-10": "Industria y energía",
+            "chip-11": "Información y comunicación",
+            "chip-12": "Medio ambiente",
+            "chip-13": "Mobilidad y transportes",
+            "chip-14": "Servicios sociales",
+            "chip-15": "Seguridad y emergencias",
+            "chip-16": "Sociedad y ciudadanía",
+            "chip-17": "Trabajo",
+            "chip-18": "Tecnología, búsqueda e innovación",
+            "chip-19": "Territorio, infraestructuras y urbanismo",
+            "chip-20": "Otros/Varios",
+            "chip-21": "No consta"
+          }
+        },
+        "tags": {
+          "name": "Etiquetas",
+          "selector": {
+            "label": "Selecciona",
+            "input-label": "Busca"
+          }
+        },
+        "states": {
+          "name": "Estados"
+        },
+        "algorithms": {
+          "name": "Tipo de sistema"
+        }
+      }
+    },
+    "results": {
+      "one-result": "Se ha encontrado {{totalSearchResults}} resultado",
+      "more-than-one-result": "Se han encontrado {{totalSearchResults}} resultados",
+      "no-results": {
+        "header": "No se han encontrado resultados con vuestra condición de búsqueda.",
+        "subheader": "Sugerencias",
+        "list": {
+          "item-1": "Comprobad que los términos de búsqueda son correctos.",
+          "item-2": "Probad la búsqueda con diferentes palabras clave.",
+          "item-3": "Probad con palabras clave genéricas.",
+          "item-4": "Comprobad los criterios y el ámbito de búsqueda."
+        }
+      }
+    },
+    "pagination": {
+      "previous-button": "anterior",
+      "next-button": "siguiente",
+      "total-pages": "Total de páginas",
+      "page": "Página"
+    }
+  },
+  "system-detail": {
+    "system-detail-resume": {
+      "description-title": "Descripción breve",
+      "tags-title": "Etiquetas"
+    },
+    "tabs": {
+      "general-information": "Información general",
+      "technical-information": "Información técnica",
+      "normative-information": "Información normativa y transparencia"
+    },
+    "documents-header": "Documentos",
+    "more-information": {
+      "header": "Más información",
+      "paragraphs": {
+        "paragraph-1": {
+          "text": "Si tu pregunta es genérica o quieres más información de inteligencia artificial en la Generalitat, consulta el apartado",
+          "link": "de Información práctica."
+        },
+        "paragraph-2": {
+          "text": "¿Tienes alguna pregunta sobre los sistemas de IA? Contacta con nosotros a través de",
+          "link": "Buzón de contacto"
+        }
+      }
+    }
+  },
+  "footer": "Financiado por"
+}

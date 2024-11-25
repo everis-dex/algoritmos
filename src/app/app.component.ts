@@ -8,6 +8,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { CommonModule } from '@angular/common';
 import { TranslationService } from './services/translation.service';
 import { translateText } from './shared/utilities';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -37,7 +38,14 @@ export class AppComponent implements OnInit {
   private readonly _algorithmicSystemNames: string[] = [];
   private readonly _translateText = translateText;
 
-  constructor(private readonly _translationService: TranslationService) {}
+  constructor(
+    private readonly _translationService: TranslationService,
+    public translateService: TranslateService
+  ) {
+    translateService.addLangs(['ca', 'es', 'en', 'fr', 'it']);
+    translateService.setDefaultLang('ca');
+    translateService.use('es');
+  }
 
   ngOnInit(): void {
     this._translationService.loadLiterals().subscribe((literals) => {

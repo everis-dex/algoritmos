@@ -3,7 +3,7 @@ import { AlgorithmicSystemCard, TopicCard } from '../interfaces/cards';
 export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   {
     id: 1,
-    state: 'En producció',
+    state: 'Actiu',
     title:
       'Algorisme Intel·ligent per a la gestió de les prioritats en el sector públic',
     description:
@@ -16,7 +16,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   },
   {
     id: 2,
-    state: 'Desmantellat',
+    state: 'Inactiu',
     title: 'Algorisme per a la identificació de patrons en dades de trànsit',
     description:
       'El projecte desenvolupa un algorisme per a la identificació de patrons en dades de trànsit',
@@ -49,7 +49,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   },
   {
     id: 5,
-    state: 'En producció',
+    state: 'Actiu',
     title: "Probabilitat d'ocupació",
     description:
       "El projecte implementa un algorisme per a la predicció de la probabilitat d'ocupació en espais o edificis, basat en dades de comportament i variables ambientals.",
@@ -58,7 +58,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   },
   {
     id: 6,
-    state: 'En producció',
+    state: 'Actiu',
     title: 'Estimacions electorals del CEO',
     description:
       "El projecte desenvolupa un algorisme per a l'estimació dels resultats electorals basat en enquestes i altres dades rellevants.",
@@ -67,7 +67,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   },
   {
     id: 7,
-    state: 'En producció',
+    state: 'Actiu',
     title: 'Preinscripció escolar',
     description:
       'El projecte desenvolupa un algorisme per gestionar la preinscripció escolar de manera eficient, tenint en compte diversos factors com la demanda i la ubicació dels centres educatius.',
@@ -76,7 +76,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   },
   {
     id: 8,
-    state: 'En producció',
+    state: 'Actiu',
     title: "Previsió d'afluència de visitants",
     description:
       "El projecte implementa un algorisme per predir l'afluència de visitants en esdeveniments o llocs públics, basat en dades històriques i factors externs com el temps.",
@@ -85,7 +85,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   },
   {
     id: 9,
-    state: 'En producció',
+    state: 'Actiu',
     title: 'Carnets professionals',
     description:
       "El projecte dissenya un sistema basat en algorismes per gestionar la creació i renovació de carnets professionals, assegurant l'autenticitat i l'accés a serveis exclusius.",
@@ -94,7 +94,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   },
   {
     id: 10,
-    state: 'En producció',
+    state: 'Actiu',
     title:
       "Algorisme per a la gestió de les reserves d'energia en un entorn residencial",
     description:
@@ -104,7 +104,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   },
   {
     id: 11,
-    state: 'En producció',
+    state: 'Actiu',
     title:
       "Algorisme per a la gestió de les reserves d'energia en un entorn residencial",
     description:
@@ -114,7 +114,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   },
   {
     id: 12,
-    state: 'En producció',
+    state: 'Actiu',
     title:
       "Algorisme per a la gestió de les reserves d'energia en un entorn residencial",
     description:
@@ -124,7 +124,7 @@ export const mockAlgorithmicSystems: AlgorithmicSystemCard[] = [
   },
   {
     id: 13,
-    state: 'En producció',
+    state: 'Actiu',
     title: "Previsió d'afluència de visitants",
     description:
       "El projecte implementa un algorisme per predir l'afluència de visitants, utilitzant tècniques d'anàlisi de dades per optimitzar l'organització d'esdeveniments.",

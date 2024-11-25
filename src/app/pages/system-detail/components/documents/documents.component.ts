@@ -15,7 +15,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   public documents: IDocument[] = [];
   public translatedLiterals: Record<string, string> = {};
 
-  private readonly _componentSubscriptions: Subscription[] = [];
+  private _componentSubscription!: Subscription;
 
   constructor(
     private readonly _documentsService: DocumentService,
@@ -24,7 +24,7 @@ export class DocumentsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.translatedLiterals = this._translationService.getTranslatedLiterals();
-    this._documentsService
+    this._componentSubscription = this._documentsService
       .getDocuments()
       .subscribe((documents: IDocument[]) => {
         this.documents = documents;
@@ -32,8 +32,6 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._componentSubscriptions.forEach((subscription) =>
-      subscription.unsubscribe()
-    );
+    if (this._componentSubscription) this._componentSubscription.unsubscribe();
   }
 }

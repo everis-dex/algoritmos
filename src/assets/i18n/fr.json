@@ -86,7 +86,7 @@
         "list": {
           "item-1": "Comprobeu que els termes de la cerca són correctes.",
           "item-2": "Probeu la cerca amb diferents paraules clau.",
-          "item-3": "Probeu amb paraules clau generals.",
+          "item-3": "Probeu amb paraules clau generals",
           "item-4": "Comprobeu els criteris i l'àmbit de cerca."
         }
       }
@@ -95,7 +95,7 @@
       "previous-button": "anterior",
       "next-button": "següent",
       "total-pages": "Total de pàgines",
-      "page": "Pàgina "
+      "page": "Pàgina"
     }
   },
   "system-detail": {
@@ -113,7 +113,7 @@
       "header": "Més informació",
       "paragraphs": {
         "paragraph-1": {
-          "text": "Si la teva pregunta és genèrica o vols més informació d'intel·ligència artificial a la Generalitat, consulta l'apartats",
+          "text": "Si la teva pregunta és genèrica o vols més informació d'intel·ligència artificial a la Generalitat, consulta l'apartat",
           "link": "d'Informació pràctica."
         },
         "paragraph-2": {

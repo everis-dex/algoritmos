@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccordionComponent } from './accordion.component';
-import { CATEGORIES, TAGS } from '../../constants/search-filters.const';
+import { CATEGORIES, STATES, TAGS } from '../../constants/search-filters.const';
 import { IAccordionData } from './accordion.model';
 import { ITabData } from '../../pages/system-detail/components/tabs-data/tabs-data.model';
 import { tabsData } from '../../pages/system-detail/components/tabs-data/tabs-data.config';
@@ -45,6 +45,29 @@ describe('AccordionComponent', () => {
       const item: ITabData = tabsData[0];
       const tabDataResult = component.isTabData(item);
       expect(tabDataResult).toBeTrue();
+    });
+  });
+
+  describe('getTranslatedFilterChips', () => {
+    it('should return translated filter chips', () => {
+      const chips = CATEGORIES.map(
+        (_, index) =>
+          `systems-searcher.filters.accordion-list.categories.chips.chip-${index}`
+      );
+
+      const translatedFilterChips = component.getTranslatedFilterChips(chips);
+
+      expect(translatedFilterChips).toEqual(
+        chips.map((chip) => component.translatedLiterals[chip])
+      );
+    });
+
+    it('should return untranslated filter chips', () => {
+      const chips = STATES;
+
+      const translatedFilterChips = component.getTranslatedFilterChips(chips);
+
+      expect(translatedFilterChips).toEqual(chips.map((chip) => chip));
     });
   });
 

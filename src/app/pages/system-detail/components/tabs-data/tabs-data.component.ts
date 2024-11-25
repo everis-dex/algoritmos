@@ -32,7 +32,7 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
   public currentTabIndex = 0;
   public translatedLiterals: Record<string, string> = {};
 
-  private readonly _componentSubscriptions: Subscription[] = [];
+  private _componentSubscription!: Subscription;
 
   constructor(
     private readonly _fieldContentService: FieldContentService,
@@ -46,9 +46,7 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    this._componentSubscriptions.forEach((subscription) =>
-      subscription.unsubscribe()
-    );
+    if (this._componentSubscription) this._componentSubscription.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -72,12 +70,14 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private _getTabFieldContent(tabIndex: number): void {
-    this._fieldContentService.getFieldContent().subscribe((field) => {
-      const currentField = this.tabsData[tabIndex].fields;
-      currentField.forEach((tabField, tabFieldIndex) => {
-        tabField.content = Object.values(field)[tabIndex][tabFieldIndex];
+    this._componentSubscription = this._fieldContentService
+      .getFieldContent()
+      .subscribe((field) => {
+        const currentField = this.tabsData[tabIndex].fields;
+        currentField.forEach((tabField, tabFieldIndex) => {
+          tabField.content = Object.values(field)[tabIndex][tabFieldIndex];
+        });
       });
-    });
   }
 
   public setTabFields(index: number): IFieldData[] {

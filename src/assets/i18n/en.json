@@ -1,0 +1,127 @@
+{
+  "banner": {
+    "gencat-link": "Home",
+    "home": {
+      "header": "AI registry",
+      "subheader": "Search for one of our systems",
+      "link": "Register for AI systems"
+    },
+    "systems-searcher": {
+      "header": "Search for one of our systems",
+      "link": "Systems searcher"
+    }
+  },
+  "input-label": "Search by word, category...",
+  "home": {
+    "algorithmic-systems-header": "Recent algorithmic systems",
+    "topics-header": "You may be interested",
+    "searcher-filter": {
+      "selector": {
+        "no-category-selected": "Filter by category"
+      },
+      "current-searches": {
+        "header": "Recent searches",
+        "button": {
+          "desktop": "Restore recents",
+          "mobile": "Restore"
+        }
+      },
+      "popular-categories-header": "Popular categories"
+    },
+    "link": "View all AI systems"
+  },
+  "systems-searcher": {
+    "filters": {
+      "header": "Filters",
+      "button": "Restore filters",
+      "accordion-list": {
+        "categories": {
+          "name": "Category",
+          "chips": {
+            "chip-0": "Public administration, government and institucional relations",
+            "chip-1": "Agriculture, livestock, fisheries and food",
+            "chip-2": "Health",
+            "chip-3": "Commerce, consumption and tourism",
+            "chip-4": "Economy",
+            "chip-5": "Culture, language and identity",
+            "chip-6": "Sports and leisure",
+            "chip-7": "Education, training and universities",
+            "chip-8": "Justice and law",
+            "chip-9": "Public finance and treasury",
+            "chip-10": "Industry and energy",
+            "chip-11": "Information and communication",
+            "chip-12": "Environment",
+            "chip-13": "Mobility and transport",
+            "chip-14": "Social services",
+            "chip-15": "Security and emergencies",
+            "chip-16": "Society and citizenship",
+            "chip-17": "Work",
+            "chip-18": "Technology, research and innovation",
+            "chip-19": "Territory, infrastructures and urban planing",
+            "chip-20": "Other/Miscellaneous",
+            "chip-21": "No contains"
+          }
+        },
+        "tags": {
+          "name": "Tags",
+          "selector": {
+            "label": "Select",
+            "input-label": "Search"
+          }
+        },
+        "states": {
+          "name": "Status"
+        },
+        "algorithms": {
+          "name": "System type"
+        }
+      }
+    },
+    "results": {
+      "one-result": "{{totalSearchResults}} has been found",
+      "more-than-one-result": "{{totalSearchResults}} have been found",
+      "no-results": {
+        "header": "No results have been found with your condition.",
+        "subheader": "Suggestions",
+        "list": {
+          "item-1": "Check that the terms of the search are correct.",
+          "item-2": "Try the search with different key words.",
+          "item-3": "Try with general key words.",
+          "item-4": "Check the criteria and search scope."
+        }
+      }
+    },
+    "pagination": {
+      "previous-button": "previous",
+      "next-button": "next",
+      "total-pages": "Total pages",
+      "page": "Page"
+    }
+  },
+  "system-detail": {
+    "system-detail-resume": {
+      "description-title": "Brief description",
+      "tags-title": "Tags"
+    },
+    "tabs": {
+      "general-information": "General information",
+      "technical-information": "Technical information",
+      "normative-information": "Regulatory and transparency information"
+    },
+    "documents-header": "Documents",
+    "more-information": {
+      "header": "More information",
+      "paragraphs": {
+        "paragraph-1": {
+          "text": "If your question is generic or you want more intelligence information artificial in the Generalitat, consult the section",
+          "link": "of practical information."
+        },
+        "paragraph-2": {
+          "text": "Do you have any questions about AI systems? Contact us through",
+          "link": "Contact box"
+        }
+      }
+    }
+  },
+  "footer": "Funded by"
+}
