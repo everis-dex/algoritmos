@@ -1,11 +1,13 @@
 @for (accordionItem of accordionList; track $index) {
 @if (isAccordionData(accordionItem)) {
 <button type="button" (click)="toggle(accordionItem.id)" class="accordion-container filter-accordion">{{
-  accordionItem.name }}<img src="assets/icons/Icon_angle-down.svg" alt="Fletxa d'expansió del contingut desplegable"
+  translatedLiterals[accordionItem.name] }}<img src="assets/icons/Icon_angle-down.svg"
+    alt="Fletxa d'expansió del contingut desplegable"
     [ngClass]="{'accordion-container--rotate-left': toggleStates[accordionItem.id].rotation, 'accordion-container--rotate-right': !toggleStates[accordionItem.id].rotation}"></button>
 @if (toggleStates[accordionItem.id].display) {
 @if (accordionItem.chips) {
-<app-chips [chips]="accordionItem.chips" [optionsSelected]="getOptionsSelected(accordionItem.id)" [customStyles]="{ 'padding': '1.25rem 0',
+<app-chips [chips]="getTranslatedFilterChips(accordionItem.chips)"
+  [optionsSelected]="getOptionsSelected(accordionItem.id)" [customStyles]="{ 'padding': '1.25rem 0',
                       'font-size': '0.875rem', 'background-color': '#EFBFBF' }" (_selectChip)="selectChip($event)"
   (_deselectChip)="deselectChip($event)"></app-chips>
 } @else {
@@ -43,7 +45,8 @@
 }
 } @else if (isTabData(accordionItem)) {
 <button type="button" (click)="toggle(accordionItem.id)" class="accordion-container tab-accordion">{{
-  accordionItem.tab }}<img src="assets/icons/Icon_angle-down.svg" alt="Fletxa d'expansió del contingut desplegable"
+  translatedLiterals[accordionItem.tab] }}<img src="assets/icons/Icon_angle-down.svg"
+    alt="Fletxa d'expansió del contingut desplegable"
     [ngClass]="{'accordion-container--rotate-left': toggleStates[accordionItem.id].rotation, 'accordion-container--rotate-right': !toggleStates[accordionItem.id].rotation}"></button>
 @if (toggleStates[accordionItem.id].display) {
 <div class="accordion-container__fields">

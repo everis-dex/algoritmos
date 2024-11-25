@@ -68,11 +68,7 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   public getTabs(tabData: ITabData): string {
-    this.tabsData = tabsData.map((tab) => {
-      tab.tab = this.translatedLiterals[`system-detail.tabs.${tab.key}`];
-      return tab;
-    });
-    return tabData.tab;
+    return this.translatedLiterals[tabData.tab];
   }
 
   private _getTabFieldContent(tabIndex: number): void {

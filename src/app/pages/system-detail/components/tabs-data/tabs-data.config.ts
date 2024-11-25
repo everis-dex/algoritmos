@@ -3,8 +3,7 @@ import { ITabData } from './tabs-data.model';
 export const tabsData: ITabData[] = [
   {
     id: 1,
-    tab: 'Informació general',
-    key: 'general-information',
+    tab: 'system-detail.tabs.general-information',
     fields: [
       {
         field: 'Nivell de risc',
@@ -75,8 +74,7 @@ export const tabsData: ITabData[] = [
   },
   {
     id: 2,
-    tab: 'Informació tècnica',
-    key: 'technical-information',
+    tab: 'system-detail.tabs.technical-information',
     fields: [
       {
         field: 'Tasca del sistema en el procediment',
@@ -124,8 +122,7 @@ export const tabsData: ITabData[] = [
   },
   {
     id: 3,
-    tab: 'Informació normativa i transparència',
-    key: 'normative-information',
+    tab: 'system-detail.tabs.normative-information',
     fields: [
       {
         field: "Regulació aplicable a l'algorisme",

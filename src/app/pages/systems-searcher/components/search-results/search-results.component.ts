@@ -47,9 +47,13 @@ export class SearchResultsComponent implements OnInit {
   }
 
   public getTotalSearchResults(): string {
-    return this.translatedLiterals[this.getNumberOfSearchResults()].replace(
-      '{{totalSearchResults}}',
-      `${this.totalSearchResultsLength}`
-    );
+    const translatedTotalSearchResults =
+      this.translatedLiterals[this.getNumberOfSearchResults()];
+    if (translatedTotalSearchResults)
+      return translatedTotalSearchResults.replace(
+        '{{totalSearchResults}}',
+        `<strong>${this.totalSearchResultsLength}</strong>`
+      );
+    return '';
   }
 }

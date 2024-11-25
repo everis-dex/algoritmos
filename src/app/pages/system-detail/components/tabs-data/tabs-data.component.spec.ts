@@ -5,6 +5,7 @@ import { tabsData } from './tabs-data.config';
 import { FieldContentService } from '../../../../services/field-content.service';
 import { mockFieldContents } from '../../../../mocks/field-contents';
 import { of } from 'rxjs';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('TabsDataComponent', () => {
   let component: TabsDataComponent;
@@ -19,6 +20,7 @@ describe('TabsDataComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [TabsDataComponent],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TabsDataComponent);
@@ -47,7 +49,7 @@ describe('TabsDataComponent', () => {
     it('should get tabs correctly', () => {
       const tabData = tabsData[0];
       const tabsResult = component.getTabs(tabData);
-      expect(tabsResult).toEqual(tabData.tab);
+      expect(tabsResult).toEqual(component.translatedLiterals[tabData.tab]);
     });
   });
 

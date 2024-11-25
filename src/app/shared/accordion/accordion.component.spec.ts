@@ -5,6 +5,7 @@ import { CATEGORIES, TAGS } from '../../constants/search-filters.const';
 import { IAccordionData } from './accordion.model';
 import { ITabData } from '../../pages/system-detail/components/tabs-data/tabs-data.model';
 import { tabsData } from '../../pages/system-detail/components/tabs-data/tabs-data.config';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('AccordionComponent', () => {
   let component: AccordionComponent;
@@ -13,6 +14,7 @@ describe('AccordionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AccordionComponent],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AccordionComponent);

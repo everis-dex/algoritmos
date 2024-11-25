@@ -35,7 +35,33 @@
       "header": "Filtres",
       "button": "Restaurar filtres",
       "accordion-list": {
-        "category-name": "Categoria",
+        "categories": {
+          "name": "Categoria",
+          "chips": {
+            "chip-0": "Administració pública, govern i relacions institucionals",
+            "chip-1": "Agricultura, ramaderia, pesca i alimentació",
+            "chip-2": "Salut",
+            "chip-3": "Comerç, consum i turisme",
+            "chip-4": "Economia",
+            "chip-5": "Cultura, llengua i identitat",
+            "chip-6": "Esports i lleure",
+            "chip-7": "Educació, formació i universitats",
+            "chip-8": "Justícia i dret",
+            "chip-9": "Finances públiques i hisenda",
+            "chip-10": "Indústria i energia",
+            "chip-11": "Informació i comunicació",
+            "chip-12": "Medi ambient",
+            "chip-13": "Mobilitat i transports",
+            "chip-14": "Serveis socials",
+            "chip-15": "Seguretat i emergències",
+            "chip-16": "Societat i ciutadania",
+            "chip-17": "Treball",
+            "chip-18": "Tecnologia, recerca i innovació",
+            "chip-19": "Territori, infraestructures i urbanisme",
+            "chip-20": "Altres/Diversos",
+            "chip-21": "No consta"
+          }
+        },
         "tags": {
           "name": "Etiquetes",
           "selector": {
@@ -43,8 +69,12 @@
             "input-label": "Cerca"
           }
         },
-        "states-name": "Estats",
-        "algorithms-name": "Tipus d'algorisme"
+        "states": {
+          "name": "Estats"
+        },
+        "algorithms": {
+          "name": "Tipus d'algorisme"
+        }
       }
     },
     "results": {
@@ -54,10 +84,10 @@
         "header": "No s'han trobat resultats amb la vostra condició de cerca.",
         "subheader": "Suggeriments:",
         "list": {
-          "first-item": "Comprobeu que els termes de la cerca són correctes.",
-          "second-item": "Probeu la cerca amb diferents paraules clau.",
-          "third-item": "Probeu amb paraules clau generals",
-          "last-item": "Comprobeu els criteris i l'àmbit de cerca."
+          "item-1": "Comprobeu que els termes de la cerca són correctes.",
+          "item-2": "Probeu la cerca amb diferents paraules clau.",
+          "item-3": "Probeu amb paraules clau generals",
+          "item-4": "Comprobeu els criteris i l'àmbit de cerca."
         }
       }
     },

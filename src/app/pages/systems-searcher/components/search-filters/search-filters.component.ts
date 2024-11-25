@@ -1,11 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  AfterContentChecked,
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AccordionComponent } from '../../../../shared/accordion/accordion.component';
 import {
   ALGORITHMS,
@@ -22,13 +16,36 @@ import { TranslationService } from '../../../../services/translation.service';
   templateUrl: './search-filters.component.html',
   styleUrl: './search-filters.component.scss',
 })
-export class SearchFiltersComponent implements OnInit, AfterContentChecked {
+export class SearchFiltersComponent implements OnInit {
   @Output()
   private readonly _filtersApplied = new EventEmitter<
     { filter: string; optionsSelected: string[] }[]
   >();
 
-  public filters: { id: number; name: string; chips?: string[] }[] = [];
+  public filters: { id: number; name: string; chips?: string[] }[] = [
+    {
+      id: 1,
+      name: 'systems-searcher.filters.accordion-list.categories.name',
+      chips: CATEGORIES.map(
+        (_, index) =>
+          `systems-searcher.filters.accordion-list.categories.chips.chip-${index}`
+      ),
+    },
+    {
+      id: 2,
+      name: 'systems-searcher.filters.accordion-list.tags.name',
+    },
+    {
+      id: 3,
+      name: 'systems-searcher.filters.accordion-list.states.name',
+      chips: STATES,
+    },
+    {
+      id: 4,
+      name: 'systems-searcher.filters.accordion-list.algorithms.name',
+      chips: ALGORITHMS,
+    },
+  ];
   public filterList: { filter: string; optionsSelected: string[] }[] =
     this.filters.map((filter) => ({
       filter: filter.name,
@@ -41,38 +58,6 @@ export class SearchFiltersComponent implements OnInit, AfterContentChecked {
 
   ngOnInit(): void {
     this.translatedLiterals = this._translationService.getTranslatedLiterals();
-  }
-
-  ngAfterContentChecked(): void {
-    this.filters = [
-      {
-        id: 1,
-        name: this.translatedLiterals[
-          'systems-searcher.filters.accordion-list.category-name'
-        ],
-        chips: CATEGORIES,
-      },
-      {
-        id: 2,
-        name: this.translatedLiterals[
-          'systems-searcher.filters.accordion-list.tags.name'
-        ],
-      },
-      {
-        id: 3,
-        name: this.translatedLiterals[
-          'systems-searcher.filters.accordion-list.states-name'
-        ],
-        chips: STATES,
-      },
-      {
-        id: 4,
-        name: this.translatedLiterals[
-          'systems-searcher.filters.accordion-list.algorithms-name'
-        ],
-        chips: ALGORITHMS,
-      },
-    ];
   }
 
   public resetFilters(id?: number): void {
@@ -99,7 +84,12 @@ export class SearchFiltersComponent implements OnInit, AfterContentChecked {
       this._addNewOptionSelected(tag, filterIndex);
     } else if (typeof event === 'string') {
       const filterIndex = this.filters.findIndex((filter) =>
-        filter.chips?.includes(event)
+        filter.chips
+          ?.map((chip) => {
+            if (!chip.includes('.')) return chip;
+            return this.translatedLiterals[chip];
+          })
+          .includes(event)
       );
       this._addNewOptionSelected(event, filterIndex);
     }

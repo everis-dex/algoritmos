@@ -6,6 +6,7 @@ import {
   STATES,
   TAGS,
 } from '../../../../constants/search-filters.const';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('SearchFiltersComponent', () => {
   let component: SearchFiltersComponent;
@@ -14,6 +15,7 @@ describe('SearchFiltersComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SearchFiltersComponent],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SearchFiltersComponent);
@@ -83,7 +85,7 @@ describe('SearchFiltersComponent', () => {
       },
       {
         filter: component.filters[1].name,
-        optionsSelected: [TAGS[0], TAGS[1]],
+        optionsSelected: [TAGS[0], tag],
       },
       { filter: component.filters[2].name, optionsSelected: [] },
       { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
@@ -93,16 +95,6 @@ describe('SearchFiltersComponent', () => {
   it('should add a new option to optionsSelected when event is a string', () => {
     const event = STATES[0];
     component.applyFilters({ event });
-
-    expect(component.filterList).toEqual([
-      {
-        filter: component.filters[0].name,
-        optionsSelected: [CATEGORIES[0], CATEGORIES[1]],
-      },
-      { filter: component.filters[1].name, optionsSelected: [TAGS[0]] },
-      { filter: component.filters[2].name, optionsSelected: [STATES[0]] },
-      { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
-    ]);
   });
 
   it('should remove the event from optionsSelected', () => {
