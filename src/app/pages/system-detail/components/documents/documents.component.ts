@@ -13,12 +13,12 @@ import { Subscription } from 'rxjs';
 export class DocumentsComponent implements OnInit, OnDestroy {
   public documents: IDocument[] = [];
 
-  private _documentsSuscription!: Subscription;
+  private _componentSubscription!: Subscription;
 
   constructor(private readonly _documentsService: DocumentService) {}
 
   ngOnInit(): void {
-    this._documentsSuscription = this._documentsService
+    this._componentSubscription = this._documentsService
       .getDocuments()
       .subscribe((documents: IDocument[]) => {
         this.documents = documents;
@@ -26,6 +26,6 @@ export class DocumentsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._documentsSuscription) this._documentsSuscription.unsubscribe();
+    if (this._componentSubscription) this._componentSubscription.unsubscribe();
   }
 }

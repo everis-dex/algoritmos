@@ -7,9 +7,9 @@
  */
 export function getStateColor(state: string): string {
   const stateColorConfig: Record<string, string> = {
-    'En producció': 'Green',
+    'Actiu': 'Green',
     'En desenvolupament': 'Yellow',
-    'Desmantellat': 'Red',
+    'Inactiu': 'Red',
   };
   return stateColorConfig[state];
 }

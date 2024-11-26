@@ -21,6 +21,17 @@ describe('SystemsSearcherComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should unsubscribe from all subscriptions on destroy', () => {
+    const subscriptionSpy = jasmine.createSpyObj('Subscription', [
+      'unsubscribe',
+    ]);
+    component['_componentSubscriptions'] = [subscriptionSpy];
+
+    component.ngOnDestroy();
+
+    expect(subscriptionSpy.unsubscribe).toHaveBeenCalled();
+  });
+
   describe('changeView', () => {
     it('should emit changeView event to the given view', () => {
       const changeViewSpy = spyOn(component['_changeView'], 'emit');

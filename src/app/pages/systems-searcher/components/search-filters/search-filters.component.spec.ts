@@ -83,7 +83,7 @@ describe('SearchFiltersComponent', () => {
       },
       {
         filter: component.filters[1].name,
-        optionsSelected: [TAGS[0], TAGS[1]],
+        optionsSelected: [TAGS[0], tag],
       },
       { filter: component.filters[2].name, optionsSelected: [] },
       { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
@@ -100,7 +100,7 @@ describe('SearchFiltersComponent', () => {
         optionsSelected: [CATEGORIES[0], CATEGORIES[1]],
       },
       { filter: component.filters[1].name, optionsSelected: [TAGS[0]] },
-      { filter: component.filters[2].name, optionsSelected: [STATES[0]] },
+      { filter: component.filters[2].name, optionsSelected: [event] },
       { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
     ]);
   });

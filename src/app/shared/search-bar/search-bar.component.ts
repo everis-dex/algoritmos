@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { CommonModule } from '@angular/common';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ChipsComponent } from '../chips/chips.component';
 import { SystemsSearcherLinkComponent } from '../systems-searcher-link/systems-searcher-link.component';
 import { Subscription } from 'rxjs';
@@ -27,6 +28,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   public isFilterVisible = false;
   public currentSearches: string[];
   public hasInputValue = false;
+  public isDesktop = false;
 
   @Input()
   public hasFilterSelector!: boolean;
@@ -34,36 +36,38 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Output()
   private readonly _changeView = new EventEmitter<string>();
 
-  private _categoriesSuscription!: Subscription;
+  private _componentSubscriptions: Subscription[] = [];
 
   constructor(
     private readonly _categoryService: CategoryService,
-    private readonly _sessionStorageService: SessionStorageService
+    private readonly _sessionStorageService: SessionStorageService,
+    private readonly _breakpointObserver: BreakpointObserver
   ) {
     this.currentSearches =
       this._sessionStorageService.getItem('currentSearches') || [];
   }
 
   ngOnInit(): void {
+    this._checkBreakpoint();
     const popularCategories =
       this._sessionStorageService.getItem<string[]>('popularCategories');
     if (popularCategories !== null) {
       this.popularCategories = popularCategories;
     } else {
-      this._categoriesSuscription = this._categoryService
-        .getCategories()
-        .subscribe((categories) => {
-          this.popularCategories = categories;
-          this._sessionStorageService.setItem(
-            'popularCategories',
-            this.popularCategories
-          );
-        });
+      this._categoryService.getCategories().subscribe((categories) => {
+        this.popularCategories = categories;
+        this._sessionStorageService.setItem(
+          'popularCategories',
+          this.popularCategories
+        );
+      });
     }
   }
 
   ngOnDestroy(): void {
-    if (this._categoriesSuscription) this._categoriesSuscription.unsubscribe();
+    this._componentSubscriptions.forEach((subscription) =>
+      subscription.unsubscribe()
+    );
   }
 
   @HostListener('document:click', ['$event'])
@@ -83,6 +87,14 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         this.isFilterVisible = false;
       }
     }
+  }
+
+  private _checkBreakpoint(): void {
+    this._breakpointObserver
+      .observe([Breakpoints.Handset])
+      .subscribe((result) => {
+        this.isDesktop = !result.matches;
+      });
   }
 
   public handleCategorySelect(): void {

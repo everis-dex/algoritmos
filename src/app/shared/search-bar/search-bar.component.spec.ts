@@ -34,14 +34,15 @@ describe('SearchBarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should ngOnInit', () => {
-    component.ngOnInit();
-    expect(component.ngOnInit).toBeTruthy();
-  });
+  it('should unsubscribe from all subscriptions on destroy', () => {
+    const subscriptionSpy = jasmine.createSpyObj('Subscription', [
+      'unsubscribe',
+    ]);
+    component['_componentSubscriptions'] = [subscriptionSpy];
 
-  it('should ngOnDestroy', () => {
     component.ngOnDestroy();
-    expect(component.ngOnDestroy).toBeTruthy();
+
+    expect(subscriptionSpy.unsubscribe).toHaveBeenCalled();
   });
 
   it('should hide the filter when clicking outside the category button and searcher container', () => {
