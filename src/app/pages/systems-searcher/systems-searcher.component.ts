@@ -37,13 +37,13 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   public totalSearchResultsLength = 0;
   public totalPages = 0;
 
-  private _algorithmicSystemsSuscription!: Subscription;
+  private _componentSubscriptions: Subscription[] = [];
 
   constructor(private readonly _algorithmicSystemService: CardService) {}
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    this._algorithmicSystemsSuscription = this._algorithmicSystemService
+    this._algorithmicSystemService
       .getAlgorithmicSystems()
       .subscribe((response) => {
         this.searchResults = response;
@@ -57,8 +57,9 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._algorithmicSystemsSuscription)
-      this._algorithmicSystemsSuscription.unsubscribe();
+    this._componentSubscriptions.forEach((subscription) =>
+      subscription.unsubscribe()
+    );
   }
 
   public changePage(page: number): void {
@@ -67,7 +68,7 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   }
 
   private _getSearchResults(page: number): void {
-    this._algorithmicSystemsSuscription = this._algorithmicSystemService
+    this._algorithmicSystemService
       .getAlgorithmicSystems()
       .subscribe((response) => {
         this.searchResults = response.slice(

@@ -33,7 +33,9 @@
     <section class="searcher-container__filter__section" id="current-searches">
       <div class="searcher-container__filter__section__header">
         <h4>Cerques recents</h4>
-        <button class="searcher-container__filter__section__header__button" (click)="resetSearch()">Restaurar</button>
+        <button class="searcher-container__filter__section__header__button" (click)="resetSearch()">{{
+          isDesktop ? 'Restaurar recents' :
+          'Restaurar'}}</button>
       </div>
       @for (currentSearch of currentSearches; track currentSearch; let i = $index) {
       <div class="searcher-container__filter__section__current-search-container">

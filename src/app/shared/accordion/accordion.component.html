@@ -1,4 +1,4 @@
-@for (accordionItem of accordionList; track accordionItem) {
+@for (accordionItem of accordionList; track $index) {
 @if (isAccordionData(accordionItem)) {
 <button type="button" (click)="toggle(accordionItem.id)" class="accordion-container filter-accordion">{{
   accordionItem.name }}<img src="assets/icons/Icon_angle-down.svg" alt="Fletxa d'expansió del contingut desplegable"
