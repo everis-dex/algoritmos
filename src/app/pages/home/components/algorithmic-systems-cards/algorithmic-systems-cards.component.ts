@@ -31,7 +31,7 @@ export class AlgorithmicSystemsCardsComponent
 
   public algorithmicSystems: AlgorithmicSystemCard[] = [];
 
-  private _algorithmicSystemsSuscription!: Subscription;
+  private _componentSubscription!: Subscription;
 
   constructor(
     private readonly _algorithmicSystemService: CardService,
@@ -78,7 +78,7 @@ export class AlgorithmicSystemsCardsComponent
   }
 
   ngOnInit(): void {
-    this._algorithmicSystemsSuscription = this._algorithmicSystemService
+    this._componentSubscription = this._algorithmicSystemService
       .getAlgorithmicSystems()
       .subscribe((response) => {
         this.algorithmicSystems = response.slice(0, 4);
@@ -86,8 +86,8 @@ export class AlgorithmicSystemsCardsComponent
   }
 
   ngOnDestroy(): void {
-    if (this._algorithmicSystemsSuscription)
-      this._algorithmicSystemsSuscription.unsubscribe();
+    if (this._componentSubscription)
+      this._componentSubscription.unsubscribe();
   }
 
   public setView(event: string | AlgorithmicSystemCard): void {

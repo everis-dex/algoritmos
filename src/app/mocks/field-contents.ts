@@ -14,7 +14,7 @@ export const mockFieldContents: Record<string, string[]> = {
   ],
   'Informació tècnica': [
     'Llenguatge tècnic.',
-    "Seleccionar:\n- Algorisme determinista\n- Algorisme d'IA",
+    "Seleccionar:\n- Algorisme determinista\n- Sistema d'IA",
     'Text lliure.',
     'Text lliure.',
     'Text lliure.',

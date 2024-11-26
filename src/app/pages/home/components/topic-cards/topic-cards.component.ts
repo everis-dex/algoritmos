@@ -14,12 +14,12 @@ import { CardService } from '../../../../services/card.service';
 export class TopicCardsComponent implements OnInit, OnDestroy {
   public topics: TopicCard[] = [];
 
-  private _topicsSuscription!: Subscription;
+  private _componentSubscription!: Subscription;
 
   constructor(private readonly _topicsService: CardService) {}
 
   ngOnInit(): void {
-    this._topicsSuscription = this._topicsService
+    this._componentSubscription = this._topicsService
       .getTopics()
       .subscribe((response) => {
         this.topics = response;
@@ -27,6 +27,6 @@ export class TopicCardsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._topicsSuscription) this._topicsSuscription.unsubscribe();
+    if (this._componentSubscription) this._componentSubscription.unsubscribe();
   }
 }

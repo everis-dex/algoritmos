@@ -30,7 +30,7 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
   public tabsData: ITabData[] = tabsData;
   public currentTabIndex = 0;
 
-  private _fieldContentSuscription!: Subscription;
+  private _componentSubscription!: Subscription;
 
   constructor(
     private readonly _fieldContentService: FieldContentService,
@@ -42,8 +42,8 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    if (this._fieldContentSuscription)
-      this._fieldContentSuscription.unsubscribe();
+    if (this._componentSubscription)
+      this._componentSubscription.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -67,7 +67,7 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private _getTabFieldContent(tabIndex: number): void {
-    this._fieldContentSuscription = this._fieldContentService
+    this._componentSubscription = this._fieldContentService
       .getFieldContent()
       .subscribe((field) => {
         const currentField = this.tabsData[tabIndex].fields;

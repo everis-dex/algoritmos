@@ -92,6 +92,7 @@
       align-items: center;
       font-size: 1rem;
       line-height: 1.5rem;
+      text-align: left;
 
       img {
         position: absolute;
@@ -203,7 +204,7 @@
 
       &__category-button {
         max-width: 25rem;
-        height: auto;
+        height: 3rem;
         position: relative;
         top: 0;
 
@@ -231,15 +232,8 @@
       left: 7.5rem;
       right: 7.5rem;
 
-      &__section {
-        &__header__button::after {
-          content: " recents";
-          white-space: pre;
-        }
-
-        &#popular-categories {
-          gap: 0.75rem;
-        }
+      &__section#popular-categories {
+        gap: 0.75rem;
       }
     }
   }
