@@ -78,23 +78,21 @@
       }
     },
     "results": {
+      "no-results": "No se han encontrado resultados con vuestra condición de búsqueda.",
+      "suggestion-list": {
+        "header": "Sugerencias:",
+        "suggestion-1": "Comprobad que los términos de búsqueda son correctos.",
+        "suggestion-2": "Probad la búsqueda con diferentes palabras clave.",
+        "suggestion-3": "Probad con palabras clave genéricas.",
+        "suggestion-4": "Comprobad los criterios y el ámbito de búsqueda."
+      },
       "one-result": "Se ha encontrado {{totalSearchResults}} resultado",
-      "more-than-one-result": "Se han encontrado {{totalSearchResults}} resultados",
-      "no-results": {
-        "header": "No se han encontrado resultados con vuestra condición de búsqueda.",
-        "subheader": "Sugerencias",
-        "list": {
-          "item-1": "Comprobad que los términos de búsqueda son correctos.",
-          "item-2": "Probad la búsqueda con diferentes palabras clave.",
-          "item-3": "Probad con palabras clave genéricas.",
-          "item-4": "Comprobad los criterios y el ámbito de búsqueda."
-        }
-      }
+      "more-than-one-result": "Se han encontrado {{totalSearchResults}} resultados"
     },
     "pagination": {
       "previous-button": "anterior",
       "next-button": "siguiente",
-      "total-pages": "Total de páginas",
+      "total-pages": "Total de páginas:",
       "page": "Página"
     }
   },
@@ -113,11 +111,11 @@
       "header": "Más información",
       "paragraphs": {
         "paragraph-1": {
-          "text": "Si tu pregunta es genérica o quieres más información de inteligencia artificial en la Generalitat, consulta el apartado",
+          "text": "Si tu pregunta es genérica o quieres más información de inteligencia artificial en la Generalitat, consulta el apartado:",
           "link": "de Información práctica."
         },
         "paragraph-2": {
-          "text": "¿Tienes alguna pregunta sobre los sistemas de IA? Contacta con nosotros a través de",
+          "text": "¿Tienes alguna pregunta sobre los sistemas de IA? Contacta con nosotros a través de:",
           "link": "Buzón de contacto"
         }
       }

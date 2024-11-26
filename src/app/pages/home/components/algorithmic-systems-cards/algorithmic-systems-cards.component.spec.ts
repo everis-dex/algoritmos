@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AlgorithmicSystemsCardsComponent } from './algorithmic-systems-cards.component';
 import { mockAlgorithmicSystems } from '../../../../mocks/cards';
 import { provideHttpClient } from '@angular/common/http';
+import { provideTranslateService } from '@ngx-translate/core';
 
 describe('AlgorithmicSystemsCardsComponent', () => {
   let component: AlgorithmicSystemsCardsComponent;
@@ -11,7 +12,7 @@ describe('AlgorithmicSystemsCardsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AlgorithmicSystemsCardsComponent],
-      providers: [provideHttpClient()],
+      providers: [provideHttpClient(), provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AlgorithmicSystemsCardsComponent);

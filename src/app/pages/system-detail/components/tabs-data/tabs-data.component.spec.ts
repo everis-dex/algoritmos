@@ -6,6 +6,7 @@ import { FieldContentService } from '../../../../services/field-content.service'
 import { mockFieldContents } from '../../../../mocks/field-contents';
 import { of } from 'rxjs';
 import { provideHttpClient } from '@angular/common/http';
+import { provideTranslateService } from '@ngx-translate/core';
 
 describe('TabsDataComponent', () => {
   let component: TabsDataComponent;
@@ -20,7 +21,7 @@ describe('TabsDataComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [TabsDataComponent],
-      providers: [provideHttpClient()],
+      providers: [provideHttpClient(), provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TabsDataComponent);

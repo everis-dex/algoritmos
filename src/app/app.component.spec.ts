@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { mockAlgorithmicSystems } from './mocks/cards';
 import { provideHttpClient } from '@angular/common/http';
+import { provideTranslateService } from '@ngx-translate/core';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -10,7 +11,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [provideHttpClient()],
+      providers: [provideHttpClient(), provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);

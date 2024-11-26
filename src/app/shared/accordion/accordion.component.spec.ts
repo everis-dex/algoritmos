@@ -6,6 +6,7 @@ import { IAccordionData } from './accordion.model';
 import { ITabData } from '../../pages/system-detail/components/tabs-data/tabs-data.model';
 import { tabsData } from '../../pages/system-detail/components/tabs-data/tabs-data.config';
 import { provideHttpClient } from '@angular/common/http';
+import { provideTranslateService } from '@ngx-translate/core';
 
 describe('AccordionComponent', () => {
   let component: AccordionComponent;
@@ -14,7 +15,7 @@ describe('AccordionComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AccordionComponent],
-      providers: [provideHttpClient()],
+      providers: [provideHttpClient(), provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AccordionComponent);

@@ -1,127 +1,125 @@
 {
   "banner": {
-    "gencat-link": "Inici",
+    "gencat-link": "Accueil",
     "home": {
-      "header": "Registre d'IA",
-      "subheader": "Cerca un dels nostres sistemes",
-      "link": "Registre de sistemes d'IA"
+      "header": "Registre AI",
+      "subheader": "Recherchez l'un de nos systèmes",
+      "link": "Enregistrement des systèmes d'IA"
     },
     "systems-searcher": {
-      "header": "Cerca un dels nostres sistemes",
-      "link": "Cercador de sistemes"
+      "header": "Recherchez l'un de nos systèmes",
+      "link": "Recherche de systèmes"
     }
   },
-  "input-label": "Cerca per paraula, categoria...",
+  "input-label": "Recherche par mot, catégorie...",
   "home": {
-    "algorithmic-systems-header": "Sistemes algorísmics recents",
-    "topics-header": "Et pot interessar",
+    "algorithmic-systems-header": "Systèmes algorithmiques récents",
+    "topics-header": "Vous pourriez être intéressé",
     "searcher-filter": {
       "selector": {
-        "no-category-selected": "Filtra per categoria"
+        "no-category-selected": "Filtrer par catégorie"
       },
       "current-searches": {
-        "header": "Cerques recents",
+        "header": "Récent recherches",
         "button": {
-          "desktop": "Restaurar recents",
-          "mobile": "Restaurar"
+          "desktop": "Restaurer les récents",
+          "mobile": "Restaurer"
         }
       },
-      "popular-categories-header": "Categories populars"
+      "popular-categories-header": "Catégories populaires"
     },
-    "link": "Consulta tots els sistemes d'IA"
+    "link": "Afficher tous les systèmes d'IA"
   },
   "systems-searcher": {
     "filters": {
       "header": "Filtres",
-      "button": "Restaurar filtres",
+      "button": "Filtres de restauration",
       "accordion-list": {
         "categories": {
-          "name": "Categoria",
+          "name": "Catégorie",
           "chips": {
-            "chip-0": "Administració pública, govern i relacions institucionals",
-            "chip-1": "Agricultura, ramaderia, pesca i alimentació",
-            "chip-2": "Salut",
-            "chip-3": "Comerç, consum i turisme",
-            "chip-4": "Economia",
-            "chip-5": "Cultura, llengua i identitat",
-            "chip-6": "Esports i lleure",
-            "chip-7": "Educació, formació i universitats",
-            "chip-8": "Justícia i dret",
-            "chip-9": "Finances públiques i hisenda",
-            "chip-10": "Indústria i energia",
-            "chip-11": "Informació i comunicació",
-            "chip-12": "Medi ambient",
-            "chip-13": "Mobilitat i transports",
-            "chip-14": "Serveis socials",
-            "chip-15": "Seguretat i emergències",
-            "chip-16": "Societat i ciutadania",
-            "chip-17": "Treball",
-            "chip-18": "Tecnologia, recerca i innovació",
-            "chip-19": "Territori, infraestructures i urbanisme",
-            "chip-20": "Altres/Diversos",
-            "chip-21": "No consta"
+            "chip-0": "Administration publique, relations gouvernementales et institutionnelles",
+            "chip-1": "Agriculture, élevage, pêche et alimentation",
+            "chip-2": "Santé",
+            "chip-3": "Commerce, consommation et tourisme",
+            "chip-4": "Économie",
+            "chip-5": "Culture, langue et identité",
+            "chip-6": "Sports et loisirs",
+            "chip-7": "Éducation, formation et universités",
+            "chip-8": "Justice et droit",
+            "chip-9": "Finances publiques et trésorerie",
+            "chip-10": "Industrie et énergie",
+            "chip-11": "Information et communication",
+            "chip-12": "Environnement",
+            "chip-13": "Mobilité et transports",
+            "chip-14": "Services sociaux",
+            "chip-15": "Sécurité et urgences",
+            "chip-16": "Société et citoyenneté",
+            "chip-17": "Travail",
+            "chip-18": "Technologie, recherche et innovation",
+            "chip-19": "Territoire, infrastructures et urbanisme",
+            "chip-20": "Autre/Divers",
+            "chip-21": "Non contient"
           }
         },
         "tags": {
-          "name": "Etiquetes",
+          "name": "Tags",
           "selector": {
-            "label": "Selecciona",
-            "input-label": "Cerca"
+            "label": "Sélectionner",
+            "input-label": "Recherche"
           }
         },
         "states": {
-          "name": "Estats"
+          "name": "Statut"
         },
         "algorithms": {
-          "name": "Tipus de sistema"
+          "name": "Type de système"
         }
       }
     },
     "results": {
-      "one-result": "S'ha trobat {{totalSearchResults}} resultat",
-      "more-than-one-result": "S'han trobat {{totalSearchResults}} resultats",
-      "no-results": {
-        "header": "No s'han trobat resultats amb la vostra condició de cerca.",
-        "subheader": "Suggeriments",
-        "list": {
-          "item-1": "Comprobeu que els termes de la cerca són correctes.",
-          "item-2": "Probeu la cerca amb diferents paraules clau.",
-          "item-3": "Probeu amb paraules clau generals",
-          "item-4": "Comprobeu els criteris i l'àmbit de cerca."
-        }
-      }
+      "no-results": "Aucun résultat n'a été trouvé avec votre condition de recherche.",
+      "suggestion-list": {
+        "header": "Suggestions :",
+        "suggestion-1": "Vérifiez que les termes de recherche sont corrects.",
+        "suggestion-2": "Essayez votre recherche avec différents mots-clés.",
+        "suggestion-3": "Essayez avec des mots-clés généraux.",
+        "suggestion-4": "Vérifiez les critères de recherche et la portée."
+      },
+      "one-result": "Trouvé {{totalSearchResults}} résultat",
+      "more-than-one-result": "Trouvé {{totalSearchResults}} résultats"
     },
     "pagination": {
-      "previous-button": "anterior",
-      "next-button": "següent",
-      "total-pages": "Total de pàgines",
-      "page": "Pàgina"
+      "previous-button": "précédent",
+      "next-button": "suivant",
+      "total-pages": "Total de pages :",
+      "page": "Page"
     }
   },
   "system-detail": {
     "system-detail-resume": {
-      "description-title": "Descripció breu",
-      "tags-title": "Etiquetes"
+      "description-title": "Brève description",
+      "tags-title": "Tags"
     },
     "tabs": {
-      "general-information": "Informació general",
-      "technical-information": "Informació tècnica",
-      "normative-information": "Informació normativa i transparència"
+      "general-information": "Informations générales",
+      "technical-information": "Informations techniques",
+      "normative-information": "Informations réglementaires et transparence"
     },
     "documents-header": "Documents",
     "more-information": {
-      "header": "Més informació",
+      "header": "Plus d'informations",
       "paragraphs": {
         "paragraph-1": {
-          "text": "Si la teva pregunta és genèrica o vols més informació d'intel·ligència artificial a la Generalitat, consulta l'apartat",
-          "link": "d'Informació pràctica."
+          "text": "Si votre question est générique ou si vous souhaitez plus d'informations sur l'intelligence artificielle à la Generalitat, consultez la rubrique :",
+          "link": "des Informations pratiques."
         },
         "paragraph-2": {
-          "text": "Tens alguna pregunta sobre els sistemes d'IA? Contacta amb nosaltres a través de",
-          "link": "Bústia de contacte"
+          "text": "Vous avez des questions sur les systèmes d'IA ? Contactez-nous via :",
+          "link": "Boîte de contact"
         }
       }
     }
   },
-  "footer": "Finançat per"
+  "footer": "Financé par"
 }

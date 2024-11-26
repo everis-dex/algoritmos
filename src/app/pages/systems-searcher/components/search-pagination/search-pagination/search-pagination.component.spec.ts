@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SearchPaginationComponent } from './search-pagination.component';
 import { provideHttpClient } from '@angular/common/http';
+import { provideTranslateService } from '@ngx-translate/core';
 
 describe('SearchPaginationComponent', () => {
   let component: SearchPaginationComponent;
@@ -9,7 +10,7 @@ describe('SearchPaginationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SearchPaginationComponent],
-      providers: [provideHttpClient()],
+      providers: [provideHttpClient(), provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SearchPaginationComponent);

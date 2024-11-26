@@ -78,23 +78,21 @@
       }
     },
     "results": {
+      "no-results": "No results have been found with your condition.",
+      "suggestion-list": {
+        "header": "Suggestions:",
+        "suggestion-1": "Check that the terms of the search are correct.",
+        "suggestion-2": "Try the search with different key words.",
+        "suggestion-3": "Try with general key words.",
+        "suggestion-4": "Check the criteria and search scope."
+      },
       "one-result": "{{totalSearchResults}} has been found",
-      "more-than-one-result": "{{totalSearchResults}} have been found",
-      "no-results": {
-        "header": "No results have been found with your condition.",
-        "subheader": "Suggestions",
-        "list": {
-          "item-1": "Check that the terms of the search are correct.",
-          "item-2": "Try the search with different key words.",
-          "item-3": "Try with general key words.",
-          "item-4": "Check the criteria and search scope."
-        }
-      }
+      "more-than-one-result": "{{totalSearchResults}} have been found"
     },
     "pagination": {
       "previous-button": "previous",
       "next-button": "next",
-      "total-pages": "Total pages",
+      "total-pages": "Total pages:",
       "page": "Page"
     }
   },
@@ -113,11 +111,11 @@
       "header": "More information",
       "paragraphs": {
         "paragraph-1": {
-          "text": "If your question is generic or you want more intelligence information artificial in the Generalitat, consult the section",
+          "text": "If your question is generic or you want more intelligence information artificial in the Generalitat, consult the section:",
           "link": "of practical information."
         },
         "paragraph-2": {
-          "text": "Do you have any questions about AI systems? Contact us through",
+          "text": "Do you have any questions about AI systems? Contact us through:",
           "link": "Contact box"
         }
       }

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BannerComponent } from './banner.component';
 import { provideHttpClient } from '@angular/common/http';
+import { provideTranslateService } from '@ngx-translate/core';
 
 describe('BannerComponent', () => {
   let component: BannerComponent;
@@ -10,7 +11,7 @@ describe('BannerComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [BannerComponent],
-      providers: [provideHttpClient()]
+      providers: [provideHttpClient(), provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(BannerComponent);

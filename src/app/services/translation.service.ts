@@ -13,7 +13,7 @@ export class TranslationService {
 
   constructor(
     private readonly _http: HttpClient,
-    private _translateService: TranslateService
+    private readonly _translateService: TranslateService
   ) {}
 
   public translateText(text: string, targetLang: string): Observable<string> {
@@ -52,16 +52,14 @@ export class TranslationService {
   ): { key: string; value: string }[] {
     let literalsList: { key: string; value: string }[] = [];
     for (const key in literals) {
-      if (Object.hasOwn(literals, key)) {
-        const value = literals[key];
-        const currentKey = parentKey ? `${parentKey}.${key}` : key;
-        if (typeof value === 'string') {
-          literalsList.push({ key: currentKey, value });
-        } else if (typeof value === 'object' && value !== null) {
-          literalsList = literalsList.concat(
-            this._extractLiterals(value as Record<string, unknown>, currentKey)
-          );
-        }
+      const value = literals[key];
+      const currentKey = parentKey ? `${parentKey}.${key}` : key;
+      if (typeof value === 'string') {
+        literalsList.push({ key: currentKey, value });
+      } else if (typeof value === 'object' && value !== null) {
+        literalsList = literalsList.concat(
+          this._extractLiterals(value as Record<string, unknown>, currentKey)
+        );
       }
     }
     return literalsList;
@@ -76,12 +74,12 @@ export class TranslationService {
     const literalsToTranslate = extractedLiterals.map(
       (literal) => literal.value
     );
-    this.translateText(literalsToTranslate.join('|'), 'it').subscribe({
+    this.translateText(literalsToTranslate.join('|'), 'es').subscribe({
       next: (translatedText) => {
         const translatedTextsArray = translatedText.split('|');
-        console.log(translatedTextsArray);
         extractedLiterals.forEach((literal, index) => {
-          this.translatedLiterals[literal.key] = translatedTextsArray[index];
+          this.translatedLiterals[literal.key] =
+            translatedTextsArray[index]?.trim();
         });
       },
       error: () => {

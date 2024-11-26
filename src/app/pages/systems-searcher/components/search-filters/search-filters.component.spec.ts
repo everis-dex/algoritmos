@@ -7,6 +7,7 @@ import {
   TAGS,
 } from '../../../../constants/search-filters.const';
 import { provideHttpClient } from '@angular/common/http';
+import { provideTranslateService } from '@ngx-translate/core';
 
 describe('SearchFiltersComponent', () => {
   let component: SearchFiltersComponent;
@@ -15,7 +16,7 @@ describe('SearchFiltersComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SearchFiltersComponent],
-      providers: [provideHttpClient()],
+      providers: [provideHttpClient(), provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SearchFiltersComponent);
