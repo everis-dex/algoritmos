@@ -37,7 +37,7 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   public totalSearchResultsLength = 0;
   public totalPages = 0;
 
-  private _componentSubscriptions: Subscription[] = [];
+  private readonly _componentSubscriptions: Subscription[] = [];
 
   constructor(private readonly _algorithmicSystemService: CardService) {}
 

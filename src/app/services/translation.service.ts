@@ -1,22 +1,28 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TranslationService {
   public translatedLiterals: Record<string, string> = {};
+
   private readonly _apiUrl =
     'https://translate.googleapis.com/translate_a/single';
+  private readonly _literalsTranslations: string[] = [];
 
   constructor(
     private readonly _http: HttpClient,
     private readonly _translateService: TranslateService
   ) {}
 
-  public translateText(text: string, targetLang: string): Observable<string> {
+  public translateText(
+    text: string,
+    targetLang: string,
+    extractedLiterals?: Record<string, string>[]
+  ): Observable<string> {
     const params = new HttpParams()
       .set('client', 'gtx')
       .set('sl', 'ca')
@@ -25,9 +31,15 @@ export class TranslationService {
       .set('q', text);
 
     return this._http.get<string[]>(this._apiUrl, { params }).pipe(
-      catchError((error) => {
-        console.error('Error al traducir:', error);
-        return of(text);
+      catchError(() => {
+        extractedLiterals?.forEach((literal) => {
+          this._translateService
+            .get(literal['key'])
+            .subscribe((translation) =>
+              this._literalsTranslations.push(translation)
+            );
+        });
+        return this._literalsTranslations;
       }),
       map((response) => {
         if (Array.isArray(response[0])) {
@@ -36,7 +48,7 @@ export class TranslationService {
             .map((fragment) => fragment[0])
             .join(' ');
         }
-        return text;
+        return this._literalsTranslations.join('|');
       })
     );
   }
@@ -74,21 +86,16 @@ export class TranslationService {
     const literalsToTranslate = extractedLiterals.map(
       (literal) => literal.value
     );
-    this.translateText(literalsToTranslate.join('|'), 'es').subscribe({
-      next: (translatedText) => {
-        const translatedTextsArray = translatedText.split('|');
-        extractedLiterals.forEach((literal, index) => {
-          this.translatedLiterals[literal.key] =
-            translatedTextsArray[index]?.trim();
-        });
-      },
-      error: () => {
-        extractedLiterals.forEach((literal) => {
-          this._translateService.get(literal.key).subscribe((translation) => {
-            this.translatedLiterals[literal.key] = translation;
-          });
-        });
-      },
+    this.translateText(
+      literalsToTranslate.join('|'),
+      'es',
+      extractedLiterals
+    ).subscribe((translatedText) => {
+      const translatedTextsArray = translatedText.split('|');
+      extractedLiterals.forEach((literal, index) => {
+        this.translatedLiterals[literal.key] =
+          translatedTextsArray[index]?.trim();
+      });
     });
   }
 }

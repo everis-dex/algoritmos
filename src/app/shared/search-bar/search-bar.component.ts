@@ -40,7 +40,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Output()
   private readonly _changeView = new EventEmitter<string>();
 
-  private _componentSubscriptions: Subscription[] = [];
+  private readonly _componentSubscriptions: Subscription[] = [];
   private readonly _translateText = translateText;
   private readonly _categoriesSelected: string[] = [];
 
