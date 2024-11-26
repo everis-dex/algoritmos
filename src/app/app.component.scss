@@ -2,9 +2,6 @@
 
 ::ng-deep {
   section {
-    display: flex;
-    flex-direction: column;
-
     h1 {
       padding-bottom: 1rem;
     }
@@ -33,7 +30,7 @@
         grid-template-columns: 1fr;
       }
 
-      &:not(div > section) {
+      &:first-of-type {
         padding-left: 1rem;
         padding-right: 1rem;
       }
@@ -51,32 +48,34 @@
         line-height: 2.5rem;
       }
 
-      &:not(div > section) {
-        padding-left: 7.5rem;
-        padding-right: 7.5rem;
+      &:first-of-type {
+        padding-left: 0;
+        padding-right: 0;
+
+        &:not(.banner-container):not(.topic-cards-container) {
+          max-width: 73.125rem;
+          margin: auto;
+        }
       }
     }
   }
 }
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
-}
+  div {
+    flex: 1;
 
-.app-container {
-  flex: 1;
+    .main-container > * {
+      display: flex;
+      flex-direction: column;
 
-  main > * {
-    display: flex;
-    flex-direction: column;
-    
-    @media (min-width: $mobile) and (max-width: $desktop) {
-      padding-top: 2rem;
-    }
-    @media (min-width: $desktop) {
-      padding-top: 1.5rem;
+      @media (min-width: $mobile) and (max-width: $desktop) {
+        padding-top: 2rem;
+      }
+      @media (min-width: $desktop) {
+        padding-top: 1.5rem;
+      }
     }
   }
 }

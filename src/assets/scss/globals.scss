@@ -50,6 +50,7 @@ h4 {
 h1,
 h2 {
   font-weight: 400;
+  text-align: left;
 }
 
 h4 {
@@ -65,4 +66,9 @@ h4 {
 
 li:not(ul.search-results__no-results__suggestion-list li)::marker {
   content: "";
+}
+
+section {
+  display: flex;
+  flex-direction: column;
 }
