@@ -1,0 +1,7 @@
+{
+    "/resource": {
+      "target": "https://analisi.transparenciacatalunya.cat",
+      "secure": true,
+      "changeOrigin": true
+    }
+  }

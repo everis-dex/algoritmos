@@ -92,7 +92,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private _checkBreakpoint(): void {
     this._breakpointObserver
       .observe([Breakpoints.Handset])
-      .subscribe((result) => {
+      .subscribe((result: any) => {
         this.isDesktop = !result.matches;
       });
   }
