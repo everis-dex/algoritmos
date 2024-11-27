@@ -5,9 +5,8 @@ import { SystemDetailComponent } from './pages/system-detail/system-detail.compo
 import { BannerComponent } from './shared/banner/banner.component';
 import { AlgorithmicSystemCard } from './interfaces/cards';
 import { FooterComponent } from './shared/footer/footer.component';
-import { CommonModule } from '@angular/common';
 import { AlgorithmsRegistryService } from './services/algorithms-registry.service';
-import { Subject, take, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { IAlgorithm } from './interfaces/algorithms';
 
 @Component({
@@ -19,7 +18,6 @@ import { IAlgorithm } from './interfaces/algorithms';
     SystemDetailComponent,
     BannerComponent,
     FooterComponent,
-    CommonModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

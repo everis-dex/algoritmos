@@ -23,7 +23,7 @@
   }
 
   @media (min-width: $mobile) and (max-width: $desktop) {
-    padding: 1.5rem 2.125rem 2.125rem;
+    margin: 1.5rem 2.125rem 2.125rem;
 
     span {
       font-size: 0.625rem;
@@ -32,6 +32,11 @@
     &__icons-group {
       flex-direction: column;
 
+      div {
+        display: flex;
+        justify-content: space-between;
+      }
+
       & > img {
         margin-top: 1.5rem;
         max-width: 60%;
@@ -39,7 +44,8 @@
     }
   }
   @media (min-width: $desktop) {
-    padding: 2.5rem 8.75rem 3.125rem;
+    margin: 2.5rem auto 3.125rem;
+    max-width: 70.625rem;
 
     span {
       font-size: 1rem;

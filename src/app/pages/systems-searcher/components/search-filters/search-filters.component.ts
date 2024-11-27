@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { AccordionComponent } from '../../../../shared/accordion/accordion.component';
 import {
@@ -11,7 +10,7 @@ import {
 @Component({
   selector: 'app-search-filters',
   standalone: true,
-  imports: [CommonModule, AccordionComponent],
+  imports: [AccordionComponent],
   templateUrl: './search-filters.component.html',
   styleUrl: './search-filters.component.scss',
 })

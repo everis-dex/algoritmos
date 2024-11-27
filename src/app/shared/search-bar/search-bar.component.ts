@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { CommonModule } from '@angular/common';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { ChipsComponent } from '../chips/chips.component';
 import { SystemsSearcherLinkComponent } from '../systems-searcher-link/systems-searcher-link.component';
 import { Subscription } from 'rxjs';
@@ -37,11 +36,11 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   private readonly _changeView = new EventEmitter<string>();
 
   private _componentSubscriptions: Subscription[] = [];
+  private _mediaQueryList!: MediaQueryList;
 
   constructor(
     private readonly _categoryService: CategoryService,
-    private readonly _sessionStorageService: SessionStorageService,
-    private readonly _breakpointObserver: BreakpointObserver
+    private readonly _sessionStorageService: SessionStorageService
   ) {
     this.currentSearches =
       this._sessionStorageService.getItem('currentSearches') || [];
@@ -90,11 +89,14 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   private _checkBreakpoint(): void {
-    this._breakpointObserver
-      .observe([Breakpoints.Handset])
-      .subscribe((result: any) => {
-        this.isDesktop = !result.matches;
-      });
+    this._mediaQueryList = window.matchMedia(`(min-width: 1200px)`);
+    this.isDesktop = this._mediaQueryList.matches;
+    this._mediaQueryList.addEventListener(
+      'change',
+      (event: MediaQueryListEvent) => {
+        this.isDesktop = event.matches;
+      }
+    );
   }
 
   public handleCategorySelect(): void {
