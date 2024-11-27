@@ -13,8 +13,6 @@ export class AlgorithmsRegistryService {
 
   constructor(private http: HttpClient) { }
 
-  public allAlgResults: Array<IAlgorithm> = [];
-
   
   getAlgorithms(): Observable<IAlgorithm[]> {
     const username = environment.basicAuth.username;
@@ -65,9 +63,9 @@ export class AlgorithmsRegistryService {
   onFiltersSearch(allResults: Array<IAlgorithm>, filters: IFilterSearch): Array<IAlgorithm> {
     const lowercasedFilters = {
       estat:this.normalized( filters.estat),
-      tema: this.normalized(filters.tema),
-      etiquetes: this.normalized(filters.etiquetes),
-      tipus_sistema: this.normalized(filters.etiquetes),
+      tema: this.normalized(filters.tema), // check varios temas
+      etiquetes: this.normalized(filters.etiquetes), // check varias etiquetas
+      tipus_sistema: this.normalized(filters.tipus_sistema),
     };
     return allResults.filter((item) => {
       const matchesTema = lowercasedFilters.tema
@@ -86,6 +84,11 @@ export class AlgorithmsRegistryService {
       return matchesTema && matchesEstat && matchesEtiquetes && matchesTipusSistema;
     });
   }
+
+
+  // ToDo search by ID / name
+  // ToDo listado etiquetas
+  // ToDo método para recuperar el listado
 
   normalized(text: string | undefined): string {
     if (!text) return '';
