@@ -3,43 +3,38 @@
 .banner-container {
   background-color: $white-smoke;
 
-  & > div:not(.banner-container__home-container) {
-    max-width: 73.125rem;
-    margin: auto;
+  nav {
+    background-color: $white-smoke;
 
-    nav {
-      background-color: $white-smoke;
+    ul {
+      align-items: baseline;
+      gap: 0.5rem;
+      padding-top: 1.75rem;
+      padding-left: 0;
 
-      ul {
-        align-items: baseline;
-        gap: 0.5rem;
-        padding-top: 1.75rem;
-        padding-left: 0;
+      li,
+      a {
+        color: $grey-dark;
+        line-height: 1rem;
+        font-size: 0.75rem;
+      }
 
-        li,
-        a {
-          color: $grey-dark;
-          line-height: 1rem;
-          font-size: 0.75rem;
+      a {
+        &::after {
+          content: "";
+          width: 1rem;
+          height: 1rem;
+          margin-left: 0.5rem;
+          background-image: url("../../../assets/icons/Chevron_Small_Up.svg");
+          background-repeat: no-repeat;
+          display: inline-block;
+          vertical-align: bottom;
         }
-
-        a {
-          &::after {
-            content: "";
-            width: 1rem;
-            height: 1rem;
-            margin-left: 0.5rem;
-            background-image: url("../../../assets/icons/Chevron_Small_Up.svg");
-            background-repeat: no-repeat;
-            display: inline-block;
-            vertical-align: bottom;
-          }
-          &:hover {
-            font-family: "Open Sans Bold", sans-serif;
-          }
-          &:focus {
-            outline: 0.025rem dotted $grey-dark;
-          }
+        &:hover {
+          font-family: "Open Sans Bold", sans-serif;
+        }
+        &:focus {
+          outline: 0.025rem dotted $grey-dark;
         }
       }
     }
@@ -78,16 +73,13 @@
     }
 
     &__home-container {
-      &__header {
+      &__header,
+      &__subheader img {
         display: none;
       }
 
       &__subheader {
         height: 18rem;
-
-        img {
-          display: none;
-        }
 
         div {
           &:first-of-type {
@@ -107,11 +99,17 @@
     h1 {
       font-size: 1.75rem;
       line-height: 2.625rem;
+      margin: 0 1rem;
     }
   }
 }
 @media (min-width: $desktop) {
   .banner-container {
+    & > div:not(.banner-container__home-container) {
+      max-width: 73.125rem;
+      margin: auto;
+    }
+
     nav {
       display: inherit;
 
@@ -121,16 +119,13 @@
     }
 
     &__home-container {
-      &__header {
+      &__header,
+      &__subheader img {
         display: inherit;
       }
 
       &__subheader {
         height: 100%;
-
-        img {
-          display: inherit;
-        }
 
         div {
           &:first-of-type {
@@ -148,6 +143,7 @@
     h1 {
       font-size: 2.1875rem;
       line-height: 3rem;
+      margin: 0 auto;
     }
   }
 }
