@@ -6,8 +6,6 @@ import { BannerComponent } from './shared/banner/banner.component';
 import { AlgorithmicSystemCard } from './interfaces/cards';
 import { FooterComponent } from './shared/footer/footer.component';
 import { AlgorithmsRegistryService } from './services/algorithms-registry.service';
-import { Subject, takeUntil } from 'rxjs';
-import { IAlgorithm } from './interfaces/algorithms';
 
 @Component({
   selector: 'app-root',
@@ -33,7 +31,7 @@ export class AppComponent {
   };
 
 
-  constructor(private algorithmsRegistry: AlgorithmsRegistryService) {}
+  constructor() {}
 
   public changeView(view?: string): void {
     this.currentView = view ?? 'home';

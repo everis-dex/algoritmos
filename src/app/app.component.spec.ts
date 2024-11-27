@@ -11,10 +11,7 @@ describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
-      providers: [
-        AlgorithmsRegistryService,
-        provideHttpClient()
-      ]
+      providers: []
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
