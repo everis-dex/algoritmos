@@ -190,9 +190,9 @@ describe('AlgorithmsRegistryService', () => {
 
 describe('onOpenSearch', () => {
   it('should find matches in nom field', () => {
-    const result = service.onOpenSearch(mockAlgorithms, 'Smart');
+    const result = service.onOpenSearch(mockAlgorithms, 'V1');
     expect(result.length).toBe(1);
-    expect(result[0].nom).toBe('Smart Algorithm');
+    expect(result[0].nom).toBe('CHATGPT V1');
   });
 
   it('should find matches in tema field', () => {
@@ -202,9 +202,9 @@ describe('onOpenSearch', () => {
   });
 
   it('should find matches in estat field', () => {
-    const result = service.onOpenSearch(mockAlgorithms, 'Active');
+    const result = service.onOpenSearch(mockAlgorithms, 'Actiu');
     expect(result.length).toBe(1);
-    expect(result[0].estat).toBe('Active');
+    expect(result[0].estat).toBe('Actiu');
   });
 
   it('should find matches in etiquetes field', () => {
