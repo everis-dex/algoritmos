@@ -22,7 +22,7 @@ import { IAlgorithm } from './interfaces/algorithms';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent {
   public currentView = 'home';
   public algorithmicSystemDetails: AlgorithmicSystemCard = {
     id: 0,
@@ -32,14 +32,8 @@ export class AppComponent implements OnInit, OnDestroy {
     categoryChips: [],
   };
 
-  private destroy$ = new Subject<void>();
 
   constructor(private algorithmsRegistry: AlgorithmsRegistryService) {}
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
   public changeView(view?: string): void {
     this.currentView = view ?? 'home';
@@ -47,18 +41,5 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public setDetails(details: AlgorithmicSystemCard): void {
     this.algorithmicSystemDetails = details;
-  }
-
-  ngOnInit(): void {
-    this.algorithmsRegistry.getAlgorithms()
-    .pipe(takeUntil(this.destroy$))
-    .subscribe({
-      next: (res: IAlgorithm[]) => {
-        console.log('🚀 ~ res:', res)
-      },
-      error: (error: any) => {
-        console.log('🚀 ~ error:', error)
-      }
-    })
   }
 }
