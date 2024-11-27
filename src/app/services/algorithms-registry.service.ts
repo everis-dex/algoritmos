@@ -49,7 +49,7 @@ export class AlgorithmsRegistryService {
       keysToSearch.some((key) =>
         (key in item) && 
         typeof item[key as keyof IAlgorithm] === 'string' && 
-        item[key as keyof IAlgorithm]?.toString().toLowerCase().includes(lowerSearchText)
+        this.normalized(item[key as keyof IAlgorithm]?.toString()).includes(lowerSearchText)
       )
     );
   }
