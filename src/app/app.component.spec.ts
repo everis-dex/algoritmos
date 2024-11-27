@@ -2,8 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { mockAlgorithmicSystems } from './mocks/cards';
 import { AlgorithmsRegistryService } from './services/algorithms-registry.service';
-import { HttpClient, HttpHandler, provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -14,8 +13,7 @@ describe('AppComponent', () => {
       imports: [AppComponent],
       providers: [
         AlgorithmsRegistryService,
-        provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClient()
       ]
     }).compileComponents();
 

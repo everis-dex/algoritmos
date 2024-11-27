@@ -2,12 +2,13 @@ import { TestBed } from '@angular/core/testing';
 
 import { AlgorithmsRegistryService } from './algorithms-registry.service';
 import { IAlgorithm } from '../interfaces/algorithms';
-import { HttpClientTestingModule, provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 describe('AlgorithmsRegistryService', () => {
   let service: AlgorithmsRegistryService;
-
+  let httpMock: HttpTestingController;
   const mockAlgorithms: IAlgorithm[] = [
     {
         "nom": "Copilot",
@@ -104,9 +105,63 @@ describe('AlgorithmsRegistryService', () => {
         provideHttpClientTesting(), ]
     });
     service = TestBed.inject(AlgorithmsRegistryService);
+    httpMock = TestBed.inject(HttpTestingController);
   });
 
-  describe('onFiltersSearch', () => {
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+
+describe('getAlgorithms', () => {
+    it('should make GET request with correct basic auth headers', () => {
+
+      const expectedCredentials = btoa(`${environment.basicAuth.username}:${environment.basicAuth.password}`);
+
+      service.getAlgorithms().subscribe(response => {
+        expect(response).toEqual(mockAlgorithms);
+      });
+
+      const req = httpMock.expectOne(environment.apiUrl);
+      expect(req.request.method).toBe('GET');
+      expect(req.request.headers.get('Authorization')).toBe(`Basic ${expectedCredentials}`);
+      expect(req.request.headers.get('Content-Type')).toBe('application/json');
+      expect(req.request.withCredentials).toBeTrue();
+
+      req.flush(mockAlgorithms);
+    });
+
+    it('should handle empty response', () => {
+      const mockResponse: IAlgorithm[] = [];
+
+      service.getAlgorithms().subscribe(response => {
+        expect(response).toEqual([]);
+      });
+
+      const req = httpMock.expectOne(environment.apiUrl);
+      req.flush(mockResponse);
+    });
+
+    it('should handle HTTP error', () => {
+      const errorMessage = 'HTTP Error';
+
+      service.getAlgorithms().subscribe({
+        error: (error) => {
+          expect(error.status).toBe(404);
+          expect(error.statusText).toBe(errorMessage);
+        }
+      });
+
+      const req = httpMock.expectOne(environment.apiUrl);
+      req.flush('404 error', {
+        status: 404,
+        statusText: errorMessage
+      });
+    });
+});
+
+
+describe('onFiltersSearch', () => {
 
 
   it('should filter by tema', () => {

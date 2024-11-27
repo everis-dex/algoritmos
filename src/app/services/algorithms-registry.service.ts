@@ -29,7 +29,7 @@ export class AlgorithmsRegistryService {
     };
     console.log('🚀 ~ this.registryURL:', this.registryURL)
     return this.http.get<IAlgorithm[]>(this.registryURL, options);
-    }
+  }
 
     
   /**
