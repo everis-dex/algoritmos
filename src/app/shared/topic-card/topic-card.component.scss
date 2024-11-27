@@ -1,7 +1,7 @@
 @import "../../../assets/scss/styles.scss";
 
 .topic-card-link {
-  text-decoration: none;
+  text-decoration: none !important;
   position: relative;
 
   &--before {

@@ -1,122 +1,153 @@
 @import "../../../assets/scss/styles.scss";
 
 .banner-container {
-  background-color: rgba($white-smoke, 0.9);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  background-color: $white-smoke;
 
-  ul {
-    align-items: baseline;
-    gap: 0.5rem;
-    padding-top: 1.75rem;
-    padding-left: 0;
+  & > div:not(.banner-container__home-container) {
+    max-width: 73.125rem;
+    margin: auto;
 
-    li,
-    a {
-      color: $grey-dark;
-      line-height: 1rem;
-      font-size: 0.75rem;
-    }
+    nav {
+      background-color: $white-smoke;
 
-    a {
-      &::after {
-        content: "";
-        width: 1rem;
-        height: 1rem;
-        margin-left: 0.5rem;
-        background-image: url("../../../assets/icons/Chevron_Small_Up.svg");
-        background-repeat: no-repeat;
-        display: inline-block;
-        vertical-align: bottom;
-      }
-      &:hover {
-        font-family: "Open Sans Bold", sans-serif;
-      }
-      &:focus {
-        outline: 0.025rem dotted $grey-dark;
+      ul {
+        align-items: baseline;
+        gap: 0.5rem;
+        padding-top: 1.75rem;
+        padding-left: 0;
+
+        li,
+        a {
+          color: $grey-dark;
+          line-height: 1rem;
+          font-size: 0.75rem;
+        }
+
+        a {
+          &::after {
+            content: "";
+            width: 1rem;
+            height: 1rem;
+            margin-left: 0.5rem;
+            background-image: url("../../../assets/icons/Chevron_Small_Up.svg");
+            background-repeat: no-repeat;
+            display: inline-block;
+            vertical-align: bottom;
+          }
+          &:hover {
+            font-family: "Open Sans Bold", sans-serif;
+          }
+          &:focus {
+            outline: 0.025rem dotted $grey-dark;
+          }
+        }
       }
     }
   }
 
-  &__home-header {
-    display: block;
-    position: relative;
+  &__home-container {
+    &__subheader {
+      position: relative;
 
-    h2 {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background-color: rgba($white-smoke, 0.9);
-      line-height: 2.375rem;
-    }
+      img {
+        width: 100%;
+      }
 
-    img {
-      width: 100%;
+      div:last-child {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        background-color: rgba($white-smoke, 0.9);
+
+        h2 {
+          padding: 1.5rem 0;
+        }
+      }
     }
   }
 
-  &__other-view-header {
-    display: none;
+  h1 {
+    padding: 1.5rem 0;
   }
 }
 
 @media (min-width: $mobile) and (max-width: $desktop) {
   .banner-container {
-    ul,
-    &__home-header h1,
-    &__home-header img {
+    nav {
       display: none;
     }
 
-    &__home-header {
-      &--before {
-        height: 100%;
-        background-image: url("../../../assets/images/Titulo+foto.svg");
-        background-size: cover;
-        background-position: center;
+    &__home-container {
+      &__header {
+        display: none;
       }
 
-      height: 18rem;
+      &__subheader {
+        height: 18rem;
 
-      h2 {
-        padding: 1.5rem;
-        font-size: 1.75rem;
+        img {
+          display: none;
+        }
+
+        div {
+          &:first-of-type {
+            height: 100%;
+            background-image: url("../../../assets/images/Titulo+foto.svg");
+            background-size: cover;
+            background-position: center;
+          }
+          &:last-of-type h2 {
+            font-size: 1.75rem;
+            margin: 0 1rem;
+          }
+        }
       }
     }
 
     h1 {
       font-size: 1.75rem;
       line-height: 2.625rem;
-      padding: 1.5rem;
     }
   }
 }
 @media (min-width: $desktop) {
   .banner-container {
-    ul {
-      display: flex;
+    nav {
+      display: inherit;
+
+      ul {
+        display: flex;
+      }
     }
 
-    &__home-header {
-      background: none;
-      height: 100%;
-
-      h2 {
-        padding: 1.5rem 0;
-        font-size: 2rem;
+    &__home-container {
+      &__header {
+        display: inherit;
       }
 
-      h1, img {
-        display: block;
+      &__subheader {
+        height: 100%;
+
+        img {
+          display: inherit;
+        }
+
+        div {
+          &:first-of-type {
+            display: none;
+          }
+          &:last-of-type h2 {
+            margin: 0 auto;
+            font-size: 2rem;
+            max-width: 73.125rem;
+          }
+        }
       }
     }
 
     h1 {
       font-size: 2.1875rem;
       line-height: 3rem;
-      padding-bottom: 1.5rem;
     }
   }
 }

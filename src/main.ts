@@ -1,7 +1,7 @@
 import { bootstrapApplication } from "@angular/platform-browser";
 import { AppComponent } from './app/app.component';
 
-function bootstrapGecat() {
+function bootstrapGencat() {
 
   fetch(`https://administraciodigital.gencat.cat/template?mode=html&code=OAD0001&idioma=ca&nocache`)
   .then(response => response.text())
@@ -27,4 +27,4 @@ function bootstrapGecat() {
 
 }
 
-bootstrapGecat();
+bootstrapGencat();

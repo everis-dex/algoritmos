@@ -1,27 +1,45 @@
-<nav class="banner-container">
-  <ul>
-    <li><a href="https://administraciodigital.gencat.cat/ca/inici/">Inici</a></li>
-    @if (currentView === 'home') {
-    <li>Registre de sistemes d'IA</li>
-    } @else {
-    <li><a href="#" (click)="redirectToHomeView($event)">Registre de sistemes d'IA</a></li>
-    @if (currentView === 'systems-searcher') {
-    <li>Cercador de sistemes</li>
-    } @else if (currentView === 'system-detail') {
-    <li>{{ algorithmicSystemName }}</li>
+<div class="banner-container">
+  <div>
+    <nav>
+      <ul>
+        <li><a href="https://administraciodigital.gencat.cat/ca/inici/">Inici</a></li>
+        <li>
+          @if (currentView === 'home') {
+          Registre de sistemes d'IA
+          } @else {
+          <a href="#" (click)="redirectToHomeView($event)">Registre de sistemes d'IA</a>
+          }
+        </li>
+        <li>
+          @if (currentView === 'systems-searcher') {
+          Cercador de sistemes
+          } @else {
+          {{ algorithmicSystemName }}
+          }
+        </li>
+      </ul>
+    </nav>
+    @switch (currentView) {
+    @case ('home') {
+    <h1 class="banner-container__home-container__header">Registre d'IA</h1>
+    }
+    @case ('systems-searcher') {
+    <h1>Cerca un dels nostres sistemes</h1>
+    }
+    @case ('system-detail') {
+    <h1>{{ algorithmicSystemName }}</h1>
     }
     }
-  </ul>
-  <div
-    [ngClass]="{'banner-container__home-header': currentView === 'home', 'banner-container__other-view-header': currentView !== 'home'}">
-    <h1>Registre d'IA</h1>
-    <div class="banner-container__home-header--before"></div>
-    <h2>Cerca un dels nostres sistemes</h2>
-    <img src="assets/images/Imagen.svg" alt="Imatge de la capçalera">
   </div>
-  @if (currentView === 'systems-searcher') {
-  <h1>Cerca un dels nostres sistemes</h1>
-  } @else if (currentView === 'system-detail') {
-  <h1>{{ algorithmicSystemName }}</h1>
+  @if (currentView === 'home') {
+  <div class="banner-container__home-container">
+    <div class="banner-container__home-container__subheader">
+      <img src="assets/images/Imagen.svg" alt="">
+      <div></div>
+      <div>
+        <h2>Cerca un dels nostres sistemes</h2>
+      </div>
+    </div>
+  </div>
   }
-</nav>
+</div>

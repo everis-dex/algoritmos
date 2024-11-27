@@ -30,7 +30,7 @@
         grid-template-columns: 1fr;
       }
 
-      &:first-of-type {
+      &:not(div > section) {
         padding-left: 1rem;
         padding-right: 1rem;
       }
@@ -48,7 +48,7 @@
         line-height: 2.5rem;
       }
 
-      &:first-of-type {
+      &:not(div > section) {
         padding-left: 0;
         padding-right: 0;
 
