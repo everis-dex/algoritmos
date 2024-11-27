@@ -2,6 +2,11 @@
 
 .topic-cards-container {
   background-color: $white-smoke;
+
+  & > div {
+    max-width: 73.125rem;
+    margin: auto;
+  }
 }
 
 @media (min-width: $mobile) and (max-width: $desktop) {

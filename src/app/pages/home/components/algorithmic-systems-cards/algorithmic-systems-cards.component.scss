@@ -23,8 +23,13 @@
       padding-top: 0;
     }
 
-    &__link:first-child {
-      display: none;
+    &__link {
+      &:first-child {
+        display: none;
+      }
+      &:last-child {
+        display: inherit;
+      }
     }
   }
 }

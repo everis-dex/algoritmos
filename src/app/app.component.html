@@ -1,14 +1,21 @@
 <div class="wrapper">
-  <div class="app-container">
+  <div>
     <app-banner [currentView]="currentView" [algorithmicSystemName]="algorithmicSystemDetails.title"
       (_changeView)="changeView()"></app-banner>
-    <main [ngSwitch]="currentView">
-      <app-home *ngSwitchCase="'home'" (_changeView)="changeView($event)" (_setDetails)="setDetails($event)"></app-home>
-      <app-systems-searcher *ngSwitchCase="'systems-searcher'" (_changeView)="changeView($event)"
+    <div class="main-container">
+      @switch (currentView) {
+      @case ('home') {
+      <app-home (_changeView)="changeView($event)" (_setDetails)="setDetails($event)"></app-home>
+      }
+      @case ('systems-searcher') {
+      <app-systems-searcher (_changeView)="changeView($event)"
         (_setDetails)="setDetails($event)"></app-systems-searcher>
-      <app-system-detail *ngSwitchCase="'system-detail'"
-        [algorithmicSystem]="algorithmicSystemDetails"></app-system-detail>
-    </main>
+      }
+      @case ('system-detail') {
+      <app-system-detail [algorithmicSystem]="algorithmicSystemDetails"></app-system-detail>
+      }
+      }
+    </div>
   </div>
   <app-footer></app-footer>
 </div>
