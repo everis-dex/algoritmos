@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParamsOptions } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { IAlgorithm, IFilterSearch } from '../interfaces/algorithms';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +10,24 @@ import { Observable } from 'rxjs';
 export class AlgorithmsRegistryService {
 
   public registryURL = environment.apiUrl
+  public allAlgorithms: IAlgorithm[] = [];
+  private allAlgorithmsSubject = new BehaviorSubject<IAlgorithm[] | null>(null);
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+    this.getAlgorithms().subscribe((data) => {
+      this.allAlgorithmsSubject.next(data);
+      this.allAlgorithms = data;
+    });
+  }
+
+  getAllAlgorithmsSubject(): Observable<IAlgorithm[] | null> {
+    return this.allAlgorithmsSubject.asObservable();
+  }
+
+  getAllAlgorithms(): Array<IAlgorithm> {
+    return this.allAlgorithms;
+  }
 
   
   getAlgorithms(): Observable<IAlgorithm[]> {
@@ -19,7 +35,6 @@ export class AlgorithmsRegistryService {
     const password = environment.basicAuth.password;
     const credentials = btoa(`${username}:${password}`);
 
-    console.log('🚀 ~ credentials:', credentials)
     const options = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -27,7 +42,6 @@ export class AlgorithmsRegistryService {
       }),
       withCredentials: true
     };
-    console.log('🚀 ~ this.registryURL:', this.registryURL)
     return this.http.get<IAlgorithm[]>(this.registryURL, options);
   }
 
@@ -88,7 +102,9 @@ export class AlgorithmsRegistryService {
 
   // ToDo search by ID / name
   // ToDo listado etiquetas
-  // ToDo método para recuperar el listado
+  // ToDo método para recuperar el listado etiquetas
+  // ToDo método para recuperar el listado categorias - estáticos
+
 
   normalized(text: string | undefined): string {
     if (!text) return '';

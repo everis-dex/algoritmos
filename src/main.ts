@@ -21,7 +21,7 @@ function bootstrapGencat() {
         bootstrapApplication(AppComponent, appConfig).catch((err) =>
           console.error('Error al inicializar Angular:', err)
         );
-      }, 1000);
+      }, 1200);
     })
     .catch((err) => {
       console.error('Error al cargar el index.html dinámico:', err);
