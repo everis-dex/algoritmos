@@ -1,5 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
+import { appConfig } from './app/app.config';
 
 function bootstrapGencat() {
   fetch(
@@ -17,7 +18,7 @@ function bootstrapGencat() {
           const appRoot = document.createElement('app-root');
           main.appendChild(appRoot);
         }
-        bootstrapApplication(AppComponent).catch((err) =>
+        bootstrapApplication(AppComponent, appConfig).catch((err) =>
           console.error('Error al inicializar Angular:', err)
         );
       }, 1000);
