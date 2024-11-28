@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParamsOptions } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { IAlgorithm, IFilterSearch } from '../interfaces/algorithms';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, take } from 'rxjs';
 import { CATEGORIES } from '../constants/search-filters.const';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class AlgorithmsRegistryService {
 
 
   constructor(private http: HttpClient) {
-    this.getAlgorithms().subscribe((data) => {
+    this.getAlgorithms().pipe(take(1)).subscribe((data) => {
       this.allAlgorithmsSubject.next(data);
       this.allAlgorithms = data;
     });
