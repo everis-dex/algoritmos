@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 
 import { AlgorithmsRegistryService } from './algorithms-registry.service';
 import { IAlgorithm } from '../interfaces/algorithms';
-import { HttpClientTestingModule, HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 describe('AlgorithmsRegistryService', () => {
@@ -102,7 +102,7 @@ describe('AlgorithmsRegistryService', () => {
       providers: [
         AlgorithmsRegistryService,
         provideHttpClient(),
-        provideHttpClientTesting(), ]
+        provideHttpClientTesting()]
     });
     service = TestBed.inject(AlgorithmsRegistryService);
     httpMock = TestBed.inject(HttpTestingController);
