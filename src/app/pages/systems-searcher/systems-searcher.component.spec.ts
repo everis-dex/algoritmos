@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SystemsSearcherComponent } from './systems-searcher.component';
-import { mockAlgorithmicSystems } from '../../mocks/cards';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('SystemsSearcherComponent', () => {
   let component: SystemsSearcherComponent;
@@ -10,6 +10,7 @@ describe('SystemsSearcherComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SystemsSearcherComponent],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SystemsSearcherComponent);
@@ -30,28 +31,6 @@ describe('SystemsSearcherComponent', () => {
     component.ngOnDestroy();
 
     expect(subscriptionSpy.unsubscribe).toHaveBeenCalled();
-  });
-
-  describe('changeView', () => {
-    it('should emit changeView event to the given view', () => {
-      const changeViewSpy = spyOn(component['_changeView'], 'emit');
-
-      const testView = 'test-view';
-      component.changeView(testView);
-
-      expect(changeViewSpy).toHaveBeenCalledWith(testView);
-    });
-  });
-
-  describe('setDetails', () => {
-    it('should emit setDetails event to the given details', () => {
-      const setDetailsSpy = spyOn(component['_setDetails'], 'emit');
-
-      const details = mockAlgorithmicSystems[0];
-      component.setDetails(details);
-
-      expect(setDetailsSpy).toHaveBeenCalledWith(details);
-    });
   });
 
   describe('changePage', () => {

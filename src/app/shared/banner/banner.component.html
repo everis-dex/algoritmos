@@ -13,8 +13,8 @@
         <li>
           @if (currentView === 'systems-searcher') {
           Cercador de sistemes
-          } @else {
-          {{ algorithmicSystemName }}
+          } @else if (currentView === 'system-detail') {
+          {{ algorithmName }}
           }
         </li>
       </ul>
@@ -27,7 +27,7 @@
     <h1>Cerca un dels nostres sistemes</h1>
     }
     @case ('system-detail') {
-    <h1>{{ algorithmicSystemName }}</h1>
+    <h1>{{ algorithmName }}</h1>
     }
     }
   </div>

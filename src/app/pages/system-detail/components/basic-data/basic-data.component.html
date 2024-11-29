@@ -1,22 +1,22 @@
-@if (algorithmicSystem) {
+@if (algorithm) {
 <div class="basic-data-container">
-  <span class="basic-data-container__state"><img src="assets/icons/Oval_{{getStateColor(algorithmicSystem.state)}}.svg"
+  <span class="basic-data-container__state"><img src="assets/icons/Oval_{{getStateColor(algorithm.estat)}}.svg"
       alt="Estat del sistema algorítmic">{{
-    algorithmicSystem.state }}</span>
+    algorithm.estat }}</span>
   <div class="basic-data-container__paragraph-container">
     <p class="basic-data-container__paragraph">Descripció breu</p>
-    <p>{{algorithmicSystem.description}}</p>
+    <p>{{ algorithm.descripcio }}</p>
   </div>
   <div class="basic-data-container__category-chip-container">
-    @for (categoryChip of algorithmicSystem.categoryChips; track $index) {
-    <div class="basic-data-container__category-chip">{{ categoryChip }}</div>
-    }
+    <div class="basic-data-container__category-chip">{{ algorithm.tema }}</div>
   </div>
   <div class="basic-data-container__paragraph-container">
     <p class="basic-data-container__paragraph">Etiquetes</p>
     <div class="basic-data-container__tag-container">
-      @for (tag of algorithmicSystem.tags; track $index) {
+      @if (algorithm.etiquetes) {
+      @for (tag of algorithm.etiquetes.split(','); track $index) {
       <div class="basic-data-container__tag">{{ tag }}</div>
+      }
       }
     </div>
   </div>

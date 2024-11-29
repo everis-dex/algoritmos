@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlgorithmicSystemCardComponent } from './algorithmic-system-card.component';
-import { mockAlgorithmicSystems } from '../../mocks/cards';
+import { mockAlgorithms } from '../../mocks/algorithms';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('AlgorithmicSystemCardComponent', () => {
   let component: AlgorithmicSystemCardComponent;
@@ -10,6 +11,7 @@ describe('AlgorithmicSystemCardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AlgorithmicSystemCardComponent],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AlgorithmicSystemCardComponent);
@@ -21,15 +23,15 @@ describe('AlgorithmicSystemCardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('redirectToAlgorithmicSystemDetails', () => {
-    it('should emit changeView event to the given algorithmic system', () => {
-      const changeViewSpy = spyOn(component['_changeView'], 'emit');
+  describe('redirectToSystemDetailView', () => {
+    it('should redirect to system detail view to the given algorithmic system', () => {
+      const viewManagerSpy = spyOn(component['_viewManagerService'], 'setView');
 
       const event = new MouseEvent('click');
-      const algorithmicSystem = mockAlgorithmicSystems[0];
-      component.redirectToAlgorithmicSystemDetails(event, algorithmicSystem);
+      const algorithmicSystem = mockAlgorithms[0];
+      component.redirectToSystemDetailView(event, algorithmicSystem);
 
-      expect(changeViewSpy).toHaveBeenCalledWith(algorithmicSystem);
+      expect(viewManagerSpy).toHaveBeenCalledWith('system-detail');
     });
   });
 });

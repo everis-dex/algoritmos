@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { ViewManagerService } from '../../services/view-manager.service';
 
 @Component({
   selector: 'app-systems-searcher-link',
@@ -8,10 +9,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './systems-searcher-link.component.scss',
 })
 export class SystemsSearcherLinkComponent {
-  @Output()
-  private readonly _changeView = new EventEmitter<string>();
-
+  constructor(private readonly _viewManagerService: ViewManagerService) {}
+  
   public redirectToSystemsSearcherView(): void {
-    this._changeView.emit('systems-searcher');
+    this._viewManagerService.setView('systems-searcher');
   }
 }

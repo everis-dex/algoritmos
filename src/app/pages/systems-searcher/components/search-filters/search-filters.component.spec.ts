@@ -6,6 +6,7 @@ import {
   STATES,
   TAGS,
 } from '../../../../constants/search-filters.const';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('SearchFiltersComponent', () => {
   let component: SearchFiltersComponent;
@@ -14,6 +15,7 @@ describe('SearchFiltersComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [SearchFiltersComponent],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SearchFiltersComponent);

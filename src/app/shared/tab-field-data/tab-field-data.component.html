@@ -10,6 +10,6 @@
     <p class="tab-field-container__static-content__description">{{field.description?.text}}</p>
     }
   </div>
-  <p class="tab-field-container__dynamic-content">{{field.content}}</p>
+  <p [innerHTML]="field.content" class="tab-field-container__dynamic-content"></p>
 </div>
 }

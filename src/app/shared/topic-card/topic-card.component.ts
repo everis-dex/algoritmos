@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TopicCard } from '../../interfaces/cards';
+import { ITopic } from '../../interfaces/topics';
 @Component({
   selector: 'app-topic-card',
   standalone: true,
@@ -9,5 +9,5 @@ import { TopicCard } from '../../interfaces/cards';
 })
 export class TopicCardComponent {
   @Input()
-  public topic!: TopicCard;
+  public topic!: ITopic;
 }

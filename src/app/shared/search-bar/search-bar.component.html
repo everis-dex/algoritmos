@@ -53,8 +53,7 @@
       <h4>Categories populars</h4>
       <app-chips [chips]="popularCategories" (_selectChip)="selectCategory($event)"></app-chips>
     </section>
-    <app-systems-searcher-link
-      (_changeView)="redirectToSystemsSearcherView({event: $event})"></app-systems-searcher-link>
+    <app-systems-searcher-link></app-systems-searcher-link>
   </div>
   }
 </section>

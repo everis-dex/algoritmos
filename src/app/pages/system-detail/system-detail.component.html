@@ -1,7 +1,6 @@
 <section class="system-detail-container">
-  <app-basic-data class="system-detail-container__basic-data-container"
-    [algorithmicSystem]="algorithmicSystem"></app-basic-data>
-  <app-tabs-data class="system-detail-container__tabs-data-container"
+  <app-basic-data class="system-detail-container__basic-data-container" [algorithm]="algorithm"></app-basic-data>
+  <app-tabs-data class="system-detail-container__tabs-data-container" [algorithm]="algorithm"
     (_setMarginTop)="setMarginTop($event)"></app-tabs-data>
   <div class="system-detail-container__sidebar-container" [style.marginTop.px]="marginTop">
     <app-documents></app-documents>

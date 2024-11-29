@@ -70,6 +70,9 @@ export const tabsData: ITabData[] = [
       {
         field: 'Motiu de la modificació',
       },
+      {
+        field: 'Data de desmantellament',
+      },
     ],
   },
   {
@@ -98,7 +101,7 @@ export const tabsData: ITabData[] = [
         },
       },
       {
-        field: 'Dades usades per al seu funciofieldnt',
+        field: 'Dades usades per al seu funcionament',
         description: {
           text: "Breu descripció sobre el repositori o conjunt de dades utilitzat per a l'entrefieldnt. Per exemple, dades dels usuaris de la renda bàsica universal actuals (2023-2024). No inclou dades de gènere, nacionalitat.",
           isVisible: false,
@@ -139,7 +142,7 @@ export const tabsData: ITabData[] = [
         },
       },
       {
-        field: "Avaluació d'execució del sistema/ algorisme",
+        field: "Avaluació d'execució del sistema / algorisme",
         description: {
           text: "Procés de valoració del rendiment i del comportament del sistema o de l'algorisme en la seva aplicació pràctica, per determinar la seva eficàcia i precisió en les tasques que ha de realitzar.\nURL de l'informe, si existeix.",
           isVisible: false,

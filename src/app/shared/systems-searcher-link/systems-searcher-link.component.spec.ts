@@ -20,11 +20,11 @@ describe('SystemsSearcherLinkComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit changeView event', () => {
-    const changeViewSpy = spyOn(component['_changeView'], 'emit');
+  it('should redirect to systems searcher view', () => {
+    const viewManagerSpy = spyOn(component['_viewManagerService'], 'setView');
 
     component.redirectToSystemsSearcherView();
 
-    expect(changeViewSpy).toHaveBeenCalled();
+    expect(viewManagerSpy).toHaveBeenCalledWith('systems-searcher');
   });
 });

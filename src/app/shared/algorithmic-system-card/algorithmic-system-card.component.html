@@ -1,17 +1,14 @@
-@if (algorithmicSystem) {
-<a href="#" (click)="redirectToAlgorithmicSystemDetails($event, algorithmicSystem)"
-  title="{{ algorithmicSystem.title }}">
+@if (algorithm) {
+<a href="#" (click)="redirectToSystemDetailView($event, algorithm)" title="{{ algorithm.nom }}">
   <div class="algorithmic-system-card-container">
     <span class="algorithmic-system-card-container__state"><img
-        src="assets/icons/Oval_{{getStateColor(algorithmicSystem.state)}}.svg" alt="Estat del sistema algorítmic">{{
-      algorithmicSystem.state }}</span>
-    <h2 class="algorithmic-system-card-container__title">{{ algorithmicSystem.title }}</h2>
+        src="assets/icons/Oval_{{getStateColor(algorithm.estat)}}.svg" alt="">{{
+      algorithm.estat }}</span>
+    <h2 class="algorithmic-system-card-container__name">{{ algorithm.nom }}</h2>
     <div class="algorithmic-system-card-container__separator"></div>
-    <p class="algorithmic-system-card-container__description">{{ algorithmicSystem.description }}</p>
+    <p class="algorithmic-system-card-container__description">{{ algorithm.descripcio }}</p>
     <div class="algorithmic-system-card-container__category-chip-container">
-      @for (categoryChip of algorithmicSystem.categoryChips; track $index) {
-      <div class="algorithmic-system-card-container__category-chip">{{ categoryChip }}</div>
-      }
+      <div class="algorithmic-system-card-container__category-chip">{{ algorithm.tema }}</div>
     </div>
   </div>
 </a>

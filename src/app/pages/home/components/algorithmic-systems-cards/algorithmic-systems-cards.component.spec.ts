@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AlgorithmicSystemsCardsComponent } from './algorithmic-systems-cards.component';
-import { mockAlgorithmicSystems } from '../../../../mocks/cards';
+import { provideHttpClient } from '@angular/common/http';
 
 describe('AlgorithmicSystemsCardsComponent', () => {
   let component: AlgorithmicSystemsCardsComponent;
@@ -10,6 +10,7 @@ describe('AlgorithmicSystemsCardsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AlgorithmicSystemsCardsComponent],
+      providers: [provideHttpClient()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AlgorithmicSystemsCardsComponent);
@@ -28,28 +29,6 @@ describe('AlgorithmicSystemsCardsComponent', () => {
       component.onResize();
 
       expect(setMaxHeightSpy).toHaveBeenCalled();
-    });
-  });
-
-  describe('setView', () => {
-    it('should emit changeView event when argument is a string', () => {
-      const changeViewSpy = spyOn(component['_changeView'], 'emit');
-
-      const view = 'systems-searcher';
-      component.setView(view);
-
-      expect(changeViewSpy).toHaveBeenCalledWith(view);
-    });
-
-    it('should emit changeView event when argument is an object', () => {
-      const changeViewSpy = spyOn(component['_changeView'], 'emit');
-      const setDetailsSpy = spyOn(component['_setDetails'], 'emit');
-
-      const details = mockAlgorithmicSystems[0];
-      component.setView(details);
-
-      expect(changeViewSpy).toHaveBeenCalledWith('system-detail');
-      expect(setDetailsSpy).toHaveBeenCalledWith(details);
     });
   });
 });

@@ -1,174 +1,172 @@
-import { HttpClient, HttpHeaders, HttpParamsOptions } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { IAlgorithm, IFilterSearch } from '../interfaces/algorithms';
-import { BehaviorSubject, Observable, of, take } from 'rxjs';
-import { CATEGORIES } from '../constants/search-filters.const';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { normalized } from '../shared/utilities';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlgorithmsRegistryService {
+  public algorithms: IAlgorithm[] = [];
 
-  public registryURL = environment.apiUrl
-  public allAlgorithms: IAlgorithm[] = [];
-  private allAlgorithmsSubject = new BehaviorSubject<IAlgorithm[] | null>(null);
+  private readonly _registryURL = environment.apiUrl;
+  private readonly _algorithm$ = new BehaviorSubject<IAlgorithm>(
+    {} as IAlgorithm
+  );
+  private readonly _algorithms$ = new BehaviorSubject<IAlgorithm[]>([]);
+  private readonly _normalized = normalized;
 
-
-  constructor(private http: HttpClient) {
-    this.getAlgorithms().pipe(take(1)).subscribe((data) => {
-      this.allAlgorithmsSubject.next(data);
-      this.allAlgorithms = data;
-    });
-  }
+  constructor(private readonly _http: HttpClient) {}
 
   /**
-   * Returns all algorithms as an observable
+   * Loads the list of algorithms from the API.
    *
-   * @return {*}  {(Observable<IAlgorithm[] | null>)}
+   * @return {Observable<IAlgorithm[]>} An observable containing the list of algorithms.
    * @memberof AlgorithmsRegistryService
    */
-  getAllAlgorithmsSubject(): Observable<IAlgorithm[] | null> {
-    return this.allAlgorithmsSubject.asObservable();
-  }
-
-  
-  /**
-   * Returns all algorithms as an array
-   *
-   * @return {*}  {Array<IAlgorithm>}
-   * @memberof AlgorithmsRegistryService
-   */
-  getAllAlgorithms(): Array<IAlgorithm> {
-    return this.allAlgorithms;
-  }
-
-  
-  /**
-   * Returns data from API
-   *
-   * @return {*}  {Observable<IAlgorithm[]>}
-   * @memberof AlgorithmsRegistryService
-   */
-  getAlgorithms(): Observable<IAlgorithm[]> {
+  public loadAlgorithms(): Observable<IAlgorithm[]> {
     const username = environment.basicAuth.username;
     const password = environment.basicAuth.password;
     const credentials = btoa(`${username}:${password}`);
-
     const options = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': `Basic ${credentials}`,
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${credentials}`,
       }),
-      withCredentials: true
+      withCredentials: true,
     };
-    return this.http.get<IAlgorithm[]>(this.registryURL, options);
+    return this._http.get<IAlgorithm[]>(this._registryURL, options);
   }
 
-    
   /**
-   * Returns an array of algorithms that match the given open search.
+   * Sets the algorithms list and updates the observable.
    *
-   * @param {Array<IAlgorithm>} allResults
-   * @param {string} searchText
-   * @return {*}  {Array<IAlgorithm>}
+   * @param {IAlgorithm[]} algorithms The list of algorithms to set.
    * @memberof AlgorithmsRegistryService
    */
-  onOpenSearch(searchText: string): Array<IAlgorithm> {
-    const lowerSearchText = this.normalized(searchText);
-    const keysToSearch = ['nom', 'tema', 'estat', 'etiquetes', 'tipus_sistema']; // todo define
-    return this.allAlgorithms.filter((item) =>
-      keysToSearch.some((key) =>
-        (key in item) && 
-        typeof item[key as keyof IAlgorithm] === 'string' && 
-        this.normalized(item[key as keyof IAlgorithm]?.toString()).includes(lowerSearchText)
+  public setAlgorithms(algorithms: IAlgorithm[]): void {
+    this.algorithms = algorithms;
+    this._algorithms$.next(algorithms);
+  }
+
+  /**
+   * Sets the current algorithm and updates the observable.
+   *
+   * @param {IAlgorithm} algorithm The algorithm to set as the current one.
+   * @memberof AlgorithmsRegistryService
+   */
+  public setAlgorithm(algorithm: IAlgorithm): void {
+    this._algorithm$.next(algorithm);
+  }
+
+  /**
+   * Returns the current algorithm as an observable.
+   *
+   * @return {Observable<IAlgorithm>} The current algorithm as an observable.
+   * @memberof AlgorithmsRegistryService
+   */
+  public getAlgorithmSubject(): Observable<IAlgorithm> {
+    return this._algorithm$.asObservable();
+  }
+
+  /**
+   * Returns the list of algorithms as an observable.
+   *
+   * @return {Observable<IAlgorithm[]>} The list of algorithms as an observable.
+   * @memberof AlgorithmsRegistryService
+   */
+  public getAlgorithmsSubject(): Observable<IAlgorithm[]> {
+    return this._algorithms$.asObservable();
+  }
+
+  /**
+   * Returns the list of algorithms.
+   *
+   * @return {IAlgorithm[]} The list of algorithms.
+   * @memberof AlgorithmsRegistryService
+   */
+  public getAlgorithms(): IAlgorithm[] {
+    return this.algorithms;
+  }
+
+  /**
+   * Filters the algorithms based on the given search text.
+   * Searches through the algorithm fields: 'nom', 'tema', 'estat', 'etiquetes', 'tipus_sistema'.
+   *
+   * @param {string} searchText The search text to filter algorithms.
+   * @return {IAlgorithm[]} The filtered list of algorithms that match the search text.
+   * @memberof AlgorithmsRegistryService
+   */
+  public onOpenSearch(searchText: string): IAlgorithm[] {
+    const lowerSearchText = this._normalized(searchText);
+    const keysToSearch = ['nom', 'tema', 'estat', 'etiquetes', 'tipus_sistema'];
+    return this.algorithms.filter((item) =>
+      keysToSearch.some(
+        (key) =>
+          key in item &&
+          typeof item[key as keyof IAlgorithm] === 'string' &&
+          this._normalized(item[key as keyof IAlgorithm]?.toString()).includes(
+            lowerSearchText
+          )
       )
     );
   }
 
   /**
-   * Returns an array of algorithms that match the given filters.
+   * Filters the algorithms based on the provided filters.
+   * The filters are applied to the fields: 'estat', 'tema', 'etiquetes', and 'tipus_sistema'.
    *
-   * @param {Array<IAlgorithm>} allResults
-   * @param {IFilterSearch} filters
-   * @return {*}  {Array<IAlgorithm>}
+   * @param {IFilterSearch} filters The filters to apply to the algorithm search.
+   * @return {IAlgorithm[]} The filtered list of algorithms that match the given filters.
    * @memberof AlgorithmsRegistryService
    */
-  onFiltersSearch(filters: IFilterSearch): Array<IAlgorithm> {
+  public onFiltersSearch(filters: IFilterSearch): IAlgorithm[] {
     const lowercasedFilters = {
-      estat:this.normalized( filters.estat),
-      tema: this.normalized(filters.tema), // check varios temas
-      etiquetes: this.normalized(filters.etiquetes), // check varias etiquetas
-      tipus_sistema: this.normalized(filters.tipus_sistema),
+      estat: this._normalized(filters.estat),
+      tema: this._normalized(filters.tema),
+      etiquetes: this._normalized(filters.etiquetes),
+      tipus_sistema: this._normalized(filters.tipus_sistema),
     };
-    return this.allAlgorithms.filter((item) => {
+    return this.algorithms.filter((item) => {
       const matchesTema = lowercasedFilters.tema
-        ? this.normalized(item.tema).includes(lowercasedFilters.tema)
+        ? this._normalized(item.tema).includes(lowercasedFilters.tema)
         : true;
       const matchesEstat = lowercasedFilters.estat
-        ? this.normalized(item.estat).includes(lowercasedFilters.estat)
+        ? this._normalized(item.estat).includes(lowercasedFilters.estat)
         : true;
       const matchesEtiquetes = lowercasedFilters.etiquetes
-        ? this.normalized(item.etiquetes).includes(lowercasedFilters.etiquetes)
+        ? this._normalized(item.etiquetes).includes(lowercasedFilters.etiquetes)
         : true;
       const matchesTipusSistema = lowercasedFilters.tipus_sistema
-        ? this.normalized(item.tipus_sistema).includes(lowercasedFilters.tipus_sistema)
+        ? this._normalized(item.tipus_sistema).includes(
+            lowercasedFilters.tipus_sistema
+          )
         : true;
-      
-      return matchesTema && matchesEstat && matchesEtiquetes && matchesTipusSistema;
+
+      return (
+        matchesTema && matchesEstat && matchesEtiquetes && matchesTipusSistema
+      );
     });
   }
 
-  
   /**
-   * Returns the algorithm with the given name
+   * Returns a unique list of tags from the algorithms.
+   * The labels are extracted from the 'etiquetes' field and split by commas.
    *
-   * @param {string} name
-   * @return {*}  {IAlgorithm}
+   * @return {string[]} A list of unique algorithm tags.
    * @memberof AlgorithmsRegistryService
    */
-  getAlgorthmByName(name: string): IAlgorithm { // ToDo change for ID when available
-    if (!this.allAlgorithms) return {} as IAlgorithm;
-    return this.allAlgorithms.find(algorithm => algorithm.nom === name) || {} as IAlgorithm;
-  }
+  public getAlgorithmTagList(): string[] {
+    const splitEntries = this.algorithms
+      .map((algorithm) => algorithm.etiquetes)
+      .flat()
+      .filter((entry) => entry.includes(','))
+      .flatMap((entry) => entry.split(','));
+    const cleanEntries = splitEntries.filter((entry) => !entry.includes(','));
+    const result = Array.from(new Set([...splitEntries, ...cleanEntries]));
 
-
-  /**
-   * Retunrs the list of algorithms labels
-   *
-   * @return {*} 
-   * @memberof AlgorithmsRegistryService
-   */
-  getAlgorithmsLabelsList() {
-      const splitEntries = this.allAlgorithms.map(algorithm => algorithm.etiquetes).flat()
-      .filter(entry => entry.includes(','))
-      .flatMap(entry => entry.split(','));
-      const cleanEntries = splitEntries.filter(entry => !entry.includes(','));
-      const result = Array.from(new Set([...splitEntries, ...cleanEntries]));
-    
-      return result;
-  }
-
-  /**
-   * Returns categories from constant
-   *
-   * @return {*} 
-   * @memberof AlgorithmsRegistryService
-   */
-  getAlgorithmsCategoriesList() {
-    return CATEGORIES;
-  }
-
-
-  /**
-   * Returns a normalized string, removing accents and converting to lowercase
-   *
-   * @param {(string | undefined)} text
-   * @return {*}  {string}
-   * @memberof AlgorithmsRegistryService
-   */
-  normalized(text: string | undefined): string {
-    if (!text) return '';
-    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    return result;
   }
 }

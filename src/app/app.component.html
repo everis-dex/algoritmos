@@ -1,18 +1,16 @@
 <div class="wrapper">
   <div>
-    <app-banner [currentView]="currentView" [algorithmicSystemName]="algorithmicSystemDetails.title"
-      (_changeView)="changeView()"></app-banner>
+    <app-banner [currentView]="currentView" [algorithmName]="algorithm.nom"></app-banner>
     <div class="main-container">
       @switch (currentView) {
       @case ('home') {
-      <app-home (_changeView)="changeView($event)" (_setDetails)="setDetails($event)"></app-home>
+      <app-home></app-home>
       }
       @case ('systems-searcher') {
-      <app-systems-searcher (_changeView)="changeView($event)"
-        (_setDetails)="setDetails($event)"></app-systems-searcher>
+      <app-systems-searcher></app-systems-searcher>
       }
       @case ('system-detail') {
-      <app-system-detail [algorithmicSystem]="algorithmicSystemDetails"></app-system-detail>
+      <app-system-detail [algorithm]="algorithm"></app-system-detail>
       }
       }
     </div>

@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ChipsComponent } from '../chips/chips.component';
-import { TAGS, TAGS_ID } from '../../constants/search-filters.const';
+import { TAGS_ID } from '../../constants/search-filters.const';
 import { ITabData } from '../../pages/system-detail/components/tabs-data/tabs-data.model';
 import { IAccordionData } from './accordion.model';
 import { TabFieldDataComponent } from '../tab-field-data/tab-field-data.component';
+import { normalized } from '../utilities';
+import { AlgorithmsRegistryService } from '../../services/algorithms-registry.service';
 
 @Component({
   selector: 'app-accordion',
@@ -34,12 +36,20 @@ export class AccordionComponent implements OnInit {
   public toggleStates: Record<string, { display: boolean; rotation: boolean }> =
     {};
   public isSelectorRotated = false;
-  public tags = TAGS;
+  public tags: string[] = [];
   public hasTagsSelected = false;
   public hasInputValue = false;
-  public filteredTags: string[] = [...this.tags];
+  public filteredTags: string[] = [];
+
+  private readonly _normalized = normalized;
+
+  constructor(
+    private readonly _algorithmsRegistryService: AlgorithmsRegistryService
+  ) {}
 
   ngOnInit(): void {
+    this.tags = this._algorithmsRegistryService.getAlgorithmTagList();
+    this.filteredTags = [...this.tags];
     this.accordionList?.forEach((accordion) => {
       this.toggleStates[accordion.id] = { display: false, rotation: false };
     });
@@ -65,23 +75,21 @@ export class AccordionComponent implements OnInit {
       this.filteredTags = this.tags;
       return;
     }
-    const lowerInputValue = inputValue.toLowerCase();
+    const normalizedInput = this._normalized(inputValue);
     this.filteredTags = this.tags
-      .filter((tag) =>
-        tag
-          .toLowerCase()
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .includes(lowerInputValue)
-      )
+      .filter((tag) => {
+        const normalizedTag = this._normalized(tag);
+        return normalizedTag.includes(normalizedInput);
+      })
       .sort((a, b) => {
-        const startsWithA = a.toLowerCase().startsWith(lowerInputValue)
-          ? -1
-          : 1;
-        const startsWithB = b.toLowerCase().startsWith(lowerInputValue)
-          ? -1
-          : 1;
-        return startsWithA - startsWithB;
+        const normalizedA = this._normalized(a);
+        const normalizedB = this._normalized(b);
+        const startsWithA = normalizedA.startsWith(normalizedInput) ? -1 : 1;
+        const startsWithB = normalizedB.startsWith(normalizedInput) ? -1 : 1;
+        if (startsWithA !== startsWithB) {
+          return startsWithA - startsWithB;
+        }
+        return normalizedA.localeCompare(normalizedB);
       });
   }
 

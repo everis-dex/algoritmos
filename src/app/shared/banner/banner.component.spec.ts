@@ -20,12 +20,12 @@ describe('BannerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should emit changeView event', () => {
-    const changeViewSpy = spyOn(component['_changeView'], 'emit');
+  it('should redirect to home view', () => {
+    const viewManagerSpy = spyOn(component['_viewManagerService'], 'setView');
 
     const event = new Event('click');
     component.redirectToHomeView(event);
 
-    expect(changeViewSpy).toHaveBeenCalled();
+    expect(viewManagerSpy).toHaveBeenCalledWith('home');
   });
 });

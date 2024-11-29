@@ -1,18 +1,17 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
   OnDestroy,
   OnInit,
-  Output,
   AfterViewInit,
   HostListener,
 } from '@angular/core';
 import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card.component';
-import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import { Subscription } from 'rxjs';
-import { CardService } from '../../../../services/card.service';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
+import { AlgorithmsRegistryService } from '../../../../services/algorithms-registry.service';
+import { IAlgorithm } from '../../../../interfaces/algorithms';
+import { mockAlgorithms } from '../../../../mocks/algorithms';
 
 @Component({
   selector: 'app-algorithmic-systems-cards',
@@ -24,17 +23,12 @@ import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searche
 export class AlgorithmicSystemsCardsComponent
   implements OnInit, OnDestroy, AfterViewInit
 {
-  @Output()
-  private readonly _changeView = new EventEmitter<string>();
-  @Output()
-  private readonly _setDetails = new EventEmitter<AlgorithmicSystemCard>();
-
-  public algorithmicSystems: AlgorithmicSystemCard[] = [];
+  public algorithms: IAlgorithm[] = [];
 
   private _componentSubscription!: Subscription;
 
   constructor(
-    private readonly _algorithmicSystemService: CardService,
+    private readonly _algorithmsRegistryService: AlgorithmsRegistryService,
     private readonly _el: ElementRef
   ) {}
 
@@ -45,12 +39,6 @@ export class AlgorithmicSystemsCardsComponent
   @HostListener('window:resize')
   onResize(): void {
     this.setMaxHeightForElements();
-  }
-
-  public getAlgorithmicSystemDetails(
-    algorithmicSystem: AlgorithmicSystemCard
-  ): AlgorithmicSystemCard {
-    return algorithmicSystem;
   }
 
   public setMaxHeightForElements(): void {
@@ -78,24 +66,21 @@ export class AlgorithmicSystemsCardsComponent
   }
 
   ngOnInit(): void {
-    this._componentSubscription = this._algorithmicSystemService
-      .getAlgorithmicSystems()
-      .subscribe((response) => {
-        this.algorithmicSystems = response.slice(0, 4);
+    this._componentSubscription = this._algorithmsRegistryService
+      .getAlgorithmsSubject()
+      .subscribe((data) => {
+        //this.algorithms = data;
+        this.algorithms = mockAlgorithms;
+        this.algorithms.sort((a, b) => {
+          const firstDate = a.data_ultima_modificacio;
+          const secondDate = b.data_ultima_modificacio;
+          return new Date(secondDate).getTime() - new Date(firstDate).getTime();
+        });
+        this.algorithms = this.algorithms.slice(0, 4);
       });
   }
 
   ngOnDestroy(): void {
-    if (this._componentSubscription)
-      this._componentSubscription.unsubscribe();
-  }
-
-  public setView(event: string | AlgorithmicSystemCard): void {
-    if (typeof event === 'string') {
-      this._changeView.emit(event);
-    } else {
-      this._changeView.emit('system-detail');
-      this._setDetails.emit(event);
-    }
+    if (this._componentSubscription) this._componentSubscription.unsubscribe();
   }
 }

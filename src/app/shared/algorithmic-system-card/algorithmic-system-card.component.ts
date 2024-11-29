@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AlgorithmicSystemCard } from '../../interfaces/cards';
+import { Component, Input } from '@angular/core';
 import { getStateColor } from '../utilities';
+import { IAlgorithm } from '../../interfaces/algorithms';
+import { ViewManagerService } from '../../services/view-manager.service';
+import { AlgorithmsRegistryService } from '../../services/algorithms-registry.service';
 
 @Component({
   selector: 'app-algorithmic-system-card',
@@ -11,19 +13,21 @@ import { getStateColor } from '../utilities';
 })
 export class AlgorithmicSystemCardComponent {
   @Input()
-  public algorithmicSystem!: AlgorithmicSystemCard;
-
-  @Output()
-  private readonly _changeView = new EventEmitter<AlgorithmicSystemCard>();
+  public algorithm!: IAlgorithm;
 
   public getStateColor = getStateColor;
 
-  public redirectToAlgorithmicSystemDetails(
+  constructor(
+    private readonly _viewManagerService: ViewManagerService,
+    private readonly _algorithmsRegistryService: AlgorithmsRegistryService
+  ) {}
+
+  public redirectToSystemDetailView(
     event: MouseEvent,
-    algorithmicSystem: AlgorithmicSystemCard
+    algorithm: IAlgorithm
   ): void {
     event.preventDefault();
-
-    this._changeView.emit(algorithmicSystem);
+    this._viewManagerService.setView('system-detail');
+    this._algorithmsRegistryService.setAlgorithm(algorithm);
   }
 }

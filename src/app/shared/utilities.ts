@@ -13,3 +13,18 @@ export function getStateColor(state: string): string {
   };
   return stateColorConfig[state];
 }
+
+/**
+ * Returns a normalized string, removing accents and converting to lowercase
+ *
+ * @param {(string | undefined)} text
+ * @return {*}  {string}
+ * @memberof AlgorithmsRegistryService
+ */
+export function normalized(text: string | undefined): string {
+  if (!text) return '';
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}

@@ -171,14 +171,14 @@ describe('SearchBarComponent', () => {
     expect(component.currentSearches).toEqual([]);
   });
 
-  it('should emit changeView event with currentSearch', () => {
-    const changeViewSpy = spyOn(component['_changeView'], 'emit');
+  it('should redirect to systems searcher view with currentSearch', () => {
+    const viewManagerSpy = spyOn(component['_viewManagerService'], 'setView');
     const currentSearch = 'test';
 
     sessionStorageService.setItem('lastSearch', currentSearch);
 
     component.redirectToSystemsSearcherView({ currentSearch });
 
-    expect(changeViewSpy).toHaveBeenCalledWith('systems-searcher');
+    expect(viewManagerSpy).toHaveBeenCalledWith('systems-searcher');
   });
 });

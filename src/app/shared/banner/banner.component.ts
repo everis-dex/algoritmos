@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { ViewManagerService } from '../../services/view-manager.service';
 
 @Component({
   selector: 'app-banner',
@@ -11,13 +12,12 @@ export class BannerComponent {
   @Input()
   public currentView!: string;
   @Input()
-  public algorithmicSystemName!: string;
+  public algorithmName = '';
 
-  @Output()
-  private readonly _changeView = new EventEmitter<void>();
+  constructor(private readonly _viewManagerService: ViewManagerService) {}
 
   public redirectToHomeView(event: Event): void {
     event.preventDefault();
-    this._changeView.emit();
+    this._viewManagerService.setView('home');
   }
 }

@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchResultsComponent } from './search-results.component';
-import { mockAlgorithmicSystems } from '../../../../mocks/cards';
 
 describe('SearchResultsComponent', () => {
   let component: SearchResultsComponent;
@@ -19,18 +18,5 @@ describe('SearchResultsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  describe('setView', () => {
-    it('should emit changeView event to the given view', () => {
-      const changeViewSpy = spyOn(component['_changeView'], 'emit');
-      const setDetailsSpy = spyOn(component['_setDetails'], 'emit');
-
-      const details = mockAlgorithmicSystems[0];
-      component.setView(details);
-
-      expect(changeViewSpy).toHaveBeenCalledWith('system-detail');
-      expect(setDetailsSpy).toHaveBeenCalledWith(details);
-    });
   });
 });

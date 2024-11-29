@@ -1,11 +1,9 @@
 import {
   Component,
-  EventEmitter,
   HostListener,
   Input,
   OnDestroy,
   OnInit,
-  Output,
 } from '@angular/core';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { CommonModule } from '@angular/common';
@@ -13,6 +11,7 @@ import { ChipsComponent } from '../chips/chips.component';
 import { SystemsSearcherLinkComponent } from '../systems-searcher-link/systems-searcher-link.component';
 import { Subscription } from 'rxjs';
 import { CategoryService } from '../../services/category.service';
+import { ViewManagerService } from '../../services/view-manager.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -32,15 +31,13 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Input()
   public hasFilterSelector!: boolean;
 
-  @Output()
-  private readonly _changeView = new EventEmitter<string>();
-
   private _componentSubscriptions: Subscription[] = [];
   private _mediaQueryList!: MediaQueryList;
 
   constructor(
     private readonly _categoryService: CategoryService,
-    private readonly _sessionStorageService: SessionStorageService
+    private readonly _sessionStorageService: SessionStorageService,
+    private readonly _viewManagerService: ViewManagerService
   ) {
     this.currentSearches =
       this._sessionStorageService.getItem('currentSearches') || [];
@@ -163,6 +160,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }): void {
     if (currentSearch)
       this._sessionStorageService.setItem('lastSearch', currentSearch);
-    this._changeView.emit(event ?? 'systems-searcher');
+    this._viewManagerService.setView(event ?? 'systems-searcher');
   }
 }

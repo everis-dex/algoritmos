@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { AlgorithmicSystemCard } from '../../../../interfaces/cards';
 import { getStateColor } from '../../../../shared/utilities';
+import { IAlgorithm } from '../../../../interfaces/algorithms';
 
 @Component({
   selector: 'app-basic-data',
@@ -11,7 +11,7 @@ import { getStateColor } from '../../../../shared/utilities';
 })
 export class BasicDataComponent {
   @Input()
-  public algorithmicSystem!: AlgorithmicSystemCard;
+  public algorithm!: IAlgorithm;
 
   public getStateColor = getStateColor;
 }

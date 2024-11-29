@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TopicCardComponent } from '../../../../shared/topic-card/topic-card.component';
-import { TopicCard } from '../../../../interfaces/cards';
+import { ITopic } from '../../../../interfaces/topics';
 import { Subscription } from 'rxjs';
-import { CardService } from '../../../../services/card.service';
+import { TopicsService } from '../../../../services/topics.service';
 
 @Component({
   selector: 'app-topic-cards',
@@ -12,11 +12,11 @@ import { CardService } from '../../../../services/card.service';
   styleUrl: './topic-cards.component.scss',
 })
 export class TopicCardsComponent implements OnInit, OnDestroy {
-  public topics: TopicCard[] = [];
+  public topics: ITopic[] = [];
 
   private _componentSubscription!: Subscription;
 
-  constructor(private readonly _topicsService: CardService) {}
+  constructor(private readonly _topicsService: TopicsService) {}
 
   ngOnInit(): void {
     this._componentSubscription = this._topicsService
