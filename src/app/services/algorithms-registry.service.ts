@@ -12,7 +12,7 @@ export class AlgorithmsRegistryService {
   public algorithms: IAlgorithm[] = [];
 
   private readonly _registryURL = environment.apiUrl;
-  private readonly _algorithm$ = new BehaviorSubject<IAlgorithm>(
+  private readonly _currentAlgorithm$ = new BehaviorSubject<IAlgorithm>(
     {} as IAlgorithm
   );
   private readonly _algorithms$ = new BehaviorSubject<IAlgorithm[]>([]);
@@ -33,7 +33,7 @@ export class AlgorithmsRegistryService {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Basic ${credentials}`,
+        'Authorization': `Basic ${credentials}`,
       }),
       withCredentials: true,
     };
@@ -57,8 +57,8 @@ export class AlgorithmsRegistryService {
    * @param {IAlgorithm} algorithm The algorithm to set as the current one.
    * @memberof AlgorithmsRegistryService
    */
-  public setAlgorithm(algorithm: IAlgorithm): void {
-    this._algorithm$.next(algorithm);
+  public setCurrentAlgorithm(algorithm: IAlgorithm): void {
+    this._currentAlgorithm$.next(algorithm);
   }
 
   /**
@@ -67,8 +67,8 @@ export class AlgorithmsRegistryService {
    * @return {Observable<IAlgorithm>} The current algorithm as an observable.
    * @memberof AlgorithmsRegistryService
    */
-  public getAlgorithmSubject(): Observable<IAlgorithm> {
-    return this._algorithm$.asObservable();
+  public getCurrentAlgorithmSubject(): Observable<IAlgorithm> {
+    return this._currentAlgorithm$.asObservable();
   }
 
   /**

@@ -28,6 +28,6 @@ export class AlgorithmicSystemCardComponent {
   ): void {
     event.preventDefault();
     this._viewManagerService.setView('system-detail');
-    this._algorithmsRegistryService.setAlgorithm(algorithm);
+    this._algorithmsRegistryService.setCurrentAlgorithm(algorithm);
   }
 }

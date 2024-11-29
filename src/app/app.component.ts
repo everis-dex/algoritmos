@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   constructor(
     private readonly _algorithmsRegistryService: AlgorithmsRegistryService,
     private readonly _viewManagerService: ViewManagerService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this._getAlgorithms();
@@ -48,17 +48,13 @@ export class AppComponent implements OnInit {
 
   private _changeView(): void {
     this._viewManagerService.getView().subscribe((data) => {
-      if (data) {
-        this.currentView = data;
-      } else {
-        this.currentView = 'home';
-      }
+      this.currentView = data || 'home';
     });
   }
 
   private _setAlgorithmName(): void {
     this._algorithmsRegistryService
-      .getAlgorithmSubject()
+      .getCurrentAlgorithmSubject()
       .subscribe((data) => (this.algorithm = data));
   }
 }
