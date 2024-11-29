@@ -55,7 +55,7 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   }
 
   private _getSearchResults(page: number): void {
-    this.searchResults.slice(
+    this.searchResults = this.searchResults.slice(
       (page - 1) * MAX_SEARCH_RESULTS_PER_PAGE,
       page * MAX_SEARCH_RESULTS_PER_PAGE
     );

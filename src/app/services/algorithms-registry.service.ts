@@ -163,7 +163,8 @@ export class AlgorithmsRegistryService {
       .map((algorithm) => algorithm.etiquetes)
       .flat()
       .filter((entry) => entry.includes(','))
-      .flatMap((entry) => entry.split(','));
+      .flatMap((entry) => entry.split(','))
+      .map((entry) => entry.charAt(0).toUpperCase() + entry.slice(1));
     const cleanEntries = splitEntries.filter((entry) => !entry.includes(','));
     const result = Array.from(new Set([...splitEntries, ...cleanEntries]));
 

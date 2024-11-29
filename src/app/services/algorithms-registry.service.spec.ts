@@ -94,7 +94,7 @@ describe('AlgorithmsRegistryService', () => {
       const filters = {
         estat: 'En producció',
         tema: 'Informació i comunicació',
-        etiquetes: 'ia',
+        etiquetes: 'IA',
         tipus_sistema: "Sistema d'IA",
       };
       const filteredMockAlgorithms = mockAlgorithms.filter((algorithm) => {
@@ -165,6 +165,27 @@ describe('AlgorithmsRegistryService', () => {
     it('should handle empty search text', () => {
       const result = service.onOpenSearch('');
       expect(result).toEqual(mockAlgorithms);
+    });
+  });
+
+  describe('setAlgorithms', () => {
+    it('should set the algorithms list and emit the change', () => {
+      const algorithmsSubjectSpy = spyOn(
+        service['_algorithms$'],
+        'next'
+      ).and.callThrough();
+
+      service.setAlgorithms(mockAlgorithms);
+
+      expect(algorithmsSubjectSpy).toHaveBeenCalledWith(mockAlgorithms);
+      expect(service['_algorithms$'].getValue()).toEqual(mockAlgorithms);
+    });
+  });
+
+  describe('getAlgorithmTagList', () => {
+    it('should return a unique list of tags', () => {
+      const tagList = service.getAlgorithmTagList();
+      expect(tagList.length).toBe(7);
     });
   });
 });

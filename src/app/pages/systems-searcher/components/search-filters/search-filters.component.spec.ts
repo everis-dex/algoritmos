@@ -4,13 +4,20 @@ import {
   ALGORITHMS,
   CATEGORIES,
   STATES,
-  TAGS,
 } from '../../../../constants/search-filters.const';
 import { provideHttpClient } from '@angular/common/http';
 
 describe('SearchFiltersComponent', () => {
   let component: SearchFiltersComponent;
   let fixture: ComponentFixture<SearchFiltersComponent>;
+
+  const tags = [
+    'Innovació',
+    'Ètica digital',
+    'Seguretat informàtica',
+    'Anàlisi de dades',
+    'Protecció de dades',
+  ];
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,7 +34,7 @@ describe('SearchFiltersComponent', () => {
         filter: component.filters[0].name,
         optionsSelected: [CATEGORIES[0], CATEGORIES[1]],
       },
-      { filter: component.filters[1].name, optionsSelected: [TAGS[0]] },
+      { filter: component.filters[1].name, optionsSelected: [tags[0]] },
       { filter: component.filters[2].name, optionsSelected: [] },
       { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
     ];
@@ -57,7 +64,7 @@ describe('SearchFiltersComponent', () => {
         filter: component.filters[0].name,
         optionsSelected: [CATEGORIES[0], CATEGORIES[1]],
       },
-      { filter: component.filters[1].name, optionsSelected: [TAGS[0]] },
+      { filter: component.filters[1].name, optionsSelected: [tags[0]] },
       { filter: component.filters[2].name, optionsSelected: [] },
       { filter: component.filters[3].name, optionsSelected: [] },
     ]);
@@ -67,7 +74,7 @@ describe('SearchFiltersComponent', () => {
     const resetFiltersSpy = spyOn(component, 'resetFilters');
 
     const index = 3;
-    const option = TAGS[1];
+    const option = tags[1];
     component['_addNewOptionSelected'](option, index);
 
     expect(resetFiltersSpy).toHaveBeenCalledWith(index);
@@ -75,7 +82,7 @@ describe('SearchFiltersComponent', () => {
 
   it('should add a new option to optionsSelected when tag is provided', () => {
     const event = new MouseEvent('click');
-    const tag = TAGS[1];
+    const tag = tags[1];
     component.applyFilters({ event, tag });
 
     expect(component.filterList).toEqual([
@@ -85,7 +92,7 @@ describe('SearchFiltersComponent', () => {
       },
       {
         filter: component.filters[1].name,
-        optionsSelected: [TAGS[0], tag],
+        optionsSelected: [tags[0], tag],
       },
       { filter: component.filters[2].name, optionsSelected: [] },
       { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
@@ -101,7 +108,7 @@ describe('SearchFiltersComponent', () => {
         filter: component.filters[0].name,
         optionsSelected: [CATEGORIES[0], CATEGORIES[1]],
       },
-      { filter: component.filters[1].name, optionsSelected: [TAGS[0]] },
+      { filter: component.filters[1].name, optionsSelected: [tags[0]] },
       { filter: component.filters[2].name, optionsSelected: [event] },
       { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
     ]);
@@ -112,7 +119,7 @@ describe('SearchFiltersComponent', () => {
 
     expect(component.filterList).toEqual([
       { filter: component.filters[0].name, optionsSelected: [CATEGORIES[1]] },
-      { filter: component.filters[1].name, optionsSelected: [TAGS[0]] },
+      { filter: component.filters[1].name, optionsSelected: [tags[0]] },
       { filter: component.filters[2].name, optionsSelected: [] },
       { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
     ]);
@@ -126,7 +133,7 @@ describe('SearchFiltersComponent', () => {
         filter: component.filters[0].name,
         optionsSelected: [CATEGORIES[0], CATEGORIES[1]],
       },
-      { filter: component.filters[1].name, optionsSelected: [TAGS[0]] },
+      { filter: component.filters[1].name, optionsSelected: [tags[0]] },
       { filter: component.filters[2].name, optionsSelected: [] },
       { filter: component.filters[3].name, optionsSelected: [] },
     ]);
