@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     private readonly _algorithmsRegistryService: AlgorithmsRegistryService,
     private readonly _viewManagerService: ViewManagerService,
     private readonly _sessionStorageService: SessionStorageService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._getAlgorithms();

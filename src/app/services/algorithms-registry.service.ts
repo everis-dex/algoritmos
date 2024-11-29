@@ -153,7 +153,6 @@ export class AlgorithmsRegistryService {
     });
   }
 
-  
   /**
    * Returns a list of algorithms that match the given search text and filters.
    *
@@ -162,7 +161,10 @@ export class AlgorithmsRegistryService {
    * @return {*}  {IAlgorithm[]}
    * @memberof AlgorithmsRegistryService
    */
-  public onCombinedSearch(searchText: string, filters: IFilterSearch): IAlgorithm[] {
+  public onCombinedSearch(
+    searchText: string,
+    filters: IFilterSearch
+  ): IAlgorithm[] {
     const textSearchResults = this.onOpenSearch(searchText);
     const filtersSearchResults = this.onFiltersSearch(filters);
     const result = textSearchResults.filter((item) =>
