@@ -8,6 +8,7 @@ import { IAlgorithm } from './interfaces/algorithms';
 import { AlgorithmsRegistryService } from './services/algorithms-registry.service';
 import { take } from 'rxjs';
 import { ViewManagerService } from './services/view-manager.service';
+import { SessionStorageService } from './services/session-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -28,13 +29,16 @@ export class AppComponent implements OnInit {
 
   constructor(
     private readonly _algorithmsRegistryService: AlgorithmsRegistryService,
-    private readonly _viewManagerService: ViewManagerService
+    private readonly _viewManagerService: ViewManagerService,
+    private readonly _sessionStorageService: SessionStorageService
   ) { }
 
   ngOnInit(): void {
     this._getAlgorithms();
     this._changeView();
     this._setAlgorithmName();
+    this._sessionStorageService.removeItem('popularCategorySelected');
+    this._sessionStorageService.removeItem('lastSearch');
   }
 
   private _getAlgorithms(): void {

@@ -7,6 +7,7 @@ import { SearchPaginationComponent } from './components/search-pagination/search
 import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../constants/search-pagination.const';
 import { IAlgorithm } from '../../interfaces/algorithms';
 import { AlgorithmsRegistryService } from '../../services/algorithms-registry.service';
+import { SessionStorageService } from '../../services/session-storage.service';
 
 @Component({
   selector: 'app-systems-searcher',
@@ -29,12 +30,25 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   private _componentSubscriptions: Subscription[] = [];
 
   constructor(
-    private readonly _algorithmsRegistryService: AlgorithmsRegistryService
+    private readonly _algorithmsRegistryService: AlgorithmsRegistryService,
+    private readonly _sessionStorageService: SessionStorageService,
   ) {}
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    this.searchResults = this._algorithmsRegistryService.getAlgorithms();
+    this.setSearchResults();
+    this.setTotalPages();
+  }
+
+  setSearchResults(): void {
+    const homeInputSearch = this._sessionStorageService.getItem<string>('lastSearch') || '';
+    const homeCategorySearch = this._sessionStorageService.getItem<string>('popularCategorySelected') || '';
+    this.searchResults = this._algorithmsRegistryService.onCombinedSearch(homeInputSearch, {tema: homeCategorySearch});
+    this._sessionStorageService.removeItem('lastSearch');
+    this._sessionStorageService.removeItem('popularCategorySelected');
+  }
+
+  setTotalPages(): void {
     this.totalSearchResultsLength = this.searchResults.length;
     if (this.totalSearchResultsLength > 6) {
       this.totalPages = Math.ceil(

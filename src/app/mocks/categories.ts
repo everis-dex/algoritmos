@@ -1,6 +1,6 @@
 export const mockCategories = [
-  'Administració pública',
+  'Administració pública, govern i relacions institucionals',
   'Serveis socials',
-  'Economia',
-  'Tecnologia, recerca i innovació',
+  'Mobilitat i transports',
+  'Salut',
 ];
