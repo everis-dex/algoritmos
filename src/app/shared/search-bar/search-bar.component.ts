@@ -106,7 +106,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   public selectCategory(categorySelected: string): void {
     this.categorySelected = categorySelected;
-    this._sessionStorageService.setItem('popularCategorySelected', categorySelected);
+    this._sessionStorageService.setItem(
+      'popularCategorySelected',
+      categorySelected
+    );
     this.isFilterVisible = false;
   }
 

@@ -11,7 +11,6 @@ import { Subscription } from 'rxjs';
 import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
 import { AlgorithmsRegistryService } from '../../../../services/algorithms-registry.service';
 import { IAlgorithm } from '../../../../interfaces/algorithms';
-import { mockAlgorithms } from '../../../../mocks/algorithms';
 
 @Component({
   selector: 'app-algorithmic-systems-cards',
@@ -69,14 +68,23 @@ export class AlgorithmicSystemsCardsComponent
     this._componentSubscription = this._algorithmsRegistryService
       .getAlgorithmsSubject()
       .subscribe((data) => {
-        //this.algorithms = data;
-        this.algorithms = mockAlgorithms;
-        this.algorithms.sort((a, b) => {
-          const firstDate = a.data_ultima_modificacio;
-          const secondDate = b.data_ultima_modificacio;
-          return new Date(secondDate).getTime() - new Date(firstDate).getTime();
-        });
-        this.algorithms = this.algorithms.slice(0, 4);
+        const sortedData = data
+          .filter((item) => item.data_ultima_modificacio)
+          .sort((a, b) => {
+            const convertToISO = (dateStr: string) => {
+              if (dateStr.includes('/')) {
+                const parts = dateStr.split('/');
+                return `${parts[2]}-${parts[1]}-${parts[0]}`;
+              }
+              return dateStr;
+            };
+            return (
+              new Date(convertToISO(b.data_ultima_modificacio)).getTime() -
+              new Date(convertToISO(a.data_ultima_modificacio)).getTime()
+            );
+          })
+          .slice(0, 4);
+        this.algorithms = sortedData;
       });
   }
 

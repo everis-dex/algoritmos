@@ -3,7 +3,7 @@
  *
  * @export
  * @param {string} state
- * @return {*} {string}
+ * @return {string}
  */
 export function getStateColor(state: string): string {
   const stateColorConfig: Record<string, string> = {
@@ -18,7 +18,7 @@ export function getStateColor(state: string): string {
  * Returns a normalized string, removing accents and converting to lowercase
  *
  * @param {(string | undefined)} text
- * @return {*}  {string}
+ * @return {string}
  * @memberof AlgorithmsRegistryService
  */
 export function normalized(text: string | undefined): string {
@@ -29,16 +29,23 @@ export function normalized(text: string | undefined): string {
     .toLowerCase();
 }
 
-export function normalizedArray(textColletion: Array<string> | undefined): Array<string>  {
+/**
+ * Returns a new array of normalized strings, removing accents and converting each to lowercase.
+ *
+ * @param {string[] | undefined} textCollection
+ * @return {string[]}
+ * @memberof AlgorithmsRegistryService
+ */
+export function normalizedArray(textColletion: string[] | undefined): string[] {
   if (!textColletion) return [];
-  const result: Array<string> = [];
+  const result: string[] = [];
   textColletion.forEach((element: string) => {
     result.push(
-    element.normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase()
+      element
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
     );
   });
   return result;
 }
-

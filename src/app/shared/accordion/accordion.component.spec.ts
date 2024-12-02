@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccordionComponent } from './accordion.component';
-import { CATEGORIES, TAGS } from '../../constants/search-filters.const';
+import { CATEGORIES } from '../../constants/search-filters.const';
 import { IAccordionData } from './accordion.model';
 import { ITabData } from '../../pages/system-detail/components/tabs-data/tabs-data.model';
 import { tabsData } from '../../pages/system-detail/components/tabs-data/tabs-data.config';
@@ -21,7 +21,13 @@ describe('AccordionComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    component.tags = TAGS;
+    component.tags = [
+      'Innovació',
+      'Ètica digital',
+      'Seguretat informàtica',
+      'Anàlisi de dades',
+      'Protecció de dades',
+    ];
   });
 
   it('should create', () => {
@@ -67,7 +73,7 @@ describe('AccordionComponent', () => {
       component.filterTags();
 
       expect(component.hasInputValue).toBeFalse();
-      expect(component.filteredTags).toEqual(TAGS);
+      expect(component.filteredTags).toEqual(component.tags);
     });
 
     it('should filter and sort tags with input value matching the start of tags', () => {
@@ -112,6 +118,19 @@ describe('AccordionComponent', () => {
       component.toggle(accordionId);
 
       expect(filterTagsSpy).toHaveBeenCalled();
+    });
+
+    it('should prioritize tags starting with input value', () => {
+      component.tags = [...component.tags, 'Dades estadístiques'];
+      const inputValue = 'da';
+
+      component.filterTags(inputValue);
+    
+      expect(component.filteredTags).toEqual([
+        'Dades estadístiques',
+        'Anàlisi de dades',
+        'Protecció de dades',
+      ]);
     });
   });
 
