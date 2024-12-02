@@ -185,7 +185,7 @@ describe('AlgorithmsRegistryService', () => {
   describe('getAlgorithmTagList', () => {
     it('should return a unique list of tags', () => {
       const tagList = service.getAlgorithmTagList();
-      expect(tagList.length).toBe(7);
+      expect(tagList.length).toBe(8);
     });
   });
 });
