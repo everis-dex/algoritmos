@@ -1,9 +1,11 @@
 import {
   Component,
+  EventEmitter,
   HostListener,
   Input,
   OnDestroy,
   OnInit,
+  Output,
 } from '@angular/core';
 import { SessionStorageService } from '../../services/session-storage.service';
 import { CommonModule } from '@angular/common';
@@ -30,6 +32,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   @Input()
   public hasFilterSelector!: boolean;
+  @Output()
+  private readonly _barSubmitted = new EventEmitter<void>();
 
   private _componentSubscriptions: Subscription[] = [];
   private _mediaQueryList!: MediaQueryList;
@@ -124,6 +128,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       event.preventDefault();
 
       const item = this._sessionStorageService.getItem<string>('lastSearch');
+      this._barSubmitted.emit();
       if (
         item &&
         !this.currentSearches.some((currentSearch) => currentSearch === item)

@@ -3,7 +3,7 @@
  *
  * @export
  * @param {string} state
- * @return {*} {string}
+ * @return {string}
  */
 export function getStateColor(state: string): string {
   const stateColorConfig: Record<string, string> = {
@@ -18,7 +18,7 @@ export function getStateColor(state: string): string {
  * Returns a normalized string, removing accents and converting to lowercase
  *
  * @param {(string | undefined)} text
- * @return {*}  {string}
+ * @return {string}
  * @memberof AlgorithmsRegistryService
  */
 export function normalized(text: string | undefined): string {
