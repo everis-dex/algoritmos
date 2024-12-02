@@ -38,7 +38,7 @@ export class AlgorithmsRegistryService {
       }),
       withCredentials: true,
     };
-    return of(mockAlgorithms)
+    return of(mockAlgorithms);
     // return this._http.get<IAlgorithm[]>(this._registryURL, options);
   }
 
@@ -139,7 +139,11 @@ export class AlgorithmsRegistryService {
         ? this._normalized(item.estat).includes(lowercasedFilters.estat)
         : true;
       const matchesEtiquetes = lowercasedFilters.etiquetes
-        ? this._normalized(item.etiquetes).includes(lowercasedFilters.etiquetes)
+        ? (() => {
+            const itemTags = this._normalized(item.etiquetes).split(',');
+            const filterTags = lowercasedFilters.etiquetes.split(',');
+            return filterTags.every((tag) => itemTags.includes(tag));
+          })()
         : true;
       const matchesTipusSistema = lowercasedFilters.tipus_sistema
         ? this._normalized(item.tipus_sistema).includes(

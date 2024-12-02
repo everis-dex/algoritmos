@@ -94,9 +94,9 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
     if (updatedFilterList) {
       this.filterList = updatedFilterList;
       this._filtersAppliedParams = {
-        estat: this.filterList[2].optionsSelected[0],
         tema: this.filterList[0].optionsSelected[0],
-        etiquetes: this.filterList[1].optionsSelected[0],
+        etiquetes: this.filterList[1].optionsSelected.join(','),
+        estat: this.filterList[2].optionsSelected[0],
         tipus_sistema: this.filterList[3].optionsSelected[0],
       };
     }
