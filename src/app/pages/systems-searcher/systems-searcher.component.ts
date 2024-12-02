@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { SearchPaginationComponent } from './components/search-pagination/search-pagination/search-pagination.component';
 import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../constants/search-pagination.const';
-import { IAlgorithm } from '../../interfaces/algorithms';
+import { IAlgorithm, IFilterSearch } from '../../interfaces/algorithms';
 import { AlgorithmsRegistryService } from '../../services/algorithms-registry.service';
 import { SessionStorageService } from '../../services/session-storage.service';
 
@@ -23,11 +23,13 @@ import { SessionStorageService } from '../../services/session-storage.service';
 })
 export class SystemsSearcherComponent implements OnInit, OnDestroy {
   public searchResults: IAlgorithm[] = [];
+  public originalResults: IAlgorithm[] = [];
   public filterList: { filter: string; optionsSelected: string[] }[] = [];
   public totalSearchResultsLength = 0;
   public totalPages = 0;
 
   private _componentSubscriptions: Subscription[] = [];
+  public filtersAppliedParams: IFilterSearch = {}
 
   constructor(
     private readonly _algorithmsRegistryService: AlgorithmsRegistryService,
@@ -43,7 +45,7 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   setSearchResults(): void {
     const homeInputSearch = this._sessionStorageService.getItem<string>('lastSearch') || '';
     const homeCategorySearch = this._sessionStorageService.getItem<string>('popularCategorySelected') || '';
-    this.searchResults = this._algorithmsRegistryService.onCombinedSearch(homeInputSearch, {tema: homeCategorySearch});
+    this.searchResults = this.originalResults = this._algorithmsRegistryService.onCombinedSearch(homeInputSearch, {tema: homeCategorySearch});
     this._sessionStorageService.removeItem('lastSearch');
     this._sessionStorageService.removeItem('popularCategorySelected');
   }
@@ -54,6 +56,8 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
       this.totalPages = Math.ceil(
         this.searchResults.length / MAX_SEARCH_RESULTS_PER_PAGE
       );
+    } else {
+      this.totalPages = 0;
     }
   }
 
@@ -69,15 +73,24 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   }
 
   private _getSearchResults(page: number): void {
-    this.searchResults.slice(
+    this.searchResults =  this.originalResults.slice(
       (page - 1) * MAX_SEARCH_RESULTS_PER_PAGE,
       page * MAX_SEARCH_RESULTS_PER_PAGE
     );
   }
 
-  public filtersApplied(
-    updatedFilterList: { filter: string; optionsSelected: string[] }[]
-  ): void {
-    this.filterList = updatedFilterList;
+  getSearch(updatedFilterList: { filter: string; optionsSelected: string[] }[] | void) {
+    const inputSearch = this._sessionStorageService.getItem<string>('lastSearch') || '';
+    if (updatedFilterList) {
+      this.filterList = updatedFilterList;
+      this.filtersAppliedParams = {
+        estat: this.filterList[2].optionsSelected[0],
+        tema: this.filterList[0].optionsSelected[0],
+        etiquetes: this.filterList[1].optionsSelected[0],
+        tipus_sistema: this.filterList[3].optionsSelected[0],
+      };
+    }
+    this.searchResults = this.originalResults = this._algorithmsRegistryService.onCombinedSearch(inputSearch, this.filtersAppliedParams);
+    this.setTotalPages();
   }
 }

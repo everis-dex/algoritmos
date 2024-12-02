@@ -55,6 +55,7 @@ export class SearchFiltersComponent {
       optionsSelected: [],
     }));
     this.resetTagsSelected = true;
+    this._filtersApplied.emit(this.filterList);
   }
 
   public applyFilters({
@@ -95,5 +96,6 @@ export class SearchFiltersComponent {
         filterIndex
       ].optionsSelected.filter((option) => option !== event);
     }
+    this._filtersApplied.emit(this.filterList);
   }
 }

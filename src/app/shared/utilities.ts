@@ -28,3 +28,17 @@ export function normalized(text: string | undefined): string {
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
 }
+
+export function normalizedArray(textColletion: Array<string> | undefined): Array<string>  {
+  if (!textColletion) return [];
+  const result: Array<string> = [];
+  textColletion.forEach((element: string) => {
+    result.push(
+    element.normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    );
+  });
+  return result;
+}
+
