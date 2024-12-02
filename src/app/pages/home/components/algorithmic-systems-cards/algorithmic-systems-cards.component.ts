@@ -74,7 +74,7 @@ export class AlgorithmicSystemsCardsComponent
             const convertToISO = (dateStr: string) => {
               if (dateStr.includes('/')) {
                 const parts = dateStr.split('/');
-                return `20${parts[2]}-${parts[1]}-${parts[0]}`;
+                return `${parts[2]}-${parts[1]}-${parts[0]}`;
               }
               return dateStr;
             };
