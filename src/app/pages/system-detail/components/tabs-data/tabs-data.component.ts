@@ -5,7 +5,6 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
@@ -14,7 +13,6 @@ import { IFieldData, ITabData } from './tabs-data.model';
 import { CommonModule } from '@angular/common';
 import { TabFieldDataComponent } from '../../../../shared/tab-field-data/tab-field-data.component';
 import { AccordionComponent } from '../../../../shared/accordion/accordion.component';
-import { Subscription } from 'rxjs';
 import { IAlgorithm } from '../../../../interfaces/algorithms';
 
 @Component({
@@ -24,7 +22,7 @@ import { IAlgorithm } from '../../../../interfaces/algorithms';
   templateUrl: './tabs-data.component.html',
   styleUrl: './tabs-data.component.scss',
 })
-export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
+export class TabsDataComponent implements OnInit, AfterViewInit {
   @Input()
   public algorithm!: IAlgorithm;
 
@@ -34,16 +32,10 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
   public tabsData: ITabData[] = tabsData;
   public currentTabIndex = 0;
 
-  private readonly _componentSubscription!: Subscription;
-
   constructor(private readonly _el: ElementRef) {}
 
   ngOnInit(): void {
     if (this.algorithm) this._getTabFieldContents(this.currentTabIndex);
-  }
-
-  ngOnDestroy(): void {
-    if (this._componentSubscription) this._componentSubscription.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -111,14 +103,16 @@ export class TabsDataComponent implements OnInit, OnDestroy, AfterViewInit {
         'Consum energètic': this.algorithm.consum_energetic,
       },
     ];
-    this.tabsData[tabIndex].fields.forEach(
-      (field) => {
-        let content = algorithmFieldsContent[tabIndex][field.field];
-        if (content?.includes('https')) {
-          content = content.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1">$1<img src="assets/icons/Redirection-link.svg"></a>');
-        }
-        field.content = content || 'N-A';
-      });
+    this.tabsData[tabIndex].fields.forEach((field) => {
+      let content = algorithmFieldsContent[tabIndex][field.field];
+      if (content?.includes('https')) {
+        content = content.replace(
+          /(https?:\/\/[^\s]+)/g,
+          '<a href="$1">$1<img src="assets/icons/Redirection-link.svg"></a>'
+        );
+      }
+      field.content = content || 'N-A';
+    });
   }
 
   public setTabFields(index: number): IFieldData[] {

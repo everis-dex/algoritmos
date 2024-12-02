@@ -22,13 +22,6 @@ export const CATEGORIES = [
   'Altres/Diversos',
   'No consta',
 ];
-export const TAGS = [
-  'Innovació',
-  'Ètica digital',
-  'Seguretat informàtica',
-  'Anàlisi de dades',
-  'Protecció de dades',
-];
 export const STATES = ['En desenvolupament', 'Actiu', 'Inactiu'];
 export const ALGORITHMS = ["Sistema d'IA", 'Algorisme determinista'];
 export const TAGS_ID = 2;
