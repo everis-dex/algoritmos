@@ -86,7 +86,7 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
     );
   }
 
-  getSearch(
+  public getSearch(
     updatedFilterList: { filter: string; optionsSelected: string[] }[] | void
   ) {
     const inputSearch =

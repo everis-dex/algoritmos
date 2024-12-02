@@ -28,24 +28,3 @@ export function normalized(text: string | undefined): string {
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase();
 }
-
-/**
- * Returns a new array of normalized strings, removing accents and converting each to lowercase.
- *
- * @param {string[] | undefined} textCollection
- * @return {string[]}
- * @memberof AlgorithmsRegistryService
- */
-export function normalizedArray(textColletion: string[] | undefined): string[] {
-  if (!textColletion) return [];
-  const result: string[] = [];
-  textColletion.forEach((element: string) => {
-    result.push(
-      element
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase()
-    );
-  });
-  return result;
-}
