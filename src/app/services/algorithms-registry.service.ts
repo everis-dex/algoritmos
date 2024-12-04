@@ -34,7 +34,7 @@ export class AlgorithmsRegistryService {
     const options = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Basic ${credentials}`,
+        'Authorization': `Basic ${credentials}`,
       }),
       withCredentials: true,
     };
@@ -166,9 +166,10 @@ export class AlgorithmsRegistryService {
   /**
    * Returns a list of algorithms that match the given search text and filters.
    *
-   * @param {string} searchText
-   * @param {IFilterSearch} filters
-   * @return {*}  {IAlgorithm[]}
+   * @param {string} searchText The text used to perform a search among the algorithms.
+   * @param {IFilterSearch} filters The filters applied to refine the search results.
+   * @return {IAlgorithm[]} An array of `IAlgorithm` objects that satisfy both the text search
+   * and the filter criteria. If no matches are found, returns an empty array.
    * @memberof AlgorithmsRegistryService
    */
   public onCombinedSearch(
