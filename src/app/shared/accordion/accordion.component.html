@@ -29,7 +29,7 @@
     <img src="assets/icons/Buscador_Boton.svg" alt="Botó del cercador">
   </form>
   @if (filteredTags.length > 0) {
-  <div>
+  <div class="scrollable-container">
     @for (tag of filteredTags; track tag) {
     <button type="button" (click)="selectChip($event, tag)">{{ tag }}</button>
     }

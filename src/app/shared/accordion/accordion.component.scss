@@ -1,5 +1,29 @@
 @import "../../../assets/scss/styles.scss";
 
+.scrollable-container {
+  max-height: calc(5 * 2.5rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.scrollable-container::-webkit-scrollbar {
+  width: 8px;
+  background-color: #f5f5f5;
+}
+
+.scrollable-container::-webkit-scrollbar-track {
+  background-color: red;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+  background-color: blueviolet; /* barra */
+  border-radius: 4px;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb:hover {
+  background-color: orange;
+}
+
+
 .filter-accordion {
   color: $grey-black;
 }
