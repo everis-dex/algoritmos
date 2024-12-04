@@ -4,7 +4,7 @@ import {
   ALGORITHMS,
   CATEGORIES,
   STATES,
-  TAGS_ID,
+  TAGS_FILTER_INDEX,
 } from '../../../../constants/search-filters.const';
 
 @Component({
@@ -17,85 +17,89 @@ import {
 export class SearchFiltersComponent {
   @Output()
   private readonly _filtersApplied = new EventEmitter<
-    { filter: string; optionsSelected: string[] }[]
+    { name: string; chipsSelected: string[] }[]
   >();
 
-  public filters = [
+  public filterList: {
+    id: number;
+    name: string;
+    chips: string[];
+    chipsSelected: string[];
+  }[] = [
     {
-      id: 1,
+      id: 0,
       name: 'Categoria',
       chips: CATEGORIES,
+      chipsSelected: [],
     },
-    { id: 2, name: 'Etiquetes' },
     {
-      id: 3,
+      id: 1,
+      name: 'Etiquetes',
+      chips: [],
+      chipsSelected: [],
+    },
+    {
+      id: 2,
       name: 'Estats',
       chips: STATES,
+      chipsSelected: [],
     },
     {
-      id: 4,
+      id: 3,
       name: "Tipus d'algorisme",
       chips: ALGORITHMS,
+      chipsSelected: [],
     },
   ];
-  public filterList: { filter: string; optionsSelected: string[] }[] =
-    this.filters.map((filter) => ({
-      filter: filter.name,
-      optionsSelected: [],
-    }));
-  public resetTagsSelected = false;
 
-  public resetFilters(id?: number): void {
-    if (id) {
-      this.filterList[id].optionsSelected = [];
-      return;
-    }
-    this.filterList = this.filters.map((filter) => ({
-      filter: filter.name,
-      optionsSelected: [],
-    }));
-    this.resetTagsSelected = true;
+  public resetFilters(): void {
+    this.filterList = this.filterList.map((filterItem) => {
+      return {
+        ...filterItem,
+        chipsSelected: [],
+      };
+    });
     this._filtersApplied.emit(this.filterList);
   }
 
-  public applyFilters({
+  public applyFilter({
+    index,
     event,
     tag,
   }: {
-    event: string | MouseEvent;
+    index: number;
+    event?: string | MouseEvent;
     tag?: string;
   }): void {
-    if (event instanceof MouseEvent && tag) {
-      const filterIndex = this.filters.findIndex((filter) => !filter.chips);
-      this._addNewOptionSelected(tag, filterIndex);
+    if (tag) {
+      const chipAlreadySelected = this.filterList.some((filterItem) => {
+        return filterItem.chipsSelected.includes(tag);
+      });
+      if (chipAlreadySelected) return;
+      this.filterList[index].chipsSelected.push(tag);
     } else if (typeof event === 'string') {
-      const filterIndex = this.filters.findIndex((filter) =>
-        filter.chips?.includes(event)
-      );
-      this._addNewOptionSelected(event, filterIndex);
+      this.filterList[index].chipsSelected.push(event);
     }
 
-    this.resetTagsSelected = false;
+    if (
+      index > TAGS_FILTER_INDEX &&
+      this.filterList[index].chipsSelected.length > 1
+    )
+      this.filterList[index].chipsSelected.shift();
+
     this._filtersApplied.emit(this.filterList);
   }
 
-  private _addNewOptionSelected(option: string, index: number): void {
-    if (index >= TAGS_ID) this.resetFilters(index);
-    const filter = this.filterList[index];
-    if (!filter?.optionsSelected.includes(option)) {
-      filter?.optionsSelected.push(option);
-    }
-  }
-
-  public removeFilters(event: string): void {
-    const filterIndex = this.filterList.findIndex((filterItem) =>
-      filterItem?.optionsSelected.includes(event)
-    );
-    if (filterIndex !== -1) {
-      this.filterList[filterIndex].optionsSelected = this.filterList[
-        filterIndex
-      ].optionsSelected.filter((option) => option !== event);
-    }
+  public removeFilter({
+    index,
+    event,
+  }: {
+    index: number;
+    event: string;
+  }): void {
+    this.filterList[index].chipsSelected = this.filterList[
+      index
+    ].chipsSelected.filter((option) => option !== event);
     this._filtersApplied.emit(this.filterList);
   }
 }

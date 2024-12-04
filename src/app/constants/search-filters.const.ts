@@ -24,4 +24,4 @@ export const CATEGORIES = [
 ];
 export const STATES = ['En desenvolupament', 'Actiu', 'Inactiu'];
 export const ALGORITHMS = ["Sistema d'IA", 'Algorisme determinista'];
-export const TAGS_ID = 2;
+export const TAGS_FILTER_INDEX = 1;

@@ -29,7 +29,7 @@ describe('AlgorithmsRegistryService', () => {
         (algorithm) => algorithm.tema === filters.tema
       );
 
-      const result = service.onFiltersSearch(filters);
+      const result = service['_onFiltersSearch'](filters);
       expect(result).toEqual(filteredMockAlgorithms);
     });
 
@@ -44,7 +44,7 @@ describe('AlgorithmsRegistryService', () => {
         (algorithm) => algorithm.estat === filters.estat
       );
 
-      const result = service.onFiltersSearch(filters);
+      const result = service['_onFiltersSearch'](filters);
       expect(result).toEqual(filteredMockAlgorithms);
     });
 
@@ -59,7 +59,7 @@ describe('AlgorithmsRegistryService', () => {
         algorithm.etiquetes.toLowerCase().includes(filters.etiquetes)
       );
 
-      const result = service.onFiltersSearch(filters);
+      const result = service['_onFiltersSearch'](filters);
       expect(result).toEqual(filteredMockAlgorithms);
     });
 
@@ -71,7 +71,7 @@ describe('AlgorithmsRegistryService', () => {
         tipus_sistema: '',
       };
 
-      const result = service.onFiltersSearch(filters);
+      const result = service['_onFiltersSearch'](filters);
       expect(result).toEqual(mockAlgorithms);
     });
 
@@ -86,7 +86,7 @@ describe('AlgorithmsRegistryService', () => {
         (algorithm) => algorithm.estat.toLowerCase() === filters.estat
       );
 
-      const result = service.onFiltersSearch(filters);
+      const result = service['_onFiltersSearch'](filters);
       expect(result).toEqual(filteredMockAlgorithms);
     });
 
@@ -106,14 +106,14 @@ describe('AlgorithmsRegistryService', () => {
         );
       });
 
-      const result = service.onFiltersSearch(filters);
+      const result = service['_onFiltersSearch'](filters);
       expect(result).toEqual(filteredMockAlgorithms);
     });
   });
 
   describe('onOpenSearch', () => {
     it('should find matches in nom field', () => {
-      const result = service.onOpenSearch('V1');
+      const result = service['_onOpenSearch']('V1');
       const filteredMockAlgorithms = mockAlgorithms.filter((algorithm) =>
         algorithm.nom.includes('V1')
       );
@@ -122,7 +122,7 @@ describe('AlgorithmsRegistryService', () => {
     });
 
     it('should find matches in tema field', () => {
-      const result = service.onOpenSearch('Informació i comunicació');
+      const result = service['_onOpenSearch']('Informació i comunicació');
       const filteredMockAlgorithms = mockAlgorithms.filter(
         (algorithm) => algorithm.tema === 'Informació i comunicació'
       );
@@ -131,7 +131,7 @@ describe('AlgorithmsRegistryService', () => {
     });
 
     it('should find matches in estat field', () => {
-      const result = service.onOpenSearch('Actiu');
+      const result = service['_onOpenSearch']('Actiu');
       const filteredMockAlgorithms = mockAlgorithms.filter(
         (algorithm) => algorithm.estat === 'Actiu'
       );
@@ -140,7 +140,7 @@ describe('AlgorithmsRegistryService', () => {
     });
 
     it('should find matches in etiquetes field', () => {
-      const result = service.onOpenSearch('copilot');
+      const result = service['_onOpenSearch']('copilot');
       const filteredMockAlgorithms = mockAlgorithms.filter((algorithm) =>
         algorithm.etiquetes.includes('copilot')
       );
@@ -149,7 +149,7 @@ describe('AlgorithmsRegistryService', () => {
     });
 
     it('should find matches in tipus_sistema field', () => {
-      const result = service.onOpenSearch("Sistema d'IA");
+      const result = service['_onOpenSearch']("Sistema d'IA");
       const filteredMockAlgorithms = mockAlgorithms.filter(
         (algorithm) => algorithm.tipus_sistema === "Sistema d'IA"
       );
@@ -158,12 +158,12 @@ describe('AlgorithmsRegistryService', () => {
     });
 
     it('should return empty array for no matches', () => {
-      const result = service.onOpenSearch('nonexistent');
+      const result = service['_onOpenSearch']('nonexistent');
       expect(result).toEqual([]);
     });
 
     it('should handle empty search text', () => {
-      const result = service.onOpenSearch('');
+      const result = service['_onOpenSearch']('');
       expect(result).toEqual(mockAlgorithms);
     });
   });
@@ -185,7 +185,7 @@ describe('AlgorithmsRegistryService', () => {
   describe('getAlgorithmTagList', () => {
     it('should return a unique list of tags', () => {
       const tagList = service.getAlgorithmTagList();
-      expect(tagList.length).toBe(8);
+      expect(tagList.length).toBe(7);
     });
   });
 });

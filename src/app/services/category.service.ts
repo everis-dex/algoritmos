@@ -6,12 +6,7 @@ import { mockCategories } from '../mocks/categories';
   providedIn: 'root',
 })
 export class CategoryService {
-  public categoryList: string[] = [];
-
   public getCategories(): Observable<string[]> {
-    mockCategories.forEach((category) => {
-      this.categoryList.push(category);
-    });
-    return of(this.categoryList);
+    return of(mockCategories);
   }
 }

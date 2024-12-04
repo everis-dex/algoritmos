@@ -38,7 +38,7 @@ describe('SearchBarComponent', () => {
     const subscriptionSpy = jasmine.createSpyObj('Subscription', [
       'unsubscribe',
     ]);
-    component['_componentSubscriptions'] = [subscriptionSpy];
+    component['_componentSubscription'] = subscriptionSpy;
 
     component.ngOnDestroy();
 

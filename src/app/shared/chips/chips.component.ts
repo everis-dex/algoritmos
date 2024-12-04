@@ -10,11 +10,11 @@ import { Component, EventEmitter, Output, Input } from '@angular/core';
 })
 export class ChipsComponent {
   @Input()
-  public chips?: string[];
+  public chips!: string[];
+  @Input()
+  public chipsSelected!: string[] | undefined;
   @Input()
   public customStyles?: Record<string, string>;
-  @Input()
-  public optionsSelected!: string[];
 
   @Output()
   private readonly _selectChip = new EventEmitter<string>();

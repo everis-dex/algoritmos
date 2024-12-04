@@ -2,7 +2,7 @@ import { ITabData } from './tabs-data.model';
 
 export const tabsData: ITabData[] = [
   {
-    id: 1,
+    id: 0,
     tab: 'Informació general',
     fields: [
       {
@@ -76,7 +76,7 @@ export const tabsData: ITabData[] = [
     ],
   },
   {
-    id: 2,
+    id: 1,
     tab: 'Informació tècnica',
     fields: [
       {
@@ -124,7 +124,7 @@ export const tabsData: ITabData[] = [
     ],
   },
   {
-    id: 3,
+    id: 2,
     tab: 'Informació normativa i transparència',
     fields: [
       {

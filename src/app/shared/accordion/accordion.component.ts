@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ChipsComponent } from '../chips/chips.component';
-import { TAGS_ID } from '../../constants/search-filters.const';
+import { TAGS_FILTER_INDEX } from '../../constants/search-filters.const';
 import { ITabData } from '../../pages/system-detail/components/tabs-data/tabs-data.model';
-import { IAccordionData } from './accordion.model';
+import { IFilterData } from './accordion.model';
 import { TabFieldDataComponent } from '../tab-field-data/tab-field-data.component';
 import { normalized } from '../utilities';
 import { AlgorithmsRegistryService } from '../../services/algorithms-registry.service';
@@ -17,19 +17,19 @@ import { AlgorithmsRegistryService } from '../../services/algorithms-registry.se
 })
 export class AccordionComponent implements OnInit {
   @Input()
-  public accordionList!: IAccordionData[] | ITabData[];
-  @Input()
-  public filterList!: { filter: string; optionsSelected: string[] }[];
-  @Input()
-  public resetTagsSelected!: boolean;
+  public accordionList!: IFilterData[] | ITabData[];
 
   @Output()
-  private readonly _applyFilters = new EventEmitter<{
-    event: string | MouseEvent;
+  private readonly _applyFilter = new EventEmitter<{
+    index: number;
+    event?: string | MouseEvent;
     tag?: string;
   }>();
   @Output()
-  private readonly _removeFilters = new EventEmitter<string>();
+  private readonly _removeFilter = new EventEmitter<{
+    index: number;
+    event: string;
+  }>();
   @Output()
   private readonly _setTabFields = new EventEmitter<number>();
 
@@ -37,9 +37,9 @@ export class AccordionComponent implements OnInit {
     {};
   public isSelectorRotated = false;
   public tags: string[] = [];
-  public hasTagsSelected = false;
   public hasInputValue = false;
   public filteredTags: string[] = [];
+  public className = '';
 
   private readonly _normalized = normalized;
 
@@ -55,18 +55,33 @@ export class AccordionComponent implements OnInit {
     });
   }
 
-  public isAccordionData(
-    item: IAccordionData | ITabData
-  ): item is IAccordionData {
-    return 'name' in item;
+  public getButtonContent(index: number): string {
+    if (this.accordionList?.[index]) {
+      if ('name' in this.accordionList[index]) {
+        this.className = 'filter';
+        return this.accordionList[index].name;
+      }
+      this.className = 'tab';
+      return this.accordionList[index].tab;
+    }
+    return '';
   }
 
-  public isTabData(item: IAccordionData | ITabData): item is ITabData {
+  public isFilter(item: IFilterData | ITabData): item is IFilterData {
+    return 'chips' in item;
+  }
+
+  public isTab(item: ITabData): item is ITabData {
     return 'tab' in item;
   }
 
-  public getOptionsSelected(index: number): string[] {
-    return this.filterList?.[index - 1]?.optionsSelected;
+  public getChipsSelected(item: IFilterData): string[] {
+    return item.chipsSelected;
+  }
+
+  public areTagsSelected(item: IFilterData): boolean {
+    if (item.id === TAGS_FILTER_INDEX) return item.chipsSelected.length > 0;
+    return false;
   }
 
   public filterTags(inputValue?: string): void {
@@ -93,13 +108,13 @@ export class AccordionComponent implements OnInit {
       });
   }
 
-  public toggle(id: number): void {
-    if (id === TAGS_ID && this.hasInputValue) this.filterTags();
-    this.toggleStates[id] = {
-      display: !this.toggleStates[id]?.display,
-      rotation: !this.toggleStates[id]?.rotation,
+  public toggle(index: number): void {
+    if (index === TAGS_FILTER_INDEX && this.hasInputValue) this.filterTags();
+    this.toggleStates[index] = {
+      display: !this.toggleStates[index]?.display,
+      rotation: !this.toggleStates[index]?.rotation,
     };
-    this._setTabFields.emit(id - 1);
+    this._setTabFields.emit(index);
   }
 
   public handleTagSelect(): void {
@@ -115,22 +130,20 @@ export class AccordionComponent implements OnInit {
     this.filterTags(value);
   }
 
-  public selectChip(event: string | MouseEvent, tag?: string): void {
+  public selectChip(
+    index: number,
+    event: string | MouseEvent,
+    tag?: string
+  ): void {
     if (event instanceof MouseEvent && tag) {
       event.preventDefault();
-      if (!this.tags.includes(tag)) return;
-      this.hasTagsSelected = true;
-      this._applyFilters.emit({ event, tag });
-    } else {
-      this._applyFilters.emit({ event });
+      this._applyFilter.emit({ index, tag });
+    } else if (typeof event === 'string') {
+      this._applyFilter.emit({ index, event });
     }
   }
 
-  public deselectChip(event: string, index?: number): void {
-    this._removeFilters.emit(event);
-    if (index) {
-      if (this.filterList[index - 1].optionsSelected.length === 0)
-        this.hasTagsSelected = false;
-    }
+  public deselectChip(item: IFilterData, event: string): void {
+    this._removeFilter.emit({ index: item.id, event });
   }
 }

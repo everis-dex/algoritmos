@@ -44,16 +44,50 @@ describe('SystemsSearcherComponent', () => {
     });
   });
 
-  describe('filtersApplied', () => {
-    it('should update filter list correctly', () => {
-      const updatedFilterList = [
-        { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },
-        { filter: 'Filter 2', optionsSelected: ['Option 3'] },
-        { filter: 'Filter 3', optionsSelected: [] },
-      ];
-      component.filtersApplied(updatedFilterList);
+  describe('getSearch', () => {
+    it('should call session storage and algorithms service with valid filters and session search value', () => {
+      const getItemSpy = spyOn(
+        component['_sessionStorageService'],
+        'getItem'
+      ).and.returnValue('testSearch');
+      const onCombinedSearchSpy = spyOn(
+        component['_algorithmsRegistryService'],
+        'onCombinedSearch'
+      ).and.returnValue([]);
 
-      expect(component.filterList).toEqual(updatedFilterList);
+      const updatedFilterList = [
+        { name: 'tema', chipsSelected: ['tema1'] },
+        { name: 'etiquetes', chipsSelected: ['etiqueta1', 'etiqueta2'] },
+        { name: 'estat', chipsSelected: ['estat1'] },
+        { name: 'tipus_sistema', chipsSelected: ['sistema1'] },
+      ];
+      component.getSearch(updatedFilterList);
+
+      expect(getItemSpy).toHaveBeenCalledWith('lastSearch');
+      expect(onCombinedSearchSpy).toHaveBeenCalledWith('testSearch', {
+        tema: 'tema1',
+        etiquetes: 'etiqueta1,etiqueta2',
+        estat: 'estat1',
+        tipus_sistema: 'sistema1',
+      });
+      expect(component.searchResults).toEqual([]);
+    });
+
+    it('should call session storage and algorithms service with valid filters and no session search value', () => {
+      const getItemSpy = spyOn(
+        component['_sessionStorageService'],
+        'getItem'
+      ).and.returnValue(undefined);
+
+      const updatedFilterList = [
+        { name: 'tema', chipsSelected: ['tema1'] },
+        { name: 'etiquetes', chipsSelected: ['etiqueta1', 'etiqueta2'] },
+        { name: 'estat', chipsSelected: ['estat1'] },
+        { name: 'tipus_sistema', chipsSelected: ['sistema1'] },
+      ];
+      component.getSearch(updatedFilterList);
+
+      expect(getItemSpy).toHaveBeenCalledWith('lastSearch');
     });
   });
 });
