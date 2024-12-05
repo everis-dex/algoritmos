@@ -7,14 +7,12 @@
 @if (isFilter(accordionItem)) {
 @if (accordionItem.chips.length > 0) {
 <app-chips [chips]="accordionItem.chips" [chipsSelected]="getChipsSelected(accordionItem)"
-  [customStyles]="{ 'padding': '1.25rem 0', 'font-size': '0.875rem', 'background-color': '#EFBFBF' }"
   (_selectChip)="selectChip(accordionItem.id, $event)"
   (_deselectChip)="deselectChip(accordionItem, $event)"></app-chips>
 } @else {
 @if (areTagsSelected(accordionItem)) {
-<app-chips [customStyles]="{ 'padding': '1.25rem 0',
-                              'font-size': '0.875rem', 'background-color': '#EFBFBF' }"
-  [chipsSelected]="getChipsSelected(accordionItem)" (_deselectChip)="deselectChip(accordionItem, $event)"></app-chips>
+<app-chips [chipsSelected]="getChipsSelected(accordionItem)"
+  (_deselectChip)="deselectChip(accordionItem, $event)"></app-chips>
 }
 <div class="accordion-container__form-select"
   [ngClass]="{'accordion-container__form-select--padding-top': accordionItem.chipsSelected.length === 0}">

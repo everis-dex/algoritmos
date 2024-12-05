@@ -13,8 +13,6 @@ export class ChipsComponent {
   public chips!: string[];
   @Input()
   public chipsSelected!: string[] | undefined;
-  @Input()
-  public customStyles?: Record<string, string>;
 
   @Output()
   private readonly _selectChip = new EventEmitter<string>();

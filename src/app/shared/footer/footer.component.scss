@@ -2,23 +2,16 @@
 
 .footer-container {
   span {
+    display: block;
     color: $grey-dark;
   }
 
   &__icons-group {
     display: flex;
+    flex-wrap: wrap;
 
-    div img {
-      &:first-child {
-        max-width: 40%;
-      }
-      &:last-child {
-        max-width: 60%;
-      }
-    }
-
-    & > img {
-      align-self: center;
+    img {
+      height: clamp(1.5rem, 4vw + 0.5rem, 3.5rem);
     }
   }
 
@@ -27,19 +20,28 @@
 
     span {
       font-size: 0.625rem;
+      line-height: 1rem;
     }
-
-    &__icons-group {
-      flex-direction: column;
-
-      div {
-        display: flex;
-        justify-content: space-between;
+  }
+  @media (min-width: $mobile) and (max-width: $tablet) {
+    img {
+      &:nth-child(2) {
+        margin-left: auto;
       }
-
-      & > img {
-        margin-top: 1.5rem;
-        max-width: 60%;
+      &:nth-child(3) {
+        flex-basis: 100%;
+        margin: 1.5rem auto 0;
+      }
+    }
+  }
+  @media (min-width: $tablet) {
+    img {
+      &:nth-child(2) {
+        margin-left: 1.5rem;
+      }
+      &:nth-child(3) {
+        flex-basis: auto;
+        margin: 0 0 0 auto;
       }
     }
   }
@@ -49,20 +51,7 @@
 
     span {
       font-size: 1rem;
-    }
-
-    &__icons-group {
-      flex-direction: row;
-      justify-content: space-between;
-
-      div {
-        max-width: 50%;
-      }
-
-      & > img {
-        margin-top: 0;
-        max-width: 40%;
-      }
+      line-height: 1.5rem;
     }
   }
 }
