@@ -23,17 +23,18 @@ import { ViewManagerService } from '../../services/view-manager.service';
   styleUrl: './search-bar.component.scss',
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
+  @Input()
+  public hasFilterSelector!: boolean;
+
+  @Output()
+  private readonly _barSubmitted = new EventEmitter<void>();
+
   public popularCategories: string[] = [];
   public categorySelected = '';
   public isFilterVisible = false;
   public currentSearches: string[];
   public hasInputValue = false;
   public isDesktop = false;
-
-  @Input()
-  public hasFilterSelector!: boolean;
-  @Output()
-  private readonly _barSubmitted = new EventEmitter<void>();
 
   private _componentSubscription!: Subscription;
   private _mediaQueryList!: MediaQueryList;

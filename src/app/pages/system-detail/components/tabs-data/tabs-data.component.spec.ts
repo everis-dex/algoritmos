@@ -65,7 +65,7 @@ describe('TabsDataComponent', () => {
         'Motiu de la motificació': component.algorithm.motiu_modificacio,
         'Data de desmantellament': component.algorithm.data_retirada,
       };
-
+      
       const tabIndex = 0;
       const tabFieldsResult = component.setTabFields(tabIndex);
 

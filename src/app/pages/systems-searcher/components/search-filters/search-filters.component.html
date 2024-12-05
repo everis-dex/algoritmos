@@ -1,7 +1,9 @@
 <aside class="searcher-filter-container" aria-labelledby="Filtres">
   <div>
-    <h3 id="Filtres">Filtres</h3>
+    <h2 [style.fontSize]="filtersApplied ? '1.5rem' : '1.25rem'" id="Filtres">Filtres</h2>
+    @if (filtersApplied) {
     <button (click)="resetFilters()">Restaurar filtres</button>
+    }
   </div>
   <app-accordion [accordionList]="filterList" (_applyFilter)="applyFilter($event)"
     (_removeFilter)="removeFilter($event)"></app-accordion>

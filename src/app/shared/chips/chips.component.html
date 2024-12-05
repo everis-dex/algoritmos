@@ -1,18 +1,17 @@
-<div class="chips-container"
-  [style.padding]="((chips && chips.length > 0) || (chipsSelected && chipsSelected.length > 0)) ? '1.25rem 0' : '0'">
+<ul class="chips-container" [style.padding]="isFilter ? setPadding() : '0'">
   @for (chipSelected of chipsSelected; track $index) {
-  <div>
+  <li>
     <span>{{ chipSelected }}</span>
     <button (click)="deselectChip(chipSelected)">
-      <img src="assets/icons/Cross_icon.svg" alt="">
+      <img src="assets/icons/Cross_icon.svg" alt="Desfer la selecció de la xip">
     </button>
-  </div>
+  </li>
   }
   @for (chip of chips; track $index) {
   @if (!chipsSelected?.includes(chip)) {
-  <button class="chips-container__chip" type="button" (click)="selectChip(chip)" [title]="chip">
-    <span>{{ chip }}</span>
-  </button>
+  <li><button type="button" (click)="selectChip(chip)" [title]="chip">
+      <span>{{ chip }}</span>
+    </button></li>
   }
   }
-</div>
+</ul>

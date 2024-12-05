@@ -51,6 +51,7 @@ export class SearchFiltersComponent {
       chipsSelected: [],
     },
   ];
+  public filtersApplied = false;
 
   public resetFilters(): void {
     this.filterList = this.filterList.map((filterItem) => {
@@ -59,6 +60,7 @@ export class SearchFiltersComponent {
         chipsSelected: [],
       };
     });
+    this.filtersApplied = false;
     this._filtersApplied.emit(this.filterList);
   }
 
@@ -80,13 +82,12 @@ export class SearchFiltersComponent {
     } else if (typeof event === 'string') {
       this.filterList[index].chipsSelected.push(event);
     }
-
     if (
       index > TAGS_FILTER_INDEX &&
       this.filterList[index].chipsSelected.length > 1
     )
       this.filterList[index].chipsSelected.shift();
-
+    this.filtersApplied = true;
     this._filtersApplied.emit(this.filterList);
   }
 
@@ -100,6 +101,7 @@ export class SearchFiltersComponent {
     this.filterList[index].chipsSelected = this.filterList[
       index
     ].chipsSelected.filter((option) => option !== event);
+    this.filtersApplied = !!(this.filterList[index].chipsSelected.length > 0);
     this._filtersApplied.emit(this.filterList);
   }
 }

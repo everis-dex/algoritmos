@@ -39,20 +39,37 @@ export class AccordionComponent implements OnInit {
   public tags: string[] = [];
   public hasInputValue = false;
   public filteredTags: string[] = [];
+  public isDesktop = false;
   public className = '';
 
   private readonly _normalized = normalized;
+  private _mediaQueryList!: MediaQueryList;
 
   constructor(
     private readonly _algorithmsRegistryService: AlgorithmsRegistryService
   ) {}
 
   ngOnInit(): void {
+    this._checkBreakpoint();
     this.tags = this._algorithmsRegistryService.getAlgorithmTagList();
     this.filteredTags = [...this.tags];
     this.accordionList?.forEach((accordion) => {
-      this.toggleStates[accordion.id] = { display: false, rotation: false };
+      this.toggleStates[accordion.id] = {
+        display: !!this.isFilter(accordion),
+        rotation: !!this.isFilter(accordion),
+      };
     });
+  }
+
+  private _checkBreakpoint(): void {
+    this._mediaQueryList = window.matchMedia(`(min-width: 1200px)`);
+    this.isDesktop = this._mediaQueryList.matches;
+    this._mediaQueryList.addEventListener(
+      'change',
+      (event: MediaQueryListEvent) => {
+        this.isDesktop = event.matches;
+      }
+    );
   }
 
   public getButtonContent(index: number): string {
@@ -145,5 +162,13 @@ export class AccordionComponent implements OnInit {
 
   public deselectChip(item: IFilterData, event: string): void {
     this._removeFilter.emit({ index: item.id, event });
+  }
+
+  public setPadding(item: IFilterData): string {
+    if (item.chipsSelected.length === 0) {
+      return this.isDesktop ? '1.25rem 0' : '0.5rem 0';
+    } else {
+      return this.isDesktop ? '0 0 1.25rem' : '0 0 0.5rem';
+    }
   }
 }

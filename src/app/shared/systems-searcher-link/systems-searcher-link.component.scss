@@ -4,9 +4,10 @@ div {
   width: 100%;
   display: grid;
 
-  button {
+  a {
     color: $red-bright;
     font-weight: 600;
+    display: flex;
     gap: 0.25rem;
     justify-self: end;
     align-items: center;

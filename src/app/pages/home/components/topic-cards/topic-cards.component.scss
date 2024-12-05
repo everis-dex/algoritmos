@@ -6,21 +6,35 @@
   & > div {
     max-width: 73.125rem;
     margin: auto;
-  }
-}
+    display: grid;
 
-@media (min-width: $mobile) and (max-width: $desktop) {
-  .topic-cards-container {
+    @media (min-width: $mobile) and (max-width: $desktop) {
+      gap: 2rem;
+    }
+    @media (min-width: $desktop) {
+      gap: 2.5rem;
+    }
+  }
+
+  @media (min-width: $mobile) and (max-width: $desktop) {
     padding-top: 1rem;
     padding-bottom: 2rem;
     gap: 1rem;
+
+    h2 {
+      font-size: 1.375rem;
+      line-height: 1.875rem;
+    }
   }
-}
-@media (min-width: $desktop) {
-  .topic-cards-container {
+  @media (min-width: $desktop) {
     padding-top: 2rem;
     padding-bottom: 3.4375rem;
     gap: 1.5rem;
+
+    h2 {
+      font-size: 1.875rem;
+      line-height: 2.5rem;
+    }
 
     &__cards {
       grid-template-columns: repeat(2, 1fr);

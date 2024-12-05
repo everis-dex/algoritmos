@@ -1,48 +1,48 @@
-@for (accordionItem of accordionList; track $index) {
-<button type="button" (click)="toggle(accordionItem.id)" class="accordion-container {{ className }}-accordion">{{
-  getButtonContent(accordionItem.id)}}<img src="assets/icons/Icon_angle-down.svg"
-    alt="Fletxa d'expansió del contingut desplegable"
-    [ngClass]="{'accordion-container--rotate-left': toggleStates[accordionItem.id].rotation, 'accordion-container--rotate-right': !toggleStates[accordionItem.id].rotation}"></button>
-@if (toggleStates[accordionItem.id].display) {
-@if (isFilter(accordionItem)) {
-@if (accordionItem.chips.length > 0) {
-<app-chips [chips]="accordionItem.chips" [chipsSelected]="getChipsSelected(accordionItem)"
-  (_selectChip)="selectChip(accordionItem.id, $event)"
-  (_deselectChip)="deselectChip(accordionItem, $event)"></app-chips>
-} @else {
-@if (areTagsSelected(accordionItem)) {
-<app-chips [chipsSelected]="getChipsSelected(accordionItem)"
-  (_deselectChip)="deselectChip(accordionItem, $event)"></app-chips>
-}
-<div class="accordion-container__form-select"
-  [ngClass]="{'accordion-container__form-select--padding-top': accordionItem.chipsSelected.length === 0}">
-  <button type="button" (click)="handleTagSelect()">Selecciona<img src="assets/icons/Icon_angle-down.svg"
-      alt="Fletxa d'expansió del contingut desplegable"
-      [ngClass]="{'accordion-container--rotate-left': isSelectorRotated, 'accordion-container--rotate-right': !isSelectorRotated}"></button>
-  @if (isSelectorRotated) {
-  <form aria-label="Cercador d'etiquetes">
-    <label for="tag-input"
-      [ngClass]="{'accordion-container__form-select__label--visible': !hasInputValue, 'accordion-container__form-select__label--hidden': hasInputValue}">Cerca</label>
-    <input id="tag-input" type="text" (input)="handleInput($event)" (keydown)="handleInput($event)">
-    <button type="submit" tabindex="-1" style="display: none;"></button>
-    <img src="assets/icons/Buscador_Boton.svg" alt="Botó del cercador">
-  </form>
-  @if (filteredTags.length > 0) {
-  <ul>
-    @for (tag of filteredTags; track tag) {
-    <li><button type="button" (click)="selectChip(accordionItem.id, $event, tag)">{{ tag }}</button></li>
+<ul [ngClass]="{'accordion-list': !isDesktop}">
+  @for (accordionItem of accordionList; track $index) {
+  <li><button type="button" (click)="toggle(accordionItem.id)" class="accordion-container {{ className }}-accordion">{{
+      getButtonContent(accordionItem.id)}}<img src="assets/icons/Icon_angle-down.svg" alt=""
+        [ngClass]="{'accordion-container--rotate-left': toggleStates[accordionItem.id].rotation, 'accordion-container--rotate-right': !toggleStates[accordionItem.id].rotation}"></button>
+  </li>
+  @if (toggleStates[accordionItem.id].display) {
+  @if (isFilter(accordionItem)) {
+  @if (accordionItem.chips.length > 0) {
+  <app-chips [isFilter]="true" [chips]="accordionItem.chips" [chipsSelected]="getChipsSelected(accordionItem)"
+    (_selectChip)="selectChip(accordionItem.id, $event)"
+    (_deselectChip)="deselectChip(accordionItem, $event)"></app-chips>
+  } @else {
+  @if (areTagsSelected(accordionItem)) {
+  <app-chips [isFilter]="true" [chipsSelected]="getChipsSelected(accordionItem)"
+    (_deselectChip)="deselectChip(accordionItem, $event)"></app-chips>
+  }
+  <div class="accordion-container__form-select" [style.padding]="setPadding(accordionItem)">
+    <button type="button" (click)="handleTagSelect()">Selecciona<img src="assets/icons/Icon_angle-down.svg" alt=""
+        [ngClass]="{'accordion-container--rotate-left': isSelectorRotated, 'accordion-container--rotate-right': !isSelectorRotated}"></button>
+    @if (isSelectorRotated) {
+    <form aria-label="Cercador d'etiquetes">
+      <label for="tag-input"
+        [ngClass]="{'accordion-container__form-select__label--visible': !hasInputValue, 'accordion-container__form-select__label--hidden': hasInputValue}">Cerca</label>
+      <input id="tag-input" type="text" (input)="handleInput($event)" (keydown)="handleInput($event)">
+      <button type="submit" tabindex="-1" style="display: none;"></button>
+      <img src="assets/icons/Buscador_Boton.svg" alt="">
+    </form>
+    @if (filteredTags.length > 0) {
+    <ul>
+      @for (tag of filteredTags; track tag) {
+      <li><button type="button" (click)="selectChip(accordionItem.id, $event, tag)">{{ tag }}</button></li>
+      }
+    </ul>
     }
-  </ul>
+    }
+  </div>
+  }
+  } @else if (isTab(accordionItem)) {
+  <div class="accordion-container__fields">
+    @for (field of accordionItem.fields; track field) {
+    <app-tab-field-data [field]="field"></app-tab-field-data>
+    }
+  </div>
   }
   }
-</div>
-}
-} @else if (isTab(accordionItem)) {
-<div class="accordion-container__fields">
-  @for (field of accordionItem.fields; track field) {
-  <app-tab-field-data [field]="field"></app-tab-field-data>
   }
-</div>
-}
-}
-}
+</ul>

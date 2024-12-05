@@ -6,12 +6,42 @@
     <input [style.width]="!hasFilterSelector && '100%'" id="search-input" type="text" (input)="handleInput($event)"
       (keydown)="handleSearch($event)">
     @if (hasFilterSelector) {
-    <button type="button" (click)="handleCategorySelect()" class="searcher-container__form__category-button">{{
+    <button type="button" (click)="handleCategorySelect()" class="searcher-container__form__category-button"
+      aria.expanded="true">{{
       categorySelected ?
       categorySelected : 'Filtra per categoria' }}
-      <img src="assets/icons/select_divisor.svg" alt="Divisor del selector">
-      <img src="assets/icons/select.svg" alt="Fletxes del selector">
+      <img src="assets/icons/select_divisor.svg" alt="">
+      <img src="assets/icons/select.svg" alt="">
     </button>
+    @if (isFilterVisible) {
+    <div class="searcher-container__filter">
+      @if (currentSearches.length > 0) {
+      <section class="searcher-container__filter__section" id="current-searches">
+        <div class="searcher-container__filter__section__header">
+          <h2>Cerques recents</h2>
+          <button class="searcher-container__filter__section__header__button" (click)="resetSearch()">{{
+            isDesktop ? 'Restaurar recents' :
+            'Restaurar'}}</button>
+        </div>
+        @for (currentSearch of currentSearches; track currentSearch; let i = $index) {
+        <div class="searcher-container__filter__section__current-search-container">
+          <a href="#" (click)="redirectToSystemsSearcherView({currentSearch})">
+            <img src="assets/icons/Restart.svg" alt="">{{ currentSearch }}
+          </a>
+          <button (click)="deleteSearch(i)">
+            <img src="assets/icons/Delete.svg" alt="Borrar cerca recent">
+          </button>
+        </div>
+        }
+      </section>
+      }
+      <section class="searcher-container__filter__section" id="popular-categories">
+        <h2>Categories populars</h2>
+        <app-chips [isFilter]="false" [chips]="popularCategories" (_selectChip)="selectCategory($event)"></app-chips>
+      </section>
+      <app-systems-searcher-link></app-systems-searcher-link>
+    </div>
+    }
     }
     <label for="search-button" class="searcher-container__form__label--hidden">Botó del cercador</label>
     <button (click)="handleSearch($event)" class="searcher-container__form__search-button" type="submit"
@@ -27,33 +57,4 @@
       </svg>
     </button>
   </form>
-  @if (hasFilterSelector && isFilterVisible) {
-  <div class="searcher-container__filter">
-    @if (currentSearches.length > 0) {
-    <section class="searcher-container__filter__section" id="current-searches">
-      <div class="searcher-container__filter__section__header">
-        <h4>Cerques recents</h4>
-        <button class="searcher-container__filter__section__header__button" (click)="resetSearch()">{{
-          isDesktop ? 'Restaurar recents' :
-          'Restaurar'}}</button>
-      </div>
-      @for (currentSearch of currentSearches; track currentSearch; let i = $index) {
-      <div class="searcher-container__filter__section__current-search-container">
-        <button (click)="redirectToSystemsSearcherView({currentSearch})">
-          <img src="assets/icons/Restart.svg" alt="Restaurar">{{ currentSearch }}
-        </button>
-        <button (click)="deleteSearch(i)">
-          <img src="assets/icons/Delete.svg" alt="Borrar">
-        </button>
-      </div>
-      }
-    </section>
-    }
-    <section class="searcher-container__filter__section" id="popular-categories">
-      <h4>Categories populars</h4>
-      <app-chips [chips]="popularCategories" (_selectChip)="selectCategory($event)"></app-chips>
-    </section>
-    <app-systems-searcher-link></app-systems-searcher-link>
-  </div>
-  }
 </section>
