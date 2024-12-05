@@ -5,8 +5,7 @@
   gap: 0.625rem;
   flex-wrap: wrap;
 
-  &__chip,
-  div {
+  li {
     display: flex;
     align-items: center;
     gap: 0.625rem;
@@ -17,17 +16,16 @@
     color: $grey-dark;
     font-size: 0.875rem;
 
-    &:hover {
-      background-color: rgba(192, 0, 0, 0.1);
-      text-shadow: 0 0 0.15px $grey-dark, 0 0 0.15px $grey-dark;
+    &:has(img) {
+      background-color: $pink-very-light;
     }
-  }
+    &:not(:has(img)) {
+      background-color: transparent;
 
-  &__chip {
-    background-color: transparent;
-  }
-
-  div {
-    background-color: $pink-very-light;
+      &:hover {
+        background-color: rgba(192, 0, 0, 0.1);
+        text-shadow: 0 0 0.15px $grey-dark, 0 0 0.15px $grey-dark;
+      }
+    }
   }
 }

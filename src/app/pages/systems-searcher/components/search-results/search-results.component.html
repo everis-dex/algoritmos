@@ -11,9 +11,11 @@
         resultats
         }
     </p>
-    @for (result of searchResults.slice(0, maxSearchResultsPerPage); track $index) {
-    <app-algorithmic-system-card [algorithm]="result"></app-algorithmic-system-card>
-    }
+    <ul class="search-results__list">
+        @for (result of searchResults.slice(0, maxSearchResultsPerPage); track $index) {
+        <li><app-algorithmic-system-card [algorithm]="result"></app-algorithmic-system-card></li>
+        }
+    </ul>
     } @else {
     <div class="search-results__no-results">
         <h2 class="search-results__bold">

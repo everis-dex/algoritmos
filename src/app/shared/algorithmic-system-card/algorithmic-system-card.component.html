@@ -1,10 +1,10 @@
 @if (algorithm) {
-<a href="#" (click)="redirectToSystemDetailView($event, algorithm)" title="{{ algorithm.nom }}">
+<a href="#" (click)="redirectToSystemDetailView($event, algorithm)" aria-labelledby="algorithm-card-header">
   <div class="algorithmic-system-card-container">
     <span class="algorithmic-system-card-container__state"><img
         src="assets/icons/Oval_{{getStateColor(algorithm.estat)}}.svg" alt="">{{
       algorithm.estat }}</span>
-    <h2 class="algorithmic-system-card-container__name">{{ algorithm.nom }}</h2>
+    <h2 id="algorithm-card-header" class="algorithmic-system-card-container__name">{{ algorithm.nom }}</h2>
     <div class="algorithmic-system-card-container__separator"></div>
     <p class="algorithmic-system-card-container__description">{{ algorithm.descripcio }}</p>
     <div class="algorithmic-system-card-container__category-chip-container">

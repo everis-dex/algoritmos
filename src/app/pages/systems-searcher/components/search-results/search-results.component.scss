@@ -1,47 +1,50 @@
 @import "../../../../../assets/scss/styles.scss";
 
 .search-results {
-  display: grid;
-
   &__results-found,
   li {
     color: $grey-dark;
-  }
-
-  ul {
-    padding-left: 0.875rem;
-
-    li {
-      padding-left: 0.625rem;
-
-      &::marker {
-        content: "•";
-      }
-    }
   }
 
   &__bold {
     font-weight: 600;
   }
 
+  &__list {
+    display: grid;
+    margin-top: 1.25rem;
+  }
+
   &__no-results {
     display: grid;
     gap: 1.25rem;
-  }
-}
 
-@media (min-width: $mobile) and (max-width: $desktop) {
-  .search-results {
-    gap: 1.5rem;
+    &__suggestion-list {
+      padding-left: 0.875rem;
+
+      li {
+        padding-left: 0.625rem;
+
+        &::marker {
+          content: "•";
+        }
+      }
+    }
+  }
+
+  @media (min-width: $mobile) and (max-width: $desktop) {
+    &__list {
+      gap: 1.5rem;
+    }
 
     &__results-found {
       justify-self: flex-start;
     }
   }
-}
-@media (min-width: $desktop) {
-  .search-results {
-    gap: 1.25rem;
+  @media (min-width: $desktop) {
+    &__list {
+      gap: 1.25rem;
+    }
 
     &__results-found {
       justify-self: end;

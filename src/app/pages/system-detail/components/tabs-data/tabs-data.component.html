@@ -10,11 +10,11 @@
       }
     </div>
     @if (tabsData[currentTabIndex].fields) {
-    <div class="tabs-data-container__tabs__fields">
+    <ul class="tabs-data-container__tabs__fields">
       @for (tabField of tabsData[currentTabIndex].fields; track $index) {
-      <app-tab-field-data [field]="tabField"></app-tab-field-data>
+      <li><app-tab-field-data [field]="tabField"></app-tab-field-data></li>
       }
-    </div>
+    </ul>
     }
   </div>
   <app-accordion [accordionList]="tabsData" (_setTabFields)="setTabFields($event)"

@@ -1,10 +1,10 @@
 <section class="current-algorithmic-systems-container">
   <app-systems-searcher-link class="current-algorithmic-systems-container__link"></app-systems-searcher-link>
-  <h1>Sistemes Algorísmics recents</h1>
-  <div class="current-algorithmic-systems-container__cards">
+  <h2>Sistemes Algorísmics recents</h2>
+  <ul class="current-algorithmic-systems-container__cards">
     @for (algorithm of algorithms; track $index) {
-    <app-algorithmic-system-card [algorithm]="algorithm"></app-algorithmic-system-card>
+    <li><app-algorithmic-system-card [algorithm]="algorithm"></app-algorithmic-system-card></li>
     }
-  </div>
+  </ul>
   <app-systems-searcher-link class="current-algorithmic-systems-container__link"></app-systems-searcher-link>
 </section>

@@ -1,9 +1,9 @@
 /**
  * Returns the color associated with the given state.
  *
- * @export
- * @param {string} state
- * @return {string}
+ * @param {string} state The state whose associated color is to be retrieved.
+ * @return {string} The color associated with the given state (e.g., 'Green', 'Yellow', 'Red').
+ * @memberof AlgorithmsRegistryService
  */
 export function getStateColor(state: string): string {
   const stateColorConfig: Record<string, string> = {
@@ -15,10 +15,10 @@ export function getStateColor(state: string): string {
 }
 
 /**
- * Returns a normalized string, removing accents and converting to lowercase
+ * Returns a normalized string, removing accents and converting to lowercase.
  *
- * @param {(string | undefined)} text
- * @return {string}
+ * @param {(string | undefined)} text The input string to be normalized. If `undefined`, an empty string will be returned.
+ * @return {string} The normalized string without accents and in lowercase.
  * @memberof AlgorithmsRegistryService
  */
 export function normalized(text: string | undefined): string {
