@@ -3,6 +3,6 @@
     <h3 id="Filtres">Filtres</h3>
     <button (click)="resetFilters()">Restaurar filtres</button>
   </div>
-  <app-accordion [accordionList]="filters" [filterList]="filterList" [resetTagsSelected]="resetTagsSelected"
-    (_applyFilters)="applyFilters($event)" (_removeFilters)="removeFilters($event)"></app-accordion>
+  <app-accordion [accordionList]="filterList" (_applyFilter)="applyFilter($event)"
+    (_removeFilter)="removeFilter($event)"></app-accordion>
 </aside>

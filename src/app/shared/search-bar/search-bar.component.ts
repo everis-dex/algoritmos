@@ -35,7 +35,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Output()
   private readonly _barSubmitted = new EventEmitter<void>();
 
-  private _componentSubscriptions: Subscription[] = [];
+  private _componentSubscription!: Subscription;
   private _mediaQueryList!: MediaQueryList;
 
   constructor(
@@ -49,25 +49,15 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._checkBreakpoint();
-    const popularCategories =
-      this._sessionStorageService.getItem<string[]>('popularCategories');
-    if (popularCategories !== null) {
-      this.popularCategories = popularCategories;
-    } else {
-      this._categoryService.getCategories().subscribe((categories) => {
+    this._componentSubscription = this._categoryService
+      .getCategories()
+      .subscribe((categories) => {
         this.popularCategories = categories;
-        this._sessionStorageService.setItem(
-          'popularCategories',
-          this.popularCategories
-        );
       });
-    }
   }
 
   ngOnDestroy(): void {
-    this._componentSubscriptions.forEach((subscription) =>
-      subscription.unsubscribe()
-    );
+    if (this._componentSubscription) this._componentSubscription.unsubscribe();
   }
 
   @HostListener('document:click', ['$event'])

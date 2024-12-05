@@ -1,42 +1,18 @@
-@if (chips) {
-<div class="chips-container" [ngStyle]="{'padding': customStyles?.['padding']}">
-  @if (!optionsSelected) {
-  @for (chip of chips; track $index) {
-  <button class="chips-container__chip" type="button" (click)="selectChip(chip)" [title]="chip"
-    [ngStyle]="{'font-size': customStyles?.['font-size'], 'background-color': 'transparent'}">
-    <span>{{ chip }}</span>
-  </button>
-  }
-  } @else {
-  @for (chip of chips; track $index) {
-  @if (optionsSelected.includes(chip)) {
-  <div [ngStyle]="{'font-size': customStyles?.['font-size'], 'background-color': customStyles?.['background-color']}">
-    <span>{{ chip }}</span>
-    <button (click)="deselectChip(chip)">
-      <img src="assets/icons/Cross_icon.svg" alt="Deseleccionar xip">
+<div class="chips-container"
+  [style.padding]="((chips && chips.length > 0) || (chipsSelected && chipsSelected.length > 0)) ? '1.25rem 0' : '0'">
+  @for (chipSelected of chipsSelected; track $index) {
+  <div>
+    <span>{{ chipSelected }}</span>
+    <button (click)="deselectChip(chipSelected)">
+      <img src="assets/icons/Cross_icon.svg" alt="">
     </button>
   </div>
   }
-  }
   @for (chip of chips; track $index) {
-  @if (!optionsSelected.includes(chip)) {
-  <button class="chips-container__chip" type="button" (click)="selectChip(chip)" [title]="chip"
-    [ngStyle]="{'font-size': customStyles?.['font-size'], 'background-color': 'transparent'}">
+  @if (!chipsSelected?.includes(chip)) {
+  <button class="chips-container__chip" type="button" (click)="selectChip(chip)" [title]="chip">
     <span>{{ chip }}</span>
   </button>
   }
   }
-  }
 </div>
-} @else {
-<div class="chips-container" [ngStyle]="{'padding': customStyles?.['padding']}">
-  @for (optionSelected of optionsSelected; track $index) {
-  <div [ngStyle]="{'font-size': customStyles?.['font-size'], 'background-color': customStyles?.['background-color']}">
-    <span>{{ optionSelected }}</span>
-    <button (click)="deselectChip(optionSelected)">
-      <img src="assets/icons/Cross_icon.svg" alt="Deseleccionar xip">
-    </button>
-  </div>
-  }
-</div>
-}

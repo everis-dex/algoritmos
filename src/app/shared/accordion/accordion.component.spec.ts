@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AccordionComponent } from './accordion.component';
-import { CATEGORIES } from '../../constants/search-filters.const';
-import { IAccordionData } from './accordion.model';
+import { CATEGORIES, STATES } from '../../constants/search-filters.const';
+import { IFilterData } from './accordion.model';
 import { ITabData } from '../../pages/system-detail/components/tabs-data/tabs-data.model';
 import { tabsData } from '../../pages/system-detail/components/tabs-data/tabs-data.config';
 import { provideHttpClient } from '@angular/common/http';
@@ -34,37 +34,61 @@ describe('AccordionComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('isAccordionData', () => {
-    it('should return true if the item is of type IAccordionData', () => {
-      const item: IAccordionData = {
-        id: 1,
+  describe('isFilter', () => {
+    it('should return true if the item is of type IFilterData', () => {
+      const item: IFilterData = {
+        id: 0,
         name: 'Categoria',
         chips: CATEGORIES,
+        chipsSelected: [],
       };
-      const accordionDataResult = component.isAccordionData(item);
+      const accordionDataResult = component.isFilter(item);
       expect(accordionDataResult).toBeTrue();
     });
   });
 
-  describe('isTabData', () => {
+  describe('isTab', () => {
     it('should return true if the item is of type ITabData', () => {
       const item: ITabData = tabsData[0];
-      const tabDataResult = component.isTabData(item);
+      const tabDataResult = component.isTab(item);
       expect(tabDataResult).toBeTrue();
     });
   });
 
-  describe('getOptionsSelected', () => {
-    it('should get options selected correctly', () => {
-      component.filterList = [
-        { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },
-        { filter: 'Filter 2', optionsSelected: ['Option 3'] },
-        { filter: 'Filter 3', optionsSelected: [] },
-      ];
+  describe('getChipsSelected', () => {
+    it('should get chips selected correctly', () => {
+      const item: IFilterData = {
+        id: 0,
+        name: 'Categoría',
+        chips: CATEGORIES,
+        chipsSelected: [CATEGORIES[0], CATEGORIES[1]],
+      };
+      const chipsSelected = component.getChipsSelected(item);
+      expect(chipsSelected).toEqual(item.chipsSelected);
+    });
+  });
 
-      const index = 1;
-      const optionsSelected = component.getOptionsSelected(index);
-      expect(optionsSelected).toEqual(['Option 1', 'Option 2']);
+  describe('areTagsSelected', () => {
+    it('should return true if the selected item is a tag and has selected chips', () => {
+      const item: IFilterData = {
+        id: 1,
+        name: 'Etiquetes',
+        chips: [],
+        chipsSelected: [component.tags[0]],
+      };
+      const tagsSelected = component.areTagsSelected(item);
+      expect(tagsSelected).toBeTrue();
+    });
+
+    it('should return false if the selected item is not a tag', () => {
+      const item: IFilterData = {
+        id: 0,
+        name: 'Categories',
+        chips: CATEGORIES,
+        chipsSelected: [CATEGORIES[0]],
+      };
+      const tagsSelected = component.areTagsSelected(item);
+      expect(tagsSelected).toBeFalse();
     });
   });
 
@@ -76,7 +100,19 @@ describe('AccordionComponent', () => {
       expect(component.filteredTags).toEqual(component.tags);
     });
 
-    it('should filter and sort tags with input value matching the start of tags', () => {
+    it('should prioritize tags that start with the input value "da" and sort the remaining matches', () => {
+      component.tags = [...component.tags, 'Dades personals'];
+      const inputValue = 'da';
+      component.filterTags(inputValue);
+
+      expect(component.filteredTags).toEqual([
+        'Dades personals',
+        'Anàlisi de dades',
+        'Protecció de dades',
+      ]);
+    });
+
+    it('should prioritize and sort tags correctly when multiple tags start with the input value "se"', () => {
       component.tags = [...component.tags, 'Seguretat de la informació'];
       const inputValue = 'se';
       component.filterTags(inputValue);
@@ -84,16 +120,6 @@ describe('AccordionComponent', () => {
       expect(component.filteredTags).toEqual([
         'Seguretat de la informació',
         'Seguretat informàtica',
-      ]);
-    });
-
-    it('should filter tags with input value matching inside tags', () => {
-      const inputValue = 'da';
-      component.filterTags(inputValue);
-
-      expect(component.filteredTags).toEqual([
-        'Anàlisi de dades',
-        'Protecció de dades',
       ]);
     });
   });
@@ -114,23 +140,10 @@ describe('AccordionComponent', () => {
       const filterTagsSpy = spyOn(component, 'filterTags');
       component.hasInputValue = true;
 
-      const accordionId = 2;
-      component.toggle(accordionId);
+      const index = 1;
+      component.toggle(index);
 
       expect(filterTagsSpy).toHaveBeenCalled();
-    });
-
-    it('should prioritize tags starting with input value', () => {
-      component.tags = [...component.tags, 'Dades estadístiques'];
-      const inputValue = 'da';
-
-      component.filterTags(inputValue);
-    
-      expect(component.filteredTags).toEqual([
-        'Dades estadístiques',
-        'Anàlisi de dades',
-        'Protecció de dades',
-      ]);
     });
   });
 
@@ -140,7 +153,6 @@ describe('AccordionComponent', () => {
 
       component.hasInputValue = true;
       component.isSelectorRotated = true;
-
       component.handleTagSelect();
 
       expect(filterTagsSpy).toHaveBeenCalled();
@@ -166,50 +178,51 @@ describe('AccordionComponent', () => {
 
   describe('selectChip', () => {
     it('should prevent default and emit event when input is a MouseEvent', () => {
+      const index = 1;
       const event = new MouseEvent('click');
-      const applyFiltersSpy = spyOn(component['_applyFilters'], 'emit');
+      const applyFilterSpy = spyOn(component['_applyFilter'], 'emit');
       const tag = 'Tag 1';
 
       component.tags = [tag];
-      component.selectChip(event, tag);
+      component.selectChip(index, event, tag);
 
-      expect(applyFiltersSpy).toHaveBeenCalledWith({ event, tag });
+      expect(applyFilterSpy).toHaveBeenCalledWith({ index, tag });
     });
 
     it('should not emit or prevent default if tag is not in tags list', () => {
+      const index = 1;
       const event = new MouseEvent('click');
       const tag = 'Tag 3';
 
       component.tags = ['Tag 1', 'Tag 2'];
-      component.selectChip(event, tag);
+      component.selectChip(index, event, tag);
     });
 
-    it('should emit applyFilters event directly when input is a string', () => {
-      const applyFiltersSpy = spyOn(component['_applyFilters'], 'emit');
+    it('should emit applyFilter event directly when input is a string', () => {
+      const applyFilterSpy = spyOn(component['_applyFilter'], 'emit');
 
+      const index = 1;
       const event = 'Chip 1';
-      component.selectChip(event);
+      component.selectChip(index, event);
 
-      expect(applyFiltersSpy).toHaveBeenCalledWith({ event });
+      expect(applyFilterSpy).toHaveBeenCalledWith({ index, event });
     });
   });
 
   describe('deselectChip', () => {
-    it('should emit removeFilters event when a chip is deselected', () => {
-      component.filterList = [
-        { filter: 'Filter 1', optionsSelected: ['Option 1', 'Option 2'] },
-        { filter: 'Filter 2', optionsSelected: ['Option 3'] },
-        { filter: 'Filter 3', optionsSelected: [] },
-      ];
+    it('should emit removeFilter event when a chip is deselected', () => {
+      const removeFilterSpy = spyOn(component['_removeFilter'], 'emit');
 
-      const removeFiltersSpy = spyOn(component['_removeFilters'], 'emit');
+      const item: IFilterData = {
+        id: 2,
+        name: 'Estats',
+        chips: STATES,
+        chipsSelected: [STATES[0]],
+      };
+      const event = item.chipsSelected[0];
+      component.deselectChip(item, event);
 
-      const event = 'Chip 1';
-      const index = 3;
-      component.deselectChip(event, index);
-
-      expect(removeFiltersSpy).toHaveBeenCalledWith(event);
-      expect(component.hasTagsSelected).toBeFalse();
+      expect(removeFilterSpy).toHaveBeenCalledWith({ index: item.id, event });
     });
   });
 });

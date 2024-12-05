@@ -101,7 +101,7 @@ export class AlgorithmsRegistryService {
    * @return {IAlgorithm[]} The filtered list of algorithms that match the search text.
    * @memberof AlgorithmsRegistryService
    */
-  public onOpenSearch(searchText: string): IAlgorithm[] {
+  private _onOpenSearch(searchText: string): IAlgorithm[] {
     const lowerSearchText = this._normalized(searchText);
     const keysToSearch = ['nom', 'tema', 'estat', 'etiquetes', 'tipus_sistema'];
     return this.algorithms.filter((item) =>
@@ -124,7 +124,7 @@ export class AlgorithmsRegistryService {
    * @return {IAlgorithm[]} The filtered list of algorithms that match the given filters.
    * @memberof AlgorithmsRegistryService
    */
-  public onFiltersSearch(filters: IFilterSearch): IAlgorithm[] {
+  private _onFiltersSearch(filters: IFilterSearch): IAlgorithm[] {
     const lowercasedFilters = {
       estat: this._normalized(filters.estat),
       tema: this._normalized(filters.tema),
@@ -133,7 +133,13 @@ export class AlgorithmsRegistryService {
     };
     return this.algorithms.filter((item) => {
       const matchesTema = lowercasedFilters.tema
-        ? this._normalized(item.tema).includes(lowercasedFilters.tema)
+        ? (() => {
+            const itemCategories = this._normalized(item.tema).split(',');
+            const filterCategories = lowercasedFilters.tema.split(',');
+            return filterCategories.every((category) =>
+              itemCategories.includes(category)
+            );
+          })()
         : true;
       const matchesEstat = lowercasedFilters.estat
         ? this._normalized(item.estat).includes(lowercasedFilters.estat)
@@ -160,17 +166,18 @@ export class AlgorithmsRegistryService {
   /**
    * Returns a list of algorithms that match the given search text and filters.
    *
-   * @param {string} searchText
-   * @param {IFilterSearch} filters
-   * @return {*}  {IAlgorithm[]}
+   * @param {string} searchText The text used to perform a search among the algorithms.
+   * @param {IFilterSearch} filters The filters applied to refine the search results.
+   * @return {IAlgorithm[]} An array of `IAlgorithm` objects that satisfy both the text search
+   * and the filter criteria. If no matches are found, returns an empty array.
    * @memberof AlgorithmsRegistryService
    */
   public onCombinedSearch(
     searchText: string,
     filters: IFilterSearch
   ): IAlgorithm[] {
-    const textSearchResults = this.onOpenSearch(searchText);
-    const filtersSearchResults = this.onFiltersSearch(filters);
+    const textSearchResults = this._onOpenSearch(searchText);
+    const filtersSearchResults = this._onFiltersSearch(filters);
     const result = textSearchResults.filter((item) =>
       filtersSearchResults.includes(item)
     );

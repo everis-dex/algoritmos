@@ -17,11 +17,10 @@ button {
 
 input {
   line-height: 1.5rem;
-  border: 0.0625rem solid $grey-very-light;
-  box-sizing: border-box;
+  border: 1px solid $grey-very-light;
 
   &:focus {
-    border: 0.0625rem solid $vivid-cerulean;
+    border: 1px solid $vivid-cerulean;
     border-radius: 0.125rem;
     outline: none;
   }

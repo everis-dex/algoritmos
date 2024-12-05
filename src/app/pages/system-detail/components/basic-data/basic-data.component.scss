@@ -59,16 +59,15 @@
     display: flex;
     align-items: center;
     align-self: end;
-    box-sizing: border-box;
   }
 
   &__category-chip {
-    border: 0.0625rem solid $red-bright;
+    border: 1px solid $red-bright;
     background-color: $red-transparent;
   }
 
   &__tag {
-    border: 0.0625rem solid $grey-dark;
+    border: 1px solid $grey-dark;
     background-color: $white-smoke;
   }
 }

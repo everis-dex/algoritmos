@@ -31,12 +31,29 @@ describe('SearchFiltersComponent', () => {
 
     component.filterList = [
       {
-        filter: component.filters[0].name,
-        optionsSelected: [CATEGORIES[0], CATEGORIES[1]],
+        id: 0,
+        name: component.filterList[0].name,
+        chips: CATEGORIES,
+        chipsSelected: [CATEGORIES[0]],
       },
-      { filter: component.filters[1].name, optionsSelected: [tags[0]] },
-      { filter: component.filters[2].name, optionsSelected: [] },
-      { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
+      {
+        id: 1,
+        name: component.filterList[1].name,
+        chips: [],
+        chipsSelected: [tags[0]],
+      },
+      {
+        id: 2,
+        name: component.filterList[2].name,
+        chips: STATES,
+        chipsSelected: [STATES[0]],
+      },
+      {
+        id: 3,
+        name: component.filterList[3].name,
+        chips: ALGORITHMS,
+        chipsSelected: [ALGORITHMS[0]],
+      },
     ];
   });
 
@@ -44,98 +61,173 @@ describe('SearchFiltersComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should reset all filters', () => {
-    component.resetFilters();
+  describe('resetFilters', () => {
+    it('should reset all filters', () => {
+      component.resetFilters();
 
-    expect(component.filterList).toEqual([
-      { filter: component.filters[0].name, optionsSelected: [] },
-      { filter: component.filters[1].name, optionsSelected: [] },
-      { filter: component.filters[2].name, optionsSelected: [] },
-      { filter: component.filters[3].name, optionsSelected: [] },
-    ]);
+      expect(component.filterList).toEqual([
+        {
+          id: 0,
+          name: component.filterList[0].name,
+          chips: CATEGORIES,
+          chipsSelected: [],
+        },
+        {
+          id: 1,
+          name: component.filterList[1].name,
+          chips: [],
+          chipsSelected: [],
+        },
+        {
+          id: 2,
+          name: component.filterList[2].name,
+          chips: STATES,
+          chipsSelected: [],
+        },
+        {
+          id: 3,
+          name: component.filterList[3].name,
+          chips: ALGORITHMS,
+          chipsSelected: [],
+        },
+      ]);
+    });
   });
 
-  it('should reset the filter for the provided id', () => {
-    const index = 3;
-    component.resetFilters(index);
+  describe('applyFilter', () => {
+    it('should add a tag to chipsSelected if the tag is not already selected', () => {
+      const index = 1;
+      const event = new MouseEvent('click');
+      const tag = tags[1];
+      component.applyFilter({ index, event, tag });
 
-    expect(component.filterList).toEqual([
-      {
-        filter: component.filters[0].name,
-        optionsSelected: [CATEGORIES[0], CATEGORIES[1]],
-      },
-      { filter: component.filters[1].name, optionsSelected: [tags[0]] },
-      { filter: component.filters[2].name, optionsSelected: [] },
-      { filter: component.filters[3].name, optionsSelected: [] },
-    ]);
+      expect(component.filterList).toEqual([
+        {
+          id: 0,
+          name: component.filterList[0].name,
+          chips: CATEGORIES,
+          chipsSelected: [CATEGORIES[0]],
+        },
+        {
+          id: 1,
+          name: component.filterList[1].name,
+          chips: [],
+          chipsSelected: [tags[0], tags[1]],
+        },
+        {
+          id: 2,
+          name: component.filterList[2].name,
+          chips: STATES,
+          chipsSelected: [STATES[0]],
+        },
+        {
+          id: 3,
+          name: component.filterList[3].name,
+          chips: ALGORITHMS,
+          chipsSelected: [ALGORITHMS[0]],
+        },
+      ]);
+    });
+
+    it('should not add a tag to chipsSelected if the tag is already selected', () => {
+      const index = 1;
+      const event = new MouseEvent('click');
+      const tag = tags[0];
+      component.applyFilter({ index, event, tag });
+
+      expect(component.filterList).toEqual([
+        {
+          id: 0,
+          name: component.filterList[0].name,
+          chips: CATEGORIES,
+          chipsSelected: [CATEGORIES[0]],
+        },
+        {
+          id: 1,
+          name: component.filterList[1].name,
+          chips: [],
+          chipsSelected: [tags[0]],
+        },
+        {
+          id: 2,
+          name: component.filterList[2].name,
+          chips: STATES,
+          chipsSelected: [STATES[0]],
+        },
+        {
+          id: 3,
+          name: component.filterList[3].name,
+          chips: ALGORITHMS,
+          chipsSelected: [ALGORITHMS[0]],
+        },
+      ]);
+    });
+
+    it('should add a chip to chipsSelected when event is a string', () => {
+      const index = 2;
+      const event = STATES[1];
+      component.applyFilter({ index, event });
+
+      expect(component.filterList).toEqual([
+        {
+          id: 0,
+          name: component.filterList[0].name,
+          chips: CATEGORIES,
+          chipsSelected: [CATEGORIES[0]],
+        },
+        {
+          id: 1,
+          name: component.filterList[1].name,
+          chips: [],
+          chipsSelected: [tags[0]],
+        },
+        {
+          id: 2,
+          name: component.filterList[2].name,
+          chips: STATES,
+          chipsSelected: [STATES[1]],
+        },
+        {
+          id: 3,
+          name: component.filterList[3].name,
+          chips: ALGORITHMS,
+          chipsSelected: [ALGORITHMS[0]],
+        },
+      ]);
+    });
   });
 
-  it('should call resetFilters if index is greater than or equal to TAGS_ID in _addNewOptionSelected', () => {
-    const resetFiltersSpy = spyOn(component, 'resetFilters');
+  describe('removeFilter', () => {
+    it('should remove the event from chipsSelected', () => {
+      const index = 0;
+      component.removeFilter({ index, event: CATEGORIES[0] });
 
-    const index = 3;
-    const option = tags[1];
-    component['_addNewOptionSelected'](option, index);
-
-    expect(resetFiltersSpy).toHaveBeenCalledWith(index);
-  });
-
-  it('should add a new option to optionsSelected when tag is provided', () => {
-    const event = new MouseEvent('click');
-    const tag = tags[1];
-    component.applyFilters({ event, tag });
-
-    expect(component.filterList).toEqual([
-      {
-        filter: component.filters[0].name,
-        optionsSelected: [CATEGORIES[0], CATEGORIES[1]],
-      },
-      {
-        filter: component.filters[1].name,
-        optionsSelected: [tags[0], tag],
-      },
-      { filter: component.filters[2].name, optionsSelected: [] },
-      { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
-    ]);
-  });
-
-  it('should add a new option to optionsSelected when event is a string', () => {
-    const event = STATES[0];
-    component.applyFilters({ event });
-
-    expect(component.filterList).toEqual([
-      {
-        filter: component.filters[0].name,
-        optionsSelected: [CATEGORIES[0], CATEGORIES[1]],
-      },
-      { filter: component.filters[1].name, optionsSelected: [tags[0]] },
-      { filter: component.filters[2].name, optionsSelected: [event] },
-      { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
-    ]);
-  });
-
-  it('should remove the event from optionsSelected', () => {
-    component.removeFilters(CATEGORIES[0]);
-
-    expect(component.filterList).toEqual([
-      { filter: component.filters[0].name, optionsSelected: [CATEGORIES[1]] },
-      { filter: component.filters[1].name, optionsSelected: [tags[0]] },
-      { filter: component.filters[2].name, optionsSelected: [] },
-      { filter: component.filters[3].name, optionsSelected: [ALGORITHMS[0]] },
-    ]);
-  });
-
-  it('should not modify filterList if the event is not found', () => {
-    component.removeFilters(ALGORITHMS[0]);
-
-    expect(component.filterList).toEqual([
-      {
-        filter: component.filters[0].name,
-        optionsSelected: [CATEGORIES[0], CATEGORIES[1]],
-      },
-      { filter: component.filters[1].name, optionsSelected: [tags[0]] },
-      { filter: component.filters[2].name, optionsSelected: [] },
-      { filter: component.filters[3].name, optionsSelected: [] },
-    ]);
+      expect(component.filterList).toEqual([
+        {
+          id: 0,
+          name: component.filterList[0].name,
+          chips: CATEGORIES,
+          chipsSelected: [],
+        },
+        {
+          id: 1,
+          name: component.filterList[1].name,
+          chips: [],
+          chipsSelected: [tags[0]],
+        },
+        {
+          id: 2,
+          name: component.filterList[2].name,
+          chips: STATES,
+          chipsSelected: [STATES[0]],
+        },
+        {
+          id: 3,
+          name: component.filterList[3].name,
+          chips: ALGORITHMS,
+          chipsSelected: [ALGORITHMS[0]],
+        },
+      ]);
+    });
   });
 });

@@ -23,7 +23,6 @@ import { SessionStorageService } from '../../services/session-storage.service';
 })
 export class SystemsSearcherComponent implements OnInit, OnDestroy {
   public searchResults: IAlgorithm[] = [];
-  public filterList: { filter: string; optionsSelected: string[] }[] = [];
   public totalSearchResultsLength = 0;
   public totalPages = 0;
 
@@ -87,17 +86,16 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   }
 
   public getSearch(
-    updatedFilterList: { filter: string; optionsSelected: string[] }[] | void
+    updatedFilterList: { name: string; chipsSelected: string[] }[] | void
   ) {
     const inputSearch =
       this._sessionStorageService.getItem<string>('lastSearch') ?? '';
     if (updatedFilterList) {
-      this.filterList = updatedFilterList;
       this._filtersAppliedParams = {
-        tema: this.filterList[0].optionsSelected[0],
-        etiquetes: this.filterList[1].optionsSelected.join(','),
-        estat: this.filterList[2].optionsSelected[0],
-        tipus_sistema: this.filterList[3].optionsSelected[0],
+        tema: updatedFilterList[0].chipsSelected.join(','),
+        etiquetes: updatedFilterList[1].chipsSelected.join(','),
+        estat: updatedFilterList[2].chipsSelected[0],
+        tipus_sistema: updatedFilterList[3].chipsSelected[0],
       };
     }
     this._originalResults = this._algorithmsRegistryService.onCombinedSearch(
