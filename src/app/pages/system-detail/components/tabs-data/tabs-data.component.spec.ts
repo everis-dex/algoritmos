@@ -1,4 +1,4 @@
-/*import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TabsDataComponent } from './tabs-data.component';
 import { tabsData } from './tabs-data.config';
@@ -65,7 +65,7 @@ describe('TabsDataComponent', () => {
         'Motiu de la motificació': component.algorithm.motiu_modificacio,
         'Data de desmantellament': component.algorithm.data_retirada,
       };
-      
+
       const tabIndex = 0;
       const tabFieldsResult = component.setTabFields(tabIndex);
 
@@ -75,4 +75,4 @@ describe('TabsDataComponent', () => {
       expect(tabFieldsResult).toEqual(component.tabsData[tabIndex].fields);
     });
   });
-});*/
+});

@@ -40,7 +40,6 @@ export class AccordionComponent implements OnInit {
   public hasInputValue = false;
   public filteredTags: string[] = [];
   public isDesktop = false;
-  public className = '';
 
   private readonly _normalized = normalized;
   private _mediaQueryList!: MediaQueryList;
@@ -75,10 +74,8 @@ export class AccordionComponent implements OnInit {
   public getButtonContent(index: number): string {
     if (this.accordionList?.[index]) {
       if ('name' in this.accordionList[index]) {
-        this.className = 'filter';
         return this.accordionList[index].name;
       }
-      this.className = 'tab';
       return this.accordionList[index].tab;
     }
     return '';
@@ -88,7 +85,7 @@ export class AccordionComponent implements OnInit {
     return 'chips' in item;
   }
 
-  public isTab(item: ITabData): item is ITabData {
+  public isTab(item: IFilterData | ITabData): item is ITabData {
     return 'tab' in item;
   }
 
@@ -162,13 +159,5 @@ export class AccordionComponent implements OnInit {
 
   public deselectChip(item: IFilterData, event: string): void {
     this._removeFilter.emit({ index: item.id, event });
-  }
-
-  public setPadding(item: IFilterData): string {
-    if (item.chipsSelected.length === 0) {
-      return this.isDesktop ? '1.25rem 0' : '0.5rem 0';
-    } else {
-      return this.isDesktop ? '0 0 1.25rem' : '0 0 0.5rem';
-    }
   }
 }

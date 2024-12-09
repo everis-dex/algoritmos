@@ -101,7 +101,9 @@ export class SearchFiltersComponent {
     this.filterList[index].chipsSelected = this.filterList[
       index
     ].chipsSelected.filter((option) => option !== event);
-    this.filtersApplied = !!(this.filterList[index].chipsSelected.length > 0);
+    this.filtersApplied = this.filterList.some(
+      (filter) => filter.chipsSelected.length > 0
+    );
     this._filtersApplied.emit(this.filterList);
   }
 }

@@ -2,7 +2,13 @@
 
 .accordion-list {
   display: grid;
-  gap: 0.75rem;
+
+  @media (min-width: $mobile) and (max-width: $desktop) {
+    gap: 1.25rem;
+  }
+  @media (min-width: $desktop) {
+    gap: 0;
+  }
 }
 
 .filter-accordion {
@@ -44,13 +50,13 @@
   &__form-select {
     display: flex;
     flex-direction: column;
-    padding-bottom: 1.25rem;
 
     @media (min-width: $mobile) and (max-width: $desktop) {
       width: 100%;
     }
     @media (min-width: $desktop) {
       width: 85%;
+      padding-bottom: 1.25rem;
     }
 
     button {

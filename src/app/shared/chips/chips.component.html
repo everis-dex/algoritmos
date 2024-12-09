@@ -1,4 +1,4 @@
-<ul class="chips-container" [style.padding]="isFilter ? setPadding() : '0'">
+<ul class="chips-container" [style.padding]="isFilter ? '1.25rem 0 ' + (isDesktop ? '1.25rem' : '0') : '0'">
   @for (chipSelected of chipsSelected; track $index) {
   <li>
     <span>{{ chipSelected }}</span>

@@ -25,10 +25,6 @@
       line-height: 1.3rem;
     }
 
-    &__title {
-      font-weight: 600;
-    }
-
     &:hover h3 {
       text-decoration: underline;
     }
@@ -40,7 +36,7 @@
     padding: 0 1.125rem 2.25rem;
     height: 19.5rem;
 
-    h3 {
+    &__title {
       font-size: 1.25rem;
       line-height: 1.75rem;
     }
@@ -57,7 +53,7 @@
     padding: 0 2.25rem 1.3125rem;
     height: 19.3125rem;
 
-    h3 {
+    &__title {
       font-size: 1.5rem;
       line-height: 2rem;
     }
