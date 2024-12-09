@@ -17,6 +17,8 @@ export class DocumentsComponent implements OnInit, OnDestroy {
 
   constructor(private readonly _documentsService: DocumentService) {}
 
+  // ToDo reemplazar servicio por Input de algoritmo y mostrar sus fitxers (serán máximo 10). Backend en desarrollo.
+
   ngOnInit(): void {
     this._componentSubscription = this._documentsService
       .getDocuments()

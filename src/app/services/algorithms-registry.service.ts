@@ -38,8 +38,8 @@ export class AlgorithmsRegistryService {
       }),
       withCredentials: true,
     };
-    return of(mockAlgorithms);
-    // return this._http.get<IAlgorithm[]>(this._registryURL, options);
+    // return of(mockAlgorithms);
+    return this._http.get<IAlgorithm[]>(this._registryURL, options);
   }
 
   /**
