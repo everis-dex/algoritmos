@@ -1,6 +1,7 @@
 @if (topic) {
 <a [attr.href]="topic.url" [attr.title]="topic.title" class="topic-card-link">
-  <div class="topic-card-link--before" [style.backgroundImage]="'url(' + topic.image + ')'"></div>
+  <div class="topic-card-link--before"
+    [style.backgroundImage]="'url(../../../../assets/images/' + topic.image + '.svg)'"></div>
   <div class="topic-card-link__content">
     <h3 class="topic-card-link__content__title">{{ topic.title }}</h3>
     <p class="topic-card-link__content__description">
