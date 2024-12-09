@@ -39,6 +39,10 @@
     }
   }
 
+  nav, ul.nav>li {
+    border-top: none;
+  }
+
   &__home-container {
     &__subheader {
       position: relative;
