@@ -1,5 +1,5 @@
 <aside class="searcher-filter-container" aria-labelledby="Filtres">
-  <div>
+  <div [style.height]="filtersApplied ? '3.3125rem' : '3.25rem'">
     <h2 [style.fontSize]="filtersApplied ? '1.5rem' : '1.25rem'" id="Filtres">Filtres</h2>
     @if (filtersApplied) {
     <button (click)="resetFilters()">Restaurar filtres</button>

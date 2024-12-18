@@ -2,7 +2,8 @@
   @for (accordionItem of accordionList; track $index) {
   <li>
     <button type="button" (click)="toggle(accordionItem.id)"
-      class="accordion-container {{ isFilter(accordionItem) ? 'filter' : 'tab' }}-accordion">{{
+      class="accordion-container {{ isFilter(accordionItem) ? 'filter' : 'tab' }}-accordion"
+      [style.marginTop]="setMarginTop(accordionItem.id)">{{
       getButtonContent(accordionItem.id)}}<img src="assets/icons/Icon_angle-down.svg" alt=""
         [ngClass]="{'accordion-container--rotate-left': toggleStates[accordionItem.id].rotation, 'accordion-container--rotate-right': !toggleStates[accordionItem.id].rotation}"></button>
     @if (toggleStates[accordionItem.id].display) {

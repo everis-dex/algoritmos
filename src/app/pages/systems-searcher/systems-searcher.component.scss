@@ -9,16 +9,11 @@ section {
   }
   @media (min-width: $desktop) {
     gap: 1.5rem;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: 23.8125rem 1fr;
     padding-top: 3.25rem;
 
     .filters {
-      grid-column: span 4;
-      margin-top: 1.875rem;
-    }
-
-    .results {
-      grid-column: span 8;
+      margin-top: 1.375rem;
     }
   }
 }

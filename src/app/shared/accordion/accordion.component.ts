@@ -160,4 +160,10 @@ export class AccordionComponent implements OnInit {
   public deselectChip(item: IFilterData, event: string): void {
     this._removeFilter.emit({ index: item.id, event });
   }
+
+  public setMarginTop(id: number): string {
+    if (!this.isDesktop && id !== 0 && this.toggleStates[id - 1].display)
+      return '0.5rem';
+    return '0';
+  }
 }

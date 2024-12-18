@@ -6,6 +6,15 @@
     color: $grey-dark;
   }
 
+  &__results-found {
+    @media (min-width: $mobile) and (max-width: $desktop) {
+      justify-self: flex-start;
+    }
+    @media (min-width: $desktop) {
+      justify-self: end;
+    }
+  }
+
   &__bold {
     font-weight: 600;
   }
@@ -13,12 +22,27 @@
   &__list {
     display: grid;
     margin-top: 1.25rem;
+
+    @media (min-width: $mobile) and (max-width: $desktop) {
+      gap: 1.5rem;
+    }
+    @media (min-width: $desktop) {
+      gap: 1.25rem;
+    }
   }
 
   &__no-results {
     display: grid;
     gap: 1.25rem;
-    margin-top: 2.25rem;
+
+    @media (min-width: $desktop) {
+      margin-top: 2.375rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
 
     &__suggestion-list {
       padding-left: 0.875rem;
@@ -30,25 +54,6 @@
           content: "•";
         }
       }
-    }
-  }
-
-  @media (min-width: $mobile) and (max-width: $desktop) {
-    &__list {
-      gap: 1.5rem;
-    }
-
-    &__results-found {
-      justify-self: flex-start;
-    }
-  }
-  @media (min-width: $desktop) {
-    &__list {
-      gap: 1.25rem;
-    }
-
-    &__results-found {
-      justify-self: end;
     }
   }
 }

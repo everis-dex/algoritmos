@@ -12,22 +12,16 @@
     }
 
     h2 {
-      letter-spacing: 0.015rem;
+      letter-spacing: 0.25px;
       color: $grey-black;
-      font-weight: 400;
-
-      @media (min-width: $mobile) and (max-width: $desktop) {
-        font-size: 1.25rem;
-      }
-      @media (min-width: $desktop) {
-        font-size: 1.5rem;
-      }
+      line-height: 1.25rem;
     }
 
     button {
       color: $red-bright;
       font-weight: 600;
-      line-height: 2rem;
+      font-size: 0.875rem;
+      line-height: 1.3125rem;
     }
   }
 }

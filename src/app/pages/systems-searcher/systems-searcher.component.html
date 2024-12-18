@@ -1,7 +1,7 @@
 <app-search-bar [hasFilterSelector]="false" (_barSubmitted)="getSearch($event)"></app-search-bar>
 <section>
   <app-search-filters class="filters" (_filtersApplied)="getSearch($event)"></app-search-filters>
-  <div class="results">
+  <div>
     <app-search-results [searchResults]="searchResults"
       [totalSearchResultsLength]="totalSearchResultsLength"></app-search-results>
     @if (totalPages > 0) {

@@ -41,7 +41,7 @@
     display: flex;
     gap: 0.25rem;
     border-bottom: 1px solid $grey-very-light;
-    padding: 1.5rem 1.5rem 0;
+    padding-left: 1.5rem;
 
     &__separator:not(:last-of-type) {
       display: block;
