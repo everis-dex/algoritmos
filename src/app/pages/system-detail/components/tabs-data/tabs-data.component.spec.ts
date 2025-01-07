@@ -50,16 +50,17 @@ describe('TabsDataComponent', () => {
       component.algorithm = mockAlgorithms[0];
       const mockAlgorithm: Record<string, string> = {
         'Nivell de risc': component.algorithm.nivell_de_risc,
-        "Forma d'adquisició": component.algorithm.forma_adquisicio,
-        'Font de finançament': component.algorithm.font_financament,
+        'Forma de desenvolupament': component.algorithm.forma_adquisicio,
+        'Fonts de finançament': component.algorithm.font_financament,
         'Desenvolupador': component.algorithm.desenvolupador,
         'Unitat responsable': component.algorithm.unitat_responsable,
         'Tema': component.algorithm.tema,
         'Declarat com actuació administrativa automatizada':
           component.algorithm.actuacio_administrativa_automatitzada,
-        'Política pública on intervé el sistema':
+        'Intervenció o vinculació del sistema respecte a una política pública':
           component.algorithm.politica_publica,
-        "Data d'entrada": component.algorithm.data_posada_produccio,
+        'Data de la posada en funcionament':
+          component.algorithm.data_posada_produccio,
         "Data de l'última modificació":
           component.algorithm.data_ultima_modificacio,
         'Motiu de la motificació': component.algorithm.motiu_modificacio,

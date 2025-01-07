@@ -34,6 +34,16 @@ describe('AccordionComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('onResize', () => {
+    it('should update isDesktop when window is resized', () => {
+      const checkBreakpointSpy = spyOn(component, 'checkBreakpoint');
+
+      component.onResize();
+
+      expect(checkBreakpointSpy).toHaveBeenCalled();
+    });
+  });
+
   describe('isFilter', () => {
     it('should return true if the item is of type IFilterData', () => {
       const item: IFilterData = {

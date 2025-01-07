@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { getStateColor } from '../../../../shared/utilities';
 import { IAlgorithm } from '../../../../interfaces/algorithms';
 
 @Component({
@@ -12,6 +11,4 @@ import { IAlgorithm } from '../../../../interfaces/algorithms';
 export class BasicDataComponent {
   @Input()
   public algorithm!: IAlgorithm;
-
-  public getStateColor = getStateColor;
 }

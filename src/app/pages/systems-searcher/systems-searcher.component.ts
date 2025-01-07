@@ -58,13 +58,9 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
 
   private _setTotalPages(): void {
     this.totalSearchResultsLength = this.searchResults.length;
-    if (this.totalSearchResultsLength > 6) {
-      this.totalPages = Math.ceil(
-        this.searchResults.length / MAX_SEARCH_RESULTS_PER_PAGE
-      );
-    } else {
-      this.totalPages = 0;
-    }
+    this.totalPages = Math.ceil(
+      this.totalSearchResultsLength / MAX_SEARCH_RESULTS_PER_PAGE
+    );
   }
 
   ngOnDestroy(): void {

@@ -1,13 +1,14 @@
 <div class="banner-container">
   <div>
-    <nav>
+    <nav aria-label="Navegació del bàner">
       <ul>
         <li><a href="https://administraciodigital.gencat.cat/ca/inici/">Inici</a></li>
         <li>
           @if (currentView === 'home') {
-          Registre de sistemes d'IA
+          Registre de sistemes d'intel·ligència artificial i altres algorismes
           } @else {
-          <a href="#" (click)="redirectToHomeView($event)">Registre de sistemes d'IA</a>
+          <a href="#" (click)="redirectToHomeView($event)">Registre de sistemes d'intel·ligència artificial i altres
+            algorismes</a>
           }
         </li>
         <li>
@@ -21,10 +22,11 @@
     </nav>
     @switch (currentView) {
     @case ('home') {
-    <h1 class="banner-container__home-container__header">Registre d'IA</h1>
+    <h1 class="banner-container__home-container__header">Registre de sistemes d'intel·ligència artificial i altres
+      sistemes</h1>
     }
     @case ('systems-searcher') {
-    <h1>Cerca un dels nostres sistemes</h1>
+    <h1>Cerca els sistemes de la Generalitat</h1>
     }
     @case ('system-detail') {
     <h1>{{ algorithmName }}</h1>
@@ -34,10 +36,10 @@
   @if (currentView === 'home') {
   <div class="banner-container__home-container">
     <div class="banner-container__home-container__subheader">
-      <img src="assets/images/Imagen.svg" alt="">
+      <img src="assets/images/desktop-banner-background.svg" alt="">
       <div></div>
       <div>
-        <h2>Cerca un dels nostres sistemes</h2>
+        <h2>Cerca els sistemes de la Generalitat</h2>
       </div>
     </div>
   </div>

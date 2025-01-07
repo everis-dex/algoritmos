@@ -1,3 +1,5 @@
+import { SafeHtml } from '@angular/platform-browser';
+
 export interface ITabData {
   id: number;
   tab: string;
@@ -9,5 +11,5 @@ export interface IFieldData {
     text: string;
     isVisible: boolean;
   };
-  content?: string;
+  content?: string | SafeHtml;
 }

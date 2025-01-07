@@ -24,14 +24,7 @@ export class SearchPaginationComponent implements OnInit {
   public currentPage = 1;
 
   ngOnInit(): void {
-    this._getTotalPages();
-  }
-
-  private _getTotalPages(): number[] {
-    for (let i = 1; i <= this.totalPages; i++) {
-      this.pages.push(i);
-    }
-    return this.pages;
+    this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
   public handlePage(page: number): void {

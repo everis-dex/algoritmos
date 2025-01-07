@@ -17,6 +17,87 @@ describe('AlgorithmsRegistryService', () => {
     service.algorithms = mockAlgorithms;
   });
 
+  describe('setAlgorithms', () => {
+    it('should set the algorithm list and emit the change', () => {
+      const algorithmsSubjectSpy = spyOn(
+        service['_algorithms$'],
+        'next'
+      ).and.callThrough();
+
+      service.setAlgorithms(mockAlgorithms);
+
+      expect(algorithmsSubjectSpy).toHaveBeenCalledWith(mockAlgorithms);
+      expect(service['_algorithms$'].getValue()).toEqual(mockAlgorithms);
+    });
+  });
+
+  describe('getAlgorithms', () => {
+    it('should get the algorithm list', () => {
+      const result = service.getAlgorithms();
+      expect(result).toEqual(mockAlgorithms);
+    });
+  });
+
+  describe('onOpenSearch', () => {
+    it('should find matches in nom field', () => {
+      const result = service['_onOpenSearch']('V1');
+      const filteredMockAlgorithms = mockAlgorithms.filter((algorithm) =>
+        algorithm.nom.includes('V1')
+      );
+
+      expect(result).toEqual(filteredMockAlgorithms);
+    });
+
+    it('should find matches in tema field', () => {
+      const result = service['_onOpenSearch']('Informació i comunicació');
+      const filteredMockAlgorithms = mockAlgorithms.filter(
+        (algorithm) => algorithm.tema === 'Informació i comunicació'
+      );
+
+      expect(result).toEqual(filteredMockAlgorithms);
+    });
+
+    it('should find matches in estat field', () => {
+      const result = service['_onOpenSearch']('Actiu');
+      const filteredMockAlgorithms = mockAlgorithms.filter(
+        (algorithm) => algorithm.estat === 'Actiu'
+      );
+
+      expect(result).toEqual(filteredMockAlgorithms);
+    });
+
+    it('should find matches in etiquetes field', () => {
+      const result = service['_onOpenSearch']('copilot');
+      const filteredMockAlgorithms = mockAlgorithms.filter((algorithm) =>
+        algorithm.etiquetes.includes('copilot')
+      );
+
+      expect(result).toEqual(filteredMockAlgorithms);
+    });
+
+    it('should find matches in tipus_sistema field', () => {
+      const result = service['_onOpenSearch'](
+        "Sistema d'intel·ligència artificial"
+      );
+      const filteredMockAlgorithms = mockAlgorithms.filter(
+        (algorithm) =>
+          algorithm.tipus_sistema === "Sistema d'intel·ligència artificial"
+      );
+
+      expect(result).toEqual(filteredMockAlgorithms);
+    });
+
+    it('should return empty array for no matches', () => {
+      const result = service['_onOpenSearch']('nonexistent');
+      expect(result).toEqual([]);
+    });
+
+    it('should handle empty search text', () => {
+      const result = service['_onOpenSearch']('');
+      expect(result).toEqual(mockAlgorithms);
+    });
+  });
+
   describe('onFiltersSearch', () => {
     it('should filter by tema', () => {
       const filters = {
@@ -92,10 +173,10 @@ describe('AlgorithmsRegistryService', () => {
 
     it('should handle multiple filters simultaneously', () => {
       const filters = {
-        estat: 'En producció',
+        estat: 'Actiu',
         tema: 'Informació i comunicació',
         etiquetes: 'IA',
-        tipus_sistema: "Sistema d'IA",
+        tipus_sistema: "Sistema d'intel·ligència artificial",
       };
       const filteredMockAlgorithms = mockAlgorithms.filter((algorithm) => {
         return (
@@ -111,74 +192,32 @@ describe('AlgorithmsRegistryService', () => {
     });
   });
 
-  describe('onOpenSearch', () => {
-    it('should find matches in nom field', () => {
-      const result = service['_onOpenSearch']('V1');
-      const filteredMockAlgorithms = mockAlgorithms.filter((algorithm) =>
-        algorithm.nom.includes('V1')
+  describe('onCombinedSearch', () => {
+    it('should return the intersection of filters and search results', () => {
+      const filters = {
+        estat: 'Actiu',
+        tema: 'Informació i comunicació',
+        etiquetes: 'IA',
+        tipus_sistema: "Sistema d'intel·ligència artificial",
+      };
+      const searchText = 'V1';
+      const textSearchResults = mockAlgorithms.filter((algorithm) =>
+        algorithm.nom.includes(searchText)
+      );
+      const filtersSearchResults = mockAlgorithms.filter((algorithm) => {
+        return (
+          algorithm.estat === filters.estat &&
+          algorithm.tema === filters.tema &&
+          algorithm.etiquetes.includes(filters.etiquetes) &&
+          algorithm.tipus_sistema === filters.tipus_sistema
+        );
+      });
+      const expectedResults = textSearchResults.filter((item) =>
+        filtersSearchResults.includes(item)
       );
 
-      expect(result).toEqual(filteredMockAlgorithms);
-    });
-
-    it('should find matches in tema field', () => {
-      const result = service['_onOpenSearch']('Informació i comunicació');
-      const filteredMockAlgorithms = mockAlgorithms.filter(
-        (algorithm) => algorithm.tema === 'Informació i comunicació'
-      );
-
-      expect(result).toEqual(filteredMockAlgorithms);
-    });
-
-    it('should find matches in estat field', () => {
-      const result = service['_onOpenSearch']('Actiu');
-      const filteredMockAlgorithms = mockAlgorithms.filter(
-        (algorithm) => algorithm.estat === 'Actiu'
-      );
-
-      expect(result).toEqual(filteredMockAlgorithms);
-    });
-
-    it('should find matches in etiquetes field', () => {
-      const result = service['_onOpenSearch']('copilot');
-      const filteredMockAlgorithms = mockAlgorithms.filter((algorithm) =>
-        algorithm.etiquetes.includes('copilot')
-      );
-
-      expect(result).toEqual(filteredMockAlgorithms);
-    });
-
-    it('should find matches in tipus_sistema field', () => {
-      const result = service['_onOpenSearch']("Sistema d'IA");
-      const filteredMockAlgorithms = mockAlgorithms.filter(
-        (algorithm) => algorithm.tipus_sistema === "Sistema d'IA"
-      );
-
-      expect(result).toEqual(filteredMockAlgorithms);
-    });
-
-    it('should return empty array for no matches', () => {
-      const result = service['_onOpenSearch']('nonexistent');
-      expect(result).toEqual([]);
-    });
-
-    it('should handle empty search text', () => {
-      const result = service['_onOpenSearch']('');
-      expect(result).toEqual(mockAlgorithms);
-    });
-  });
-
-  describe('setAlgorithms', () => {
-    it('should set the algorithms list and emit the change', () => {
-      const algorithmsSubjectSpy = spyOn(
-        service['_algorithms$'],
-        'next'
-      ).and.callThrough();
-
-      service.setAlgorithms(mockAlgorithms);
-
-      expect(algorithmsSubjectSpy).toHaveBeenCalledWith(mockAlgorithms);
-      expect(service['_algorithms$'].getValue()).toEqual(mockAlgorithms);
+      const result = service.onCombinedSearch(searchText, filters);
+      expect(result).toEqual(expectedResults);
     });
   });
 

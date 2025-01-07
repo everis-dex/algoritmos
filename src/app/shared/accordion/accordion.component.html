@@ -4,7 +4,7 @@
     <button type="button" (click)="toggle(accordionItem.id)"
       class="accordion-container {{ isFilter(accordionItem) ? 'filter' : 'tab' }}-accordion"
       [style.marginTop]="setMarginTop(accordionItem.id)">{{
-      getButtonContent(accordionItem.id)}}<img src="assets/icons/Icon_angle-down.svg" alt=""
+      getButtonContent(accordionItem.id)}}<img src="assets/icons/dropdown-arrow.svg" alt=""
         [ngClass]="{'accordion-container--rotate-left': toggleStates[accordionItem.id].rotation, 'accordion-container--rotate-right': !toggleStates[accordionItem.id].rotation}"></button>
     @if (toggleStates[accordionItem.id].display) {
     @if (isFilter(accordionItem)) {
@@ -19,7 +19,7 @@
     }
     <div class="accordion-container__form-select"
       [style.paddingTop]="isDesktop ? (accordionItem.chipsSelected.length === 0 ? '1.25rem' : '0') : '1.25rem'">
-      <button type="button" (click)="handleTagSelect()">Selecciona<img src="assets/icons/Icon_angle-down.svg" alt=""
+      <button type="button" (click)="handleTagSelect()">Selecciona<img src="assets/icons/dropdown-arrow.svg" alt=""
           [ngClass]="{'accordion-container--rotate-left': isSelectorRotated, 'accordion-container--rotate-right': !isSelectorRotated}"></button>
       @if (isSelectorRotated) {
       <form aria-label="Cercador d'etiquetes">
@@ -27,7 +27,7 @@
           [ngClass]="{'accordion-container__form-select__label--visible': !hasInputValue, 'accordion-container__form-select__label--hidden': hasInputValue}">Cerca</label>
         <input id="tag-input" type="text" (input)="handleInput($event)" (keydown)="handleInput($event)">
         <button type="submit" tabindex="-1" style="display: none;"></button>
-        <img src="assets/icons/Buscador_Boton.svg" alt="">
+        <img src="assets/icons/search.svg" alt="">
       </form>
       @if (filteredTags.length > 0) {
       <ul>

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { getStateColor } from '../utilities';
 import { IAlgorithm } from '../../interfaces/algorithms';
 import { ViewManagerService } from '../../services/view-manager.service';
 import { AlgorithmsRegistryService } from '../../services/algorithms-registry.service';
@@ -14,8 +13,6 @@ import { AlgorithmsRegistryService } from '../../services/algorithms-registry.se
 export class AlgorithmicSystemCardComponent {
   @Input()
   public algorithm!: IAlgorithm;
-
-  public getStateColor = getStateColor;
 
   constructor(
     private readonly _viewManagerService: ViewManagerService,

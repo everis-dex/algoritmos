@@ -2,9 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { IAlgorithm, IFilterSearch } from '../interfaces/algorithms';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { normalized } from '../shared/utilities';
-import { mockAlgorithms } from '../mocks/algorithms';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +37,6 @@ export class AlgorithmsRegistryService {
       }),
       withCredentials: true,
     };
-    // return of(mockAlgorithms);
     return this._http.get<IAlgorithm[]>(this._registryURL, options);
   }
 
@@ -178,10 +176,9 @@ export class AlgorithmsRegistryService {
   ): IAlgorithm[] {
     const textSearchResults = this._onOpenSearch(searchText);
     const filtersSearchResults = this._onFiltersSearch(filters);
-    const result = textSearchResults.filter((item) =>
+    return textSearchResults.filter((item) =>
       filtersSearchResults.includes(item)
     );
-    return result;
   }
 
   /**

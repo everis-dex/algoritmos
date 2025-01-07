@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { ChipsComponent } from '../chips/chips.component';
 import { TAGS_FILTER_INDEX } from '../../constants/search-filters.const';
 import { ITabData } from '../../pages/system-detail/components/tabs-data/tabs-data.model';
@@ -49,7 +56,7 @@ export class AccordionComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._checkBreakpoint();
+    this.checkBreakpoint();
     this.tags = this._algorithmsRegistryService.getAlgorithmTagList();
     this.filteredTags = [...this.tags];
     this.accordionList?.forEach((accordion) => {
@@ -60,25 +67,22 @@ export class AccordionComponent implements OnInit {
     });
   }
 
-  private _checkBreakpoint(): void {
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    this.checkBreakpoint();
+  }
+
+  public checkBreakpoint(): void {
     this._mediaQueryList = window.matchMedia(`(min-width: 1200px)`);
     this.isDesktop = this._mediaQueryList.matches;
-    this._mediaQueryList.addEventListener(
-      'change',
-      (event: MediaQueryListEvent) => {
-        this.isDesktop = event.matches;
-      }
-    );
   }
 
   public getButtonContent(index: number): string {
-    if (this.accordionList?.[index]) {
-      if ('name' in this.accordionList[index]) {
-        return this.accordionList[index].name;
-      }
-      return this.accordionList[index].tab;
+    const accordionListindex = this.accordionList[index];
+    if ('name' in accordionListindex) {
+      return accordionListindex.name;
     }
-    return '';
+    return accordionListindex.tab;
   }
 
   public isFilter(item: IFilterData | ITabData): item is IFilterData {

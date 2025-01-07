@@ -6,9 +6,10 @@ import { BannerComponent } from './shared/banner/banner.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { IAlgorithm } from './interfaces/algorithms';
 import { AlgorithmsRegistryService } from './services/algorithms-registry.service';
-import { take } from 'rxjs';
+import { catchError, of, take } from 'rxjs';
 import { ViewManagerService } from './services/view-manager.service';
 import { SessionStorageService } from './services/session-storage.service';
+import { mockAlgorithms } from './mocks/algorithms';
 
 @Component({
   selector: 'app-root',
@@ -31,23 +32,23 @@ export class AppComponent implements OnInit {
     private readonly _algorithmsRegistryService: AlgorithmsRegistryService,
     private readonly _viewManagerService: ViewManagerService,
     private readonly _sessionStorageService: SessionStorageService
-  ) {}
+  ) {
+    this._algorithmsRegistryService
+      .loadAlgorithms()
+      .pipe(
+        take(1),
+        catchError(() => of(mockAlgorithms))
+      )
+      .subscribe((data) => {
+        this._algorithmsRegistryService.setAlgorithms(data);
+      });
+  }
 
   ngOnInit(): void {
-    this._getAlgorithms();
     this._changeView();
     this._setAlgorithmName();
     this._sessionStorageService.removeItem('popularCategorySelected');
     this._sessionStorageService.removeItem('lastSearch');
-  }
-
-  private _getAlgorithms(): void {
-    this._algorithmsRegistryService
-      .loadAlgorithms()
-      .pipe(take(1))
-      .subscribe((data) => {
-        this._algorithmsRegistryService.setAlgorithms(data);
-      });
   }
 
   private _changeView(): void {

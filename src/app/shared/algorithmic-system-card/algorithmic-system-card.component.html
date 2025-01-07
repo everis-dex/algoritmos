@@ -2,7 +2,7 @@
 <a href="#" (click)="redirectToSystemDetailView($event, algorithm)">
   <div class="algorithmic-system-card-container">
     <span class="algorithmic-system-card-container__state"><img
-        src="assets/icons/Oval_{{getStateColor(algorithm.estat)}}.svg" alt="">{{
+        src="assets/icons/{{algorithm.estat.toLowerCase().replace(' ', '-')}}-state.svg" alt="">{{
       algorithm.estat }}</span>
     <h3 class="algorithmic-system-card-container__name">{{ algorithm.nom }}</h3>
     <div class="algorithmic-system-card-container__separator"></div>

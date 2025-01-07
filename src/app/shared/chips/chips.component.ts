@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  OnInit,
+  HostListener,
+} from '@angular/core';
 
 @Component({
   selector: 'app-chips',
@@ -26,18 +33,17 @@ export class ChipsComponent implements OnInit {
   private _mediaQueryList!: MediaQueryList;
 
   ngOnInit(): void {
-    this._checkBreakpoint();
+    this.checkBreakpoint();
   }
 
-  private _checkBreakpoint(): void {
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    this.checkBreakpoint();
+  }
+
+  public checkBreakpoint(): void {
     this._mediaQueryList = window.matchMedia(`(min-width: 1200px)`);
     this.isDesktop = this._mediaQueryList.matches;
-    this._mediaQueryList.addEventListener(
-      'change',
-      (event: MediaQueryListEvent) => {
-        this.isDesktop = event.matches;
-      }
-    );
   }
 
   public selectChip(chip: string): void {

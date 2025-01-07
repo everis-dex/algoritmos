@@ -67,7 +67,7 @@ export class AlgorithmicSystemsCardsComponent
   ngOnInit(): void {
     this._componentSubscription = this._algorithmsRegistryService
       .getAlgorithmsSubject()
-      .subscribe((data) => {
+      ?.subscribe((data) => {
         const sortedData = data
           .filter((item) => item.data_ultima_modificacio)
           .sort((a, b) => {

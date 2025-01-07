@@ -49,7 +49,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this._checkBreakpoint();
+    this.checkBreakpoint();
     this._componentSubscription = this._categoryService
       .getCategories()
       .subscribe((categories) => {
@@ -80,15 +80,14 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     }
   }
 
-  private _checkBreakpoint(): void {
+  @HostListener('window:resize', ['$event'])
+  onResize(): void {
+    this.checkBreakpoint();
+  }
+
+  public checkBreakpoint(): void {
     this._mediaQueryList = window.matchMedia(`(min-width: 1200px)`);
     this.isDesktop = this._mediaQueryList.matches;
-    this._mediaQueryList.addEventListener(
-      'change',
-      (event: MediaQueryListEvent) => {
-        this.isDesktop = event.matches;
-      }
-    );
   }
 
   public handleCategorySelect(): void {

@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { TabFieldDataComponent } from '../../../../shared/tab-field-data/tab-field-data.component';
 import { AccordionComponent } from '../../../../shared/accordion/accordion.component';
 import { IAlgorithm } from '../../../../interfaces/algorithms';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tabs-data',
@@ -32,10 +33,13 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
   public tabsData: ITabData[] = tabsData;
   public currentTabIndex = 0;
 
-  constructor(private readonly _el: ElementRef) {}
+  constructor(
+    private readonly _el: ElementRef,
+    private readonly _sanitizer: DomSanitizer
+  ) {}
 
   ngOnInit(): void {
-    if (this.algorithm) this._getTabFieldContents(this.currentTabIndex);
+    this._getTabFieldContents(this.currentTabIndex);
   }
 
   ngAfterViewInit(): void {
@@ -59,60 +63,63 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
   }
 
   private _getTabFieldContents(tabIndex: number): void {
-    const algorithmFieldsContent: Record<string, string>[] = [
-      {
-        'Nivell de risc': this.algorithm.nivell_de_risc,
-        "Forma d'adquisició": this.algorithm.forma_adquisicio,
-        'Font de finançament': this.algorithm.font_financament,
-        'Desenvolupador': this.algorithm.desenvolupador,
-        'Unitat responsable': this.algorithm.unitat_responsable,
-        'Tema': this.algorithm.tema,
-        'Declarat com actuació administrativa automatizada':
-          this.algorithm.actuacio_administrativa_automatitzada,
-        'Política pública on intervé el sistema':
-          this.algorithm.politica_publica,
-        "Data d'entrada": this.algorithm.data_posada_produccio,
-        "Data de l'última modificació": this.algorithm.data_ultima_modificacio,
-        'Motiu de la motificació': this.algorithm.motiu_modificacio,
-        'Data de desmantellament': this.algorithm.data_retirada,
-      },
-      {
-        'Tasca del sistema en el procediment':
-          this.algorithm.procediment_objeccio,
-        'Tipus de sistema algorístic': this.algorithm.tipus_sistema,
-        'Rendiment': this.algorithm.rendiment,
-        'Dades usades per al seu funcionament':
-          this.algorithm.dades_funcionament,
-        'Dades utilitzades en producció': this.algorithm.dades_entrenament,
-        'Equitat': this.algorithm.equitat,
-      },
-      {
-        "Regulació aplicable a l'algorisme": this.algorithm.normativa_aplicable,
-        'Dades personals': this.algorithm.dades_personals,
-        "Avaluació d'execució del sistema / algorisme":
-          this.algorithm.avaluacio_execucio_sistema,
-        'Beneficis': this.algorithm.beneficis,
-        'Perfil de la ciutadania afectada':
-          this.algorithm.perfil_ciutadania_afectada,
-        'Riscos': this.algorithm.riscos,
-        'Explicabilitat': this.algorithm.explicabilitat,
-        "Composició de l'equip": this.algorithm.composicio_equip,
-        'Invervenció / supervisió humana':
-          this.algorithm.intervencio_supervisio_humana,
-        "Procediment d'objecció": this.algorithm.procediment_objeccio,
-        'Consum energètic': this.algorithm.consum_energetic,
-      },
-    ];
-    this.tabsData[tabIndex].fields.forEach((field) => {
-      let content = algorithmFieldsContent[tabIndex][field.field];
-      if (content?.includes('https')) {
-        content = content.replace(
-          /(https?:\/\/[^\s]+)/g,
-          '<a href="$1">$1<img src="assets/icons/Redirection-link.svg"></a>'
+    if (this.algorithm) {
+      const algorithmFieldsContent: Record<string, string>[] = [
+        {
+          'Nivell de risc': this.algorithm.nivell_de_risc,
+          'Forma de desenvolupament': this.algorithm.forma_adquisicio,
+          'Fonts de finançament': this.algorithm.font_financament,
+          'Desenvolupador': this.algorithm.desenvolupador,
+          'Unitat responsable': this.algorithm.unitat_responsable,
+          'Tema': this.algorithm.tema,
+          'Declarat com actuació administrativa automatizada':
+            this.algorithm.actuacio_administrativa_automatitzada,
+          'Intervenció o vinculació del sistema respecte a una política pública':
+            this.algorithm.politica_publica,
+          'Data de la posada en funcionament':
+            this.algorithm.data_posada_produccio,
+          "Data de l'última modificació":
+            this.algorithm.data_ultima_modificacio,
+          'Motiu de la motificació': this.algorithm.motiu_modificacio,
+          'Data de desmantellament': this.algorithm.data_retirada,
+        },
+        {
+          'Tipus de sistema': this.algorithm.tipus_sistema,
+          'Rendiment': this.algorithm.rendiment,
+          'Dades de funcionament': this.algorithm.dades_funcionament,
+          "Dades d'entrenament": this.algorithm.dades_entrenament,
+          'Equitat': this.algorithm.equitat,
+        },
+        {
+          "Regulació aplicable a l'algorisme":
+            this.algorithm.normativa_aplicable,
+          'Dades personals': this.algorithm.dades_personals,
+          "Avaluació de l'execució": this.algorithm.avaluacio_execucio_sistema,
+          'Beneficis': this.algorithm.beneficis,
+          'Persones destinatàries': this.algorithm.perfil_ciutadania_afectada,
+          'Riscos': this.algorithm.riscos,
+          'Funcionament': this.algorithm.explicabilitat,
+          "Dades sobre l'equip de desenvolupament":
+            this.algorithm.composicio_equip,
+          "Intervenció o supervisió d'una persona en els resultats":
+            this.algorithm.intervencio_supervisio_humana,
+          "Procediment d'oposició": this.algorithm.procediment_objeccio,
+          'Consum energètic': this.algorithm.consum_energetic,
+        },
+      ];
+      this.tabsData[tabIndex].fields.forEach((field) => {
+        let content = algorithmFieldsContent[tabIndex][field.field];
+        if (content?.includes('https')) {
+          content = content.replace(
+            /(https?:\/\/[^\s]+)/g,
+            '<a href="$1" target="_blank" rel="noopener" title="opens in a new window" style="text-decoration: underline; color: #c00000">$1<img src="assets/icons/external-link-redirection.svg" alt=""></a>'
+          );
+        }
+        field.content = this._sanitizer.bypassSecurityTrustHtml(
+          content || 'N-A'
         );
-      }
-      field.content = content || 'N-A';
-    });
+      });
+    }
   }
 
   public setTabFields(index: number): IFieldData[] {

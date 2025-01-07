@@ -8,70 +8,83 @@ export const tabsData: ITabData[] = [
       {
         field: 'Nivell de risc',
         description: {
-          text: "Classificació dels sistemes en funció del seu impacte segons els criteris del Reglament europeu d'IA.",
+          text: "Nivell de risc del sistema d'IA, segons els criteris del Reglament europeu d'IA.",
           isVisible: false,
         },
       },
       {
-        field: "Forma d'adquisició",
+        field: 'Forma de desenvolupament',
         description: {
-          text: "Procés de desenvolupament, compra o integració d'aquest sistema.",
+          text: "Com s'ha creat, desenvolupat i adoptat el sistema.\n— L'Administració ha desenvolupat el sistema.\n— L'Administració ha comprat el sistema i ha fet un procés per integrar-lo internament.\n— Un proveïdor extern ha desenvolupat el sistema i l'ha integrat.",
           isVisible: false,
         },
       },
       {
-        field: 'Font de finançament',
+        field: 'Fonts de finançament',
         description: {
-          text: 'Conjunt de recursos econòmics utilitzats per desenvolupar, adquirir o implementar aquest sistema.',
+          text: "Com s'ha finançat el sistema.",
           isVisible: false,
         },
       },
       {
         field: 'Desenvolupador',
         description: {
-          text: "Persona, equip o empresa responsable de crear, entrenar i ajustar l'algorisme per a una aplicació específica.",
+          text: 'Dades sobre qui ha desenvolupat el sistema.',
           isVisible: false,
         },
       },
       {
         field: 'Unitat responsable',
         description: {
-          text: "Unitat o entitat de la Generalitat responsable de l'ús del sistema.",
+          text: "Nom de la unitat de l'Administració de la Generalitat responsable de l'ús del sistema.",
           isVisible: false,
         },
       },
       {
         field: 'Tema',
         description: {
-          text: "Àrea o àmbit d'aplicació específic dels 24 distribuïts per la Generalitat de Catalunya en els quals aquest sistema està dissenyat per funcionar.",
+          text: 'Àrees temàtiques.',
           isVisible: false,
         },
       },
       {
-        field: 'Declarat com actuació administrativa automatitzada',
+        field: 'Actuació administrativa automatitzada',
         description: {
-          text: "Una actuació administrativa automatitzada és qualsevol acte o actuació realitzada íntegrament a través de mitjans electrònics per una Administració pública en el marc d'un procediment administratiu i en la qual no hi hagi intervingut de manera directa un empleat públic.",
+          text: "Una actuació administrativa automatitzada (AAA) és qualsevol acte o actuació dut a terme íntegrament a través de mitjans electrònics per una administració pública en el marc d'un procediment administratiu en què no hagi intervingut de manera directa un empleat públic.",
           isVisible: false,
         },
       },
       {
-        field: 'Política pública on intervé el sistema',
+        field:
+          'Intervenció o vinculació del sistema respecte a una política pública',
         description: {
-          text: "Conjunt de decisions i directrius oficials que guien l'ús i la implementació d'aquest sistema en àmbit del pla de Govern o pla sectorial del qual forma part el sistema.",
+          text: "Àmbit d'actuació.",
           isVisible: false,
         },
       },
       {
-        field: "Data d'entrada",
+        field: 'Data de la posada en funcionament',
+        description: {
+          text: 'Data de la posada en funcionament.',
+          isVisible: false,
+        },
       },
       {
         field: "Data de l'última modificació",
+        description: {
+          text: "Data de l'última modificació.",
+          isVisible: false,
+        },
       },
       {
         field: 'Motiu de la modificació',
       },
       {
-        field: 'Data de desmantellament',
+        field: 'Data de retirada',
+        description: {
+          text: 'Data de la retirada del sistema.',
+          isVisible: false,
+        },
       },
     ],
   },
@@ -80,44 +93,37 @@ export const tabsData: ITabData[] = [
     tab: 'Informació tècnica',
     fields: [
       {
-        field: 'Tasca del sistema en el procediment',
+        field: 'Tipus de sistema',
         description: {
-          text: "Tipologia de l'algorisme utilitzat pel sistema.",
-          isVisible: false,
-        },
-      },
-      {
-        field: 'Tipus de sistema algorísmic',
-        description: {
-          text: "La tipologia de l'algorisme es refereix al tipus específic d'algorisme o mètode computacional que s'utilitza per processar les dades i prendre decisions automàtiques.",
+          text: 'Tipologia del sistema.',
           isVisible: false,
         },
       },
       {
         field: 'Rendiment',
         description: {
-          text: "El rendiment esperat del sistema i les mètriques utilitzades. Per exemple: AUC/*accuracy=0.89. Especificar en quina mesura el sistema resol l'objectiu esperat, en una varietat de casos.",
+          text: "Grau d'assoliment de l'objectiu i precisió dels resultats.",
           isVisible: false,
         },
       },
       {
-        field: 'Dades usades per al seu funcionament',
+        field: 'Dades de funcionament',
         description: {
-          text: "Breu descripció sobre el repositori o conjunt de dades utilitzat per a l'entrefieldnt. Per exemple, dades dels usuaris de la renda bàsica universal actuals (2023-2024). No inclou dades de gènere, nacionalitat.",
+          text: 'Conjunt de dades que utilitza el sistema en funcionament per obtenir resultats.',
           isVisible: false,
         },
       },
       {
-        field: 'Dades utilitzades en producció',
+        field: "Dades d'entrenament",
         description: {
-          text: "Breu descripció sobre el repositori o conjunt de dades en producció utilitzat per a l'entrefieldnt. Per exemple, dades dels usuaris de la renda bàsica universal actuals (2023-2024). No inclou dades de gènere, nacionalitat, etc.",
+          text: "Conjunt de dades d'entrenament que utilitza el sistema per aprendre a funcionar.",
           isVisible: false,
         },
       },
       {
         field: 'Equitat',
         description: {
-          text: "Avaluació per determinar si el sistema tracta de manera justa i imparcial a tots els grups i individus afectats, sense generar discriminació o biaixos injustos. Si no se n'ha detectat cap, que s'expliciti.",
+          text: "Accions que s'han dut a terme per garantir que el sistema no discrimini a l'hora de donar resultats.",
           isVisible: false,
         },
       },
@@ -128,79 +134,79 @@ export const tabsData: ITabData[] = [
     tab: 'Informació normativa i transparència',
     fields: [
       {
-        field: "Regulació aplicable a l'algorisme",
+        field: 'Normativa',
         description: {
-          text: "Base normativa que legitima l'ús del sistema",
+          text: "Normativa que defineix i regula l'ús del sistema.",
           isVisible: false,
         },
       },
       {
         field: 'Dades personals',
         description: {
-          text: 'Informació relacionada amb individus que pot ser utilitzada per identificar-los directament o indirectament, i que és processada pel sistema per a les seves funcions i càlculs.\nURL del tractament de dades personals Explicació de la URL.',
+          text: 'Tractament de les dades personals i la normativa que el permet.',
           isVisible: false,
         },
       },
       {
-        field: "Avaluació d'execució del sistema / algorisme",
+        field: "Avaluació de l'execució",
         description: {
-          text: "Procés de valoració del rendiment i del comportament del sistema o de l'algorisme en la seva aplicació pràctica, per determinar la seva eficàcia i precisió en les tasques que ha de realitzar.\nURL de l'informe, si existeix.",
+          text: 'Informes que avaluen el sistema des de criteris diversos.',
           isVisible: false,
         },
       },
       {
         field: 'Beneficis',
         description: {
-          text: "Tots els beneficis que comporta l'ús de l'algorisme. Preferentment, separant aquells adreçats a la ciutadania i aquells adreçats a la mateixa Administració.",
+          text: "Avantatges i millores que comporta l'ús del sistema.",
           isVisible: false,
         },
       },
       {
-        field: 'Perfil de la ciutadania afectada',
+        field: 'Persones destinatàries',
         description: {
-          text: "Descripció dels grups o persones que poden ser impactats directament per les decisions preses per l'algorisme, basades en les dades i els criteris utilitzats pel sistema. Si són d'exclusió social, col·lectius, dones, menors…",
+          text: "Persones o conjunt de persones a les quals s'adreça el sistema.",
           isVisible: false,
         },
       },
       {
         field: 'Riscos',
         description: {
-          text: "Possibles conseqüències negatives o impactes adversos que poden derivar de l'ús d'aquest sistema, com ara discriminació, errors en les prediccions o vulnerabilitat a la manipulació.",
+          text: 'Descripció dels riscos del sistema i dels mètodes utilitzats per reduir-los.',
           isVisible: false,
         },
       },
       {
-        field: 'Explicabilitat',
+        field: 'Funcionament',
         description: {
-          text: "Capacitat de poder entendre i explicar de manera clara i comprensible com el sistema pren decisions o fa prediccions basades en les dades i l'algorisme utilitzat.Si es tracta d'un sistema interpretable o de caixa negra.",
+          text: 'Informació específica sobre com funciona el sistema: quin tipus de mètode fa servir i quines eines utilitza.',
           isVisible: false,
         },
       },
       {
-        field: "Composició de l'equip",
+        field: "Dades sobre l'equip de desenvolupament",
         description: {
-          text: "Informació específica sobre la composició de l'equip de desenvolupament en quant a diversitat de gènere, edat, perfil professional, llengua materna...",
+          text: "Dades sobre la composició de l'equip de desenvolupament del sistema.",
           isVisible: false,
         },
       },
       {
-        field: 'Intervenció / supervisió humana',
+        field: "Intervenció o supervisió d'una persona en els resultats",
         description: {
-          text: 'Participació activa o control exercit per persones per monitoritzar, influir o prendre decisions sobre les accions del sistema, assegurant un comportament ètic i adequat segons les circumstàncies. Si existeix, proporcionar informació sobre com es garanteix la supervisió i control humà del sistema.',
+          text: 'Participació i revisió humana en els resultats del sistema.',
           isVisible: false,
         },
       },
       {
-        field: "Procediment d'objecció",
+        field: "Procediment d'oposició",
         description: {
-          text: 'Mecanisme establert per permetre als individus o grups afectats presentar reclamacions o objeccions contra les decisions preses pel sistema, especialment quan sospiten errors, biaixos o discriminació.',
+          text: "Garantia del dret d'oposar-se a l'ús o al resultat del sistema.",
           isVisible: false,
         },
       },
       {
         field: 'Consum energètic',
         description: {
-          text: "Quantitat d'energia que el sistema requereix per funcionar, incloent el processament de dades i càlculs complexos necessaris per a les seves funcions.",
+          text: 'Recursos energètics que consumeix el funcionament del sistema.',
           isVisible: false,
         },
       },

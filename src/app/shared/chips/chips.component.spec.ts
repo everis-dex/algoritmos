@@ -20,6 +20,16 @@ describe('ChipsComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  describe('onResize', () => {
+    it('should update isDesktop when window is resized', () => {
+      const checkBreakpointSpy = spyOn(component, 'checkBreakpoint');
+
+      component.onResize();
+
+      expect(checkBreakpointSpy).toHaveBeenCalled();
+    });
+  });
+
   it('should emit selectChip event', () => {
     const selectChipSpy = spyOn(component['_selectChip'], 'emit');
 

@@ -4,7 +4,7 @@
   <div>
     <app-search-results [searchResults]="searchResults"
       [totalSearchResultsLength]="totalSearchResultsLength"></app-search-results>
-    @if (totalPages > 0) {
+    @if (totalPages > 1) {
     <app-search-pagination [totalPages]="totalPages" (_changePage)="changePage($event)"></app-search-pagination>
     }
   </div>
