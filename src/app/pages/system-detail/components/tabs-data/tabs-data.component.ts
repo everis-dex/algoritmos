@@ -72,7 +72,7 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
           'Desenvolupador': this.algorithm.desenvolupador,
           'Unitat responsable': this.algorithm.unitat_responsable,
           'Tema': this.algorithm.tema,
-          'Declarat com actuació administrativa automatizada':
+          'Actuació administrativa automatitzada':
             this.algorithm.actuacio_administrativa_automatitzada,
           'Intervenció o vinculació del sistema respecte a una política pública':
             this.algorithm.politica_publica,
@@ -80,8 +80,8 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
             this.algorithm.data_posada_produccio,
           "Data de l'última modificació":
             this.algorithm.data_ultima_modificacio,
-          'Motiu de la motificació': this.algorithm.motiu_modificacio,
-          'Data de desmantellament': this.algorithm.data_retirada,
+          'Motiu de la modificació': this.algorithm.motiu_modificacio,
+          'Data de retirada': this.algorithm.data_retirada,
         },
         {
           'Tipus de sistema': this.algorithm.tipus_sistema,
@@ -91,7 +91,7 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
           'Equitat': this.algorithm.equitat,
         },
         {
-          "Regulació aplicable a l'algorisme":
+          "Normativa":
             this.algorithm.normativa_aplicable,
           'Dades personals': this.algorithm.dades_personals,
           "Avaluació de l'execució": this.algorithm.avaluacio_execucio_sistema,

@@ -55,7 +55,7 @@ describe('TabsDataComponent', () => {
         'Desenvolupador': component.algorithm.desenvolupador,
         'Unitat responsable': component.algorithm.unitat_responsable,
         'Tema': component.algorithm.tema,
-        'Declarat com actuació administrativa automatizada':
+        'Actuació administrativa automatitzada':
           component.algorithm.actuacio_administrativa_automatitzada,
         'Intervenció o vinculació del sistema respecte a una política pública':
           component.algorithm.politica_publica,
@@ -63,8 +63,8 @@ describe('TabsDataComponent', () => {
           component.algorithm.data_posada_produccio,
         "Data de l'última modificació":
           component.algorithm.data_ultima_modificacio,
-        'Motiu de la motificació': component.algorithm.motiu_modificacio,
-        'Data de desmantellament': component.algorithm.data_retirada,
+        'Motiu de la modificació': component.algorithm.motiu_modificacio,
+        'Data de retirada': component.algorithm.data_retirada,
       };
 
       const tabIndex = 0;
