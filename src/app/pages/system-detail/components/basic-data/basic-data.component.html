@@ -1,7 +1,7 @@
 @if (algorithm) {
 <div class="basic-data-container">
-  <span class="basic-data-container__state"><img
-      src="assets/icons/{{algorithm.estat.toLowerCase().replace(' ', '-')}}-state.svg" alt="">{{
+  <span class="basic-data-container__state"><img src="assets/icons/{{normalized(algorithm.estat, true)}}-state.svg"
+      alt="">{{
     algorithm.estat }}</span>
   <div class="basic-data-container__paragraph-container">
     <p class="basic-data-container__paragraph">Descripció breu</p>
