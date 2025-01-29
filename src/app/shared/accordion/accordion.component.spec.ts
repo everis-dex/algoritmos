@@ -137,12 +137,11 @@ describe('AccordionComponent', () => {
   describe('toggle', () => {
     it('should toggle the accordion to display it and rotate the icon', () => {
       const accordionId = 1;
-      component.toggleStates[accordionId] = { display: false, rotation: false };
+      component.toggleState[accordionId] = { display: false };
       component.toggle(accordionId);
 
-      expect(component.toggleStates[accordionId]).toEqual({
+      expect(component.toggleState[accordionId]).toEqual({
         display: true,
-        rotation: true,
       });
     });
 

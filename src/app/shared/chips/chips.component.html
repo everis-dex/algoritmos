@@ -2,16 +2,21 @@
   @for (chipSelected of chipsSelected; track $index) {
   <li>
     <span>{{ chipSelected }}</span>
-    <button (click)="deselectChip(chipSelected)">
-      <img src="assets/icons/chip-delete.svg" alt="Desfer la selecció de la xip">
+    <button (click)="deselectChip(chipSelected)" [id]="'deselect-' + chipSelected">
+      <label [for]="'deselect-' + chipSelected" class="visually-hidden">Anul·lar selecció en {{ chipSelected
+        }}</label>
+      <img src="assets/icons/chip-delete.svg" alt="">
     </button>
   </li>
   }
   @for (chip of chips; track $index) {
   @if (!chipsSelected?.includes(chip)) {
-  <li><button type="button" (click)="selectChip(chip)" [title]="chip">
+  <li>
+    <button type="button" (click)="selectChip(chip)" [id]="'select-' + chip">
+      <label [for]="'select-' + chip" class="visually-hidden">Seleccionar {{ chip }}</label>
       <span>{{ chip }}</span>
-    </button></li>
+    </button>
+  </li>
   }
   }
 </ul>

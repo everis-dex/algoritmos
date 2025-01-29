@@ -61,16 +61,9 @@
     position: relative;
 
     &__label {
-      &--visible {
-        position: absolute;
-        z-index: -1;
-        color: $grey-medium;
-      }
-      &--hidden {
-        width: 0;
-        height: 0;
-        overflow: hidden;
-      }
+      position: absolute;
+      z-index: -1;
+      color: $grey-medium;
     }
 
     input {
@@ -129,7 +122,7 @@
         width: 100%;
       }
 
-      &__label--visible {
+      &__label {
         left: 0.625rem;
       }
 
@@ -198,7 +191,7 @@
         max-width: 46.5rem;
       }
 
-      &__label--visible {
+      &__label {
         left: 0.75rem;
       }
 

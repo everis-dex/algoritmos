@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { IAlgorithm } from '../../interfaces/algorithms';
 import { ViewManagerService } from '../../services/view-manager.service';
 import { AlgorithmsRegistryService } from '../../services/algorithms-registry.service';
+import { normalized } from '../utilities';
 
 @Component({
   selector: 'app-algorithmic-system-card',
@@ -13,6 +14,8 @@ import { AlgorithmsRegistryService } from '../../services/algorithms-registry.se
 export class AlgorithmicSystemCardComponent {
   @Input()
   public algorithm!: IAlgorithm;
+
+  public normalized = normalized;
 
   constructor(
     private readonly _viewManagerService: ViewManagerService,

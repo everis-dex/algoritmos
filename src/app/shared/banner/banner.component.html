@@ -2,12 +2,13 @@
   <div>
     <nav aria-label="Navegació del bàner">
       <ul>
-        <li><a href="https://administraciodigital.gencat.cat/ca/inici/">Inici</a></li>
+        <li><a href="https://administraciodigital.gencat.cat/ca/inici/" aria-label="Inici">Inici</a></li>
         <li>
           @if (currentView === 'home') {
           Registre de sistemes d'intel·ligència artificial i altres algorismes
           } @else {
-          <a href="#" (click)="redirectToHomeView($event)">Registre de sistemes d'intel·ligència artificial i altres
+          <a href="#" (click)="redirectToHomeView($event)" aria-label="Registre de sistemes d'intel·ligència artificial i altres
+          algorismes">Registre de sistemes d'intel·ligència artificial i altres
             algorismes</a>
           }
         </li>

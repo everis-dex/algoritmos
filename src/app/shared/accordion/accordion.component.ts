@@ -40,8 +40,7 @@ export class AccordionComponent implements OnInit {
   @Output()
   private readonly _setTabFields = new EventEmitter<number>();
 
-  public toggleStates: Record<string, { display: boolean; rotation: boolean }> =
-    {};
+  public toggleState: Record<string, { display: boolean }> = {};
   public isSelectorRotated = false;
   public tags: string[] = [];
   public hasInputValue = false;
@@ -60,9 +59,8 @@ export class AccordionComponent implements OnInit {
     this.tags = this._algorithmsRegistryService.getAlgorithmTagList();
     this.filteredTags = [...this.tags];
     this.accordionList?.forEach((accordion) => {
-      this.toggleStates[accordion.id] = {
-        display: !!this.isFilter(accordion),
-        rotation: !!this.isFilter(accordion),
+      this.toggleState[accordion.id] = {
+        display: true,
       };
     });
   }
@@ -128,10 +126,8 @@ export class AccordionComponent implements OnInit {
 
   public toggle(index: number): void {
     if (index === TAGS_FILTER_INDEX && this.hasInputValue) this.filterTags();
-    this.toggleStates[index] = {
-      display: !this.toggleStates[index]?.display,
-      rotation: !this.toggleStates[index]?.rotation,
-    };
+    const accordionState = this.toggleState[index];
+    if (accordionState) accordionState.display = !accordionState.display;
     this._setTabFields.emit(index);
   }
 
@@ -166,7 +162,7 @@ export class AccordionComponent implements OnInit {
   }
 
   public setMarginTop(id: number): string {
-    if (!this.isDesktop && id !== 0 && this.toggleStates[id - 1].display)
+    if (!this.isDesktop && id !== 0 && this.toggleState[id - 1].display)
       return '0.5rem';
     return '0';
   }

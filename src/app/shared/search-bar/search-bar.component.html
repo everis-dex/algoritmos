@@ -1,20 +1,18 @@
 <section class="searcher-container">
   <form class="searcher-container__form" aria-label="Cercador">
     <label for="search-input"
-      [ngClass]="{'searcher-container__form__label--visible': !hasInputValue, 'searcher-container__form__label--hidden': hasInputValue}">Cerca
+      [ngClass]="{'searcher-container__form__label': !hasInputValue, 'visually-hidden': hasInputValue}">Cerca
       per...</label>
     <input [style.width]="!hasFilterSelector && '100%'" id="search-input" type="text" (input)="handleInput($event)"
       (keydown)="handleSearch($event)">
     @if (hasFilterSelector) {
     <button type="button" (click)="handleCategorySelect()" class="searcher-container__form__category-button"
-      aria-expanded="true">{{
-      categorySelected ?
-      categorySelected : 'Filtra per categoria' }}
+      [attr.aria-expanded]="isFilterVisible" aria-controls="category-filter">{{
+      categorySelected || 'Filtra per categoria'}}
       <img src="assets/icons/select-divisor.svg" alt="">
       <img src="assets/icons/select.svg" alt="">
     </button>
-    @if (isFilterVisible) {
-    <div class="searcher-container__filter">
+    <div id="category-filter" [hidden]="!isFilterVisible" class="searcher-container__filter">
       @if (currentSearches.length > 0) {
       <section class="searcher-container__filter__section" id="current-searches">
         <div class="searcher-container__filter__section__header">
@@ -42,8 +40,7 @@
       <app-systems-searcher-link></app-systems-searcher-link>
     </div>
     }
-    }
-    <label for="search-button" class="searcher-container__form__label--hidden">Cerca</label>
+    <label for="search-button" class="visually-hidden">Cerca</label>
     <button (click)="handleSearch($event)" class="searcher-container__form__search-button" type="submit"
       id="search-button">Cerca</button>
   </form>

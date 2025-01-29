@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ITopic } from '../../interfaces/topics';
+import { normalized } from '../utilities';
 @Component({
   selector: 'app-topic-card',
   standalone: true,
@@ -10,4 +11,6 @@ import { ITopic } from '../../interfaces/topics';
 export class TopicCardComponent {
   @Input()
   public topic!: ITopic;
+
+  public normalized = normalized;
 }

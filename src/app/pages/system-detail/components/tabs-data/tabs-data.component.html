@@ -2,7 +2,8 @@
   <div class="tabs-data-container--desktop">
     <div class="tabs-data-container__tabs">
       @for (tab of tabsData; track $index) {
-      <button type="button" (click)="setTabFields($index)" class="tabs-data-container__tab">
+      <button type="button" [id]="'toggle-' + tab.id" (click)="setTabFields($index)" class="tabs-data-container__tab">
+        <label [for]="'toggle-' + tab.id" class="visually-hidden">{{'Activar la pestanya ' + getTabs(tab)}}</label>
         {{getTabs(tab)}}
         <div [ngClass]="{'tabs-data-container__tab--border-bottom': currentTabIndex === $index}"></div>
       </button>
