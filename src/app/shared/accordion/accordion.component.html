@@ -1,12 +1,12 @@
 <ul class="accordion-list">
   @for (accordionItem of accordionList; track $index) {
   <li>
-    <button type="button" [id]="'toggle-' + accordionItem.id" (click)="toggle(accordionItem.id)"
+    <button type="button" (click)="toggle(accordionItem.id)"
       class="accordion-container {{ isFilter(accordionItem) ? 'filter' : 'tab' }}-accordion"
       [style.marginTop]="setMarginTop(accordionItem.id)">
-      <label [for]="'toggle-' + accordionItem.id" class="visually-hidden">{{'Alternar ' + (isFilter(accordionItem)
-        ? 'el filtre ' : 'la pestanya ') + getButtonContent(accordionItem.id)}}</label>
-      {{getButtonContent(accordionItem.id)}}
+      <span class="visually-hidden">{{ 'Alternar ' + (isFilter(accordionItem)
+        ? 'el filtre ' : 'la pestanya ') + getButtonContent(accordionItem.id) }}</span>
+      {{ getButtonContent(accordionItem.id) }}
       <img src="assets/icons/dropdown-arrow.svg" alt=""
         [style]="{'transform': 'rotate(' + (toggleState[accordionItem.id].display ? '180' : '0') + 'deg)', 'transition': 'transform 0.5s ease'}">
     </button>

@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-search-pagination',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './search-pagination.component.html',
   styleUrl: './search-pagination.component.scss',
 })

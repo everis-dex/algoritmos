@@ -3,7 +3,7 @@
   font-family: "Open Sans", sans-serif;
 }
 
-button,
+button:not(:disabled),
 a {
   cursor: pointer;
 }
