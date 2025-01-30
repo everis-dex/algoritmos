@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TopicCardComponent } from '../../../../shared/topic-card/topic-card.component';
-import { TOPICS } from '../../../../constants/topics.const';
+import { topics } from '../../../../shared/topic-card/topic-card.config';
 
 @Component({
   selector: 'app-topic-cards',
@@ -10,5 +10,5 @@ import { TOPICS } from '../../../../constants/topics.const';
   styleUrl: './topic-cards.component.scss',
 })
 export class TopicCardsComponent {
-  public topics = TOPICS;
+  public topics = topics;
 }

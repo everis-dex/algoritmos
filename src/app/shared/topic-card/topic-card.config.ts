@@ -1,6 +1,6 @@
-import { ITopic } from '../interfaces/topics';
+import { ITopic } from "./topic-card.model";
 
-export const TOPICS: ITopic[] = [
+export const topics: ITopic[] = [
   {
     image: 'ia-systems-registry-topic',
     title: "Sobre el registre de sistemes d'IA",

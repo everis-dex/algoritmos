@@ -34,19 +34,6 @@ describe('SearchBarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('ngOnDestroy', () => {
-    it('should unsubscribe from all subscriptions on destroy', () => {
-      const subscriptionSpy = jasmine.createSpyObj('Subscription', [
-        'unsubscribe',
-      ]);
-      component['_componentSubscription'] = subscriptionSpy;
-
-      component.ngOnDestroy();
-
-      expect(subscriptionSpy.unsubscribe).toHaveBeenCalled();
-    });
-  });
-
   describe('onResize', () => {
     it('should update isDesktop when window is resized', () => {
       const checkBreakpointSpy = spyOn(component, 'checkBreakpoint');

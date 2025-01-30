@@ -28,7 +28,7 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
 
   private _componentSubscriptions: Subscription[] = [];
   private _filtersAppliedParams: IFilterSearch = {};
-  private _originalResults: IAlgorithm[] = [];
+  private _updatedSearchResults: IAlgorithm[] = [];
 
   constructor(
     private readonly _algorithmsRegistryService: AlgorithmsRegistryService,
@@ -47,11 +47,11 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
     const homeCategorySearch =
       this._sessionStorageService.getItem<string>('popularCategorySelected') ??
       '';
-    this._originalResults = this._algorithmsRegistryService.onCombinedSearch(
+    this.searchResults = this._algorithmsRegistryService.onCombinedSearch(
       homeInputSearch,
       { tema: homeCategorySearch }
     );
-    this.searchResults = this._originalResults;
+    this._updatedSearchResults = [...this.searchResults];
     this._sessionStorageService.removeItem('lastSearch');
     this._sessionStorageService.removeItem('popularCategorySelected');
   }
@@ -70,19 +70,15 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
   }
 
   public changePage(page: number): void {
-    this._getSearchResults(page);
-    window.scrollTo(0, 0);
-  }
-
-  private _getSearchResults(page: number): void {
-    this.searchResults = this._originalResults.slice(
+    this.searchResults = this._updatedSearchResults.slice(
       (page - 1) * MAX_SEARCH_RESULTS_PER_PAGE,
       page * MAX_SEARCH_RESULTS_PER_PAGE
     );
+    window.scrollTo(0, 0);
   }
 
   public getSearch(
-    updatedFilterList: { name: string; chipsSelected: string[] }[] | void
+    updatedFilterList?: { name: string; chipsSelected: string[] }[] | void
   ) {
     const inputSearch =
       this._sessionStorageService.getItem<string>('lastSearch') ?? '';
@@ -94,11 +90,11 @@ export class SystemsSearcherComponent implements OnInit, OnDestroy {
         tipus_sistema: updatedFilterList[3].chipsSelected[0],
       };
     }
-    this._originalResults = this._algorithmsRegistryService.onCombinedSearch(
+    this.searchResults = this._algorithmsRegistryService.onCombinedSearch(
       inputSearch,
       this._filtersAppliedParams
     );
-    this.searchResults = this._originalResults;
+    this._updatedSearchResults = [...this.searchResults];
     this._setTotalPages();
   }
 }

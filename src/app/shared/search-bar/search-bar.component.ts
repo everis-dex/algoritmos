@@ -3,7 +3,6 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
@@ -11,9 +10,8 @@ import { SessionStorageService } from '../../services/session-storage.service';
 import { CommonModule } from '@angular/common';
 import { ChipsComponent } from '../chips/chips.component';
 import { SystemsSearcherLinkComponent } from '../systems-searcher-link/systems-searcher-link.component';
-import { Subscription } from 'rxjs';
-import { CategoryService } from '../../services/category.service';
 import { ViewManagerService } from '../../services/view-manager.service';
+import { mockCategories } from '../../mocks/categories';
 
 @Component({
   selector: 'app-search-bar',
@@ -22,25 +20,23 @@ import { ViewManagerService } from '../../services/view-manager.service';
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss',
 })
-export class SearchBarComponent implements OnInit, OnDestroy {
+export class SearchBarComponent implements OnInit {
   @Input()
   public hasFilterSelector!: boolean;
 
   @Output()
   private readonly _barSubmitted = new EventEmitter<void>();
 
-  public popularCategories: string[] = [];
+  public popularCategories = mockCategories;
   public categorySelected = '';
   public isFilterVisible = false;
   public currentSearches: string[];
   public hasInputValue = false;
   public isDesktop = false;
 
-  private _componentSubscription!: Subscription;
   private _mediaQueryList!: MediaQueryList;
 
   constructor(
-    private readonly _categoryService: CategoryService,
     private readonly _sessionStorageService: SessionStorageService,
     private readonly _viewManagerService: ViewManagerService
   ) {
@@ -50,15 +46,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.checkBreakpoint();
-    this._componentSubscription = this._categoryService
-      .getCategories()
-      .subscribe((categories) => {
-        this.popularCategories = categories;
-      });
-  }
-
-  ngOnDestroy(): void {
-    if (this._componentSubscription) this._componentSubscription.unsubscribe();
   }
 
   @HostListener('document:click', ['$event'])

@@ -102,14 +102,14 @@ export class AlgorithmsRegistryService {
   private _onOpenSearch(searchText: string): IAlgorithm[] {
     const lowerSearchText = this._normalized(searchText);
     const keysToSearch = ['nom', 'tema', 'estat', 'etiquetes', 'tipus_sistema'];
-    return this.algorithms.filter((item) =>
+    return this.algorithms.filter((algorithm) =>
       keysToSearch.some(
         (key) =>
-          key in item &&
-          typeof item[key as keyof IAlgorithm] === 'string' &&
-          this._normalized(item[key as keyof IAlgorithm]?.toString()).includes(
-            lowerSearchText
-          )
+          key in algorithm &&
+          typeof algorithm[key as keyof IAlgorithm] === 'string' &&
+          this._normalized(
+            algorithm[key as keyof IAlgorithm]?.toString()
+          ).includes(lowerSearchText)
       )
     );
   }
