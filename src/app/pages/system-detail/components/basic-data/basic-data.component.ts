@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { getStateColor } from '../../../../shared/utilities';
-import { IAlgorithm } from '../../../../interfaces/algorithms';
+import { IAlgorithm } from '../../../../shared/interfaces/algorithms.model';
+import { normalized } from '../../../../shared/utilities';
 
 @Component({
   selector: 'app-basic-data',
@@ -13,5 +13,5 @@ export class BasicDataComponent {
   @Input()
   public algorithm!: IAlgorithm;
 
-  public getStateColor = getStateColor;
+  public normalized = normalized;
 }

@@ -1,10 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { IAlgorithm, IFilterSearch } from '../interfaces/algorithms';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { IAlgorithm, IFilterSearch } from '../shared/interfaces/algorithms.model';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { normalized } from '../shared/utilities';
-import { mockAlgorithms } from '../mocks/algorithms';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +37,6 @@ export class AlgorithmsRegistryService {
       }),
       withCredentials: true,
     };
-    // return of(mockAlgorithms);
     return this._http.get<IAlgorithm[]>(this._registryURL, options);
   }
 
@@ -104,14 +102,14 @@ export class AlgorithmsRegistryService {
   private _onOpenSearch(searchText: string): IAlgorithm[] {
     const lowerSearchText = this._normalized(searchText);
     const keysToSearch = ['nom', 'tema', 'estat', 'etiquetes', 'tipus_sistema'];
-    return this.algorithms.filter((item) =>
+    return this.algorithms.filter((algorithm) =>
       keysToSearch.some(
         (key) =>
-          key in item &&
-          typeof item[key as keyof IAlgorithm] === 'string' &&
-          this._normalized(item[key as keyof IAlgorithm]?.toString()).includes(
-            lowerSearchText
-          )
+          key in algorithm &&
+          typeof algorithm[key as keyof IAlgorithm] === 'string' &&
+          this._normalized(
+            algorithm[key as keyof IAlgorithm]?.toString()
+          ).includes(lowerSearchText)
       )
     );
   }
@@ -178,10 +176,9 @@ export class AlgorithmsRegistryService {
   ): IAlgorithm[] {
     const textSearchResults = this._onOpenSearch(searchText);
     const filtersSearchResults = this._onFiltersSearch(filters);
-    const result = textSearchResults.filter((item) =>
+    return textSearchResults.filter((item) =>
       filtersSearchResults.includes(item)
     );
-    return result;
   }
 
   /**

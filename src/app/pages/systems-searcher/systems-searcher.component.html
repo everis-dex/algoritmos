@@ -1,11 +1,10 @@
-<app-search-bar [hasFilterSelector]="false" (_barSubmitted)="getSearch($event)"></app-search-bar>
+<app-search-bar [hasFilterSelector]="false" (_barSubmitted)="getSearch()"></app-search-bar>
 <section>
   <app-search-filters class="filters" (_filtersApplied)="getSearch($event)"></app-search-filters>
   <div>
     <app-search-results [searchResults]="searchResults"
       [totalSearchResultsLength]="totalSearchResultsLength"></app-search-results>
-    @if (totalPages > 0) {
-    <app-search-pagination [totalPages]="totalPages" (_changePage)="changePage($event)"></app-search-pagination>
-    }
+    <app-search-pagination [hidden]="totalPages <= 1" [totalPages]="totalPages"
+      (_changePage)="changePage($event)"></app-search-pagination>
   </div>
 </section>

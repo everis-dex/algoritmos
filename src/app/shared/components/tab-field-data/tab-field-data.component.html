@@ -1,0 +1,19 @@
+@if (field) {
+<div class="tab-field-container">
+  <div class="tab-field-container__static-content">
+    <p class="tab-field-container__static-content__field">{{field.field}}
+      @if (field.description) {
+      <button (click)="toggleFieldDescription()">
+        <span class="visually-hidden">{{ field.description.isVisible ? 'Ocultar' : 'Veure' }} la descripció de {{
+          field.field }}</span>
+        <img src="assets/icons/tooltip.svg" alt="">
+      </button>
+      }
+    </p>
+    @if (field.description?.isVisible) {
+    <p class="tab-field-container__static-content__description">{{ field.description?.text }}</p>
+    }
+  </div>
+  <p [innerHTML]="field.content" class="tab-field-container__dynamic-content"></p>
+</div>
+}

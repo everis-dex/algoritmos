@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { getStateColor } from '../../../../shared/utilities';
-import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card.component';
-import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../../../constants/search-pagination.const';
-import { IAlgorithm } from '../../../../interfaces/algorithms';
+import { AlgorithmicSystemCardComponent } from '../../../../shared/components/algorithmic-system-card/algorithmic-system-card.component';
+import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../../../shared/constants/pagination.const';
+import { IAlgorithm } from '../../../../shared/interfaces/algorithms.model';
 
 @Component({
   selector: 'app-search-results',
@@ -17,6 +16,5 @@ export class SearchResultsComponent {
   @Input()
   public totalSearchResultsLength!: number;
 
-  public getStateColor = getStateColor;
   public maxSearchResultsPerPage = MAX_SEARCH_RESULTS_PER_PAGE;
 }

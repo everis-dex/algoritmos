@@ -1,0 +1,31 @@
+@import "../../../../assets/scss/styles.scss";
+
+.chips-container {
+  display: flex;
+  gap: 0.625rem;
+  flex-wrap: wrap;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid $red-bright;
+    border-radius: 1rem;
+    min-height: 1.25rem;
+    color: $grey-dark;
+    font-size: 0.875rem;
+
+    &:has(img) {
+      background-color: $pink-very-light;
+    }
+    &:not(:has(img)) {
+      background-color: transparent;
+
+      &:hover {
+        background-color: rgba(192, 0, 0, 0.1);
+        text-shadow: 0 0 0.15px $grey-dark, 0 0 0.15px $grey-dark;
+      }
+    }
+  }
+}

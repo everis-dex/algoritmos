@@ -1,0 +1,21 @@
+<ul class="chips-container" [style.padding]="isFilter ? '1.25rem 0 ' + (isDesktop ? '1.25rem' : '0') : '0'">
+  @for (chipSelected of chipsSelected; track $index) {
+  <li>
+    <span>{{ chipSelected }}</span>
+    <button (click)="deselectChip(chipSelected)">
+      <span class="visually-hidden">Anul·lar selecció en {{ chipSelected }}</span>
+      <img src="assets/icons/chip-delete.svg" alt="">
+    </button>
+  </li>
+  }
+  @for (chip of chips; track $index) {
+  @if (!chipsSelected?.includes(chip)) {
+  <li>
+    <button type="button" (click)="selectChip(chip)">
+      <span class="visually-hidden">Seleccionar {{ chip }}</span>
+      <span>{{ chip }}</span>
+    </button>
+  </li>
+  }
+  }
+</ul>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TopicCardComponent } from '../../../../shared/topic-card/topic-card.component';
-import { TOPICS } from '../../../../constants/topics.const';
+import { TopicCardComponent } from './topic-card/topic-card.component';
+import { TOPICS } from './topic-card/topic-card.config';
 
 @Component({
   selector: 'app-topic-cards',

@@ -1,31 +1,41 @@
 <div class="search-pagination-container">
   <section>
-    <button type="button" (click)="handlePreviousPage(1)" [disabled]="pageSelected.isFirst"
-      class="search-pagination-container__double-left-arrow-img-button"><img alt="Anar a la primera pàgina"></button>
+    <button type="button" (click)="handlePreviousPage(1)" [disabled]="pageSelected.isFirst">
+      <span class="visually-hidden">Anar a la primera pàgina</span>
+      <img [src]="'assets/icons/double-left-' + (pageSelected.isLast ? 'red' : 'grey') + '-arrow.svg'" alt="">
+    </button>
+    <button type="button" (click)="handlePreviousPage()" [disabled]="pageSelected.isFirst">
+      <span class="visually-hidden">Anar a la pàgina anterior</span>
+      <img [src]="'assets/icons/left-' + (pageSelected.isLast ? 'red' : 'grey') + '-arrow.svg'" alt=""
+        class="search-pagination-container__left-arrow">
+    </button>
     <button type="button" (click)="handlePreviousPage()" [disabled]="pageSelected.isFirst"
-      class="search-pagination-container__left-arrow-img-button"><img alt="Anar a la pàgina anterior"></button>
-    <button type="button" (click)="handlePreviousPage()" [disabled]="pageSelected.isFirst"
-      class="search-pagination-container__page-navigation-button">anterior</button>
+      class="search-pagination-container__page-navigation-button">
+      <span class="visually-hidden">Anar a la pàgina anterior</span>
+      anterior
+    </button>
     @for (page of pages; track page) {
     <button type="button" (click)="handlePage(page)" [disabled]="page === currentPage"
-      [ngClass]="{'search-pagination-container__page-number-button--selected': page === currentPage}"
-      class="search-pagination-container__page-number-button">{{page}}</button>
+      class="search-pagination-container__page-number-button">
+      <span class="visually-hidden">Anar a la pàgina {{ page }}</span>
+      {{ page }}
+    </button>
     }
+    <p>Pàgina {{ currentPage }}</p>
     <button type="button" (click)="handleNextPage()" [disabled]="pageSelected.isLast"
-      class="search-pagination-container__page-navigation-button">següent</button>
-    <button type="button" (click)="handleNextPage()" [disabled]="pageSelected.isLast"
-      class="search-pagination-container__right-arrow-img-button"><img alt="Anar a la pàgina següent"></button>
-    <button type="button" (click)="handleNextPage(totalPages)" [disabled]="pageSelected.isLast"
-      class="search-pagination-container__double-right-arrow-img-button"><img alt="Anar a l'última pàgina"></button>
+      class="search-pagination-container__page-navigation-button">
+      <span class="visually-hidden">Anar a la pàgina següent</span>
+      següent
+    </button>
+    <button type="button" (click)="handleNextPage()" [disabled]="pageSelected.isLast">
+      <span class="visually-hidden">Anar a la pàgina següent</span>
+      <img [src]="'assets/icons/right-' + (pageSelected.isFirst ? 'red' : 'grey') + '-arrow.svg'" alt=""
+        class="search-pagination-container__right-arrow">
+    </button>
+    <button type="button" (click)="handleNextPage(totalPages)" [disabled]="pageSelected.isLast">
+      <span class="visually-hidden">Anar a l'última pàgina</span>
+      <img [src]="'assets/icons/double-right-' + (pageSelected.isFirst ? 'red' : 'grey') + '-arrow.svg'" alt="">
+    </button>
   </section>
-  <p>Total de pàgines: {{totalPages}}</p>
-</div>
-<div class="search-pagination-container">
-  <button type="button" (click)="handlePreviousPage()" [disabled]="pageSelected.isFirst"
-    class="search-pagination-container__left-arrow-img-button search-pagination-container__left-arrow-img-button--mobile"><img
-      alt="Anar a la pàgina anterior"></button>
-  <p>Pàgina {{currentPage}}</p>
-  <button type="button" (click)="handleNextPage()" [disabled]="pageSelected.isLast"
-    class="search-pagination-container__right-arrow-img-button search-pagination-container__right-arrow-img-button--mobile"><img
-      alt="Anar a la pàgina següent"></button>
+  <p>Total de pàgines: {{ totalPages }}</p>
 </div>

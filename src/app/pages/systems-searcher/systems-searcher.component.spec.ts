@@ -22,15 +22,17 @@ describe('SystemsSearcherComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should unsubscribe from all subscriptions on destroy', () => {
-    const subscriptionSpy = jasmine.createSpyObj('Subscription', [
-      'unsubscribe',
-    ]);
-    component['_componentSubscriptions'] = [subscriptionSpy];
+  describe('ngOnDestroy', () => {
+    it('should unsubscribe from all subscriptions on destroy', () => {
+      const subscriptionSpy = jasmine.createSpyObj('Subscription', [
+        'unsubscribe',
+      ]);
+      component['_componentSubscriptions'] = [subscriptionSpy];
 
-    component.ngOnDestroy();
+      component.ngOnDestroy();
 
-    expect(subscriptionSpy.unsubscribe).toHaveBeenCalled();
+      expect(subscriptionSpy.unsubscribe).toHaveBeenCalled();
+    });
   });
 
   describe('changePage', () => {

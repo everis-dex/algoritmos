@@ -1,6 +1,6 @@
 @if (algorithm) {
 <div class="basic-data-container">
-  <span class="basic-data-container__state"><img src="assets/icons/Oval_{{getStateColor(algorithm.estat)}}.svg"
+  <span class="basic-data-container__state"><img src="assets/icons/{{ normalized(algorithm.estat, true) }}-state.svg"
       alt="">{{
     algorithm.estat }}</span>
   <div class="basic-data-container__paragraph-container">

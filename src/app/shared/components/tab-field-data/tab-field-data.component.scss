@@ -1,0 +1,46 @@
+@import "../../../../assets/scss/styles.scss";
+
+.tab-field-container {
+  @media (min-width: $mobile) and (max-width: $desktop) {
+    display: block;
+  }
+  @media (min-width: $desktop) {
+    display: grid;
+    grid-template-columns: 42% calc(58% - 2.6875rem);
+    gap: 2.6875rem;
+    box-shadow: 0px 0px 1px 0px #00000040;
+  }
+
+  &__static-content {
+    @media (min-width: $mobile) and (max-width: $desktop) {
+      padding-top: 0.625rem;
+      padding-bottom: 0.625rem;
+    }
+    @media (min-width: $desktop) {
+      padding: 0.625rem 1.5rem;
+    }
+
+    &__field {
+      display: flex;
+      gap: 0.25rem;
+      font-weight: 600;
+      color: $grey-dark;
+    }
+
+    &__description {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: $grey-medium;
+    }
+  }
+
+  &__dynamic-content {
+    @media (min-width: $mobile) and (max-width: $desktop) {
+      padding-top: 0.625rem;
+      padding-bottom: 0.625rem;
+    }
+    @media (min-width: $desktop) {
+      padding: 0.625rem;
+    }
+  }
+}

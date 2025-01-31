@@ -1,10 +1,9 @@
-import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-search-pagination',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './search-pagination.component.html',
   styleUrl: './search-pagination.component.scss',
 })
@@ -24,14 +23,7 @@ export class SearchPaginationComponent implements OnInit {
   public currentPage = 1;
 
   ngOnInit(): void {
-    this._getTotalPages();
-  }
-
-  private _getTotalPages(): number[] {
-    for (let i = 1; i <= this.totalPages; i++) {
-      this.pages.push(i);
-    }
-    return this.pages;
+    this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
   public handlePage(page: number): void {
