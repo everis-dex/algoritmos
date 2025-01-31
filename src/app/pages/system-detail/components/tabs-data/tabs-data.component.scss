@@ -5,7 +5,7 @@
   flex-direction: column;
   gap: 1.5rem;
 
-  &--desktop {
+  & > section {
     @media (min-width: $mobile) and (max-width: $desktop) {
       display: none;
     }
@@ -16,7 +16,7 @@
     }
   }
 
-  &--mobile {
+  & > :not(section) {
     @media (min-width: $mobile) and (max-width: $desktop) {
       display: flex;
       flex-direction: column;
