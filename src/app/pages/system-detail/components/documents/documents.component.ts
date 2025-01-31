@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { mockDocuments } from '../../../../mocks/documents';
+import { mockDocuments } from './documents.mock';
 
 @Component({
   selector: 'app-documents',

@@ -6,11 +6,11 @@ import {
   AfterViewInit,
   HostListener,
 } from '@angular/core';
-import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card.component';
+import { AlgorithmicSystemCardComponent } from '../../../../shared/components/algorithmic-system-card/algorithmic-system-card.component';
 import { Subscription } from 'rxjs';
-import { SystemsSearcherLinkComponent } from '../../../../shared/systems-searcher-link/systems-searcher-link.component';
+import { SystemsSearcherLinkComponent } from '../../../../shared/components/systems-searcher-link/systems-searcher-link.component';
 import { AlgorithmsRegistryService } from '../../../../services/algorithms-registry.service';
-import { IAlgorithm } from '../../../../interfaces/algorithms';
+import { IAlgorithm } from '../../../../shared/interfaces/algorithms.model';
 
 @Component({
   selector: 'app-algorithmic-systems-cards',

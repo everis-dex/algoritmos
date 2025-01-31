@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { AccordionComponent } from '../../../../shared/accordion/accordion.component';
+import { AccordionComponent } from '../../../../shared/components/accordion/accordion.component';
 import {
   ALGORITHMS,
   CATEGORIES,
   STATES,
   TAGS_FILTER_INDEX,
-} from '../../../../constants/search-filters.const';
+} from '../../../../shared/constants/filters.const';
 
 @Component({
   selector: 'app-search-filters',

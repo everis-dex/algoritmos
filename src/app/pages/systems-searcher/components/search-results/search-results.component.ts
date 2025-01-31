@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { AlgorithmicSystemCardComponent } from '../../../../shared/algorithmic-system-card/algorithmic-system-card.component';
-import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../../../constants/search-pagination.const';
-import { IAlgorithm } from '../../../../interfaces/algorithms';
+import { AlgorithmicSystemCardComponent } from '../../../../shared/components/algorithmic-system-card/algorithmic-system-card.component';
+import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../../../shared/constants/pagination.const';
+import { IAlgorithm } from '../../../../shared/interfaces/algorithms.model';
 
 @Component({
   selector: 'app-search-results',

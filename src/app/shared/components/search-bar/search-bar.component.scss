@@ -1,0 +1,250 @@
+@import "../../../../assets/scss/styles.scss";
+
+.searcher-container {
+  &__filter {
+    border: 1px solid $grey-very-light;
+    box-shadow: 0 4px 35px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 1;
+    background-color: $white-smoke;
+
+    &__section {
+      h3 {
+        font-weight: 600;
+        line-height: 1.375rem;
+      }
+
+      &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__button {
+          color: $red-bright;
+          font-weight: 600;
+          width: fit-content;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      &__current-search-container {
+        padding: 0.5rem 0;
+        display: flex;
+        align-items: center;
+
+        a {
+          color: $dark-blue-grey;
+          width: 100%;
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+        }
+
+        button {
+          margin-left: auto;
+        }
+      }
+
+      &#current-searches {
+        margin-bottom: 1.25rem;
+      }
+    }
+  }
+
+  &__form {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 0.125rem;
+    position: relative;
+
+    &__label {
+      position: absolute;
+      z-index: -1;
+      color: $grey-medium;
+    }
+
+    input {
+      height: 100%;
+      border-right: 0;
+      color: $grey-medium;
+    }
+
+    &__category-button {
+      width: 100%;
+      padding: 0.75rem 0 0.75rem 0.75rem;
+      color: $grey-dark;
+      background-color: $white-smoke;
+      align-items: center;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      text-align: left;
+
+      img {
+        position: absolute;
+
+        &:first-of-type {
+          margin: auto 0.5rem;
+          width: 1px;
+          height: 1.25rem;
+        }
+        &:last-of-type {
+          margin: auto 0.625rem;
+          width: 0.75rem;
+          height: 1.2rem;
+        }
+      }
+
+      &:focus {
+        box-shadow: inset 0 0 0 1px $vivid-cerulean;
+        outline: none;
+      }
+    }
+
+    &__search-button {
+      background-color: $red-bright;
+      color: $white;
+      padding: 0 0.375rem;
+    }
+  }
+}
+
+@media (min-width: $mobile) and (max-width: $desktop) {
+  .searcher-container {
+    &__form {
+      height: 2.5rem;
+      position: relative;
+
+      input {
+        padding-left: 0.625rem;
+        width: 100%;
+      }
+
+      &__label {
+        left: 0.625rem;
+      }
+
+      &__category-button {
+        height: 2.5rem;
+        position: absolute;
+        top: 2.5rem;
+        margin: 0.625rem auto;
+
+        img {
+          &:first-of-type {
+            right: 2.25rem;
+          }
+          &:last-of-type {
+            right: 0.25rem;
+          }
+        }
+      }
+
+      &__search-button {
+        height: 2.5rem;
+      }
+    }
+
+    &__filter {
+      padding: 1.5rem 1rem;
+      top: 2.5rem;
+      width: 100%;
+
+      &__section {
+        h3,
+        p {
+          font-size: 0.875rem;
+        }
+
+        &__header,
+        & > h3 {
+          line-height: 1.375rem;
+        }
+
+        &__header {
+          margin-bottom: 0.375rem;
+
+          &__button {
+            font-size: 0.875rem;
+          }
+        }
+
+        &#popular-categories {
+          gap: 0.625rem;
+          margin-bottom: 1.5rem;
+        }
+      }
+    }
+  }
+}
+@media (min-width: $desktop) {
+  .searcher-container {
+    &__form {
+      height: 3rem;
+
+      input {
+        padding-left: 0.75rem;
+        width: auto;
+        min-width: 28rem;
+        max-width: 46.5rem;
+      }
+
+      &__label {
+        left: 0.75rem;
+      }
+
+      &__category-button {
+        max-width: 25rem;
+        height: 3rem;
+        position: relative;
+        top: 0;
+        margin: 0;
+
+        img {
+          &:first-of-type {
+            right: 2.5rem;
+          }
+          &:last-of-type {
+            right: 0.5rem;
+          }
+        }
+      }
+
+      &__search-button {
+        height: 3rem;
+      }
+    }
+
+    &__filter {
+      padding: 1.875rem 1.875rem 1rem;
+      top: 3rem;
+      width: 56rem;
+
+      &__section {
+        h3 {
+          font-size: 1rem;
+        }
+
+        &__header,
+        & > h3 {
+          line-height: 1.5rem;
+        }
+
+        &__header {
+          margin-bottom: 0.5rem;
+
+          &__button {
+            font-size: 1rem;
+          }
+        }
+
+        &#popular-categories {
+          gap: 0.75rem;
+          margin-bottom: 1.25rem;
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SearchBarComponent } from '../../shared/search-bar/search-bar.component';
+import { SearchBarComponent } from '../../shared/components/search-bar/search-bar.component';
 import { SearchFiltersComponent } from './components/search-filters/search-filters.component';
 import { Subscription } from 'rxjs';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { SearchPaginationComponent } from './components/search-pagination/search-pagination/search-pagination.component';
-import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../constants/search-pagination.const';
-import { IAlgorithm, IFilterSearch } from '../../interfaces/algorithms';
+import { MAX_SEARCH_RESULTS_PER_PAGE } from '../../shared/constants/pagination.const';
+import { IAlgorithm, IFilterSearch } from '../../shared/interfaces/algorithms.model';
 import { AlgorithmsRegistryService } from '../../services/algorithms-registry.service';
 import { SessionStorageService } from '../../services/session-storage.service';
 

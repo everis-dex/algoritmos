@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { IAlgorithm } from '../../../../interfaces/algorithms';
+import { IAlgorithm } from '../../../../shared/interfaces/algorithms.model';
 import { normalized } from '../../../../shared/utilities';
 
 @Component({

@@ -1,6 +1,6 @@
 import { ITabData } from './tabs-data.model';
 
-export const tabsData: ITabData[] = [
+export const TABS_DATA: ITabData[] = [
   {
     id: 0,
     tab: 'Informació general',

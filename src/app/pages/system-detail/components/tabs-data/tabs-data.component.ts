@@ -8,12 +8,12 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { tabsData } from './tabs-data.config';
+import { TABS_DATA } from './tabs-data.config';
 import { IFieldData, ITabData } from './tabs-data.model';
 import { CommonModule } from '@angular/common';
-import { TabFieldDataComponent } from '../../../../shared/tab-field-data/tab-field-data.component';
-import { AccordionComponent } from '../../../../shared/accordion/accordion.component';
-import { IAlgorithm } from '../../../../interfaces/algorithms';
+import { TabFieldDataComponent } from '../../../../shared/components/tab-field-data/tab-field-data.component';
+import { AccordionComponent } from '../../../../shared/components/accordion/accordion.component';
+import { IAlgorithm } from '../../../../shared/interfaces/algorithms.model';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -30,7 +30,7 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
   @Output()
   private readonly _setMarginTop = new EventEmitter<number>();
 
-  public tabsData: ITabData[] = tabsData;
+  public tabsData = TABS_DATA;
   public currentTabIndex = 0;
 
   constructor(

@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TabsDataComponent } from './tabs-data.component';
-import { tabsData } from './tabs-data.config';
+import { TABS_DATA } from './tabs-data.config';
 import { provideHttpClient } from '@angular/common/http';
-import { mockAlgorithms } from '../../../../mocks/algorithms';
+import { mockAlgorithms } from '../../../../shared/mock/algorithms.mock';
 
 describe('TabsDataComponent', () => {
   let component: TabsDataComponent;
@@ -39,7 +39,7 @@ describe('TabsDataComponent', () => {
 
   describe('getTabs', () => {
     it('should get tabs correctly', () => {
-      const tabData = tabsData[0];
+      const tabData = TABS_DATA[0];
       const tabsResult = component.getTabs(tabData);
       expect(tabsResult).toEqual(tabData.tab);
     });

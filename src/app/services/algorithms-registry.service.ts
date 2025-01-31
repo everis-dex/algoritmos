@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { IAlgorithm, IFilterSearch } from '../interfaces/algorithms';
+import { IAlgorithm, IFilterSearch } from '../shared/interfaces/algorithms.model';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { normalized } from '../shared/utilities';
 

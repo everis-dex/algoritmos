@@ -2,12 +2,11 @@
   <section>
     <button type="button" (click)="handlePreviousPage(1)" [disabled]="pageSelected.isFirst">
       <span class="visually-hidden">Anar a la primera pàgina</span>
-      <img [src]="'../../../../../../assets/icons/double-left-' + (pageSelected.isLast ? 'red' : 'grey') + '-arrow.svg'"
-        alt="">
+      <img [src]="'assets/icons/double-left-' + (pageSelected.isLast ? 'red' : 'grey') + '-arrow.svg'" alt="">
     </button>
     <button type="button" (click)="handlePreviousPage()" [disabled]="pageSelected.isFirst">
       <span class="visually-hidden">Anar a la pàgina anterior</span>
-      <img [src]="'../../../../../../assets/icons/left-' + (pageSelected.isLast ? 'red' : 'grey') + '-arrow.svg'" alt=""
+      <img [src]="'assets/icons/left-' + (pageSelected.isLast ? 'red' : 'grey') + '-arrow.svg'" alt=""
         class="search-pagination-container__left-arrow">
     </button>
     <button type="button" (click)="handlePreviousPage()" [disabled]="pageSelected.isFirst"
@@ -30,14 +29,12 @@
     </button>
     <button type="button" (click)="handleNextPage()" [disabled]="pageSelected.isLast">
       <span class="visually-hidden">Anar a la pàgina següent</span>
-      <img [src]="'../../../../../../assets/icons/right-' + (pageSelected.isFirst ? 'red' : 'grey') + '-arrow.svg'"
-        alt="" class="search-pagination-container__right-arrow">
+      <img [src]="'assets/icons/right-' + (pageSelected.isFirst ? 'red' : 'grey') + '-arrow.svg'" alt=""
+        class="search-pagination-container__right-arrow">
     </button>
     <button type="button" (click)="handleNextPage(totalPages)" [disabled]="pageSelected.isLast">
       <span class="visually-hidden">Anar a l'última pàgina</span>
-      <img
-        [src]="'../../../../../../assets/icons/double-right-' + (pageSelected.isFirst ? 'red' : 'grey') + '-arrow.svg'"
-        alt="">
+      <img [src]="'assets/icons/double-right-' + (pageSelected.isFirst ? 'red' : 'grey') + '-arrow.svg'" alt="">
     </button>
   </section>
   <p>Total de pàgines: {{ totalPages }}</p>

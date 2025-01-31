@@ -4,7 +4,7 @@ import {
   ALGORITHMS,
   CATEGORIES,
   STATES,
-} from '../../../../constants/search-filters.const';
+} from '../../../../shared/constants/filters.const';
 import { provideHttpClient } from '@angular/common/http';
 
 describe('SearchFiltersComponent', () => {

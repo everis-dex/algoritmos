@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { AlgorithmsRegistryService } from './algorithms-registry.service';
 import { HttpTestingController } from '@angular/common/http/testing';
 import { provideHttpClient } from '@angular/common/http';
-import { mockAlgorithms } from '../mocks/algorithms';
+import { mockAlgorithms } from '../shared/mock/algorithms.mock';
 
 describe('AlgorithmsRegistryService', () => {
   let service: AlgorithmsRegistryService;

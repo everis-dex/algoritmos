@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlgorithmicSystemsCardsComponent } from './components/algorithmic-systems-cards/algorithmic-systems-cards.component';
 import { TopicCardsComponent } from './components/topic-cards/topic-cards.component';
-import { SearchBarComponent } from '../../shared/search-bar/search-bar.component';
+import { SearchBarComponent } from '../../shared/components/search-bar/search-bar.component';
 
 @Component({
   selector: 'app-home',
