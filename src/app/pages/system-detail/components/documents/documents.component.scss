@@ -2,8 +2,8 @@
 
 .documents-container {
   border-top: 6px solid $red-bright;
-  box-shadow: 0px 1px 5px 0px #0000001f, 0px 2px 2px 0px #00000024,
-    0px 3px 1px -2px #00000033;
+  box-shadow: 0px 1px 5px 0px $black-soft, 0px 2px 2px 0px $black-medium,
+    0px 3px 1px -2px $black-strong;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -11,9 +11,8 @@
 
   &:hover {
     transform: translate3D(0, -1px, 0) scale(1.03);
-    -webkit-box-shadow: 0px 5px 3px 0px $grey-very-light;
-    -moz-box-shadow: 0px 5px 3px 0px $grey-very-light;
-    box-shadow: 0px 5px 3px 0px $grey-very-light;
+    box-shadow: 0 3px 14px 2px $black-soft, 0 8px 10px 1px $black-medium,
+      0 5px 5px -3px $black-strong;
   }
 
   @media (min-width: $mobile) and (max-width: $desktop) {
@@ -65,19 +64,19 @@
         button {
           font-size: 0.875rem;
           line-height: 1.3125rem;
-          display: flex;
           align-items: center;
           gap: 0.25rem;
           flex-wrap: wrap;
+          flex: 1;
+
+          &:hover span:first-of-type {
+            text-decoration: underline;
+          }
 
           span {
             &:first-of-type {
               font-weight: 600;
               color: $grey-dark;
-
-              &:hover {
-                text-decoration: underline;
-              }
             }
             &:last-of-type {
               font-weight: 400;

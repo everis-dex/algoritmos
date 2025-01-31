@@ -23,8 +23,8 @@
       width: 100%;
 
       ::ng-deep > button {
-        box-shadow: 0px 1px 5px 0px #0000001f, 0px 2px 2px 0px #00000024,
-          0px 3px 1px -2px #00000033;
+        box-shadow: 0px 1px 5px 0px $black-soft, 0px 2px 2px 0px $black-medium,
+          0px 3px 1px -2px $black-strong;
         background-color: $white-smoke;
 
         &:not(:first-of-type) {
@@ -57,7 +57,6 @@
 
     &__fields {
       margin: auto 0.5rem;
-      box-shadow: 0px 0px 1px 0px #00000040;
     }
   }
 
