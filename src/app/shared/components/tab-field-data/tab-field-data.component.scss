@@ -11,7 +11,10 @@
     box-shadow: 0px 0px 1px 0px $black-bold;
   }
 
-  &__static-content {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+
     @media (min-width: $mobile) and (max-width: $desktop) {
       padding-top: 0.625rem;
       padding-bottom: 0.625rem;
@@ -19,22 +22,28 @@
     @media (min-width: $desktop) {
       padding: 0.625rem 1.5rem;
     }
+  }
 
-    &__field {
-      display: flex;
-      gap: 0.25rem;
-      font-weight: 600;
-      color: $grey-dark;
-    }
+  &__field {
+    font-weight: 600;
+    color: $grey-dark;
 
-    &__description {
-      font-size: 0.875rem;
-      font-weight: 400;
-      color: $grey-medium;
+    button {
+      display: inline;
+
+      img {
+        vertical-align: bottom;
+      }
     }
   }
 
-  &__dynamic-content {
+  &__description {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: $grey-medium;
+  }
+
+  &__content {
     @media (min-width: $mobile) and (max-width: $desktop) {
       padding-top: 0.625rem;
       padding-bottom: 0.625rem;
