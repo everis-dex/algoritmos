@@ -3,22 +3,23 @@
     <nav aria-label="Navegació del bàner">
       <ul>
         <li><a href="https://administraciodigital.gencat.cat/ca/inici/" aria-label="Inici">Inici</a></li>
-        <li>
-          @if (currentView === 'home') {
-          Registre de sistemes d'intel·ligència artificial i altres algorismes
-          } @else {
-          <a href="#" (click)="redirectToHomeView($event)" aria-label="Registre de sistemes d'intel·ligència artificial i altres
-          algorismes">Registre de sistemes d'intel·ligència artificial i altres
-            algorismes</a>
-          }
-        </li>
-        <li>
-          @if (currentView === 'systems-searcher') {
-          Cercador de sistemes
-          } @else if (currentView === 'system-detail') {
-          {{ algorithmName }}
-          }
-        </li>
+        @switch (currentView) {
+        @case ('home') {
+        <li>Registre de sistemes d'intel·ligència artificial i altres algorismes</li>
+        }
+        @case ('systems-searcher') {
+        <li><a href="#" (click)="redirectToHomeView($event)" aria-label="Registre de sistemes d'intel·ligència artificial i altres
+              algorismes">Registre de sistemes d'intel·ligència artificial i altres
+            algorismes</a></li>
+        <li>Cercador de sistemes</li>
+        }
+        @case ('system-detail') {
+        <li><a href="#" (click)="redirectToHomeView($event)" aria-label="Registre de sistemes d'intel·ligència artificial i altres
+              algorismes">Registre de sistemes d'intel·ligència artificial i altres
+            algorismes</a></li>
+        <li>{{ algorithmName }}</li>
+        }
+        }
       </ul>
     </nav>
     @switch (currentView) {

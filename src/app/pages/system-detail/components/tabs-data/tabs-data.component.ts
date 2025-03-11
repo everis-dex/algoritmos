@@ -66,45 +66,58 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
     if (this.algorithm) {
       const algorithmFieldsContent: Record<string, string>[] = [
         {
-          'Nivell de risc': this.algorithm.nivell_de_risc,
-          'Forma de desenvolupament': this.algorithm.forma_adquisicio,
-          'Fonts de finançament': this.algorithm.font_financament,
-          'Desenvolupador': this.algorithm.desenvolupador,
+          'Nom': this.algorithm.nom,
+          'Estat': this.algorithm.estat,
+          'Descripció breu': this.algorithm.descripcio,
           'Unitat responsable': this.algorithm.unitat_responsable,
-          'Tema': this.algorithm.tema,
-          'Actuació administrativa automatitzada':
-            this.algorithm.actuacio_administrativa_automatitzada,
           'Intervenció o vinculació del sistema respecte a una política pública':
             this.algorithm.politica_publica,
+          'Normativa': this.algorithm.normativa_aplicable,
+          'Tema': this.algorithm.tema,
+          'Etiquetes': this.algorithm.etiquetes,
+        },
+        {
+          'Funcionament': this.algorithm.explicabilitat,
+          'Tipus de sistema': this.algorithm.tipus_sistema,
+          'Característiques tècniques':
+            this.algorithm.caracteristiques_tecniques,
+          "Dades d'entrenament": this.algorithm.dades_entrenament,
+          'Dades de funcionament': this.algorithm.dades_funcionament,
+          'Rendiment': this.algorithm.rendiment,
+        },
+        {
+          'Persones destinatàries': this.algorithm.perfil_ciutadania_afectada,
+          'Dades personals': this.algorithm.dades_personals,
+          'Beneficis': this.algorithm.beneficis,
+          'Riscos': this.algorithm.riscos,
+          'Nivell de risc': this.algorithm.nivell_de_risc,
+          'Equitat': this.algorithm.equitat,
+          "Procediment d'oposició": this.algorithm.procediment_objeccio,
+          "Dades sobre l'equip de desenvolupament":
+            this.algorithm.composicio_equip,
+          'Actuació administrativa automatitzada':
+            this.algorithm.actuacio_administrativa_automatitzada,
+          'Consum energètic': this.algorithm.consum_energetic,
+        },
+        {
+          'Periodicitat de les avaluacions':
+            this.algorithm.periocitat_proxima_avaluacio,
+        },
+        {
+          "Intervenció o supervisió d'una persona en els resultats":
+            this.algorithm.intervencio_supervisio_humana,
+          "Avaluació de l'execució": this.algorithm.avaluacio_execucio_sistema,
+        },
+        {
           'Data de la posada en funcionament':
             this.algorithm.data_posada_produccio,
+          'Desenvolupador': this.algorithm.desenvolupador,
+          'Forma de desenvolupament': this.algorithm.forma_adquisicio,
+          'Fonts de finançament': this.algorithm.font_financament,
           "Data de l'última modificació":
             this.algorithm.data_ultima_modificacio,
           'Motiu de la modificació': this.algorithm.motiu_modificacio,
           'Data de retirada': this.algorithm.data_retirada,
-        },
-        {
-          'Tipus de sistema': this.algorithm.tipus_sistema,
-          'Rendiment': this.algorithm.rendiment,
-          'Dades de funcionament': this.algorithm.dades_funcionament,
-          "Dades d'entrenament": this.algorithm.dades_entrenament,
-          'Equitat': this.algorithm.equitat,
-        },
-        {
-          "Normativa":
-            this.algorithm.normativa_aplicable,
-          'Dades personals': this.algorithm.dades_personals,
-          "Avaluació de l'execució": this.algorithm.avaluacio_execucio_sistema,
-          'Beneficis': this.algorithm.beneficis,
-          'Persones destinatàries': this.algorithm.perfil_ciutadania_afectada,
-          'Riscos': this.algorithm.riscos,
-          'Funcionament': this.algorithm.explicabilitat,
-          "Dades sobre l'equip de desenvolupament":
-            this.algorithm.composicio_equip,
-          "Intervenció o supervisió d'una persona en els resultats":
-            this.algorithm.intervencio_supervisio_humana,
-          "Procediment d'oposició": this.algorithm.procediment_objeccio,
-          'Consum energètic': this.algorithm.consum_energetic,
         },
       ];
       this.tabsData[tabIndex].fields.forEach((field) => {

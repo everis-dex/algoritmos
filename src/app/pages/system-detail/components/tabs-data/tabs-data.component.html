@@ -12,7 +12,7 @@
     </div>
     @if (tabsData[currentTabIndex].fields) {
     <ul class="tabs-data-container__tabs__fields">
-      @for (tabField of tabsData[currentTabIndex].fields; track $index) {
+      @for (tabField of tabsData[currentTabIndex].fields; track tabField) {
       <li><app-tab-field-data [field]="tabField"></app-tab-field-data></li>
       }
     </ul>

@@ -1,16 +1,6 @@
 <div class="search-results">
     @if (totalSearchResultsLength) {
-    <p class="search-results__results-found">
-        @if (totalSearchResultsLength === 1) {
-        S'ha trobat
-        <span class="search-results__bold">{{ totalSearchResultsLength }}</span>
-        resultat
-        } @else {
-        S'han trobat
-        <span class="search-results__bold">{{ totalSearchResultsLength }}</span>
-        resultats
-        }
-    </p>
+    <p class="search-results__results-found" [innerHTML]="getResultsFound()"></p>
     <ul class="search-results__list">
         @for (result of searchResults.slice(0, maxSearchResultsPerPage); track $index) {
         <li><app-algorithmic-system-card [algorithm]="result"></app-algorithmic-system-card></li>

@@ -49,25 +49,13 @@ describe('TabsDataComponent', () => {
     it('should set tab fields correctly', () => {
       component.algorithm = mockAlgorithms[0];
       const mockAlgorithm: Record<string, string> = {
-        'Nivell de risc': component.algorithm.nivell_de_risc,
-        'Forma de desenvolupament': component.algorithm.forma_adquisicio,
-        'Fonts de finançament': component.algorithm.font_financament,
-        'Desenvolupador': component.algorithm.desenvolupador,
-        'Unitat responsable': component.algorithm.unitat_responsable,
-        'Tema': component.algorithm.tema,
-        'Actuació administrativa automatitzada':
-          component.algorithm.actuacio_administrativa_automatitzada,
         'Intervenció o vinculació del sistema respecte a una política pública':
           component.algorithm.politica_publica,
-        'Data de la posada en funcionament':
-          component.algorithm.data_posada_produccio,
-        "Data de l'última modificació":
-          component.algorithm.data_ultima_modificacio,
-        'Motiu de la modificació': component.algorithm.motiu_modificacio,
-        'Data de retirada': component.algorithm.data_retirada,
+        "Avaluació de l'execució":
+          component.algorithm.avaluacio_execucio_sistema,
       };
 
-      const tabIndex = 0;
+      const tabIndex = 5;
       const tabFieldsResult = component.setTabFields(tabIndex);
 
       tabFieldsResult.forEach(
