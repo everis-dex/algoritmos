@@ -77,15 +77,6 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
           'Etiquetes': this.algorithm.etiquetes,
         },
         {
-          'Funcionament': this.algorithm.explicabilitat,
-          'Tipus de sistema': this.algorithm.tipus_sistema,
-          'Característiques tècniques':
-            this.algorithm.caracteristiques_tecniques,
-          "Dades d'entrenament": this.algorithm.dades_entrenament,
-          'Dades de funcionament': this.algorithm.dades_funcionament,
-          'Rendiment': this.algorithm.rendiment,
-        },
-        {
           'Persones destinatàries': this.algorithm.perfil_ciutadania_afectada,
           'Dades personals': this.algorithm.dades_personals,
           'Beneficis': this.algorithm.beneficis,
@@ -98,8 +89,13 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
           'Actuació administrativa automatitzada':
             this.algorithm.actuacio_administrativa_automatitzada,
           'Consum energètic': this.algorithm.consum_energetic,
-        },
-        {
+          'Funcionament': this.algorithm.explicabilitat,
+          'Tipus de sistema': this.algorithm.tipus_sistema,
+          'Característiques tècniques':
+            this.algorithm.caracteristiques_tecniques,
+          "Dades d'entrenament": this.algorithm.dades_entrenament,
+          "Dades de funcionament": this.algorithm.dades_funcionament,
+          'Rendiment': this.algorithm.rendiment,
           'Periodicitat de les avaluacions':
             this.algorithm.periocitat_proxima_avaluacio,
         },

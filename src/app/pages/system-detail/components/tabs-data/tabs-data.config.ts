@@ -66,54 +66,6 @@ export const TABS_DATA: ITabData[] = [
   },
   {
     id: 1,
-    tab: 'Com funciona',
-    fields: [
-      {
-        field: 'Funcionament',
-        description: {
-          text: 'Informació específica sobre com funciona el sistema: quin tipus de mètode fa servir i quines eines utilitza.',
-          isVisible: false,
-        },
-      },
-      {
-        field: 'Tipus de sistema',
-        description: {
-          text: 'Tipologia del sistema.',
-          isVisible: false,
-        },
-      },
-      {
-        field: 'Característiques tècniques',
-        description: {
-          text: 'Tecnologia que utilitza el sistema.',
-          isVisible: false,
-        },
-      },
-      {
-        field: "Dades d'entrenament",
-        description: {
-          text: "Conjunt de dades d'entrenament que utilitza el sistema per aprendre a funcionar.",
-          isVisible: false,
-        },
-      },
-      {
-        field: 'Dades de funcionament',
-        description: {
-          text: 'Conjunt de dades que utilitza el sistema en funcionament per obtenir resultats.',
-          isVisible: false,
-        },
-      },
-      {
-        field: 'Rendiment',
-        description: {
-          text: "Grau d'assoliment de l'objectiu i precisió dels resultats.",
-          isVisible: false,
-        },
-      },
-    ],
-  },
-  {
-    id: 2,
     tab: "A qui s'adreça",
     fields: [
       {
@@ -186,12 +138,48 @@ export const TABS_DATA: ITabData[] = [
           isVisible: false,
         },
       },
-    ],
-  },
-  {
-    id: 3,
-    tab: 'Tots els sistemes',
-    fields: [
+      {
+        field: 'Funcionament',
+        description: {
+          text: 'Informació específica sobre com funciona el sistema: quin tipus de mètode fa servir i quines eines utilitza.',
+          isVisible: false,
+        },
+      },
+      {
+        field: 'Tipus de sistema',
+        description: {
+          text: 'Tipologia del sistema.',
+          isVisible: false,
+        },
+      },
+      {
+        field: 'Característiques tècniques',
+        description: {
+          text: 'Tecnologia que utilitza el sistema.',
+          isVisible: false,
+        },
+      },
+      {
+        field: "Dades d'entrenament",
+        description: {
+          text: "Conjunt de dades d'entrenament que utilitza el sistema per aprendre a funcionar.",
+          isVisible: false,
+        },
+      },
+      {
+        field: 'Dades de funcionament',
+        description: {
+          text: 'Conjunt de dades que utilitza el sistema en funcionament per obtenir resultats.',
+          isVisible: false,
+        },
+      },
+      {
+        field: 'Rendiment',
+        description: {
+          text: "Grau d'assoliment de l'objectiu i precisió dels resultats.",
+          isVisible: false,
+        },
+      },
       {
         field: "Informes interns d'avaluació",
       },
@@ -205,7 +193,7 @@ export const TABS_DATA: ITabData[] = [
     ],
   },
   {
-    id: 4,
+    id: 2,
     tab: 'Com ho hem gestionat',
     fields: [
       {
@@ -225,7 +213,7 @@ export const TABS_DATA: ITabData[] = [
     ],
   },
   {
-    id: 5,
+    id: 3,
     tab: 'Més informació del sistema',
     fields: [
       {

@@ -55,7 +55,7 @@ describe('TabsDataComponent', () => {
           component.algorithm.avaluacio_execucio_sistema,
       };
 
-      const tabIndex = 5;
+      const tabIndex = 2;
       const tabFieldsResult = component.setTabFields(tabIndex);
 
       tabFieldsResult.forEach(
