@@ -39,7 +39,7 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    this._getTabFieldContents(this.currentTabIndex);
+    this._getTabFieldContents();
   }
 
   ngAfterViewInit(): void {
@@ -62,20 +62,9 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
     return tabData.tab;
   }
 
-  private _getTabFieldContents(tabIndex: number): void {
+  private _getTabFieldContents(): void {
     if (this.algorithm) {
       const algorithmFieldsContent: Record<string, string>[] = [
-        {
-          'Nom': this.algorithm.nom,
-          'Estat': this.algorithm.estat,
-          'Descripció breu': this.algorithm.descripcio,
-          'Unitat responsable': this.algorithm.unitat_responsable,
-          'Intervenció o vinculació del sistema respecte a una política pública':
-            this.algorithm.politica_publica,
-          'Normativa': this.algorithm.normativa_aplicable,
-          'Tema': this.algorithm.tema,
-          'Etiquetes': this.algorithm.etiquetes,
-        },
         {
           'Persones destinatàries': this.algorithm.perfil_ciutadania_afectada,
           'Dades personals': this.algorithm.dades_personals,
@@ -94,7 +83,7 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
           'Característiques tècniques':
             this.algorithm.caracteristiques_tecniques,
           "Dades d'entrenament": this.algorithm.dades_entrenament,
-          "Dades de funcionament": this.algorithm.dades_funcionament,
+          'Dades de funcionament': this.algorithm.dades_funcionament,
           'Rendiment': this.algorithm.rendiment,
           'Periodicitat de les avaluacions':
             this.algorithm.periocitat_proxima_avaluacio,
@@ -116,25 +105,25 @@ export class TabsDataComponent implements OnInit, AfterViewInit {
           'Data de retirada': this.algorithm.data_retirada,
         },
       ];
-      this.tabsData[tabIndex].fields.forEach((field) => {
-        let content = algorithmFieldsContent[tabIndex][field.field];
-        if (content?.includes('https')) {
-          content = content.replace(
-            /(https?:\/\/[^\s]+)/g,
-            '<a href="$1" target="_blank" rel="noopener" title="opens in a new window" style="text-decoration: underline; color: #c00000">$1<img src="assets/icons/external-link-redirection.svg" alt=""></a>'
+      this.tabsData.forEach((_, index) => {
+        this.tabsData[index].fields.forEach((field) => {
+          let content = algorithmFieldsContent[index][field.field];
+          if (content?.includes('https')) {
+            content = content.replace(
+              /(https?:\/\/[^\s]+)/g,
+              '<a href="$1" target="_blank" rel="noopener" title="opens in a new window" style="text-decoration: underline; color: #c00000">$1<img src="assets/icons/external-link-redirection.svg" alt=""></a>'
+            );
+          }
+          field.content = this._sanitizer.bypassSecurityTrustHtml(
+            content || 'N-A'
           );
-        }
-        field.content = this._sanitizer.bypassSecurityTrustHtml(
-          content || 'N-A'
-        );
+        });
       });
     }
   }
 
   public setTabFields(index: number): IFieldData[] {
-    window.scrollTo(0, 0);
     this.currentTabIndex = index;
-    this._getTabFieldContents(this.currentTabIndex);
     return this.tabsData[this.currentTabIndex].fields;
   }
 }

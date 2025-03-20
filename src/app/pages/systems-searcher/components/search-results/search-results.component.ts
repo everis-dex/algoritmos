@@ -21,9 +21,9 @@ export class SearchResultsComponent {
 
   public getResultsFound(): string {
     return (
-      (this.totalSearchResultsLength === 1 ? "S'ha trobat" : "S'han trobat") +
-      `<span class="search-results__bold">${this.totalSearchResultsLength}</span> ` +
-      (this.totalSearchResultsLength === 1 ? 'resultat' : 'resultats')
+      (this.totalSearchResultsLength === 1 ? "S'ha trobat " : "S'han trobat ") +
+      `<span class="search-results__bold">${this.totalSearchResultsLength}</span>` +
+      (this.totalSearchResultsLength === 1 ? ' resultat' : ' resultats')
     );
   }
 }

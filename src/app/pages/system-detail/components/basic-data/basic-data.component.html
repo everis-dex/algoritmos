@@ -3,16 +3,35 @@
   <span class="basic-data-container__state"><img src="assets/icons/{{ normalized(algorithm.estat, true) }}-state.svg"
       alt="">{{
     algorithm.estat }}</span>
-  <div class="basic-data-container__paragraph-container">
-    <p class="basic-data-container__paragraph">Descripció breu</p>
+  <div class="basic-data-container__wrapper">
+    <p class="basic-data-container__bold">Descripció breu</p>
     <p>{{ algorithm.descripcio }}</p>
   </div>
-  <div class="basic-data-container__category-chip-container">
+  @if (this.algorithm.unitat_responsable) {
+  <div class="basic-data-container__wrapper">
+    <p class="basic-data-container__bold">Unitat responsable</p>
+    <p>{{ algorithm.unitat_responsable }}</p>
+  </div>
+  }
+  @if (this.algorithm.politica_publica) {
+  <div class="basic-data-container__wrapper">
+    <p class="basic-data-container__bold">Intervenció o vinculació del sistema respecte a una política
+      pública</p>
+    <p>{{ algorithm.politica_publica }}</p>
+  </div>
+  }
+  @if (this.algorithm.normativa_aplicable) {
+  <div class="basic-data-container__wrapper">
+    <p class="basic-data-container__bold">Normativa</p>
+    <p>{{ algorithm.normativa_aplicable }}</p>
+  </div>
+  }
+  <div class="basic-data-container__category-chips">
     <div class="basic-data-container__category-chip">{{ algorithm.tema }}</div>
   </div>
-  <div class="basic-data-container__paragraph-container">
-    <p class="basic-data-container__paragraph">Etiquetes</p>
-    <div class="basic-data-container__tag-container">
+  <div class="basic-data-container__wrapper">
+    <p class="basic-data-container__bold">Etiquetes</p>
+    <div class="basic-data-container__tags">
       @if (algorithm.etiquetes) {
       @for (tag of algorithm.etiquetes.split(','); track $index) {
       <div class="basic-data-container__tag">{{ tag }}</div>

@@ -37,8 +37,6 @@ export class AccordionComponent implements OnInit {
     index: number;
     event: string;
   }>();
-  @Output()
-  private readonly _setTabFields = new EventEmitter<number>();
 
   public toggleState: Record<string, { display: boolean }> = {};
   public isSelectorRotated = false;
@@ -128,7 +126,6 @@ export class AccordionComponent implements OnInit {
     if (index === TAGS_FILTER_INDEX && this.hasInputValue) this.filterTags();
     const accordionState = this.toggleState[index];
     if (accordionState) accordionState.display = !accordionState.display;
-    this._setTabFields.emit(index);
   }
 
   public handleTagSelect(): void {

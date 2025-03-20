@@ -21,10 +21,6 @@
     background: rgba(0, 0, 0, 0.6);
     position: relative;
 
-    &__description {
-      line-height: 1.3rem;
-    }
-
     &:hover h3 {
       text-decoration: underline;
     }
@@ -40,12 +36,6 @@
       font-size: 1.25rem;
       line-height: 1.75rem;
     }
-
-    &__description {
-      font-size: 0.875rem;
-      line-height: 1.3125rem;
-      letter-spacing: 0.25px;
-    }
   }
 }
 @media (min-width: $desktop) {
@@ -56,11 +46,6 @@
     &__title {
       font-size: 1.5rem;
       line-height: 2rem;
-    }
-
-    &__description {
-      font-size: 1rem;
-      line-height: 1.5rem;
     }
   }
 }

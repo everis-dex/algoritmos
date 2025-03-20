@@ -44,7 +44,7 @@ export class AlgorithmicSystemsCardsComponent
     this._setMaxHeight('h2');
     this._setMaxHeight('p');
     this._setMaxHeight(
-      '.algorithmic-system-card-container__category-chip-container'
+      '.algorithmic-system-card-container__category-chips'
     );
   }
 

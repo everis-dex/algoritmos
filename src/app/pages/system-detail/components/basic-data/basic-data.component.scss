@@ -27,7 +27,7 @@
     }
   }
 
-  &__paragraph-container {
+  &__wrapper {
     display: flex;
     flex-direction: column;
 
@@ -39,12 +39,12 @@
     }
   }
 
-  &__paragraph {
+  &__bold {
     font-weight: 600;
   }
 
-  &__category-chip-container,
-  &__tag-container {
+  &__category-chips,
+  &__tags {
     display: flex;
     gap: 0.625rem;
     flex-wrap: wrap;

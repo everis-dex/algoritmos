@@ -3,10 +3,10 @@
 .topic-cards-container {
   background-color: $white-smoke;
 
-  & > div {
-    max-width: 73.125rem;
-    margin: auto;
+  &__wrapper {
     display: grid;
+    width: 73.125rem;
+    margin: auto;
 
     @media (min-width: $mobile) and (max-width: $desktop) {
       gap: 2rem;
@@ -19,7 +19,6 @@
   @media (min-width: $mobile) and (max-width: $desktop) {
     padding-top: 1rem;
     padding-bottom: 2rem;
-    gap: 1rem;
 
     h2 {
       font-size: 1.375rem;
@@ -29,7 +28,6 @@
   @media (min-width: $desktop) {
     padding-top: 2rem;
     padding-bottom: 3.4375rem;
-    gap: 1.5rem;
 
     h2 {
       font-size: 1.875rem;

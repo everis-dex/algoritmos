@@ -3,69 +3,6 @@ import { ITabData } from './tabs-data.model';
 export const TABS_DATA: ITabData[] = [
   {
     id: 0,
-    tab: 'En què consisteix',
-    fields: [
-      {
-        field: 'Nom',
-        description: {
-          text: "Nom del sistema d'intel·ligència artificial (IA) o de l'algorisme.",
-          isVisible: false,
-        },
-      },
-      {
-        field: 'Estat',
-        description: {
-          text: "Fase en què es troba el sistema:\n— En desenvolupament (inclou diverses etapes, com la conceptualització, que encara no s'han estipulat).\n— Actiu (en funcionament).\n— Inactiu (sistema retirat, obsolet, revisat, auditat...).",
-          isVisible: false,
-        },
-      },
-      {
-        field: 'Descripció breu',
-        description: {
-          text: "Què fa el sistema i en quin entorn s'aplica.",
-          isVisible: false,
-        },
-      },
-      {
-        field: 'Unitat responsable',
-        description: {
-          text: "Nom de la unitat de l'Administració de la Generalitat responsable de l'ús del sistema.",
-          isVisible: false,
-        },
-      },
-      {
-        field:
-          'Intervenció o vinculació del sistema respecte a una política pública',
-        description: {
-          text: "Àmbit d'actuació.",
-          isVisible: false,
-        },
-      },
-      {
-        field: 'Normativa',
-        description: {
-          text: "Normativa que defineix i regula l'ús del sistema.",
-          isVisible: false,
-        },
-      },
-      {
-        field: 'Tema',
-        description: {
-          text: 'Àrees temàtiques.',
-          isVisible: false,
-        },
-      },
-      {
-        field: 'Etiquetes',
-        description: {
-          text: 'Paraules clau que permeten fer cerques al sistema.',
-          isVisible: false,
-        },
-      },
-    ],
-  },
-  {
-    id: 1,
     tab: "A qui s'adreça",
     fields: [
       {
@@ -193,7 +130,7 @@ export const TABS_DATA: ITabData[] = [
     ],
   },
   {
-    id: 2,
+    id: 1,
     tab: 'Com ho hem gestionat',
     fields: [
       {
@@ -213,7 +150,7 @@ export const TABS_DATA: ITabData[] = [
     ],
   },
   {
-    id: 3,
+    id: 2,
     tab: 'Més informació del sistema',
     fields: [
       {
